@@ -11,6 +11,7 @@ protocol TokenServiceProtocol: AnyObject {
     var roles: [Roles] { get }
     var token: String { get set }
     var refreshToken: String { get set }
+    var id: Int { get set }
     var login: String { get }
     var password: String { get }
     func setupLoginData(login: String, password: String, roles: [Roles])
@@ -20,6 +21,7 @@ final class TokenService: TokenServiceProtocol {
     var roles: [Roles] = []
     var token: String = ""
     var refreshToken: String = ""
+    var id: Int = 0
     var login: String = ""
     var password: String = ""
     

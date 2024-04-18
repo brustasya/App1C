@@ -1,5 +1,5 @@
 //
-//  WeekDaySelectorView.swift
+//  SelectorView.swift
 //  App1C
 //
 //  Created by Станислава on 08.04.2024.
@@ -7,25 +7,33 @@
 
 import UIKit
 
-class WeekDaySelectorView: UIView {
+protocol SelectorDelegate: AnyObject {
+    func select(at index: Int)
+}
+
+class SelectorView: UIView {
+    
+    weak var delegate: SelectorDelegate?
     
     var dayButtons: [UIButton] = []
     var selectedDayIndex: Int?
+    var buttonsTitles: [String] = []
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, buttonsTitles: [String], delegate: SelectorDelegate?) {
+        self.buttonsTitles = buttonsTitles
+        self.delegate = delegate
         super.init(frame: frame)
+
         setupButtons()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupButtons()
+        //setupButtons()
     }
     
-    private func setupButtons() {
-        let daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
-        
-        for (index, day) in daysOfWeek.enumerated() {
+    private func setupButtons() {        
+        for (index, day) in buttonsTitles.enumerated() {
             let button = UIButton()
             button.setTitle(day, for: .normal)
             button.tag = index
@@ -40,11 +48,11 @@ class WeekDaySelectorView: UIView {
     }
         
     private func layoutButtons() {
-        let buttonWidth = frame.width / CGFloat(dayButtons.count)
+        let buttonWidth: CGFloat = 50//frame.width / CGFloat(dayButtons.count)
         let buttonHeight = frame.height
         
         for (index, button) in dayButtons.enumerated() {
-            let xPosition = CGFloat(index) * buttonWidth
+            let xPosition = CGFloat(index) * (frame.width / CGFloat(dayButtons.count))
             button.frame = CGRect(x: xPosition, y: 0, width: buttonWidth, height: buttonHeight)
             button.backgroundColor = .clear
             button.setTitleColor(.darkGray, for: .normal)
@@ -54,6 +62,7 @@ class WeekDaySelectorView: UIView {
     
     @objc private func dayButtonTapped(_ sender: UIButton) {
         selectedDayIndex = sender.tag
+        delegate?.select(at: selectedDayIndex ?? 0)
         updateButtonAppearance()
     }
     

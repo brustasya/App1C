@@ -8,6 +8,7 @@
 import UIKit
 
 struct BaseModel {
+    let id: Int
     let title: String
     let image: UIImage?
     let buttonImage = Images.forward.uiImage

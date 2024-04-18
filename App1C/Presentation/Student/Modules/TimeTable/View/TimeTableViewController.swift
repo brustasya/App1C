@@ -33,7 +33,12 @@ class TimeTableViewController: UIViewController {
         let titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width, height: 30), title: "Расписание")
         view.addSubview(titleLabel)
 
-        weekDaySelector = WeekDaySelectorView(frame: CGRect(x: view.frame.midX - 150, y: 70, width: 300, height: 50))
+        let daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб"]
+        weekDaySelector = SelectorView(
+            frame: CGRect(x: view.frame.midX - 150, y: 70, width: 300, height: 50),
+            buttonsTitles: daysOfWeek,
+            delegate: self
+        )
         view.addSubview(weekDaySelector)
     }
 
@@ -82,6 +87,14 @@ class TimeTableViewController: UIViewController {
             
         ])
     }
+}
+
+extension TimeTableViewController: SelectorDelegate {
+    func select(at index: Int) {
+        print(index)
+    }
+    
+    
 }
 
 extension TimeTableViewController: UITableViewDataSource, UITableViewDelegate {

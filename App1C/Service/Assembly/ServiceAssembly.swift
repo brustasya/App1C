@@ -8,7 +8,7 @@
 import Foundation
 
 final class ServiceAssembly {
-  //  private let host = "37.77.106.55"//
+   // private let host = "37.77.106.55"
     private let host = "192.168.100.5"
     private let port = 8080
     
@@ -35,6 +35,20 @@ final class ServiceAssembly {
     
     func makeUserCreationService() -> UserCreationServiceProtocol {
         UserCreationService(
+            networkService: NetworkService(),
+            requestFactory: URLRequestFactory(host: host, port: port)
+        )
+    }
+    
+    func makeUsersListService() -> UsersListServiceProtocol {
+        UsersListService(
+            networkService: NetworkService(),
+            requestFactory: URLRequestFactory(host: host, port: port)
+        )
+    }
+    
+    func makeProfileService() -> ProfileServiceProtocol {
+        ProfileService(
             networkService: NetworkService(),
             requestFactory: URLRequestFactory(host: host, port: port)
         )

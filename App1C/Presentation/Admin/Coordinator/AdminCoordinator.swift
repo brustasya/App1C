@@ -43,6 +43,11 @@ final class AdminCoordinator: CoordinatorProtocol {
 }
 
 extension AdminCoordinator: AdminSettingsModuleOutput {
+    func moduleWantsToOpenTeachersList() {
+        let teachersList = adminAssembly.makeTeachersListModule(moduleOutput: self)
+        settingsNavigationController.pushViewController(teachersList, animated: true)
+    }
+    
     func moduleWantsToOpenStudentsList() {
         let studentsListVC = adminAssembly.makeStudentsListModule(moduleOutput: self)
         settingsNavigationController.pushViewController(studentsListVC, animated: true)
@@ -53,7 +58,8 @@ extension AdminCoordinator: AdminSettingsModuleOutput {
     }
     
     func moduleWantsToOpenProfile() {
-        settingsNavigationController.pushViewController(CoursesAgregationViewController(), animated: true)
+        let profileVC = adminAssembly.makeProfileModule()
+        settingsNavigationController.pushViewController(profileVC, animated: true)
     }
     
     func moduleWantsToOpenAdminList() {
@@ -66,7 +72,45 @@ extension AdminCoordinator: AdminSettingsModuleOutput {
     }
 }
 
-extension AdminCoordinator: AdminListModuleOutput {
+extension AdminCoordinator: TeachersListModuleOutput {
+    func moduleWantsToOpenTeacherDetails(for id: Int) {
+        let teacherVC = adminAssembly.makeTeacherProfileModule(for: id)
+        settingsNavigationController.pushViewController(teacherVC, animated: true)
+    }
+    
+    func moduleWantsToOpenAddTeacher() {
+        let addTeacher = adminAssembly.makeAddTeacherModule(moduleOutput: self)
+        settingsNavigationController.pushViewController(addTeacher, animated: true)
+    }
+    
+    func moduleWantsToCloseTeachersList() {
+        settingsNavigationController.popViewController(animated: true)
+    }
+}
+
+extension AdminCoordinator: AddAdminModuleOutput {
+    func moduleWantsToCloseAddAdmin() {
+        settingsNavigationController.popViewController(animated: true)
+    }
+}
+
+extension AdminCoordinator: AddTeacherModuleOutput {
+    func moduleWantsToCloseAddTeacher() {
+        settingsNavigationController.popViewController(animated: true)
+    }
+}
+
+extension AdminCoordinator: AdminsListForAdminModuleOutput {
+    func moduleWantsToOpenAdminDetails(id: Int) {
+        let adminVC = adminAssembly.makeAdminDetailsModule(for: id)
+        settingsNavigationController.pushViewController(adminVC, animated: true)
+    }
+    
+    func moduleWantsToOpenAddAdmin() {
+        let addAdminVC = adminAssembly.makeAddAdminModule(moduleOutput: self)
+        settingsNavigationController.pushViewController(addAdminVC, animated: true)
+    }
+    
     func moduleWantsToCloseAdminList() {
         settingsNavigationController.popViewController(animated: true)
     }
@@ -76,9 +120,18 @@ extension AdminCoordinator: AdminMainScreenModuleOutput {
 }
 
 extension AdminCoordinator: StudentsListModuleOutput {
+    func moduleWantsToOpenStudentDetails(for id: Int) {
+        let studentVC = adminAssembly.makeStudentProfileModule(for: id)
+        settingsNavigationController.pushViewController(studentVC, animated: true)
+    }
+    
     func moduleWantsToOpenAddStudentModule() {
         let addStudentVC = adminAssembly.makeAddStudentModule(moduleOutput: self)
         settingsNavigationController.pushViewController(addStudentVC, animated: true)
+    }
+    
+    func moduleWantsToCloseStudentsList() {
+        settingsNavigationController.popViewController(animated: true)
     }
 }
 
@@ -86,7 +139,5 @@ extension AdminCoordinator: AddStudentModuleOutput {
     func moduleWantsToCloseAddStudent() {
         settingsNavigationController.popViewController(animated: true)
     }
-    
-    
 }
 

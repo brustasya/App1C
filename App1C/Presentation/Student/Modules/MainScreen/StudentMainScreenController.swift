@@ -18,7 +18,7 @@ class StudentMainScreenController: MainScreenViewController {
     }
     
     private func setupSheduleView() {
-        baseElements.append(BaseModel(title: "Расписание", image: Images.shedule.uiImage))
+        baseElements.append(BaseModel(id: 0, title: "Расписание", image: Images.shedule.uiImage))
         super.setupBaseView()
         
         NSLayoutConstraint.activate([

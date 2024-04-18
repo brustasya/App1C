@@ -13,4 +13,5 @@ protocol AdminSettingsModuleOutput: AnyObject {
     func moduleWantsToOpenRoleSelection()
     func moduleWantsToOpenDepartmentCourses()
     func moduleWantsToOpenStudentsList()
+    func moduleWantsToOpenTeachersList()
 }

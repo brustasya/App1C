@@ -8,7 +8,9 @@
 import Foundation
 
 protocol UserCreationServiceProtocol {
-    func createStudent(model: CreateStudentModel ,completion: @escaping (Result<[String: Int], Error>) -> Void)
+    func createStudent(model: CreateStudentModel ,completion: @escaping (Result<Data?, Error>) -> Void)
+    func createTeacher(model: CreateUserModel ,completion: @escaping (Result<Data?, Error>) -> Void)
+    func createAdmin(model: CreateUserModel ,completion: @escaping (Result<Data?, Error>) -> Void)
 }
 
 class UserCreationService: UserCreationServiceProtocol {
@@ -22,9 +24,27 @@ class UserCreationService: UserCreationServiceProtocol {
         self.requestFactory = requestFactory
     }
     
-    func createStudent(model: CreateStudentModel ,completion: @escaping (Result<[String: Int], Error>) -> Void) {
+    func createStudent(model: CreateStudentModel ,completion: @escaping (Result<Data?, Error>) -> Void) {
         do {
             let request = try requestFactory.createStudent(with: model)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func createTeacher(model: CreateUserModel ,completion: @escaping (Result<Data?, Error>) -> Void) {
+        do {
+            let request = try requestFactory.createTeacher(with: model)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func createAdmin(model: CreateUserModel ,completion: @escaping (Result<Data?, Error>) -> Void) {
+        do {
+            let request = try requestFactory.createAdmin(with: model)
             networkService.sendRequest(request, completion: completion)
         } catch {
             completion(.failure(error))

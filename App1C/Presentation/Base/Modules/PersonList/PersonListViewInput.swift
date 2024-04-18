@@ -10,4 +10,5 @@ import Foundation
 protocol PersonListViewInput: AnyObject {
     func setupPersonTable(with persons: [BaseModel])
     func updateTitle(title: String)
+    func setupAddButton(title: String) 
 }

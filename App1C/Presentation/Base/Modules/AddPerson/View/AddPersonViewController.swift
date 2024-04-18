@@ -1,5 +1,5 @@
 //
-//  AddStudentViewController.swift
+//  AddPersonViewController.swift
 //  App1C
 //
 //  Created by Станислава on 18.04.2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddStudentViewController: UIViewController {
+class AddPersonViewController: UIViewController {
     private lazy var titleLabel = UILabel()
     
     private lazy var surnameView = UIView()
@@ -19,15 +19,17 @@ class AddStudentViewController: UIViewController {
     private lazy var patronymicView = UIView()
     private lazy var patronymicTextField = UITextField()
     
+    let emailTitle = UILabel()
     private lazy var emailView = UIView()
     private lazy var emailTextField = UITextField()
    
+    let semesterTitle = UILabel()
     private lazy var semesterView = UIView()
     private lazy var semesterTextField = UITextField()
     
-    private var output: AddStudentViewOutput
+    private var output: AddPersonViewOutput
 
-    init(output: AddStudentViewOutput) {
+    init(output: AddPersonViewOutput) {
         self.output = output
         super.init(nibName: nil, bundle: nil)
     }
@@ -44,20 +46,27 @@ class AddStudentViewController: UIViewController {
         setupSemester()
         setupEmail()
         setupAddButton()
+        output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tabBarController?.tabBar.isTranslucent = true
-        tabBarController?.tabBar.isHidden = true
-    }
-    
-    private func setupTitle() {
         navigationItem.hidesBackButton = true
         (navigationController as? CustomNavigationController)?.setupBackButton()
         (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
-        titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width, height: 30), title: "Добавить студента")
+        tabBarController?.tabBar.isTranslucent = true
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        (navigationController as? CustomNavigationController)?.hideBackButton()
+    }
+    
+    private func setupTitle() {
+        titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width, height: 30), title: "")
         view.addSubview(titleLabel)
     }
     
@@ -85,7 +94,6 @@ class AddStudentViewController: UIViewController {
     }
     
     private func setupSemester() {
-        let semesterTitle = UILabel()
         createTitle(title: semesterTitle)
         semesterTitle.text = "Семестр:"
         
@@ -120,7 +128,6 @@ class AddStudentViewController: UIViewController {
     }
     
     private func setupEmail() {
-        let emailTitle = UILabel()
         createTitle(title: emailTitle)
         emailTitle.text = "Логин (почта):"
         emailTextField.placeholder = "Email"
@@ -138,7 +145,6 @@ class AddStudentViewController: UIViewController {
         
        
         NSLayoutConstraint.activate([
-            emailTitle.topAnchor.constraint(equalTo: semesterView.bottomAnchor, constant: 20),
             emailView.topAnchor.constraint(equalTo: emailTitle.bottomAnchor, constant: 15),
             
             emailView.heightAnchor.constraint(equalToConstant: 40),
@@ -163,10 +169,10 @@ class AddStudentViewController: UIViewController {
     }
     
     @objc func addStudent() {
-        output.addStudentButtonTapped(
-            secondName: patronymicTextField.text ?? "",
+        output.addButtonTapped(
+            secondName: surnameTextField.text ?? "",
             firstName: nameTextField.text ?? "",
-            surname: surnameTextField.text ?? "",
+            surname: patronymicTextField.text ?? "",
             email: emailTextField.text ?? "",
             semester: Int(semesterTextField.text ?? "5") ?? 5
         )
@@ -237,3 +243,30 @@ class AddStudentViewController: UIViewController {
     }
 }
 
+extension AddPersonViewController: AddPersonViewInput {
+    func setupTitle(title: String) {
+        titleLabel.text = title
+    }
+    
+    func setupStudentsFields() {
+        semesterTitle.isHidden = false
+        semesterView.isHidden = false
+        semesterTextField.isHidden = false
+        
+        NSLayoutConstraint.activate([
+            emailTitle.topAnchor.constraint(equalTo: semesterView.bottomAnchor, constant: 20),
+        ])
+        
+    }
+    
+    func setupEmailField() {
+        semesterTitle.isHidden = true
+        semesterView.isHidden = true
+        semesterTextField.isHidden = true
+        
+        NSLayoutConstraint.activate([
+            emailTitle.topAnchor.constraint(equalTo: patronymicView.bottomAnchor, constant: 20),
+        ])
+    }
+    
+}

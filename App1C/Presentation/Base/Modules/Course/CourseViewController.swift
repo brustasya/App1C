@@ -12,9 +12,9 @@ class CourseViewController: UIViewController {
     private lazy var linksView = UIView()
     private lazy var linksTableView = UITableView()
     private lazy var linksModels: [BaseModel] = [
-        BaseModel(title: "Преподаватели", image: Images.persons.uiImage),
-        BaseModel(title: "Студенты", image: Images.persons.uiImage),
-        BaseModel(title: "Чат курса", image: Images.chat.uiImage)
+        BaseModel(id: 0, title: "Преподаватели", image: Images.persons.uiImage),
+        BaseModel(id: 1, title: "Студенты", image: Images.persons.uiImage),
+        BaseModel(id: 2, title: "Чат курса", image: Images.chat.uiImage)
     ]
     private lazy var timeTableBackgroundView = UIView()
     private lazy var timeTableView = UITableView()

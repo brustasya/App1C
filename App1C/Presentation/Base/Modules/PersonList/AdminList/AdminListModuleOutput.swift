@@ -9,4 +9,5 @@ import Foundation
 
 protocol AdminListModuleOutput: AnyObject {
     func moduleWantsToCloseAdminList()
+    func moduleWantsToOpenAdminDetails(id: Int)
 }

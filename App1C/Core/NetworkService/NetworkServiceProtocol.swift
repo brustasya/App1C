@@ -9,4 +9,5 @@ import Foundation
 
 protocol NetworkServiceProtocol: AnyObject {
     func sendRequest<T: Decodable>(_ request: URLRequest, completion: @escaping (Result<T, Error>) -> Void)
+    func sendRequest(_ request: URLRequest, completion: @escaping (Result<Data?, Error>) -> Void) 
 }

@@ -8,5 +8,8 @@
 import Foundation
 
 protocol StudentsListViewOutput: AnyObject {
-    func addStudent() 
+    func addStudent()
+    func goBack()
+    func selectCourse(at index: Int)
+    func selectStudent(at index: Int)
 }

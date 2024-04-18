@@ -35,6 +35,7 @@ final class RoleSelectionPresenter {
                 Logger.shared.printLog(log: "\(token)")
                 TokenService.shared.token =  token.token?.accessToken ?? ""
                 TokenService.shared.refreshToken = token.token?.refreshToken ?? ""
+                TokenService.shared.id = token.uid
                 
                 DispatchQueue.main.async {
                     self?.openMainScreen(for: role)
@@ -68,11 +69,11 @@ extension RoleSelectionPresenter: RoleSelectionViewOutput {
         for role in roles {
             switch role {
             case .student:
-                rolesModel.append(BaseModel(title: "Страница студента", image: Images.books.uiImage))
+                rolesModel.append(BaseModel(id: 0, title: "Страница студента", image: Images.books.uiImage))
             case .teacher:
-                rolesModel.append(BaseModel(title: "Страница преподавателя", image: Images.graduationcap.uiImage))
+                rolesModel.append(BaseModel(id: 1, title: "Страница преподавателя", image: Images.graduationcap.uiImage))
             case .admin:
-                rolesModel.append(BaseModel(title: "Страница администратора", image: Images.gear.uiImage))
+                rolesModel.append(BaseModel(id: 2, title: "Страница администратора", image: Images.gear.uiImage))
             }
         }
         

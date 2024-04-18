@@ -71,4 +71,26 @@ extension NetworkService: NetworkServiceProtocol {
             }
         }.resume()
     }
+    
+    func sendRequest(_ request: URLRequest, completion: @escaping (Result<Data?, Error>) -> Void) {
+        session.dataTask(with: request) { [weak self] data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(TFSError.noData))
+                return
+            }
+            
+            do {
+                try self?.handleStatusCode(response: response)
+                completion(.success(nil))
+            } catch {
+                self?.errorLog(data: data)
+                completion(.failure(error))
+            }
+        }.resume()
+    }
 }

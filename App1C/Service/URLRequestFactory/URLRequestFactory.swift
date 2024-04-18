@@ -57,5 +57,6 @@ final class URLRequestFactory {
     
     func addHeader(request: inout URLRequest) {
         request.addValue(TokenService.shared.token, forHTTPHeaderField: "X-Auth_Token")
+        print()
     }
 }

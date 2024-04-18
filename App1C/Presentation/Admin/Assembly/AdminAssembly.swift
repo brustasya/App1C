@@ -31,7 +31,10 @@ final class AdminAssembly: BaseAssembly {
     }
     
     func makeStudentsListModule(moduleOutput: StudentsListModuleOutput) -> UIViewController {
-        let presenter = StudentsListPresenter(moduleOutput: moduleOutput)
+        let presenter = StudentsListPresenter(
+            moduleOutput: moduleOutput,
+            usersListService: serviceAssembly.makeUsersListService()
+        )
         let vc = StudentsListViewController(output: presenter)
         presenter.viewInput = vc
         return vc
@@ -42,7 +45,58 @@ final class AdminAssembly: BaseAssembly {
             moduleOutput: moduleOutput,
             userCreationService: serviceAssembly.makeUserCreationService()
         )
-        let vc = AddStudentViewController(output: presenter)
+        let vc = AddPersonViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeAddTeacherModule(moduleOutput: AddTeacherModuleOutput) -> UIViewController {
+        let presenter = AddTeacherPresenter(
+            moduleOutput: moduleOutput,
+            userCreationService: serviceAssembly.makeUserCreationService()
+        )
+        let vc = AddPersonViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeAddAdminModule(moduleOutput: AddAdminModuleOutput) -> UIViewController {
+        let presenter = AddAdminPresenter(
+            moduleOutput: moduleOutput,
+            userCreationService: serviceAssembly.makeUserCreationService()
+        )
+        let vc = AddPersonViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeAdminListModule(moduleOutput: AdminsListForAdminModuleOutput) -> UIViewController {
+        let presenter = AdminsListForAdminPresenter(
+            moduleOutput: moduleOutput,
+            usersListService: serviceAssembly.makeUsersListService()
+        )
+        let vc = PersonListViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeTeachersListModule(moduleOutput: TeachersListModuleOutput) -> UIViewController {
+        let presenter = TeachersListPresenter(
+            moduleOutput: moduleOutput,
+            usersListService: serviceAssembly.makeUsersListService()
+        )
+        let vc = PersonListViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeProfileModule() -> UIViewController {
+        let presenter = AdminPersonalDataPresenter(
+            id: TokenService.shared.id,
+            profileService: serviceAssembly.makeProfileService()
+        )
+        let vc = ProfileViewController(output: presenter)
+        presenter.viewInput = vc
         return vc
     }
 }

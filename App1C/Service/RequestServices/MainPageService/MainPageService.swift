@@ -10,7 +10,7 @@ import UIKit
 
 protocol MainPageServiceProtocol {
     func getMainPage(completion: @escaping (Result<MainPageModel, Error>) -> Void)
-    func updateLinks(with model: LinksModel, completion: @escaping (Result<[String: Int], Error>) -> Void)
+    func updateLinks(with model: LinksModel, completion: @escaping (Result<Data?, Error>) -> Void)
     func openURL(url: String)
 }
 
@@ -34,7 +34,7 @@ class MainPageService: MainPageServiceProtocol {
         }
     }
     
-    func updateLinks(with model: LinksModel, completion: @escaping (Result<[String: Int], Error>) -> Void) {
+    func updateLinks(with model: LinksModel, completion: @escaping (Result<Data?, Error>) -> Void) {
         do {
             let request = try requestFactory.updateLinks(with: model)
             networkService.sendRequest(request, completion: completion)

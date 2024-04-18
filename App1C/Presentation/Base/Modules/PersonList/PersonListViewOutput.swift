@@ -10,4 +10,6 @@ import Foundation
 protocol PersonListViewOutput: AnyObject {
     func viewIsReady()
     func selectedRowAt(index: Int)
+    func goBack()
+    func addButtonTapped()
 }

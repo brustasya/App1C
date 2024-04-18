@@ -13,6 +13,7 @@ class PersonListViewController: UIViewController {
     private lazy var personsView = UIView()
     private lazy var personTableView = UITableView()
     private lazy var persons: [BaseModel] = []
+    private lazy var addButton = UIButton()
     
     private var output: PersonListViewOutput
     
@@ -33,6 +34,21 @@ class PersonListViewController: UIViewController {
         output.viewIsReady()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = true
+        (navigationController as? CustomNavigationController)?.setupBackButton()
+        (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        tabBarController?.tabBar.isTranslucent = true
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        (navigationController as? CustomNavigationController)?.hideBackButton()
+    }
+    
     private func setupTitle() {
         titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width, height: 30), title: "")
         view.addSubview(titleLabel)
@@ -47,8 +63,13 @@ class PersonListViewController: UIViewController {
             contentView: view,
             frame: view.frame,
             title: "",
-            tableView: personTableView
+            tableView: personTableView,
+            margin: 0
         )
+        
+        personsView.backgroundColor = .white
+        personTableView.layer.borderColor = UIColor.clear.cgColor
+        personTableView.layer.cornerRadius = 0
         
         view.addSubview(personsView)
         personsView.addSubview(personTableView)
@@ -59,8 +80,16 @@ class PersonListViewController: UIViewController {
             personTableView.heightAnchor.constraint(equalToConstant: CGFloat(Double(persons.count * 50) - 0.5)),
             personsView.heightAnchor.constraint(equalTo: personTableView.heightAnchor, constant: 30),
             personsView.bottomAnchor.constraint(equalTo: personTableView.bottomAnchor, constant: 15),
-            personsView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
+            personsView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10)
         ])
+    }
+    
+    @objc private func goBack() {
+        output.goBack()
+    }
+    
+    @objc private func addStudentButtonTapped() {
+        output.addButtonTapped()
     }
 }
 
@@ -72,6 +101,15 @@ extension PersonListViewController: PersonListViewInput {
     
     func updateTitle(title: String) {
         titleLabel.text = title
+    }
+    
+    func setupAddButton(title: String) {
+        let y = tabBarController?.tabBar.frame.minY ?? view.frame.maxY
+        addButton = ButtonView(frame: CGRect(x: 25, y: y - 100, width: view.frame.width - 50, height: 45))
+        view.addSubview(addButton)
+        addButton.setTitle(title, for: .normal)
+        
+        addButton.addTarget(self, action: #selector(addStudentButtonTapped), for: .touchUpInside)
     }
 }
 

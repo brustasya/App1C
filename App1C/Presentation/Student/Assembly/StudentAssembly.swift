@@ -20,15 +20,4 @@ final class StudentAssembly: BaseAssembly {
         return vc
     }
     
-//    func makeTripModule(moduleOutput: TripModuleOutput, model: TripModel) -> UIViewController {
-//        let presenter = TripPresenter(
-//            moduleOutput: moduleOutput,
-//            telemetryService: serviceAssembly.makeTelemetryService(),
-//            tripModel: model
-//        )
-//        let tripVC = TripViewController(output: presenter)
-//        presenter.viewInput = tripVC
-//
-//        return tripVC
-//    }
 }

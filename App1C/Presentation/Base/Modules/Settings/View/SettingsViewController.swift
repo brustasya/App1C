@@ -12,19 +12,19 @@ class SettingsViewController: UIViewController {
     lazy var baseBackgroundView = UIView()
     lazy var baseTableView = UITableView()
     lazy var baseElements: [BaseModel] = [
-        BaseModel(title: "Личные данные", image: Images.person.uiImage),
-        BaseModel(title: "Cписок администраторов", image: Images.persons.uiImage),
-        BaseModel(title: "Чат кафедры", image: Images.chat.uiImage),
-        BaseModel(title: "Выход", image: Images.exit.uiImage),
+        BaseModel(id: 0, title: "Личные данные", image: Images.person.uiImage),
+        BaseModel(id: 1, title: "Cписок администраторов", image: Images.persons.uiImage),
+        BaseModel(id: 2, title: "Чат кафедры", image: Images.chat.uiImage),
+        BaseModel(id: 3, title: "Выход", image: Images.exit.uiImage),
     ]
     
     lazy var educationBackgroundView = UIView()
     lazy var educationTableView = UITableView()
     lazy var education: [BaseModel] = [
-        BaseModel(title: "Список преподавателей", image: Images.graduationcap.uiImage),
-        BaseModel(title: "Cписок студентов", image: Images.persons.uiImage),
-        BaseModel(title: "Архив студентов", image: Images.archive.uiImage),
-        BaseModel(title: "Список курсов", image: Images.books.uiImage),
+        BaseModel(id: 0, title: "Список преподавателей", image: Images.graduationcap.uiImage),
+        BaseModel(id: 1, title: "Cписок студентов", image: Images.persons.uiImage),
+        BaseModel(id: 2, title: "Архив студентов", image: Images.archive.uiImage),
+        BaseModel(id: 3, title: "Список курсов", image: Images.books.uiImage),
     ]
 
     override func viewDidLoad() {
@@ -35,6 +35,7 @@ class SettingsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        (navigationController as? CustomNavigationController)?.hideBackButton()
         tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.isHidden = false
     }

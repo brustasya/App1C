@@ -48,7 +48,8 @@ extension StudentCoordinator: StudentSettingsModuleOutput {
     }
     
     func moduleWantsToOpenProfile() {
-        settingsNavigationController.pushViewController(ProfileViewController(), animated: true)
+        let profileVC = studentAssembly.makeStudentProfileModule(for: TokenService.shared.id)
+        settingsNavigationController.pushViewController(profileVC, animated: true)
     }
     
     func moduleWantsToOpenAdminList() {
@@ -64,6 +65,11 @@ extension StudentCoordinator: StudentSettingsModuleOutput {
 extension StudentCoordinator: AdminListModuleOutput {
     func moduleWantsToCloseAdminList() {
         settingsNavigationController.popViewController(animated: true)
+    }
+    
+    func moduleWantsToOpenAdminDetails(id: Int) {
+        let adminVC = studentAssembly.makeAdminDetailsModule(for: id)
+        settingsNavigationController.pushViewController(adminVC, animated: true)
     }
 }
 

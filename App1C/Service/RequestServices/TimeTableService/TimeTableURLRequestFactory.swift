@@ -13,11 +13,12 @@ protocol TimeTableURLRequestFactory: AnyObject {
 
 extension URLRequestFactory: TimeTableURLRequestFactory {
     func timeTable() throws -> URLRequest {
-        guard let url = url(with: "/timetable", query: tokenString) else {
+        guard let url = url(with: "/timetable") else {
             throw TFSError.makeRequest
         }
         var request = makeRequest(url: url)
         request.httpMethod = "GET"
+        addHeader(request: &request)
         return request
     }
 }

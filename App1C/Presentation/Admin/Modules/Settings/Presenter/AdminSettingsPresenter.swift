@@ -41,7 +41,7 @@ extension AdminSettingsPresenter: AdminSettingsViewOutput {
     func selectEducationRowAt(index: Int) {
         switch index {
         case 0:
-            moduleOutput?.moduleWantsToOpenProfile()
+            moduleOutput?.moduleWantsToOpenTeachersList()
         case 1:
             moduleOutput?.moduleWantsToOpenStudentsList()
         case 2:

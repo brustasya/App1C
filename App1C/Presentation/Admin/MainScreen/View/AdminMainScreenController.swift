@@ -66,7 +66,7 @@ class AdminMainScreenController: MainScreenViewController {
     }
     
     private func setupCoursesView() {
-        baseElements.append(BaseModel(title: "Курсы кафедры", image: Images.graduationcap.uiImage))
+        baseElements.append(BaseModel(id: 4, title: "Курсы кафедры", image: Images.graduationcap.uiImage))
         super.setupBaseView()
         
         NSLayoutConstraint.activate([

@@ -28,7 +28,7 @@ class TeacherSettingsViewController: SettingsViewController {
     
     override func setupBaseElements() {
         baseElements.insert(
-            BaseModel(title: "Курсы кафедры", image: Images.books.uiImage),
+            BaseModel(id: 0, title: "Курсы кафедры", image: Images.books.uiImage),
             at: 2
         )
         super.setupBaseElements()

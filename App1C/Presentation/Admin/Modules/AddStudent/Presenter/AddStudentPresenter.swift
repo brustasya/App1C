@@ -8,7 +8,7 @@
 import Foundation
 
 final class AddStudentPresenter {
-    weak var viewInput: AddStudentViewInput?
+    weak var viewInput: AddPersonViewInput?
     weak var moduleOutput: AddStudentModuleOutput?
         
     private let userCreationService: UserCreationServiceProtocol
@@ -37,8 +37,13 @@ final class AddStudentPresenter {
     }
 }
 
-extension AddStudentPresenter: AddStudentViewOutput {
-    func addStudentButtonTapped(secondName: String, firstName: String, surname: String,
+extension AddStudentPresenter: AddPersonViewOutput {
+    func viewIsReady() {
+        viewInput?.setupTitle(title: "Добавить студента")
+        viewInput?.setupStudentsFields()
+    }
+    
+    func addButtonTapped(secondName: String, firstName: String, surname: String,
                                 email: String, semester: Int) {
         let model = CreateStudentModel(
             secondName: secondName,

@@ -20,74 +20,82 @@ protocol EventsURLRequestFactory: AnyObject {
 
 extension URLRequestFactory: EventsURLRequestFactory {
     func events() throws -> URLRequest {
-        guard let url = url(with: "/events", query: tokenString) else {
+        guard let url = url(with: "/events") else {
             throw TFSError.makeRequest
         }
         var request = makeRequest(url: url)
         request.httpMethod = "GET"
+        addHeader(request: &request)
         return request
     }
     
     func eventDetails(for id: Int) throws -> URLRequest {
-        guard let url = url(with: "/event", query: "\(tokenString)&event_id=\(id)") else {
+        guard let url = url(with: "/event", query: "event_id=\(id)") else {
             throw TFSError.makeRequest
         }
         var request = makeRequest(url: url)
         request.httpMethod = "GET"
+        addHeader(request: &request)
         return request
     }
     
     func getModifyEvent(for id: Int) throws -> URLRequest {
-        guard let url = url(with: "/modify-event", query: "\(tokenString)&event_id=\(id)") else {
+        guard let url = url(with: "/modify-event", query: "event_id=\(id)") else {
             throw TFSError.makeRequest
         }
         var request = makeRequest(url: url)
         request.httpMethod = "GET"
+        addHeader(request: &request)
         return request
     }
     
     func modifyEvent(for id: Int, with model: EventDetailServiceModel) throws -> URLRequest {
-        guard let url = url(with: "/modify-event", query: "\(tokenString)&event_id=\(id)"),
+        guard let url = url(with: "/modify-event", query: "event_id=\(id)"),
               var request = makeRequest(with: model, url: url) else {
             throw TFSError.makeRequest
         }
         request.httpMethod = "PUT"
+        addHeader(request: &request)
         return request
     }
     
     func currentEvents() throws -> URLRequest {
-        guard let url = url(with: "/current-events", query: tokenString) else {
+        guard let url = url(with: "/current-events") else {
             throw TFSError.makeRequest
         }
         var request = makeRequest(url: url)
         request.httpMethod = "GET"
+        addHeader(request: &request)
         return request
     }
     
     func watchEvent(eventID: Int) throws -> URLRequest {
-        guard let url = url(with: "/watched", query: "\(tokenString)&event_id=\(eventID)") else {
+        guard let url = url(with: "/watched", query: "event_id=\(eventID)") else {
             throw TFSError.makeRequest
         }
         var request = makeRequest(url: url)
         request.httpMethod = "PUT"
+        addHeader(request: &request)
         return request
     }
     
     func createSemester(with model: CreateSemesterModel) throws -> URLRequest {
-        guard let url = url(with: "/create/semester", query: tokenString),
+        guard let url = url(with: "/create/semester"),
               var request = makeRequest(with: model, url: url) else {
             throw TFSError.makeRequest
         }
         request.httpMethod = "POST"
+        addHeader(request: &request)
         return request
     }
     
     func createEvent(with model: CreateEventModel) throws -> URLRequest {
-        guard let url = url(with: "/create/event", query: tokenString),
+        guard let url = url(with: "/create/event"),
               var request = makeRequest(with: model, url: url) else {
             throw TFSError.makeRequest
         }
         request.httpMethod = "POST"
+        addHeader(request: &request)
         return request
     }
 }

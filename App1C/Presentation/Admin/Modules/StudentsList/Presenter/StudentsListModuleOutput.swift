@@ -9,4 +9,6 @@ import Foundation
 
 protocol StudentsListModuleOutput: AnyObject {
     func moduleWantsToOpenAddStudentModule()
+    func moduleWantsToCloseStudentsList()
+    func moduleWantsToOpenStudentDetails(for id: Int)
 }

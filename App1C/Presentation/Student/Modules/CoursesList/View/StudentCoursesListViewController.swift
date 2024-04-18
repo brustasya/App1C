@@ -51,6 +51,7 @@ class StudentCoursesListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        (navigationController as? CustomNavigationController)?.hideBackButton()
         tabBarController?.tabBar.isTranslucent = false
         tabBarController?.tabBar.isHidden = false
     }

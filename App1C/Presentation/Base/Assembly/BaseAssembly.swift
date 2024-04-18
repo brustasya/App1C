@@ -15,21 +15,41 @@ class BaseAssembly {
     }
     
     func makeAdminListModule(moduleOutput: AdminListModuleOutput) -> UIViewController {
-        let presenter = AdminListPresenter(moduleOutput: moduleOutput)
+        let presenter = AdminListPresenter(
+            moduleOutput: moduleOutput,
+            usersListService: serviceAssembly.makeUsersListService())
         let vc = PersonListViewController(output: presenter)
         presenter.viewInput = vc
         return vc
     }
     
-//    func makeTripModule(moduleOutput: TripModuleOutput, model: TripModel) -> UIViewController {
-//        let presenter = TripPresenter(
-//            moduleOutput: moduleOutput,
-//            telemetryService: serviceAssembly.makeTelemetryService(),
-//            tripModel: model
-//        )
-//        let tripVC = TripViewController(output: presenter)
-//        presenter.viewInput = tripVC
-//
-//        return tripVC
-//    }
+    func makeAdminDetailsModule(for id: Int) -> UIViewController {
+        let presenter = AdminDetailsPresenter(
+            id: id,
+            profileService: serviceAssembly.makeProfileService()
+        )
+        let vc = ProfileViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeStudentProfileModule(for id: Int) -> UIViewController {
+        let presenter = StudentPersonalDataPresenter(
+            id: id,
+            profileService: serviceAssembly.makeProfileService()
+        )
+        let vc = ProfileViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeTeacherProfileModule(for id: Int) -> UIViewController {
+        let presenter = TeacherPersonalDataPresenter(
+            id: id,
+            profileService: serviceAssembly.makeProfileService()
+        )
+        let vc = ProfileViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
 }

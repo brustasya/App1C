@@ -13,9 +13,9 @@ protocol EventsServiceProtocol {
     func getModifyEvent(eventID: Int, completion: @escaping (Result<EventDetailServiceModel, Error>) -> Void)
     func modifyEvent(eventID: Int, eventModel: EventDetailServiceModel, completion: @escaping (Result<[String: Int], Error>) -> Void)
     func currentEvents(completion: @escaping (Result<CurrentEventsModel, Error>) -> Void)
-    func watchEvent(eventID: Int, completion: @escaping (Result<[String: Int], Error>) -> Void)
-    func createSemester(model: CreateSemesterModel, completion: @escaping (Result<[String: Int], Error>) -> Void)
-    func createEvent(model: CreateEventModel, completion: @escaping (Result<[String: Int], Error>) -> Void)
+    func watchEvent(eventID: Int, completion: @escaping (Result<Data?, Error>) -> Void)
+    func createSemester(model: CreateSemesterModel, completion: @escaping (Result<Data?, Error>) -> Void)
+    func createEvent(model: CreateEventModel, completion: @escaping (Result<Data?, Error>) -> Void)
 }
 
 class EventsService: EventsServiceProtocol {
@@ -74,7 +74,7 @@ class EventsService: EventsServiceProtocol {
         }
     }
     
-    func watchEvent(eventID: Int, completion: @escaping (Result<[String: Int], Error>) -> Void) {
+    func watchEvent(eventID: Int, completion: @escaping (Result<Data?, Error>) -> Void) {
         do {
             let request = try requestFactory.watchEvent(eventID: eventID)
             networkService.sendRequest(request, completion: completion)
@@ -83,7 +83,7 @@ class EventsService: EventsServiceProtocol {
         }
     }
     
-    func createSemester(model: CreateSemesterModel, completion: @escaping (Result<[String: Int], Error>) -> Void) {
+    func createSemester(model: CreateSemesterModel, completion: @escaping (Result<Data?, Error>) -> Void) {
         do {
             let request = try requestFactory.createSemester(with: model)
             networkService.sendRequest(request, completion: completion)
@@ -92,7 +92,7 @@ class EventsService: EventsServiceProtocol {
         }
     }
     
-    func createEvent(model: CreateEventModel, completion: @escaping (Result<[String: Int], Error>) -> Void) {
+    func createEvent(model: CreateEventModel, completion: @escaping (Result<Data?, Error>) -> Void) {
         do {
             let request = try requestFactory.createEvent(with: model)
             networkService.sendRequest(request, completion: completion)

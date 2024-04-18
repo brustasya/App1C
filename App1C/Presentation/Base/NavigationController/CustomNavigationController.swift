@@ -107,6 +107,7 @@ class CustomNavigationController: UINavigationController {
     }
     
     func setupBackButton() {
+        backButton = UIButton(type: .system)
         navigationBar.addSubview(backButton)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -119,7 +120,11 @@ class CustomNavigationController: UINavigationController {
             backButton.heightAnchor.constraint(equalToConstant: 50)
         ])
         
-    //    backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        backButton.isHidden = false
+    }
+    
+    func hideBackButton() {
+        backButton.isHidden = true
     }
     
     @objc func goBack() { }

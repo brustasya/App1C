@@ -28,6 +28,8 @@ class EventsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        (navigationController as? CustomNavigationController)?.hideBackButton()
+
         tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.isHidden = false
     }
