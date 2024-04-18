@@ -1,0 +1,13 @@
+//
+//  PersonListViewInput.swift
+//  App1C
+//
+//  Created by Станислава on 09.04.2024.
+//
+
+import Foundation
+
+protocol PersonListViewInput: AnyObject {
+    func setupPersonTable(with persons: [BaseModel])
+    func updateTitle(title: String)
+}

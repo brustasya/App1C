@@ -1,0 +1,13 @@
+//
+//  VerificationModel.swift
+//  App1C
+//
+//  Created by Станислава on 13.04.2024.
+//
+
+import Foundation
+
+struct VerificationModel: Codable {
+    let login: String
+    let password: String
+}
