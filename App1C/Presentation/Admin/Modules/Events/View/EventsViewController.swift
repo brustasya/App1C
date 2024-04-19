@@ -16,11 +16,10 @@ class EventsViewController: UIViewController {
     ]
     private lazy var eventsTableView = UITableView()
     private lazy var eventsBackgroundView = UIView()
-    
-    private var output: EventsViewOutput
-    
     private lazy var courseAggregationButton = UIButton()
-    
+
+    private var output: EventsViewOutput
+        
     init(output: EventsViewOutput) {
         self.output = output
         super.init(nibName: nil, bundle: nil)
@@ -85,19 +84,29 @@ class EventsViewController: UIViewController {
         let courseSelectionButton = ButtonView(frame: CGRect(x: 25, y: title.frame.maxY + 15, width: view.frame.width - 50, height: 45))
         courseSelectionButton.setTitle("Выбор курсов", for: .normal)
         view.addSubview(courseSelectionButton)
+        courseSelectionButton.addTarget(self, action: #selector(createPreliminaryChoiceEventButtonTapped), for: .touchUpInside)
         
         let finalCourseSelectionButton = ButtonView(frame: CGRect(x: 25, y: courseSelectionButton.frame.maxY + 10, width: view.frame.width - 50, height: 45))
         finalCourseSelectionButton.setTitle("Выбор минимальной нагрузки", for: .normal)
         view.addSubview(finalCourseSelectionButton)
+        finalCourseSelectionButton.addTarget(self, action: #selector(createFinalChoiceEventButtonTapped), for: .touchUpInside)
         
         let estimationButton = ButtonView(frame: CGRect(x: 25, y: finalCourseSelectionButton.frame.maxY + 10, width: view.frame.width - 50, height: 45))
         estimationButton.setTitle("Выставление оценок", for: .normal)
         view.addSubview(estimationButton)
-        
+        estimationButton.addTarget(self, action: #selector(createEstimatingEventButtonTapped), for: .touchUpInside)
     }
     
-    @objc private func createEventButtonTapped() {
-
+    @objc private func createPreliminaryChoiceEventButtonTapped() {
+        output.createPreliminaryChoice()
+    }
+    
+    @objc private func createFinalChoiceEventButtonTapped() {
+        output.createFinalChoice()
+    }
+    
+    @objc private func createEstimatingEventButtonTapped() {
+        output.createEstimating()
     }
 }
 
@@ -118,16 +127,12 @@ extension EventsViewController: UITableViewDataSource, UITableViewDelegate {
             fatalError("Cannot create EventCell")
         }
         cell.configure(with: events[indexPath.row])
-//        cell.setButtonVisible(visible: false)
-//        cell.selectionStyle = .none
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let selectedItem = dataSource.itemIdentifier(for: indexPath) {
-//            print("Selected item: \(selectedItem)")
-//            output.tripDidSelect(model: selectedItem)
-//        }
+        output.selectRow(at: indexPath.row)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

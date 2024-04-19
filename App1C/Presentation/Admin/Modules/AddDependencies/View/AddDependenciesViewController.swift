@@ -127,17 +127,6 @@ class AddDependenciesViewController: UIViewController {
     }
 }
 
-//extension EstimationViewController: PersonListViewInput {
-//    func setupPersonTable(with persons: [BaseModel]) {
-//        self.persons = persons
-//        setupTableView()
-//    }
-//
-//    func updateTitle(title: String) {
-//        titleLabel.text = title
-//    }
-//}
-
 extension AddDependenciesViewController: AddDependenciesViewInput {
     func updateCourses(with courses: [AddDependenceModel]) {
         self.courses = courses

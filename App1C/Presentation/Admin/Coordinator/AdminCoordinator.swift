@@ -15,6 +15,7 @@ final class AdminCoordinator: CoordinatorProtocol {
     
     private var mainScreenNavigationController = UINavigationController()
     private var settingsNavigationController: UINavigationController = UINavigationController()
+    private var eventsNavigationController = UINavigationController()
     private var tripViewController: UIViewController = UIViewController()
     private var profileEditingViewController: UIViewController = UIViewController()
     private var passengerTripViewController: UIViewController = UIViewController()
@@ -27,10 +28,12 @@ final class AdminCoordinator: CoordinatorProtocol {
     func start(in window: UIWindow?) {
         let mainScreenVC = adminAssembly.makeMainScreenModule(moduleOutput: self)
         mainScreenNavigationController = CustomNavigationController(rootViewController: mainScreenVC)
-        let settingsVC = adminAssembly.makeSettingsModule(moduleOutput: self)//profileAssembly.makeProfileModule(moduleOutput: self)
+        
+        let settingsVC = adminAssembly.makeSettingsModule(moduleOutput: self)
         self.settingsNavigationController = CustomNavigationController(rootViewController: settingsVC)
+        
         let eventsVC = adminAssembly.makeEventsModule(moduleOutput: self)
-        let eventsNavigationController = CustomNavigationController(rootViewController: eventsVC)
+        eventsNavigationController = CustomNavigationController(rootViewController: eventsVC)
         
         let tabBarController = AdminTabBarController(
             mainScreenNavigationController: mainScreenNavigationController,
@@ -45,7 +48,8 @@ final class AdminCoordinator: CoordinatorProtocol {
 
 extension AdminCoordinator: EventsModuleOutput {
     func moduleWantsToCreateEvent(type: EventType) {
-        
+        let createEventVC = adminAssembly.makeCreateEventModule(eventType: type)
+        eventsNavigationController.pushViewController(createEventVC, animated: true)
     }
     
     func moduleWantsToOpenEvent(id: Int) {

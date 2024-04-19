@@ -98,7 +98,7 @@
 		85ED3B3C2BCC2A1E00101A5F /* EstimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED3B3B2BCC2A1E00101A5F /* EstimationViewController.swift */; };
 		85ED3B402BCC2EA000101A5F /* EstimationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED3B3F2BCC2EA000101A5F /* EstimationCell.swift */; };
 		85ED3B442BCC305200101A5F /* EstimationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED3B432BCC305200101A5F /* EstimationModel.swift */; };
-		85ED3B492BCEA4C600101A5F /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED3B482BCEA4C600101A5F /* CreateEventViewController.swift */; };
+		85ED3B492BCEA4C600101A5F /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED3B482BCEA4C600101A5F /* EventViewController.swift */; };
 		85ED3B4C2BCEB3A100101A5F /* CoursesAgregationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED3B4B2BCEB3A100101A5F /* CoursesAgregationViewController.swift */; };
 		85ED3B512BCEB5E000101A5F /* CourseAgregationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED3B502BCEB5E000101A5F /* CourseAgregationModel.swift */; };
 		85ED3B532BCEB5F200101A5F /* CourseAgregationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED3B522BCEB5F200101A5F /* CourseAgregationCell.swift */; };
@@ -224,8 +224,8 @@
 		85FDB5CA2BD2B59300C71E28 /* AddCourseModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDB5C92BD2B59300C71E28 /* AddCourseModuleOutput.swift */; };
 		85FDB5CD2BD2C07000C71E28 /* CourseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDB5CC2BD2C07000C71E28 /* CourseType.swift */; };
 		85FDB5D12BD2DBE400C71E28 /* CreateEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDB5D02BD2DBE400C71E28 /* CreateEventPresenter.swift */; };
-		85FDB5D32BD2DC1200C71E28 /* CreateEventViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDB5D22BD2DC1100C71E28 /* CreateEventViewInput.swift */; };
-		85FDB5D52BD2DC2300C71E28 /* CreateEventViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDB5D42BD2DC2300C71E28 /* CreateEventViewOutput.swift */; };
+		85FDB5D32BD2DC1200C71E28 /* EventViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDB5D22BD2DC1100C71E28 /* EventViewInput.swift */; };
+		85FDB5D52BD2DC2300C71E28 /* EventViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDB5D42BD2DC2300C71E28 /* EventViewOutput.swift */; };
 		85FDB5D72BD2DC9700C71E28 /* EventsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDB5D62BD2DC9700C71E28 /* EventsViewInput.swift */; };
 		85FDB5D92BD2DCA700C71E28 /* EventsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDB5D82BD2DCA700C71E28 /* EventsViewOutput.swift */; };
 		85FDB5DB2BD2DCB800C71E28 /* EventsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85FDB5DA2BD2DCB800C71E28 /* EventsPresenter.swift */; };
@@ -326,7 +326,7 @@
 		85ED3B3B2BCC2A1E00101A5F /* EstimationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimationViewController.swift; sourceTree = "<group>"; };
 		85ED3B3F2BCC2EA000101A5F /* EstimationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimationCell.swift; sourceTree = "<group>"; };
 		85ED3B432BCC305200101A5F /* EstimationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimationModel.swift; sourceTree = "<group>"; };
-		85ED3B482BCEA4C600101A5F /* CreateEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		85ED3B482BCEA4C600101A5F /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		85ED3B4B2BCEB3A100101A5F /* CoursesAgregationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesAgregationViewController.swift; sourceTree = "<group>"; };
 		85ED3B502BCEB5E000101A5F /* CourseAgregationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAgregationModel.swift; sourceTree = "<group>"; };
 		85ED3B522BCEB5F200101A5F /* CourseAgregationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAgregationCell.swift; sourceTree = "<group>"; };
@@ -452,8 +452,8 @@
 		85FDB5C92BD2B59300C71E28 /* AddCourseModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseModuleOutput.swift; sourceTree = "<group>"; };
 		85FDB5CC2BD2C07000C71E28 /* CourseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseType.swift; sourceTree = "<group>"; };
 		85FDB5D02BD2DBE400C71E28 /* CreateEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventPresenter.swift; sourceTree = "<group>"; };
-		85FDB5D22BD2DC1100C71E28 /* CreateEventViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewInput.swift; sourceTree = "<group>"; };
-		85FDB5D42BD2DC2300C71E28 /* CreateEventViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewOutput.swift; sourceTree = "<group>"; };
+		85FDB5D22BD2DC1100C71E28 /* EventViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewInput.swift; sourceTree = "<group>"; };
+		85FDB5D42BD2DC2300C71E28 /* EventViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewOutput.swift; sourceTree = "<group>"; };
 		85FDB5D62BD2DC9700C71E28 /* EventsViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewInput.swift; sourceTree = "<group>"; };
 		85FDB5D82BD2DCA700C71E28 /* EventsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewOutput.swift; sourceTree = "<group>"; };
 		85FDB5DA2BD2DCB800C71E28 /* EventsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsPresenter.swift; sourceTree = "<group>"; };
@@ -1935,9 +1935,9 @@
 		85FDB5CF2BD2DBB300C71E28 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				85ED3B482BCEA4C600101A5F /* CreateEventViewController.swift */,
-				85FDB5D22BD2DC1100C71E28 /* CreateEventViewInput.swift */,
-				85FDB5D42BD2DC2300C71E28 /* CreateEventViewOutput.swift */,
+				85ED3B482BCEA4C600101A5F /* EventViewController.swift */,
+				85FDB5D22BD2DC1100C71E28 /* EventViewInput.swift */,
+				85FDB5D42BD2DC2300C71E28 /* EventViewOutput.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2019,7 +2019,7 @@
 				85FDB5D92BD2DCA700C71E28 /* EventsViewOutput.swift in Sources */,
 				85ED3AFF2BCB04A300101A5F /* CoursesURLRequestFactory.swift in Sources */,
 				85FDB5912BD1E36400C71E28 /* AdminDepartmentCoursesPresenter.swift in Sources */,
-				85FDB5D32BD2DC1200C71E28 /* CreateEventViewInput.swift in Sources */,
+				85FDB5D32BD2DC1200C71E28 /* EventViewInput.swift in Sources */,
 				85FDB5BC2BD2A55800C71E28 /* AddDependenciesPresenter.swift in Sources */,
 				85F0E3142BC6F2E500D2DBAB /* CourseView.swift in Sources */,
 				85ED3B012BCB04B500101A5F /* CoursesAggregationURLRequestFactory.swift in Sources */,
@@ -2090,7 +2090,7 @@
 				85FDB52F2BD08FE100C71E28 /* AddStudentModuleOutput.swift in Sources */,
 				85981EFC2BBC843900A0DBE7 /* EventsViewController.swift in Sources */,
 				85ED3AF72BCB044000101A5F /* VerificationURLRequestFactory.swift in Sources */,
-				85FDB5D52BD2DC2300C71E28 /* CreateEventViewOutput.swift in Sources */,
+				85FDB5D52BD2DC2300C71E28 /* EventViewOutput.swift in Sources */,
 				85F0E2EF2BC4B3E200D2DBAB /* AdminSettingsViewOutput.swift in Sources */,
 				85F0E2B32BC0661300D2DBAB /* TeacherSettingsViewController.swift in Sources */,
 				85F0E30A2BC5EA2300D2DBAB /* DayTimeModel.swift in Sources */,
@@ -2176,7 +2176,7 @@
 				85FDB5812BD1C54600C71E28 /* AdminPersonalDataPresenter.swift in Sources */,
 				85981F212BBDEA9E00A0DBE7 /* EventModel.swift in Sources */,
 				85ED3B112BCB06C700101A5F /* ArchiveURLRequestFactory.swift in Sources */,
-				85ED3B492BCEA4C600101A5F /* CreateEventViewController.swift in Sources */,
+				85ED3B492BCEA4C600101A5F /* EventViewController.swift in Sources */,
 				85ED3B642BD0186E00101A5F /* VerificationViewController.swift in Sources */,
 				85FDB5472BD1445400C71E28 /* TeachersListModuleOutput.swift in Sources */,
 				85ED3AC42BCABE4600101A5F /* TFSError.swift in Sources */,

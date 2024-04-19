@@ -90,6 +90,4 @@ extension EventsPresenter: EventsViewOutput {
     func selectRow(at index: Int) {
         moduleOutput?.moduleWantsToOpenEvent(id: events[index].id)
     }
-    
-    
 }

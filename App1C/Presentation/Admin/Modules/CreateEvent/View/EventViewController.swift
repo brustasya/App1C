@@ -1,5 +1,5 @@
 //
-//  CreateEventViewController.swift
+//  EventViewController.swift
 //  App1C
 //
 //  Created by Станислава on 16.04.2024.
@@ -7,11 +7,12 @@
 
 import UIKit
 
-class CreateEventViewController: UIViewController {
+class EventViewController: UIViewController {
     private lazy var titleLabel = UILabel()
     private lazy var descriptionView = UIView()
     private lazy var descriptionTextField = UITextView()
     private lazy var deadlineLabel = UILabel()
+    private lazy var textFieldView = UIView()
     
     let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
@@ -21,6 +22,17 @@ class CreateEventViewController: UIViewController {
         return datePicker
     }()
     
+    private var output: EventViewOutput
+        
+    init(output: EventViewOutput) {
+        self.output = output
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,19 +41,26 @@ class CreateEventViewController: UIViewController {
         setupTitle()
         setupDeadline()
         setupDescription()
+        output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = true
+        (navigationController as? CustomNavigationController)?.setupBackButton()
+        (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
         tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.isHidden = true
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        (navigationController as? CustomNavigationController)?.hideBackButton()
+    }
+    
+    
     private func setupTitle() {
-//        navigationItem.hidesBackButton = true
-//        (navigationController as? CustomNavigationController)?.setupBackButton()
-//        (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        
         titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width, height: 30), title: "Выбор кусров")
         view.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -87,7 +106,6 @@ class CreateEventViewController: UIViewController {
     @objc func dateChanged(_ sender: UIDatePicker) {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy HH:mm"
-     //   dateTextField.text = formatter.string(from: sender.date)
         for subView in datePicker.subviews {
             for view in subView.subviews {
                 view.backgroundColor = Colors.paleYellow.uiColor
@@ -102,7 +120,6 @@ class CreateEventViewController: UIViewController {
     
     private func setupDescription() {
         let title = UILabel()
-        let textFieldView = UIView()
         descriptionView.addSubview(textFieldView)
         view.addSubview(descriptionView)
         descriptionView.addSubview(title)
@@ -118,10 +135,11 @@ class CreateEventViewController: UIViewController {
         
         descriptionTextField.backgroundColor = .clear
         descriptionTextField.textColor = .black
-        descriptionTextField.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        descriptionTextField.text = ""
         descriptionTextField.textContainer.maximumNumberOfLines = 0
         descriptionTextField.font = .systemFont(ofSize: 15, weight: .regular)
         descriptionTextField.textAlignment = .justified
+        descriptionTextField.tintColor = .gray
         
         textFieldView.backgroundColor = .white
         textFieldView.layer.cornerRadius = 15
@@ -147,7 +165,67 @@ class CreateEventViewController: UIViewController {
         ])
     }
     
+    private func setupCreateButton() {
+        let y = tabBarController?.tabBar.frame.minY ?? view.frame.maxY
+        let createButton = ButtonView(frame: CGRect(x: 25, y: y - 100, width: view.frame.width - 50, height: 45))
+        view.addSubview(createButton)
+        createButton.setTitle("Создать", for: .normal)
+        createButton.addTarget(self, action: #selector(createButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupGoOverButton() {
+        let y = tabBarController?.tabBar.frame.minY ?? view.frame.maxY
+        let goOverButton = ButtonView(frame: CGRect(x: 25, y: y - 100, width: view.frame.width - 50, height: 45))
+        view.addSubview(goOverButton)
+        goOverButton.setTitle("Перейти", for: .normal)
+        goOverButton.addTarget(self, action: #selector(goOverButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setupSaveButton() {
+        let y = tabBarController?.tabBar.frame.minY ?? view.frame.maxY
+        let saveButton = ButtonView(frame: CGRect(x: 25, y: y - 100, width: view.frame.width - 50, height: 45))
+        view.addSubview(saveButton)
+        saveButton.setTitle("Сохранить", for: .normal)
+        saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
+    }
+    
     @objc func goBack() {
-        print("go back")
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func createButtonTapped() {
+        output.createButtonTapped(deadline: datePicker.date, descr: descriptionTextField.text ?? "")
+    }
+    
+    @objc private func goOverButtonTapped() {
+        output.goOverButtonTapped()
+    }
+    
+    @objc private func saveButtonTapped() {
+        output.saveButtonTapped(deadline: datePicker.date, descr: descriptionTextField.text ?? "")
+    }
+}
+
+extension EventViewController: EventViewInput {
+    func setTitle(title: String) {
+        titleLabel.text = title
+    }
+    
+    func setupCreateMode() {
+        setupCreateButton()
+        datePicker.isUserInteractionEnabled = true
+        descriptionTextField.isUserInteractionEnabled = true
+        textFieldView.backgroundColor = .systemGray6
+    }
+    
+    func setupSaveMode() {
+        setupSaveButton()
+        datePicker.isUserInteractionEnabled = true
+        descriptionTextField.isUserInteractionEnabled = true
+        textFieldView.backgroundColor = .systemGray6
+    }
+    
+    func close() {
+        goBack()
     }
 }
