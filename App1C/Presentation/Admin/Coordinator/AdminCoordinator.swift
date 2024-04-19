@@ -29,7 +29,8 @@ final class AdminCoordinator: CoordinatorProtocol {
         mainScreenNavigationController = CustomNavigationController(rootViewController: mainScreenVC)
         let settingsVC = adminAssembly.makeSettingsModule(moduleOutput: self)//profileAssembly.makeProfileModule(moduleOutput: self)
         self.settingsNavigationController = CustomNavigationController(rootViewController: settingsVC)
-        let eventsNavigationController = CustomNavigationController(rootViewController: EventsViewController())
+        let eventsVC = adminAssembly.makeEventsModule(moduleOutput: self)
+        let eventsNavigationController = CustomNavigationController(rootViewController: eventsVC)
         
         let tabBarController = AdminTabBarController(
             mainScreenNavigationController: mainScreenNavigationController,
@@ -42,16 +43,26 @@ final class AdminCoordinator: CoordinatorProtocol {
     }
 }
 
+extension AdminCoordinator: EventsModuleOutput {
+    func moduleWantsToCreateEvent(type: EventType) {
+        
+    }
+    
+    func moduleWantsToOpenEvent(id: Int) {
+        
+    }
+
+}
+
 extension AdminCoordinator: AdminDepartmentCoursesModuleOutput {
     func moduleWantsToOPenAddCourse() {
-        settingsNavigationController.pushViewController(CourseViewController(), animated: true)
+        let addCourseVC = adminAssembly.makeAddCourseModule(moduleOutput: self)
+        settingsNavigationController.pushViewController(addCourseVC, animated: true)
     }
     
     func moduleWantsToOpenCourse(for id: Int) {
         
     }
-    
-    
 }
 
 extension AdminCoordinator: AdminSettingsModuleOutput {
@@ -71,7 +82,7 @@ extension AdminCoordinator: AdminSettingsModuleOutput {
     }
     
     func moduleWantsToOpenProfile() {
-        let profileVC = FinalCourseSelectionViewController()//adminAssembly.makeProfileModule()
+        let profileVC = adminAssembly.makeProfileModule() //AddTeachersViewController()//AddDependenciesViewController()//FinalCourseSelectionViewController()//
         settingsNavigationController.pushViewController(profileVC, animated: true)
     }
     
@@ -151,6 +162,18 @@ extension AdminCoordinator: StudentsListModuleOutput {
 extension AdminCoordinator: AddStudentModuleOutput {
     func moduleWantsToCloseAddStudent() {
         settingsNavigationController.popViewController(animated: true)
+    }
+}
+
+extension AdminCoordinator: AddCourseModuleOutput {
+    func moduleWantsToOpenAddDeps(delegate: CourseDelegate) {
+        let addDepsVC = adminAssembly.makeAddDependenciesModule(id: -1, delegate: delegate)
+        settingsNavigationController.pushViewController(addDepsVC, animated: true)
+    }
+    
+    func moduleWantsToOpenAddTeachers(delegate: CourseDelegate) {
+        let addTeachersVC = adminAssembly.makeAddTeachersModule(id: -1, delegate: delegate)
+        settingsNavigationController.pushViewController(addTeachersVC, animated: true)
     }
 }
 

@@ -109,4 +109,46 @@ final class AdminAssembly: BaseAssembly {
         presenter.viewInput = vc
         return vc
     }
+    
+    func makeAddDependenciesModule(id: Int, delegate: CourseDelegate? = nil) -> UIViewController  {
+        let presenter = AddDependenciesPresenter(
+            id: id,
+            coursesService: serviceAssembly.makeCoursesService()
+        )
+        let vc = AddDependenciesViewController(output: presenter)
+        presenter.viewInput = vc
+        presenter.delegate = delegate
+        return vc
+    }
+    
+    func makeAddTeachersModule(id: Int, delegate: CourseDelegate? = nil) -> UIViewController  {
+        let presenter = AddTeachersPresenter(
+            id: id,
+            usersListService: serviceAssembly.makeUsersListService()
+        )
+        let vc = AddTeachersViewController(output: presenter)
+        presenter.viewInput = vc
+        presenter.delegate = delegate
+        return vc
+    }
+    
+    func makeAddCourseModule(moduleOutput: AddCourseModuleOutput) -> UIViewController {
+        let presenter = AddCoursePresenter(
+            moduleOutput: moduleOutput,
+            coursesService: serviceAssembly.makeCoursesService()
+        )
+        let vc = CourseViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeEventsModule(moduleOutput: EventsModuleOutput) -> UIViewController {
+        let presenter = EventsPresenter(
+            moduleOutput: moduleOutput,
+            eventsService: serviceAssembly.makeEventsService()
+        )
+        let vc = EventsViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
 }

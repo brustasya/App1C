@@ -10,12 +10,25 @@ import UIKit
 class EventsViewController: UIViewController {
     
     private lazy var events: [EventModel] = [
-        EventModel(title: "Выбор курсов", deadline: Date(), type: .preliminaryCourseChoice),
-        EventModel(title: "Выбор минимальной нагрузки", deadline: Date(), type: .finalCourseChoice),
-        EventModel(title: "Выбор темы диплома", deadline: Date(), type: .diplomaSpeech)
+        EventModel(id: 0, title: "Выбор курсов", deadline: Date(), type: .preliminaryCourseChoice),
+        EventModel(id: 0, title: "Выбор минимальной нагрузки", deadline: Date(), type: .finalCourseChoice),
+        EventModel(id: 0, title: "Выбор темы диплома", deadline: Date(), type: .diplomaSpeech)
     ]
     private lazy var eventsTableView = UITableView()
     private lazy var eventsBackgroundView = UIView()
+    
+    private var output: EventsViewOutput
+    
+    private lazy var courseAggregationButton = UIButton()
+    
+    init(output: EventsViewOutput) {
+        self.output = output
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +37,7 @@ class EventsViewController: UIViewController {
         
         setupEventsTableView()
         setupCreateEvent()
+        output.viewIsReady()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -50,9 +64,10 @@ class EventsViewController: UIViewController {
         eventsBackgroundView.addSubview(eventsTableView)
         eventsBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         eventsTableView.translatesAutoresizingMaskIntoConstraints = false
+        eventsTableView.isScrollEnabled = true
         
         NSLayoutConstraint.activate([
-            eventsTableView.heightAnchor.constraint(equalToConstant: CGFloat(Double(events.count * 70) - 0.5)),
+            eventsTableView.heightAnchor.constraint(equalToConstant: 245),
             eventsBackgroundView.heightAnchor.constraint(equalTo: eventsTableView.heightAnchor, constant: 60),
             eventsBackgroundView.bottomAnchor.constraint(equalTo: eventsTableView.bottomAnchor, constant: 15),
             eventsBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25)
@@ -60,18 +75,12 @@ class EventsViewController: UIViewController {
     }
     
     private func setupCreateEvent() {
-        let title = UILabel(frame: CGRect(x: Int(view.frame.midX) - 100, y: events.count * 70 + 120, width: 200, height: 20))
+        let title = UILabel(frame: CGRect(x: Int(view.frame.midX) - 100, y: 380, width: 200, height: 20))
         title.text = "Создать событие"
         title.textColor = .black
         title.textAlignment = .center
         title.font = .systemFont(ofSize: 20, weight: .semibold)
         view.addSubview(title)
-//        title.translatesAutoresizingMaskIntoConstraints = false
-//
-//        NSLayoutConstraint.activate([
-//            title.topAnchor.constraint(equalTo: eventsBackgroundView.bottomAnchor, constant: 20),
-//            title.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50)
-//        ])
         
         let courseSelectionButton = ButtonView(frame: CGRect(x: 25, y: title.frame.maxY + 15, width: view.frame.width - 50, height: 45))
         courseSelectionButton.setTitle("Выбор курсов", for: .normal)
@@ -89,6 +98,13 @@ class EventsViewController: UIViewController {
     
     @objc private func createEventButtonTapped() {
 
+    }
+}
+
+extension EventsViewController: EventsViewInput {
+    func updateEvents(events: [EventModel]) {
+        self.events = events
+        eventsTableView.reloadData()
     }
 }
 

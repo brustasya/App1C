@@ -9,6 +9,7 @@ import Foundation
 
 protocol CoursesListViewOutput: AnyObject {
     func viewIsReady()
+    func viewWillAppear()
     func addCourseButtonTapped()
     func selectCourse(at index: Int)
 }

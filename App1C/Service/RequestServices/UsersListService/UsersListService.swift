@@ -11,6 +11,9 @@ protocol UsersListServiceProtocol {
     func getStudentsByYear(course: Int, completion: @escaping (Result<StudentsModel, Error>) -> Void)
     func getAdmins(completion: @escaping (Result<AdminsModel, Error>) -> Void)
     func getTeachers(completion: @escaping (Result<TeachersModel, Error>) -> Void)
+    func changeTeachers(id: Int, teachers: [Int], completion: @escaping (Result<Data?, Error>) -> Void)
+    func getTeachersByCourse(id: Int, completion: @escaping (Result<UsersModel, Error>) -> Void)
+    func getTeachers(courseID: Int, completion: @escaping (Result<TeachersModel, Error>) -> Void)
 }
 
 class UsersListService: UsersListServiceProtocol {
@@ -45,6 +48,33 @@ class UsersListService: UsersListServiceProtocol {
     func getTeachers(completion: @escaping (Result<TeachersModel, Error>) -> Void) {
         do {
             let request = try requestFactory.getTeachers()
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func getTeachers(courseID: Int, completion: @escaping (Result<TeachersModel, Error>) -> Void) {
+        do {
+            let request = try requestFactory.getTeachers(courseID: courseID)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func changeTeachers(id: Int, teachers: [Int], completion: @escaping (Result<Data?, Error>) -> Void) {
+        do {
+            let request = try requestFactory.changeTeachers(id: id, teachers: teachers)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func getTeachersByCourse(id: Int, completion: @escaping (Result<UsersModel, Error>) -> Void) {
+        do {
+            let request = try requestFactory.getTeachersByCourse(id: id)
             networkService.sendRequest(request, completion: completion)
         } catch {
             completion(.failure(error))

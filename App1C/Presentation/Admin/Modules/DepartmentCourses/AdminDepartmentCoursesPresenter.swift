@@ -42,6 +42,10 @@ final class AdminDepartmentCoursesPresenter {
 }
 
 extension AdminDepartmentCoursesPresenter: CoursesListViewOutput {
+    func viewWillAppear() {
+        getCourses()
+    }
+    
     func viewIsReady() {
         viewInput?.setupAdminMode()
         getCourses()

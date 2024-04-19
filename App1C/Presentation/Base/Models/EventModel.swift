@@ -8,6 +8,7 @@
 import Foundation
 
 struct EventModel {
+    let id: Int
     let title: String
     let deadline: Date
     let type: EventType

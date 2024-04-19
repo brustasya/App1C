@@ -60,4 +60,11 @@ final class ServiceAssembly {
             requestFactory: URLRequestFactory(host: host, port: port)
         )
     }
+    
+    func makeEventsService() -> EventsServiceProtocol {
+        EventsService(
+            networkService: NetworkService(),
+            requestFactory: URLRequestFactory(host: host, port: port)
+        )
+    }
 }

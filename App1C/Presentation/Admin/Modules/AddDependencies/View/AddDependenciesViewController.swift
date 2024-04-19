@@ -1,5 +1,5 @@
 //
-//  CoursesListViewController.swift
+//  AddDependenciesViewController.swift
 //  App1C
 //
 //  Created by Станислава on 19.04.2024.
@@ -7,18 +7,24 @@
 
 import UIKit
 
-class CoursesListViewController: UIViewController {
+class AddDependenciesViewController: UIViewController {
     
     private lazy var scrollView = UIScrollView()
-    private lazy var addCourseButton = UIButton()
+    private lazy var finishEstimatingButton = UIButton()
     private lazy var titleLabel = UILabel()
     private lazy var coursesView = UIView()
     private lazy var coursesTableView = UITableView()
-    private lazy var courses: [CourseModel] = []
+    private lazy var courses: [AddDependenceModel] = [
+        AddDependenceModel(id: 0, title: "Программирование", isCourseDependency: true),
+        AddDependenceModel(id: 0, title: "Тестирование", isCourseDependency: false),
+        AddDependenceModel(id: 0, title: "Математический анализ", isCourseDependency: true),
+        AddDependenceModel(id: 0, title: "Линейная алгебра", isCourseDependency: false),
+        AddDependenceModel(id: 0, title: "Аналитическая геометрия", isCourseDependency: false),
+    ]
     
-    private var output: CoursesListViewOutput
+    private var output: AddDependenciesViewOutput
 
-    init(output: CoursesListViewOutput) {
+    init(output: AddDependenciesViewOutput) {
         self.output = output
         super.init(nibName: nil, bundle: nil)
     }
@@ -32,8 +38,8 @@ class CoursesListViewController: UIViewController {
         
         view.backgroundColor = .white
         setupTitle()
+        setupFinishEstimatingButton()
         setupScrollView()
-        setupTableView()
         output.viewIsReady()
     }
     
@@ -45,7 +51,6 @@ class CoursesListViewController: UIViewController {
         
         tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.isHidden = true
-        output.viewWillAppear()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -54,12 +59,12 @@ class CoursesListViewController: UIViewController {
     }
     
     private func setupTitle() {
-        titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width - 60, height: 30), title: "Курсы кафедры")
+        titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width - 60, height: 30), title: "Добавить зависимости")
         view.addSubview(titleLabel)
     }
     
     private func setupTableView() {
-        coursesTableView.register(CourseCell.self, forCellReuseIdentifier: "CourseCell")
+        coursesTableView.register(AddDependenceCell.self, forCellReuseIdentifier: "AddDependenceCell")
         coursesTableView.delegate = self
         coursesTableView.dataSource = self
         
@@ -81,21 +86,21 @@ class CoursesListViewController: UIViewController {
         coursesTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            coursesTableView.heightAnchor.constraint(equalToConstant: 10000),
+            coursesTableView.heightAnchor.constraint(equalToConstant: CGFloat(Double(courses.count * 80))),
             coursesView.heightAnchor.constraint(equalTo: coursesTableView.heightAnchor, constant: 30),
             coursesView.bottomAnchor.constraint(equalTo: coursesTableView.bottomAnchor, constant: 15),
             coursesView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -10)
         ])
         
-        scrollView.contentSize.height = CGFloat(courses.count * 80 + 20)
+        scrollView.contentSize.height = CGFloat(courses.count * 80 - 80)
     }
     
-    private func setupAddCourseButton() {
+    private func setupFinishEstimatingButton() {
         let y = tabBarController?.tabBar.frame.minY ?? view.frame.maxY
-        addCourseButton = ButtonView(frame: CGRect(x: 25, y: y - 100, width: view.frame.width - 50, height: 45))
-        view.addSubview(addCourseButton)
-        addCourseButton.setTitle("Добавить", for: .normal)
-        addCourseButton.addTarget(self, action: #selector(addCourse), for: .touchUpInside)
+        finishEstimatingButton = ButtonView(frame: CGRect(x: 25, y: y - 100, width: view.frame.width - 50, height: 45))
+        view.addSubview(finishEstimatingButton)
+        finishEstimatingButton.setTitle("Добавить", for: .normal)
+        finishEstimatingButton.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
     }
     
     private func setupScrollView() {
@@ -105,73 +110,76 @@ class CoursesListViewController: UIViewController {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: finishEstimatingButton.topAnchor, constant: -20)
         ])
                 
         scrollView.contentSize = CGSize(width: scrollView.frame.width, height: 0)
         scrollView.isScrollEnabled = true
     }
     
-    @objc func addCourse() {
-        output.addCourseButtonTapped()
+    @objc private func addButtonTapped() {
+        output.addButtonTapped()
     }
     
-    @objc func goBack() {
+    @objc private func goBack() {
         navigationController?.popViewController(animated: true)
     }
 }
 
-extension CoursesListViewController: CoursesListViewInput {
-    func setupTitle(title: String) {
-        titleLabel.text = title
-    }
-    
-    func setupStudents(courses: [CourseModel]) {
+//extension EstimationViewController: PersonListViewInput {
+//    func setupPersonTable(with persons: [BaseModel]) {
+//        self.persons = persons
+//        setupTableView()
+//    }
+//
+//    func updateTitle(title: String) {
+//        titleLabel.text = title
+//    }
+//}
+
+extension AddDependenciesViewController: AddDependenciesViewInput {
+    func updateCourses(with courses: [AddDependenceModel]) {
         self.courses = courses
-        scrollView.contentSize.height = CGFloat(courses.count * 80 + 20)
-        coursesTableView.reloadData()
+        setupTableView()
     }
     
-    func setupBaseMode() {
-        NSLayoutConstraint.activate([
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
-    
-    func setupAdminMode() {
-        setupAddCourseButton()
-        
-        NSLayoutConstraint.activate([
-            scrollView.bottomAnchor.constraint(equalTo: addCourseButton.topAnchor, constant: -10)
-        ])
+    func close() {
+        goBack()
     }
 }
 
-extension CoursesListViewController: UITableViewDataSource, UITableViewDelegate {
+extension AddDependenciesViewController: SelectItemDelegate {
+    func select(id: Int) {
+        output.addCourse(id: id)
+    }
+    
+    func unSelect(id: Int) {
+        output.removeCourse(id: id)
+    }
+}
+
+extension AddDependenciesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return courses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCell", for: indexPath) as? CourseCell else {
-            fatalError("Cannot create CourseCell")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddDependenceCell", for: indexPath) as? AddDependenceCell else {
+            fatalError("Cannot create AddDependenceCell")
         }
         cell.configure(with: courses[indexPath.row])
+        cell.delegate = self
         cell.selectionStyle = .none
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        output.selectCourse(at: indexPath.row)
-    }
-    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 70
     }
 }
 
-
-
-
-
-
+protocol SelectItemDelegate: AnyObject {
+    func select(id: Int)
+    func unSelect(id: Int)
+}

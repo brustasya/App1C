@@ -47,7 +47,7 @@ final class TableView: UIView {
         contentView.addSubview(self)
         addSubview(titleLabel)
         addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        //tableView.translatesAutoresizingMaskIntoConstraints = false
         translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -61,7 +61,7 @@ final class TableView: UIView {
         
         titleLabel.font = .systemFont(ofSize: largeTitle ? 24 : 18, weight: .semibold)
         titleLabel.textColor = .black
-        
+                
         NSLayoutConstraint.activate([
             centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             widthAnchor.constraint(equalTo: contentView.widthAnchor, constant: -40),

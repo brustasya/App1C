@@ -11,6 +11,9 @@ protocol UsersListURLRequestFactory: AnyObject {
     func getStudentsByYear(course: Int) throws -> URLRequest
     func getAdmins() throws -> URLRequest
     func getTeachers() throws -> URLRequest
+    func getTeachers(courseID: Int) throws -> URLRequest
+    func changeTeachers(id: Int, teachers: [Int]) throws -> URLRequest
+    func getTeachersByCourse(id: Int) throws -> URLRequest 
 }
 
 extension URLRequestFactory: UsersListURLRequestFactory {
@@ -43,6 +46,40 @@ extension URLRequestFactory: UsersListURLRequestFactory {
         
         var request = makeRequest(url: url)
         request.httpMethod = "GET"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func getTeachers(courseID: Int) throws -> URLRequest {
+        guard let url = url(with: "/teachers", query: "course_id=\(courseID)") else {
+            throw TFSError.makeRequest
+        }
+        
+        var request = makeRequest(url: url)
+        request.httpMethod = "GET"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func getTeachersByCourse(id: Int) throws -> URLRequest {
+        guard let url = url(with: "/teachers/by-course/\(id)") else {
+            throw TFSError.makeRequest
+        }
+        
+        var request = makeRequest(url: url)
+        request.httpMethod = "GET"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func changeTeachers(id: Int, teachers: [Int]) throws -> URLRequest {
+        guard let url = url(with: "/course/\(id)/change-teachers"),
+              var request = makeRequest(with: teachers, url: url)
+        else {
+            throw TFSError.makeRequest
+        }
+        
+        request.httpMethod = "PUT"
         addHeader(request: &request)
         return request
     }
