@@ -47,7 +47,7 @@ extension AdminSettingsPresenter: AdminSettingsViewOutput {
         case 2:
             return
         case 3:
-            moduleOutput?.moduleWantsToOpenRoleSelection()
+            moduleOutput?.moduleWantsToOpenDepartmentCourses()
         default:
             return
         }

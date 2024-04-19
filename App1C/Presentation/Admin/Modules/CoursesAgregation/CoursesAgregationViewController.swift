@@ -163,8 +163,3 @@ extension CoursesAgregationViewController: UITableViewDataSource, UITableViewDel
         return 70
     }
 }
-
-
-
-
-

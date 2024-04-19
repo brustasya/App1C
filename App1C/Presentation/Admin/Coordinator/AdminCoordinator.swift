@@ -42,6 +42,18 @@ final class AdminCoordinator: CoordinatorProtocol {
     }
 }
 
+extension AdminCoordinator: AdminDepartmentCoursesModuleOutput {
+    func moduleWantsToOPenAddCourse() {
+        settingsNavigationController.pushViewController(CourseViewController(), animated: true)
+    }
+    
+    func moduleWantsToOpenCourse(for id: Int) {
+        
+    }
+    
+    
+}
+
 extension AdminCoordinator: AdminSettingsModuleOutput {
     func moduleWantsToOpenTeachersList() {
         let teachersList = adminAssembly.makeTeachersListModule(moduleOutput: self)
@@ -54,11 +66,12 @@ extension AdminCoordinator: AdminSettingsModuleOutput {
     }
     
     func moduleWantsToOpenDepartmentCourses() {
-        
+        let coursesVC = adminAssembly.makeDepartmentCoursesModule(moduleOutput: self)
+        settingsNavigationController.pushViewController(coursesVC, animated: true)
     }
     
     func moduleWantsToOpenProfile() {
-        let profileVC = adminAssembly.makeProfileModule()
+        let profileVC = FinalCourseSelectionViewController()//adminAssembly.makeProfileModule()
         settingsNavigationController.pushViewController(profileVC, animated: true)
     }
     

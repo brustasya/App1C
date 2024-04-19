@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CoursesURLRequestFactory: AnyObject {
-    
+    func getCourses() throws -> URLRequest
 }
 
 extension URLRequestFactory: CoursesURLRequestFactory {
@@ -38,6 +38,16 @@ extension URLRequestFactory: CoursesURLRequestFactory {
             throw TFSError.makeRequest
         }
         request.httpMethod = "POST"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func getCourses() throws -> URLRequest {
+        guard let url = url(with: "/courses") else {
+            throw TFSError.makeRequest
+        }
+        var request = makeRequest(url: url)
+        request.httpMethod = "GET"
         addHeader(request: &request)
         return request
     }

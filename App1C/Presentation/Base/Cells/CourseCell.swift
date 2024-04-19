@@ -40,7 +40,7 @@ class CourseCell: UITableViewCell, ConfigurableViewProtocol {
             contentBackgroundView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             contentBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             contentBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            contentBackgroundView.heightAnchor.constraint(equalToConstant: 60),
+            contentBackgroundView.heightAnchor.constraint(equalToConstant: 65),
             
             titleLabel.centerYAnchor.constraint(equalTo: contentBackgroundView.centerYAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: contentBackgroundView.leadingAnchor, constant: 16),
