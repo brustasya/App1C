@@ -30,6 +30,21 @@ class TeacherEventPresenter {
         self.moduleOutput = moduleOutput
     }
     
+    private func getCourses() {
+        coursesService.getTeacherCourses(teacherID: TokenService.shared.id) { [weak self] result in
+            switch result {
+            case .success(let model):
+                let courses = model.courses.map({ CourseModel(id: $0.id, title: $0.title, isTeacherCourse: $0.isTeacherCourse ?? true, isCourseDependency: $0.isCourseDependency) })
+                self?.courses = courses
+                DispatchQueue.main.async {
+                    self?.viewInput?.updateCourses(courses: courses)
+                }
+            case .failure(let error):
+                Logger.shared.printLog(log: "Failed load courses: \(error)")
+            }
+        }
+    }
+    
     private func getEvent() {
         eventsService.eventDetails(eventID: id) { [weak self] result in
             switch result {
@@ -66,6 +81,7 @@ extension TeacherEventPresenter: EventViewOutput {
     
     func viewIsReady() {
         getEvent()
+        getCourses()
         viewInput?.setupReadMode()
     }
     

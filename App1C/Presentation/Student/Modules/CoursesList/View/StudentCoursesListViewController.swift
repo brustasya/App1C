@@ -32,11 +32,6 @@ class StudentCoursesListViewController: UIViewController {
         StudentCourseModel(id: 1, title: "Программирование", isOffline: false, isRetake: true, grade: GradeModel(grade: 3)),
         StudentCourseModel(id: 2, title: "Разработка программного обеспечения. Java", isOffline: true, isRetake: true, grade: GradeModel(grade: 5)),
         StudentCourseModel(id: 0, title: "Тестирование программного обеспечения", isOffline: true, isRetake: false, grade: GradeModel(grade: 10)),
-        StudentCourseModel(id: 1, title: "Программирование", isOffline: false, isRetake: true, grade: GradeModel(grade: 3)),
-        StudentCourseModel(id: 2, title: "Разработка программного обеспечения. Java", isOffline: true, isRetake: true, grade: GradeModel(grade: 5)),
-        StudentCourseModel(id: 0, title: "Тестирование программного обеспечения", isOffline: true, isRetake: false, grade: GradeModel(grade: 10)),
-        StudentCourseModel(id: 1, title: "Программирование", isOffline: false, isRetake: true, grade: GradeModel(grade: 3)),
-        StudentCourseModel(id: 2, title: "Разработка программного обеспечения. Java", isOffline: true, isRetake: true, grade: GradeModel(grade: 5)),
     ]
     
     override func viewDidLoad() {
@@ -110,7 +105,7 @@ class StudentCoursesListViewController: UIViewController {
     }
     
     private func setupCurrentCourses() {
-        currentCoursesTableView.register(CurrentCourseCell.self, forCellReuseIdentifier: "CurrentCourseCell")
+        currentCoursesTableView.register(ClosedCourseCell.self, forCellReuseIdentifier: "CurrentCourseCell")
         currentCoursesTableView.delegate = self
         currentCoursesTableView.dataSource = self
         
@@ -192,7 +187,7 @@ extension StudentCoursesListViewController: UITableViewDataSource, UITableViewDe
             cell.configure(with: closedCourses[indexPath.row])
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CurrentCourseCell", for: indexPath) as? CurrentCourseCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CurrentCourseCell", for: indexPath) as? ClosedCourseCell else {
                 fatalError("Cannot create CurrentCourseCell")
             }
             cell.configure(with: currentCourses[indexPath.row])
@@ -204,7 +199,7 @@ extension StudentCoursesListViewController: UITableViewDataSource, UITableViewDe
         if tableView == closedCoursesTableView {
             return 100
         } else {
-            return 60
+            return 100
         }
     }
 }

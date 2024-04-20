@@ -9,6 +9,7 @@ import Foundation
 
 protocol UsersListServiceProtocol {
     func getStudentsByYear(course: Int, completion: @escaping (Result<StudentsModel, Error>) -> Void)
+    func getStudentsByCourse(courseID: Int, completion: @escaping (Result<StudentsModel, Error>) -> Void) 
     func getAdmins(completion: @escaping (Result<AdminsModel, Error>) -> Void)
     func getTeachers(completion: @escaping (Result<TeachersModel, Error>) -> Void)
     func changeTeachers(id: Int, teachers: [Int], completion: @escaping (Result<Data?, Error>) -> Void)
@@ -35,6 +36,16 @@ class UsersListService: UsersListServiceProtocol {
             completion(.failure(error))
         }
     }
+    
+    func getStudentsByCourse(courseID: Int, completion: @escaping (Result<StudentsModel, Error>) -> Void) {
+        do {
+            let request = try requestFactory.getStudentsByCourse(courseID: courseID)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
     
     func getAdmins(completion: @escaping (Result<AdminsModel, Error>) -> Void) {
         do {

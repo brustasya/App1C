@@ -41,4 +41,15 @@ final class TeacherAssembly: BaseAssembly {
         presenter.viewInput = vc
         return vc
     }
+    
+    func makeEstimationnModule(courseID: Int) -> UIViewController {
+        let presenter = EstimationPresenter(
+            courseID: courseID,
+            usersListService: serviceAssembly.makeUsersListService(),
+            gradesService: serviceAssembly.makeGradesService()
+        )
+        let vc = EstimationViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
 }

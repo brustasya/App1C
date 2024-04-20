@@ -13,6 +13,7 @@ protocol CoursesURLRequestFactory: AnyObject {
     func getCourses() throws -> URLRequest
     func getDeps(courseID: Int) throws -> URLRequest
     func changeDeps(courseID: Int, deps: [Int]) throws -> URLRequest
+    func getTeacherCourses(for id: Int) throws -> URLRequest
 }
 
 extension URLRequestFactory: CoursesURLRequestFactory {
@@ -72,6 +73,17 @@ extension URLRequestFactory: CoursesURLRequestFactory {
             throw TFSError.makeRequest
         }
         request.httpMethod = "POST"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func getTeacherCourses(for id: Int) throws -> URLRequest {
+        guard let url = url(with: "/teacher/\(id)/courses") else {
+            throw TFSError.makeRequest
+        }
+        
+        var request = makeRequest(url: url)
+        request.httpMethod = "GET"
         addHeader(request: &request)
         return request
     }

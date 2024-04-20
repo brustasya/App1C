@@ -43,6 +43,14 @@
 		85043AEF2BD44FD400FEF431 /* TeacherMainScreenModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AEE2BD44FD400FEF431 /* TeacherMainScreenModuleOutput.swift */; };
 		85043AF22BD4521E00FEF431 /* TeacherEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AF12BD4521E00FEF431 /* TeacherEventPresenter.swift */; };
 		85043AF42BD4523300FEF431 /* TeacherEventModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AF32BD4523300FEF431 /* TeacherEventModuleOutput.swift */; };
+		85043AF82BD4656900FEF431 /* EstimationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AF72BD4656900FEF431 /* EstimationViewInput.swift */; };
+		85043AFA2BD4657A00FEF431 /* EstimationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AF92BD4657A00FEF431 /* EstimationViewOutput.swift */; };
+		85043AFC2BD4674700FEF431 /* EstimationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AFB2BD4674700FEF431 /* EstimationPresenter.swift */; };
+		85043AFF2BD46FA900FEF431 /* EstimateServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AFE2BD46FA900FEF431 /* EstimateServerModel.swift */; };
+		85043B012BD470C100FEF431 /* GradesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043B002BD470C100FEF431 /* GradesService.swift */; };
+		85043B032BD4863E00FEF431 /* CoursesGradesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043B022BD4863E00FEF431 /* CoursesGradesModel.swift */; };
+		85043B052BD488BF00FEF431 /* StudentCoursesListViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043B042BD488BE00FEF431 /* StudentCoursesListViewInput.swift */; };
+		85043B072BD488CF00FEF431 /* StudentCoursesListViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043B062BD488CF00FEF431 /* StudentCoursesListViewOutput.swift */; };
 		85981EA42BB5E26800A0DBE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA32BB5E26800A0DBE7 /* AppDelegate.swift */; };
 		85981EA62BB5E26800A0DBE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA52BB5E26800A0DBE7 /* SceneDelegate.swift */; };
 		85981EA82BB5E26800A0DBE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA72BB5E26800A0DBE7 /* ViewController.swift */; };
@@ -305,6 +313,14 @@
 		85043AEE2BD44FD400FEF431 /* TeacherMainScreenModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherMainScreenModuleOutput.swift; sourceTree = "<group>"; };
 		85043AF12BD4521E00FEF431 /* TeacherEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherEventPresenter.swift; sourceTree = "<group>"; };
 		85043AF32BD4523300FEF431 /* TeacherEventModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeacherEventModuleOutput.swift; sourceTree = "<group>"; };
+		85043AF72BD4656900FEF431 /* EstimationViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimationViewInput.swift; sourceTree = "<group>"; };
+		85043AF92BD4657A00FEF431 /* EstimationViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimationViewOutput.swift; sourceTree = "<group>"; };
+		85043AFB2BD4674700FEF431 /* EstimationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimationPresenter.swift; sourceTree = "<group>"; };
+		85043AFE2BD46FA900FEF431 /* EstimateServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateServerModel.swift; sourceTree = "<group>"; };
+		85043B002BD470C100FEF431 /* GradesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradesService.swift; sourceTree = "<group>"; };
+		85043B022BD4863E00FEF431 /* CoursesGradesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesGradesModel.swift; sourceTree = "<group>"; };
+		85043B042BD488BE00FEF431 /* StudentCoursesListViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCoursesListViewInput.swift; sourceTree = "<group>"; };
+		85043B062BD488CF00FEF431 /* StudentCoursesListViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCoursesListViewOutput.swift; sourceTree = "<group>"; };
 		85981EA02BB5E26800A0DBE7 /* App1C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App1C.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85981EA32BB5E26800A0DBE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85981EA52BB5E26800A0DBE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -703,6 +719,33 @@
 			path = Event;
 			sourceTree = "<group>";
 		};
+		85043AF52BD4654800FEF431 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				85043AFB2BD4674700FEF431 /* EstimationPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		85043AF62BD4655000FEF431 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				85ED3B3B2BCC2A1E00101A5F /* EstimationViewController.swift */,
+				85043AF72BD4656900FEF431 /* EstimationViewInput.swift */,
+				85043AF92BD4657A00FEF431 /* EstimationViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		85043AFD2BD46F9600FEF431 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				85043AFE2BD46FA900FEF431 /* EstimateServerModel.swift */,
+				85043B022BD4863E00FEF431 /* CoursesGradesModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		85981E972BB5E26800A0DBE7 = {
 			isa = PBXGroup;
 			children = (
@@ -857,6 +900,8 @@
 			isa = PBXGroup;
 			children = (
 				85981EC12BBC22E100A0DBE7 /* StudentCoursesListViewController.swift */,
+				85043B042BD488BE00FEF431 /* StudentCoursesListViewInput.swift */,
+				85043B062BD488CF00FEF431 /* StudentCoursesListViewOutput.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1341,7 +1386,9 @@
 		85ED3AED2BCB021D00101A5F /* GradesService */ = {
 			isa = PBXGroup;
 			children = (
+				85043AFD2BD46F9600FEF431 /* Models */,
 				85ED3B042BCB05E800101A5F /* GradesURLRequestFactory.swift */,
+				85043B002BD470C100FEF431 /* GradesService.swift */,
 			);
 			path = GradesService;
 			sourceTree = "<group>";
@@ -1499,7 +1546,8 @@
 		85ED3B3E2BCC2E7A00101A5F /* Estimation */ = {
 			isa = PBXGroup;
 			children = (
-				85ED3B3B2BCC2A1E00101A5F /* EstimationViewController.swift */,
+				85043AF62BD4655000FEF431 /* View */,
+				85043AF52BD4654800FEF431 /* Presenter */,
 			);
 			path = Estimation;
 			sourceTree = "<group>";
@@ -2282,6 +2330,7 @@
 				85ED3B5F2BCF35A900101A5F /* CreateCourseModel.swift in Sources */,
 				85043AC22BD348A000FEF431 /* CoursesAgregationViewOutput.swift in Sources */,
 				85043AAB2BD323EB00FEF431 /* ModifyEventPresenter.swift in Sources */,
+				85043AF82BD4656900FEF431 /* EstimationViewInput.swift in Sources */,
 				85043AC62BD34AC600FEF431 /* CoursesAggregationService.swift in Sources */,
 				85FDB55D2BD1603A00C71E28 /* CreateUserModel.swift in Sources */,
 				85FDB5992BD1EA2D00C71E28 /* CoursesService.swift in Sources */,
@@ -2321,6 +2370,7 @@
 				85981EE42BBC7B6E00A0DBE7 /* AuthorizationAssembly.swift in Sources */,
 				85043A9E2BD314D600FEF431 /* StudentMainScreenViewOutput.swift in Sources */,
 				85FDB5D12BD2DBE400C71E28 /* CreateEventPresenter.swift in Sources */,
+				85043B052BD488BF00FEF431 /* StudentCoursesListViewInput.swift in Sources */,
 				85F0E2BF2BC1C92800D2DBAB /* CurrentCourseCell.swift in Sources */,
 				85981EE72BBC7BC800A0DBE7 /* ServiceAssembly.swift in Sources */,
 				85FDB5182BD087BA00C71E28 /* StudentsListViewController.swift in Sources */,
@@ -2348,6 +2398,8 @@
 				85F0E2C62BC4166300D2DBAB /* CourseCell.swift in Sources */,
 				85981EA82BB5E26800A0DBE7 /* ViewController.swift in Sources */,
 				85F0E2C22BC1EBB900D2DBAB /* ListState.swift in Sources */,
+				85043B032BD4863E00FEF431 /* CoursesGradesModel.swift in Sources */,
+				85043AFF2BD46FA900FEF431 /* EstimateServerModel.swift in Sources */,
 				85981EED2BBC7D5A00A0DBE7 /* StudentAssembly.swift in Sources */,
 				85FDB5BE2BD2A57000C71E28 /* AddDependenciesViewInput.swift in Sources */,
 				85FDB52F2BD08FE100C71E28 /* AddStudentModuleOutput.swift in Sources */,
@@ -2403,6 +2455,7 @@
 				85981F172BBD772100A0DBE7 /* CustomNavigationController.swift in Sources */,
 				85FDB5622BD176B200C71E28 /* ProfileViewInput.swift in Sources */,
 				85ED3AD82BCACC6B00101A5F /* Logger.swift in Sources */,
+				85043B012BD470C100FEF431 /* GradesService.swift in Sources */,
 				85F0E2ED2BC4B3D300D2DBAB /* AdminSettingsViewInput.swift in Sources */,
 				85ED3B762BD03EEE00101A5F /* AdminMainScreenModuleOutput.swift in Sources */,
 				85FDB5572BD1524C00C71E28 /* AddAdminModuleOutput.swift in Sources */,
@@ -2410,6 +2463,7 @@
 				85981F2F2BBE1B8100A0DBE7 /* TableView.swift in Sources */,
 				85043AC92BD34B5A00FEF431 /* CourseAggregationServiceModel.swift in Sources */,
 				85FDB56D2BD19BFA00C71E28 /* StudentDetailsModel.swift in Sources */,
+				85043AFA2BD4657A00FEF431 /* EstimationViewOutput.swift in Sources */,
 				85FDB5772BD1AA9B00C71E28 /* TeacherProfilePresenter.swift in Sources */,
 				85FDB54B2BD14ACD00C71E28 /* AddPersonViewController.swift in Sources */,
 				85043AD02BD3604700FEF431 /* CourseDetailesModuleOutput.swift in Sources */,
@@ -2444,6 +2498,7 @@
 				85FDB5592BD1527B00C71E28 /* AddTeacherPresenter.swift in Sources */,
 				85FDB5B82BD296C700C71E28 /* AddTeachersPresenter.swift in Sources */,
 				85ED3ADA2BCACC8700101A5F /* ErrorModel.swift in Sources */,
+				85043B072BD488CF00FEF431 /* StudentCoursesListViewOutput.swift in Sources */,
 				85981F382BBEEB1600A0DBE7 /* AdminMainScreenController.swift in Sources */,
 				85F0E2C42BC4158800D2DBAB /* CourseModel.swift in Sources */,
 				85FDB58A2BD1D0E500C71E28 /* TeacherDetailsPresenter.swift in Sources */,
@@ -2463,6 +2518,7 @@
 				85ED3AC42BCABE4600101A5F /* TFSError.swift in Sources */,
 				85043AEF2BD44FD400FEF431 /* TeacherMainScreenModuleOutput.swift in Sources */,
 				85FDB5AE2BD2933D00C71E28 /* AddTeachersViewController.swift in Sources */,
+				85043AFC2BD4674700FEF431 /* EstimationPresenter.swift in Sources */,
 				85981F072BBC9B8700A0DBE7 /* RoleSelectionViewController.swift in Sources */,
 				85ED3ACC2BCAC43D00101A5F /* URLRequestFactory.swift in Sources */,
 				85043AC02BD3488E00FEF431 /* CoursesAgregationViewInput.swift in Sources */,

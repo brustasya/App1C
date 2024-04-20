@@ -81,4 +81,11 @@ final class ServiceAssembly {
             requestFactory: URLRequestFactory(host: host, port: port)
         )
     }
+    
+    func makeGradesService() -> GradesServiceProtocol {
+        GradesService(
+            networkService: NetworkService(),
+            requestFactory: URLRequestFactory(host: host, port: port)
+        )
+    }
 }

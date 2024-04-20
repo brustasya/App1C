@@ -13,6 +13,7 @@ protocol CoursesServiceProtocol {
     func getDeps(courseID: Int, completion: @escaping (Result<CoursesModel, Error>) -> Void)
     func changeDeps(courseID: Int, deps: [Int], completion: @escaping (Result<Data?, Error>) -> Void)
     func createCourse(model: CreateCourseModel, completion: @escaping (Result<Data?, Error>) -> Void)
+    func getTeacherCourses(teacherID: Int, completion: @escaping (Result<CoursesModel, Error>) -> Void)
 }
 
 class CoursesService: CoursesServiceProtocol {
@@ -64,6 +65,15 @@ class CoursesService: CoursesServiceProtocol {
     func changeDeps(courseID: Int, deps: [Int], completion: @escaping (Result<Data?, Error>) -> Void) {
         do {
             let request = try requestFactory.changeDeps(courseID: courseID, deps: deps)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func getTeacherCourses(teacherID: Int, completion: @escaping (Result<CoursesModel, Error>) -> Void) {
+        do {
+            let request = try requestFactory.getTeacherCourses(for: teacherID)
             networkService.sendRequest(request, completion: completion)
         } catch {
             completion(.failure(error))

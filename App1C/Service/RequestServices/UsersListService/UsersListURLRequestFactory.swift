@@ -13,12 +13,24 @@ protocol UsersListURLRequestFactory: AnyObject {
     func getTeachers() throws -> URLRequest
     func getTeachers(courseID: Int) throws -> URLRequest
     func changeTeachers(id: Int, teachers: [Int]) throws -> URLRequest
-    func getTeachersByCourse(id: Int) throws -> URLRequest 
+    func getTeachersByCourse(id: Int) throws -> URLRequest
+    func getStudentsByCourse(courseID: Int) throws -> URLRequest
 }
 
 extension URLRequestFactory: UsersListURLRequestFactory {
     func getStudentsByYear(course: Int) throws -> URLRequest {
         guard let url = url(with: "/students/by-year/\(course)") else {
+            throw TFSError.makeRequest
+        }
+        
+        var request = makeRequest(url: url)
+        request.httpMethod = "GET"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func getStudentsByCourse(courseID: Int) throws -> URLRequest {
+        guard let url = url(with: "/students/by-course/\(courseID)") else {
             throw TFSError.makeRequest
         }
         

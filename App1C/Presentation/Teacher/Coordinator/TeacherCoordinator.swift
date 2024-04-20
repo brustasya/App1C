@@ -44,7 +44,7 @@ final class TeacherCoordinator: CoordinatorProtocol {
 
 extension TeacherCoordinator: TeacherSettingsModuleOutput {
     func moduleWantsToOpenDepartmentCourses() {
-        settingsNavigationController.pushViewController(EstimationViewController(), animated: true)
+        
     }
     
     func moduleWantsToOpenProfile() {
@@ -82,6 +82,7 @@ extension TeacherCoordinator: TeacherMainScreenModuleOutput {
 
 extension TeacherCoordinator: TeacherEventModuleOutput {
     func moduleWantsToOpenEstimation(courseID: Int) {
-        
+        let estimationVC = teacherAssembly.makeEstimationnModule(courseID: courseID)
+        mainScreenNavigationController.pushViewController(estimationVC, animated: true)
     }
 }

@@ -11,6 +11,8 @@ class EstimationCell: UITableViewCell, ConfigurableViewProtocol {
     
     typealias ConfigurationModel = EstimationModel
         
+    weak var delegate: EstimationDelegate?
+    
     private lazy var nameLabel = UILabel()
     private lazy var gradeView = UIView()
     private lazy var editButton = UIButton()
@@ -19,6 +21,8 @@ class EstimationCell: UITableViewCell, ConfigurableViewProtocol {
     
     private lazy var isEdit: Bool = false
     private lazy var gradeModel: GradeModel = GradeModel(grade: 0)
+    
+    private var studentID: Int = 0
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -107,6 +111,7 @@ class EstimationCell: UITableViewCell, ConfigurableViewProtocol {
         nameLabel.text = model.name
         self.gradeModel = model.grade
         editTextField.text = (gradeModel.grade > 0 && gradeModel.grade <= 10) ? "\(gradeModel.grade)" : ""
+        self.studentID = model.studentID
         setupGrade()
     }
     
@@ -116,6 +121,10 @@ class EstimationCell: UITableViewCell, ConfigurableViewProtocol {
             editButton.tintColor = .darkGray
             gradeModel = GradeModel(grade: Int(editTextField.text ?? "0") ?? 0)
             setupGrade()
+            
+            if let grade = Int(editTextField.text ?? "") {
+                delegate?.estimate(id: studentID, grade: grade)
+            }
         } else {
             editButton.setImage(Images.checkmark.uiImage, for: .normal)
             editButton.tintColor = Colors.darkgreen.uiColor

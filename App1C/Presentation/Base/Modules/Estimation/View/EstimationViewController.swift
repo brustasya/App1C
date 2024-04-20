@@ -26,16 +26,16 @@ class EstimationViewController: UIViewController {
         EstimationModel(studentID: 0, name: "Сергеева Ирина Олеговна", grade: GradeModel(grade: 2))
     ]
     
-//    private var output: PersonListViewOutput
-//
-//    init(output: PersonListViewOutput) {
-//        self.output = output
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    private var output: EstimationViewOutput
+
+    init(output: EstimationViewOutput) {
+        self.output = output
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +43,22 @@ class EstimationViewController: UIViewController {
         view.backgroundColor = .white
         setupTitle()
         setupFinishEstimatingButton()
-        setupTableView()
-       // output.viewIsReady()
+        output.viewIsReady()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = true
+        (navigationController as? CustomNavigationController)?.setupBackButton()
+        (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        tabBarController?.tabBar.isTranslucent = true
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        (navigationController as? CustomNavigationController)?.hideBackButton()
     }
     
     private func setupTitle() {
@@ -84,24 +98,33 @@ class EstimationViewController: UIViewController {
     }
     
     private func setupFinishEstimatingButton() {
-        tabBarController?.tabBar.isHidden = true
-        let y = tabBarController?.tabBar.frame.minY ?? view.frame.maxY //navigationController?.tabBarController.frame.minY ?? view.frame.maxY
+        let y = tabBarController?.tabBar.frame.minY ?? view.frame.maxY
         finishEstimatingButton = ButtonView(frame: CGRect(x: 25, y: y - 100, width: view.frame.width - 50, height: 45))
         view.addSubview(finishEstimatingButton)
         finishEstimatingButton.setTitle("Завершить выставление оценок", for: .normal)
+        finishEstimatingButton.addTarget(self, action: #selector(finishEstimation), for: .touchUpInside)
+    }
+    
+    @objc func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func finishEstimation() {
+        output.finishEstimating()
     }
 }
 
-//extension EstimationViewController: PersonListViewInput {
-//    func setupPersonTable(with persons: [BaseModel]) {
-//        self.persons = persons
-//        setupTableView()
-//    }
-//
-//    func updateTitle(title: String) {
-//        titleLabel.text = title
-//    }
-//}
+extension EstimationViewController: EstimationViewInput {
+    func setupGrades(grades: [EstimationModel]) {
+        persons = grades
+        setupTableView()
+    }
+    
+    func close() {
+        goBack()
+    }
+}
+
 
 extension EstimationViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,6 +136,7 @@ extension EstimationViewController: UITableViewDataSource, UITableViewDelegate {
             fatalError("Cannot create EstimationCell")
         }
         cell.configure(with: persons[indexPath.row])
+        cell.delegate = self
         cell.selectionStyle = .none
         return cell
     }
@@ -122,6 +146,12 @@ extension EstimationViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+protocol EstimationDelegate: AnyObject {
+    func estimate(id: Int, grade: Int)
+}
 
-
-
+extension EstimationViewController: EstimationDelegate {
+    func estimate(id: Int, grade: Int) {
+        output.estimate(id: id, grade: grade)
+    }
+}

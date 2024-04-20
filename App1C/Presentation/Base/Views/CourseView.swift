@@ -66,7 +66,7 @@ final class CourseView: UIView {
         layer.borderWidth = 1
         
         checkButton.frame = CGRect(x: 8, y: bounds.midY - 15, width: 30, height: 30)
-        statusLabel.frame = CGRect(x: bounds.maxX - 70, y: bounds.maxY - 28, width: 60, height: 20)
+        statusLabel.frame = CGRect(x: bounds.maxX - 110, y: bounds.maxY - 28, width: 100, height: 20)
         titleLabel.frame = CGRect(x: checkButton.frame.maxX + 8, y: bounds.midY - 20, width: bounds.width - 120, height: 40)
         openButton.frame = CGRect(x: bounds.maxX - 30, y: 8, width: 20, height: 20)
         infoButton.frame = CGRect(x: openButton.frame.minX - 30, y: 6, width: 25, height: 25)
@@ -92,7 +92,7 @@ final class CourseView: UIView {
         
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         statusLabel.textColor = .darkGray
-        statusLabel.textAlignment = .left
+        statusLabel.textAlignment = .right
         statusLabel.isHidden = true
         
         checkButton.addTarget(self, action: #selector(selectCourse), for: .touchUpInside)
