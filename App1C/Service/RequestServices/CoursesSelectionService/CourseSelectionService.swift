@@ -10,6 +10,8 @@ import Foundation
 protocol CourseSelectionServiceProtocol {
     func getPreliminaryChoise(completion: @escaping (Result<PreliminaryChoiceModel, Error>) -> Void)
     func preliminaryChoise(model: SelectedCoursesModel, completion: @escaping (Result<CoursesIDModel, Error>) -> Void)
+    func getFinalChoise(completion: @escaping (Result<FinalChoiceModel, Error>) -> Void)
+    func finalChoise(model: SelectedCoursesModel, completion: @escaping (Result<CoursesIDModel, Error>) -> Void)
 }
 
 class CourseSelectionService: CourseSelectionServiceProtocol {
@@ -35,6 +37,24 @@ class CourseSelectionService: CourseSelectionServiceProtocol {
     func preliminaryChoise(model: SelectedCoursesModel, completion: @escaping (Result<CoursesIDModel, Error>) -> Void) {
         do {
             let request = try requestFactory.preliminaryChoise(model: model)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func getFinalChoise(completion: @escaping (Result<FinalChoiceModel, Error>) -> Void) {
+        do {
+            let request = try requestFactory.getFinalChoise()
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func finalChoise(model: SelectedCoursesModel, completion: @escaping (Result<CoursesIDModel, Error>) -> Void) {
+        do {
+            let request = try requestFactory.finalChoise(model: model)
             networkService.sendRequest(request, completion: completion)
         } catch {
             completion(.failure(error))

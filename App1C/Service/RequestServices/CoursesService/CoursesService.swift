@@ -8,6 +8,7 @@
 import Foundation
 
 protocol CoursesServiceProtocol {
+    func getCourseDetailes(courseID: Int, completion: @escaping (Result<CourseDetailsModel, Error>) -> Void)
     func getCourses(completion: @escaping (Result<CoursesModel, Error>) -> Void)
     func getDeps(courseID: Int, completion: @escaping (Result<CoursesModel, Error>) -> Void)
     func changeDeps(courseID: Int, deps: [Int], completion: @escaping (Result<Data?, Error>) -> Void)
@@ -24,6 +25,14 @@ class CoursesService: CoursesServiceProtocol {
         self.requestFactory = requestFactory
     }
     
+    func getCourseDetailes(courseID: Int, completion: @escaping (Result<CourseDetailsModel, Error>) -> Void) {
+        do {
+            let request = try requestFactory.getCourseDetails(for: courseID)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
     
     func getCourses(completion: @escaping (Result<CoursesModel, Error>) -> Void) {
         do {

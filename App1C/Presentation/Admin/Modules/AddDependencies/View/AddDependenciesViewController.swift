@@ -139,11 +139,11 @@ extension AddDependenciesViewController: AddDependenciesViewInput {
 }
 
 extension AddDependenciesViewController: SelectItemDelegate {
-    func select(id: Int) {
+    func selectItem(id: Int) {
         output.addCourse(id: id)
     }
     
-    func unSelect(id: Int) {
+    func unSelectItem(id: Int) {
         output.removeCourse(id: id)
     }
 }
@@ -169,6 +169,6 @@ extension AddDependenciesViewController: UITableViewDataSource, UITableViewDeleg
 }
 
 protocol SelectItemDelegate: AnyObject {
-    func select(id: Int)
-    func unSelect(id: Int)
+    func selectItem(id: Int)
+    func unSelectItem(id: Int)
 }

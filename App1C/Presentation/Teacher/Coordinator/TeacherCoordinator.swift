@@ -25,7 +25,7 @@ final class TeacherCoordinator: CoordinatorProtocol {
     }
     
     func start(in window: UIWindow?) {
-        let mainScreenVC = TeacherMainScreenController()//mainScreenAssembly.makeMainScreenModule(moduleOutput: self)
+        let mainScreenVC = teacherAssembly.makeMainScreenModule(moduleOutput: self)
         mainScreenNavigationController = CustomNavigationController(rootViewController: mainScreenVC)
         let settingsVC = teacherAssembly.makeSettingsModule(moduleOutput: self)//profileAssembly.makeProfileModule(moduleOutput: self)
         self.settingsNavigationController = CustomNavigationController(rootViewController: settingsVC)
@@ -73,4 +73,15 @@ extension TeacherCoordinator: AdminListModuleOutput {
     }
 }
 
+extension TeacherCoordinator: TeacherMainScreenModuleOutput {
+    func moduleWantsToOpenEvent(id: Int) {
+        let teacherEventVC = teacherAssembly.makeEventModule(id: id, moduleOutput: self)
+        mainScreenNavigationController.pushViewController(teacherEventVC, animated: true)
+    }
+}
 
+extension TeacherCoordinator: TeacherEventModuleOutput {
+    func moduleWantsToOpenEstimation(courseID: Int) {
+        
+    }
+}

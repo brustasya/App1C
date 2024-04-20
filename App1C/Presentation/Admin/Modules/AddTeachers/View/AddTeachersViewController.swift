@@ -138,11 +138,11 @@ extension AddTeachersViewController: AddTeachersViewInput {
 }
 
 extension AddTeachersViewController: SelectItemDelegate {
-    func select(id: Int) {
+    func selectItem(id: Int) {
         output.addTeacher(id: id)
     }
     
-    func unSelect(id: Int) {
+    func unSelectItem(id: Int) {
         output.removeTeacher(id: id)
     }
 }

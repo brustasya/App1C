@@ -66,8 +66,28 @@ extension AdminCoordinator: AdminDepartmentCoursesModuleOutput {
     }
     
     func moduleWantsToOpenCourse(for id: Int) {
+        let courseVC = adminAssembly.makeCourseDetailesModule(id: id, moduleOutput: self)
+        settingsNavigationController.pushViewController(courseVC, animated: true)
+    }
+}
+
+extension AdminCoordinator: CourseDetailesModuleOutput {
+    func moduleWantsToOpenEditModule(id: Int) {
         
     }
+    
+    func moduleWantsToOpenDeps() {
+        
+    }
+    
+    func moduleWantsToOpenStudents() {
+        
+    }
+    
+    func moduleWantsToOpenTeachers() {
+        
+    }
+    
 }
 
 extension AdminCoordinator: AdminSettingsModuleOutput {

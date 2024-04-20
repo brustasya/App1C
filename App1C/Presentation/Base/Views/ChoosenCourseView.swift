@@ -1,15 +1,16 @@
 //
-//  CourseView.swift
+//  ChoosenCourseView.swift
 //  App1C
 //
-//  Created by Станислава on 10.04.2024.
+//  Created by Станислава on 20.04.2024.
 //
 
 import UIKit
 
-final class CourseView: UIView {
+final class ChoosenCourseView: UIView {
     private lazy var checkButton = UIButton()
     private lazy var statusLabel = UILabel()
+    private lazy var loadLabel = UILabel()
     private lazy var titleLabel = UILabel()
     private lazy var openButton = UIButton()
     private lazy var infoButton = UIButton()
@@ -25,6 +26,8 @@ final class CourseView: UIView {
     private lazy var isOffline = false
     private lazy var closed: Bool = false
     
+    private var numberOfLines = 0
+    
     var isOpen = true {
         didSet {
             if !isOpen {
@@ -34,20 +37,9 @@ final class CourseView: UIView {
         }
     }
     
-    weak var delegate: CourseSelecitonDelegate?
+    weak var delegate: ChoosenCourseSelectionDelegate?
     
-    public var countOfSelectedDeps = 0 {
-        didSet {
-            guard !closed else { return }
-            if countOfDependencies == countOfSelectedDeps {
-                backgroundColor = .white
-                checkButton.isUserInteractionEnabled = true
-            } else {
-                backgroundColor = .systemGray6
-                checkButton.isUserInteractionEnabled = false
-            }
-        }
-    }
+    public var countOfSelectedDeps = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -63,10 +55,11 @@ final class CourseView: UIView {
         backgroundColor = .white
         layer.cornerRadius = 20
         layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 1
+        layer.borderWidth = 2
         
         checkButton.frame = CGRect(x: 8, y: bounds.midY - 15, width: 30, height: 30)
-        statusLabel.frame = CGRect(x: bounds.maxX - 70, y: bounds.maxY - 28, width: 60, height: 20)
+        statusLabel.frame = CGRect(x: bounds.maxX - 70, y: bounds.maxY - 26, width: 60, height: 20)
+        loadLabel.frame = CGRect(x: statusLabel.frame.minX - 110, y: bounds.maxY - 26, width: 100, height: 20)
         titleLabel.frame = CGRect(x: checkButton.frame.maxX + 8, y: bounds.midY - 20, width: bounds.width - 120, height: 40)
         openButton.frame = CGRect(x: bounds.maxX - 30, y: 8, width: 20, height: 20)
         infoButton.frame = CGRect(x: openButton.frame.minX - 30, y: 6, width: 25, height: 25)
@@ -74,6 +67,7 @@ final class CourseView: UIView {
         addSubview(checkButton)
         addSubview(titleLabel)
         addSubview(statusLabel)
+        addSubview(loadLabel)
         addSubview(openButton)
         addSubview(infoButton)
         
@@ -92,96 +86,88 @@ final class CourseView: UIView {
         
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         statusLabel.textColor = .darkGray
-        statusLabel.textAlignment = .left
+        statusLabel.textAlignment = .right
         statusLabel.isHidden = true
         
+        loadLabel.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+        loadLabel.textColor = .darkGray
+        loadLabel.textAlignment = .right
+        loadLabel.isHidden = true
+        
         checkButton.addTarget(self, action: #selector(selectCourse), for: .touchUpInside)
-        openButton.addTarget(self, action: #selector(openButtonTapped), for: .touchUpInside)        
+        openButton.addTarget(self, action: #selector(openButtonTapped), for: .touchUpInside)
     }
     
     @objc private func selectCourse() {
         if isSelected {
             checkButton.tintColor = .gray
-            delegate?.unselectCourse(id: courseID)
+            delegate?.unselectChoosenCourse(id: courseID)
         } else {
             checkButton.tintColor = Colors.darkgreen.uiColor
-            delegate?.selectCourse(id: courseID)
+            delegate?.selectChoosenCourse(id: courseID)
         }
     }
     
     @objc func openButtonTapped() {
         if isDepsOpen {
             openButton.setImage(Images.down.uiImage, for: .normal)
-            delegate?.closeDependencies(view: self)
+            delegate?.closeChoosenDependencies(view: self)
         } else {
             openButton.setImage(Images.up.uiImage, for: .normal)
-            delegate?.openDependencies(view: self)
+            delegate?.openChoosenDependencies(view: self)
         }
         isDepsOpen = !isDepsOpen
     }
     
-    func configure(with model: CourseSelectionModel) {
+    func configure(with model: ChoosenCourseSelectionModel) {
         courseID = model.id
         titleLabel.text = model.title
-
         closed = model.closed
         countOfDependencies = model.courseChildren.count
         
-        if countOfDependencies == countOfSelectedDeps {
-            backgroundColor = .white
-            checkButton.isUserInteractionEnabled = true
-        } else {
-            backgroundColor = .systemGray6
-            checkButton.isUserInteractionEnabled = false
-        }
+        backgroundColor = .white
         
+        layer.borderColor = model.isStarted
+                ? Colors.darkgreen.uiColor.cgColor
+                : Colors.red.uiColor.cgColor
+       
         if model.closed {
-            backgroundColor = Colors.salat.uiColor
-            checkButton.isUserInteractionEnabled = true
-        }
-        
-        if model.wasInLoad {
-            titleLabel.frame.origin.x -= 30
-            titleLabel.frame.size.width += 30
+            if !isDep {
+                titleLabel.frame.origin.x -= 20
+                titleLabel.frame.size.width += 20
+            }
             
             checkButton.isHidden = true
-        }
-        
-        if countOfDependencies == 0 {
-            openButton.isHidden = true
+            backgroundColor = Colors.salat.uiColor
         }
         
         if isDep {
-            titleLabel.frame.origin.x -= 30
-            titleLabel.frame.size.width += 30
-            
+            titleLabel.frame.origin.x -= 20
+            titleLabel.frame.size.width += 20
             checkButton.isHidden = true
-            backgroundColor = .systemGray6
         }
     }
     
-    func setupCountOfDeps() {
-        countOfSelectedDeps = countOfDependencies
-    }
-    
-    func select(isOffline: Bool) {
+    func select(isOffline: Bool, takenAsLoad: Bool) {
         self.isOffline = isOffline
         statusLabel.text = isOffline ? "Очно" : "Экстерн"
+        loadLabel.text = takenAsLoad ? "В нагрузку" : "Не в нагрузку"
         statusLabel.isHidden = closed
+        loadLabel.isHidden = closed
         checkButton.tintColor = Colors.darkgreen.uiColor
         isSelected = true
-    }
-    
-    func finalSelect(takenAsLoad: Bool) {
-        statusLabel.text = takenAsLoad ? "В нагрузку" : "Не в нагрузку"
-        statusLabel.isHidden = false
-        checkButton.tintColor = Colors.darkgreen.uiColor
-        isSelected = true
+        if !closed && (titleLabel.text ?? "").count > 24 {
+            titleLabel.frame.origin.y -= 9
+        }
     }
     
     func unSelect() {
         statusLabel.isHidden = true
+        loadLabel.isHidden = true
         checkButton.tintColor = .gray
         isSelected = false
+        if !closed {
+            titleLabel.frame.origin.y += 9
+        }
     }
 }

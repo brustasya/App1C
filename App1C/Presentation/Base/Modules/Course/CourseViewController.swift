@@ -14,8 +14,8 @@ class CourseViewController: UIViewController {
     private lazy var linksModels: [BaseModel] = [
         BaseModel(id: 0, title: "Преподаватели", image: Images.persons.uiImage),
         BaseModel(id: 1, title: "Студенты", image: Images.persons.uiImage),
-        BaseModel(id: 3, title: "Зависимости", image: Images.books.uiImage),
-        BaseModel(id: 4, title: "Чат курса", image: Images.chat.uiImage)
+        BaseModel(id: 2, title: "Зависимости", image: Images.books.uiImage),
+        BaseModel(id: 3, title: "Чат курса", image: Images.chat.uiImage)
     ]
     
     private lazy var dayOfWeekTitle = UILabel()
@@ -78,13 +78,6 @@ class CourseViewController: UIViewController {
         
         setupTitle()
         output.viewIsReady()
-//        setupAddDependencies()
-//        setupLinksView()
-//        setupType()
-//        setupTimeTable()
-//        setupEditButton()
-//        setupSaveButton()
-//        setupDescription()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -623,6 +616,7 @@ extension CourseViewController: CourseViewInput {
         startDatePicker.isUserInteractionEnabled = false
         endDatePicker.isUserInteractionEnabled = false
         dayOfWeekView.isUserInteractionEnabled = false
+        descriptionTextField.isScrollEnabled = true
     }
     
     func setTitle(title: String) {
@@ -630,8 +624,16 @@ extension CourseViewController: CourseViewInput {
     }
     
     func updateData(name: String, chat: String, type: String, dayOfWeek: String,
-                    from: Date, to: Date, descr: String) {
-        
+                    from: Date?, to: Date?, descr: String) {
+        nameTextField.text = name
+        chatTextField.text = chat
+        courseTypeLabel.text = type
+        dayOfWeekLabel.text = dayOfWeek
+        if let from, let to {
+            startDatePicker.date = from
+            endDatePicker.date = to
+        }
+        descriptionTextField.text = descr
     }
     
     func addEditButton() {
@@ -657,7 +659,7 @@ extension CourseViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //   output.selectedRowAt(index: indexPath.row)
+        output.selectItem(id: linksModels[indexPath.row].id)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

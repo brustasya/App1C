@@ -12,4 +12,5 @@ protocol EventViewOutput: AnyObject {
     func createButtonTapped(deadline: Date, descr: String)
     func goOverButtonTapped()
     func saveButtonTapped(deadline: Date, descr: String)
+    func selectCourse(at index: Int)
 }

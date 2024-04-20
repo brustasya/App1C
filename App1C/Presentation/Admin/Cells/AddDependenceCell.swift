@@ -78,9 +78,9 @@ class AddDependenceCell: UITableViewCell, ConfigurableViewProtocol {
     
     @objc private func checkButtonTapped() {
         if isSelect {
-            delegate?.unSelect(id: id)
+            delegate?.unSelectItem(id: id)
         } else {
-            delegate?.select(id: id)
+            delegate?.selectItem(id: id)
         }
         isSelect = !isSelect
     }
@@ -89,6 +89,10 @@ class AddDependenceCell: UITableViewCell, ConfigurableViewProtocol {
         titleLabel.text = model.title
         id = model.id
         isSelect = model.isCourseDependency
+    }
+    
+    func configureColor(color: UIColor) {
+        contentBackgroundView.backgroundColor = color
     }
    
     override func prepareForReuse() {

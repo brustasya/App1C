@@ -55,6 +55,8 @@ class StudentEventPresenter {
 }
 
 extension StudentEventPresenter: EventViewOutput {
+    func selectCourse(at index: Int) { }
+    
     func viewIsReady() {
         getEvent()
         viewInput?.setupReadMode()

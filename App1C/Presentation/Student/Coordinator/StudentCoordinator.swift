@@ -100,7 +100,8 @@ extension StudentCoordinator: StudentEventModuleOutput {
     }
     
     func moduleWantsToOpenFinalCourseSelection() {
-        
+        let courseSelectionVC = studentAssembly.makeFinalCourseSelectionModule()
+        mainScreenNavigationController.pushViewController(courseSelectionVC, animated: true)
     }
     
     

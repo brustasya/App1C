@@ -1,5 +1,5 @@
 //
-//  ModifyEventPresenter.swift
+//  TeacherEventPresenter.swift
 //  App1C
 //
 //  Created by Станислава on 20.04.2024.
@@ -7,38 +7,31 @@
 
 import Foundation
 
-class ModifyEventPresenter {
-    weak var moduleOutput: StudentEventModuleOutput?
+class TeacherEventPresenter {
+    weak var moduleOutput: TeacherEventModuleOutput?
     weak var viewInput: EventViewInput?
     
     private let eventsService: EventsServiceProtocol
+    private let coursesService: CoursesServiceProtocol
     private let id: Int
     private var eventType: EventType = .estimating
     
+    private var courses: [CourseModel] = []
+    
     init(
         id: Int,
+        moduleOutput: TeacherEventModuleOutput,
+        coursesService: CoursesServiceProtocol,
         eventsService: EventsServiceProtocol
     ) {
         self.id = id
         self.eventsService = eventsService
-    }
-    
-    private func modifyEvent(model: EventDetailServiceModel) {
-        eventsService.modifyEvent(eventID: id, eventModel: model) { [weak self] result in
-            switch result {
-            case .success(_):
-                Logger.shared.printLog(log: "Success modify event")
-                DispatchQueue.main.async {
-                    self?.viewInput?.close()
-                }
-            case .failure(let error):
-                Logger.shared.printLog(log: "Failed modify event: \(error)")
-            }
-        }
+        self.coursesService = coursesService
+        self.moduleOutput = moduleOutput
     }
     
     private func getEvent() {
-        eventsService.getModifyEvent(eventID: id) { [weak self] result in
+        eventsService.eventDetails(eventID: id) { [weak self] result in
             switch result {
             case .success(let model):
                 self?.eventType = (self?.getEventType(type: model.type)) ?? .estimating
@@ -66,22 +59,21 @@ class ModifyEventPresenter {
     }
 }
 
-extension ModifyEventPresenter: EventViewOutput {
-    func selectCourse(at index: Int) { }
+extension TeacherEventPresenter: EventViewOutput {
+    func selectCourse(at index: Int) {
+        moduleOutput?.moduleWantsToOpenEstimation(courseID: courses[index].id)
+    }
     
     func viewIsReady() {
         getEvent()
-        viewInput?.setupSaveMode()
+        viewInput?.setupReadMode()
     }
     
     func createButtonTapped(deadline: Date, descr: String) { }
     
     func goOverButtonTapped() { }
     
-    func saveButtonTapped(deadline: Date, descr: String) {
-        let model = EventDetailServiceModel(id: id, title: eventType.title, description: descr, deadline: Date.toString(date: deadline), type: eventType.rawValue, speechType: nil, timetableLink: nil, zoomLink: nil, ownDiplomaDeadline: nil, universityDiplomaDeadline: nil, workDiplomaDeadline: nil, themes: nil)
-        modifyEvent(model: model)
-    }
+    func saveButtonTapped(deadline: Date, descr: String) { }
     
     
 }

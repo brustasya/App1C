@@ -180,4 +180,16 @@ final class AdminAssembly: BaseAssembly {
         presenter.viewInput = vc
         return vc
     }
+    
+    func makeCourseDetailesModule(id: Int, moduleOutput: CourseDetailesModuleOutput) -> UIViewController {
+        let presenter = CourseDetailesPresenter(
+            id: id,
+            moduleOutput: moduleOutput,
+            coursesService: serviceAssembly.makeCoursesService()
+        )
+        let vc = CourseViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
 }

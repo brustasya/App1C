@@ -55,6 +55,7 @@ extension AddCoursePresenter: CourseDelegate {
 }
 
 extension AddCoursePresenter: CourseViewOutput {
+    
     func viewIsReady() {
         //viewInput?.setupAddMode()
         viewInput?.setupReadMode()
@@ -84,4 +85,6 @@ extension AddCoursePresenter: CourseViewOutput {
     func editButtonTapped() { }
     
     func saveButtonTapped() { }
+    
+    func selectItem(id: Int) { }
 }

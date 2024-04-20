@@ -51,6 +51,8 @@ class CreateEventPresenter {
 }
 
 extension CreateEventPresenter: EventViewOutput {
+    func selectCourse(at index: Int) { }
+    
     func viewIsReady() {
         viewInput?.setupCreateMode()
         viewInput?.setTitle(title: eventType.title)

@@ -14,4 +14,5 @@ protocol CourseViewOutput: AnyObject {
     func addButtonTapped(name: String, chat: String, type: String, descr: String)
     func editButtonTapped()
     func saveButtonTapped()
+    func selectItem(id: Int)
 }

@@ -14,6 +14,12 @@ class EventViewController: UIViewController {
     private lazy var deadlineLabel = UILabel()
     private lazy var textFieldView = UIView()
     
+    private lazy var scrollView = UIScrollView()
+
+    private lazy var coursesView = UIView()
+    private lazy var coursesTableView = UITableView()
+    private lazy var courses: [CourseModel] = []
+    
     let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .dateAndTime
@@ -41,6 +47,7 @@ class EventViewController: UIViewController {
         setupTitle()
         setupDeadline()
         setupDescription()
+        setupScrollView()
         output.viewIsReady()
     }
     
@@ -155,6 +162,53 @@ class EventViewController: UIViewController {
         ])
     }
     
+    private func setupScrollView() {
+        view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: descriptionView.bottomAnchor, constant: 10),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20)
+        ])
+                
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: 0)
+        scrollView.isScrollEnabled = true
+    }
+    
+    private func setupTableView() {
+        coursesTableView.register(CourseCell.self, forCellReuseIdentifier: "CourseCell")
+        coursesTableView.delegate = self
+        coursesTableView.dataSource = self
+        
+        coursesView = TableView(
+            contentView: view,
+            frame: view.frame,
+            title: "",
+            tableView: coursesTableView,
+            margin: 0
+        )
+        
+        coursesView.backgroundColor = .white
+        coursesTableView.layer.borderColor = UIColor.clear.cgColor
+        coursesTableView.separatorColor = UIColor.clear
+        
+        scrollView.addSubview(coursesView)
+        coursesView.addSubview(coursesTableView)
+        coursesView.translatesAutoresizingMaskIntoConstraints = false
+        coursesTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            coursesTableView.heightAnchor.constraint(equalToConstant: 10000),
+            coursesView.heightAnchor.constraint(equalTo: coursesTableView.heightAnchor, constant: 30),
+            coursesView.bottomAnchor.constraint(equalTo: coursesTableView.bottomAnchor, constant: 15),
+            coursesView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -10)
+        ])
+        
+        scrollView.contentSize.height = CGFloat(courses.count * 80 + 20)
+    }
+    
     private func updateDatePicker() {
         for subView in datePicker.subviews {
             for view in subView.subviews {
@@ -248,3 +302,32 @@ extension EventViewController: EventViewInput {
         goBack()
     }
 }
+
+extension EventViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return courses.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCell", for: indexPath) as? CourseCell else {
+            fatalError("Cannot create CourseCell")
+        }
+        cell.configure(with: courses[indexPath.row])
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        output.selectCourse(at: indexPath.row)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+    
+    func updateCourses(courses: [CourseModel]) {
+        self.courses = courses
+        setupTableView()
+    }
+}
+

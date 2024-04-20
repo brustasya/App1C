@@ -15,5 +15,5 @@ protocol CourseViewInput: AnyObject {
     func addEditButton()
     func setTitle(title: String)
     func updateData(name: String, chat: String, type: String, dayOfWeek: String,
-                    from: Date, to: Date, descr: String)
+                    from: Date?, to: Date?, descr: String)
 }

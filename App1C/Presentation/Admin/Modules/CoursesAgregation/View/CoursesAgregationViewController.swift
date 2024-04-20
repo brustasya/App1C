@@ -146,11 +146,11 @@ extension CoursesAgregationViewController: CoursesAgregationViewInput {
 }
 
 extension CoursesAgregationViewController: SelectItemDelegate {
-    func select(id: Int) {
+    func selectItem(id: Int) {
         output.selectCourse(id: id, isSelect: true)
     }
     
-    func unSelect(id: Int) {
+    func unSelectItem(id: Int) {
         output.selectCourse(id: id, isSelect: false)
     }
 }

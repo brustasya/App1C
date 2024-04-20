@@ -50,4 +50,13 @@ final class StudentAssembly: BaseAssembly {
         return vc
     }
     
+    func makeFinalCourseSelectionModule() -> UIViewController {
+        let presenter = FinalCourseSelectionPresenter(
+            courseSelectionService: serviceAssembly.makeCourseSelectionService()
+        )
+        let vc = FinalCourseSelectionViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
 }

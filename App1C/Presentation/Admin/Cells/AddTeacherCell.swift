@@ -69,9 +69,9 @@ class AddTeacherCell: UITableViewCell, ConfigurableViewProtocol {
     
     @objc private func checkButtonTapped() {
         if isSelect {
-            delegate?.unSelect(id: id)
+            delegate?.unSelectItem(id: id)
         } else {
-            delegate?.select(id: id)
+            delegate?.selectItem(id: id)
         }
         isSelect = !isSelect
     }
