@@ -97,7 +97,7 @@ class CoursesAgregationViewController: UIViewController {
     }
     
     private func setupFinishEstimatingButton() {
-        let y = tabBarController?.tabBar.frame.minY ?? view.frame.maxY //navigationController?.tabBarController.frame.minY ?? view.frame.maxY
+        let y = tabBarController?.tabBar.frame.minY ?? view.frame.maxY
         finishEstimatingButton = ButtonView(frame: CGRect(x: 25, y: y - 100, width: view.frame.width - 50, height: 45))
         view.addSubview(finishEstimatingButton)
         finishEstimatingButton.setTitle("Запустить", for: .normal)
@@ -130,20 +130,10 @@ class CoursesAgregationViewController: UIViewController {
                 
         scrollView.contentSize = CGSize(width: scrollView.frame.width, height: 0)
         scrollView.isScrollEnabled = true
-      //  scrollView.layer.cornerRadius = 20
     }
 }
 
-//extension EstimationViewController: PersonListViewInput {
-//    func setupPersonTable(with persons: [BaseModel]) {
-//        self.persons = persons
-//        setupTableView()
-//    }
-//
-//    func updateTitle(title: String) {
-//        titleLabel.text = title
-//    }
-//}
+
 
 extension CoursesAgregationViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

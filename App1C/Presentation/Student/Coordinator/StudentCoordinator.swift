@@ -15,6 +15,7 @@ final class StudentCoordinator: CoordinatorProtocol {
     
     private var mainScreenNavigationController = UINavigationController()
     private var settingsNavigationController: UINavigationController = UINavigationController()
+    private var coursesListNavigationController = UINavigationController()
     private var tripViewController: UIViewController = UIViewController()
     private var profileEditingViewController: UIViewController = UIViewController()
     private var passengerTripViewController: UIViewController = UIViewController()
@@ -25,11 +26,13 @@ final class StudentCoordinator: CoordinatorProtocol {
     }
     
     func start(in window: UIWindow?) {
-        let mainScreenVC = StudentMainScreenController()//mainScreenAssembly.makeMainScreenModule(moduleOutput: self)
+        let mainScreenVC = studentAssembly.makeMainScreenModule(moduleOutput: self)
         mainScreenNavigationController = CustomNavigationController(rootViewController: mainScreenVC)
+        
         let settingsVC = studentAssembly.makeSettingsModule(moduleOutput: self)
         self.settingsNavigationController = CustomNavigationController(rootViewController: settingsVC)
-        let coursesListNavigationController = CustomNavigationController(rootViewController: StudentCoursesListViewController())
+        
+        coursesListNavigationController = CustomNavigationController(rootViewController: StudentCoursesListViewController())
         
         let tabBarController = StudentTabBarController(
             mainScreenNavigationController: mainScreenNavigationController,
@@ -44,7 +47,7 @@ final class StudentCoordinator: CoordinatorProtocol {
 
 extension StudentCoordinator: StudentSettingsModuleOutput {
     func moduleWantsToOpenDepartmentCourses() {
-        settingsNavigationController.pushViewController(CourseSelectionViewController(), animated: true)
+        
     }
     
     func moduleWantsToOpenProfile() {
@@ -77,4 +80,28 @@ extension StudentCoordinator: TimeTableModuleOutput {
     func moduleWantsToCloseTimeTable() {
         mainScreenNavigationController.popViewController(animated: true)
     }
+}
+
+extension StudentCoordinator: StudentMainScreenModuleOutput {
+    func moduleWantsToOpenEvent(id: Int) {
+        let eventVC = studentAssembly.makeEventModule(id: id, moduleOutput: self)
+        mainScreenNavigationController.pushViewController(eventVC, animated: true)
+    }
+    
+    func moduleWantsToOpenTimeTable() {
+        
+    }
+}
+
+extension StudentCoordinator: StudentEventModuleOutput {
+    func moduleWantsToOpenCourseSelection() {
+        let courseSelectionVC = studentAssembly.makeCourseSelectionModule()
+        mainScreenNavigationController.pushViewController(courseSelectionVC, animated: true)
+    }
+    
+    func moduleWantsToOpenFinalCourseSelection() {
+        
+    }
+    
+    
 }

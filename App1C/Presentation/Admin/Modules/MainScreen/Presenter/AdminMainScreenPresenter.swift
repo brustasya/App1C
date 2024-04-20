@@ -33,6 +33,11 @@ final class AdminMainScreenPresenter {
                 self?.tgLink = model.telegramChannelURL
                 self?.chatbotLink = model.telegramBotURL
                 self?.siteLink = model.siteURL
+                DispatchQueue.main.async {
+                    if model.startedCourseAggregation {
+                        self?.viewInput?.setupCourseAggregationButton()
+                    }
+                }
             case .failure(let failure):
                 Logger.shared.printLog(log: "Failed load main page: \(failure)")
             }
@@ -56,6 +61,14 @@ final class AdminMainScreenPresenter {
 }
 
 extension AdminMainScreenPresenter: AdminMainScreenViewOutput {
+    func openDepartmentCourses() {
+        moduleOutput?.moduleWantsToOpenCourses()
+    }
+    
+    func courseAggregationButtonTapped() {
+        moduleOutput?.moduleWantsToOpenCourseAggregation()
+    }
+    
     func viewIsReady() {
         getMainPage()
     }

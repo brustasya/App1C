@@ -20,4 +20,34 @@ final class StudentAssembly: BaseAssembly {
         return vc
     }
     
+    func makeMainScreenModule(moduleOutput: StudentMainScreenModuleOutput) -> UIViewController {
+        let presenter = StudentMainScreenPresenter(
+            moduleOutput: moduleOutput,
+            mainScreenService: serviceAssembly.makeMainPageService()
+        )
+        let vc = StudentMainScreenController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeEventModule(id: Int, moduleOutput: StudentEventModuleOutput) -> UIViewController {
+        let presenter = StudentEventPresenter(
+            id: id,
+            moduleOutput: moduleOutput,
+            eventsService: serviceAssembly.makeEventsService()
+        )
+        let vc = EventViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeCourseSelectionModule() -> UIViewController {
+        let presenter = CourseSelectionPresenter(
+            courseSelectionService: serviceAssembly.makeCourseSelectionService()
+        )
+        let vc = CourseSelectionViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
 }

@@ -61,7 +61,7 @@ extension Date {
     public static func toDate(dateString: String?) -> Date {
         guard let dateString else { return Date() }
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-mm-dd hh:mm:ss"
+        dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
         return dateFormatter.date(from: dateString) ?? Date()
     }
 }

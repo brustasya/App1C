@@ -30,7 +30,7 @@ extension URLRequestFactory: EventsURLRequestFactory {
     }
     
     func eventDetails(for id: Int) throws -> URLRequest {
-        guard let url = url(with: "/event", query: "event_id=\(id)") else {
+        guard let url = url(with: "/event/\(id)") else {
             throw TFSError.makeRequest
         }
         var request = makeRequest(url: url)
@@ -40,7 +40,7 @@ extension URLRequestFactory: EventsURLRequestFactory {
     }
     
     func getModifyEvent(for id: Int) throws -> URLRequest {
-        guard let url = url(with: "/modify-event", query: "event_id=\(id)") else {
+        guard let url = url(with: "/modify-event/\(id)") else {
             throw TFSError.makeRequest
         }
         var request = makeRequest(url: url)
@@ -50,7 +50,7 @@ extension URLRequestFactory: EventsURLRequestFactory {
     }
     
     func modifyEvent(for id: Int, with model: EventDetailServiceModel) throws -> URLRequest {
-        guard let url = url(with: "/modify-event", query: "event_id=\(id)"),
+        guard let url = url(with: "/modify-event/\(id)"),
               var request = makeRequest(with: model, url: url) else {
             throw TFSError.makeRequest
         }

@@ -9,20 +9,25 @@ import UIKit
 
 class CourseSelectionViewController: UIViewController {
     
-//    private var output: StudentSettingsViewOutput
-//
-//    init(output: StudentSettingsViewOutput) {
-//        self.output = output
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//
+    private var output: CourseSelectionViewOutput
+
+    init(output: CourseSelectionViewOutput) {
+        self.output = output
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     private lazy var scrollView = UIScrollView()
     private lazy var chooseButton = UIButton()
-    private let requaredAmount = 3
+    private lazy var amountLable = UILabel()
+    private lazy var courseViews: [CourseView: CourseSelectionViewModel] = [:]
+    private lazy var selectedCourses: [CourseSelectedModel] = []
+    private lazy var coursesDict: [Int: CourseSelectionModel] = [:]
+    
+    private var requaredAmount = 3
     private lazy var amount = 3 {
         didSet {
             amountLable.text = amount < 0 ? "0" : "\(amount)"
@@ -35,68 +40,31 @@ class CourseSelectionViewController: UIViewController {
             scrollView.contentSize.height = CGFloat(countOfOpenCourses * 70 + 40)
         }
     }
-    private lazy var amountLable = UILabel()
-    private lazy var courseViews: [CourseView: CourseSelectionViewModel] = [:]
-    private lazy var selectedCourses: [CourseSelectedModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         
-        let s5 = CourseSelectionServiceModel(id: 5, title: "Аналитическая геометрия", dependencies: [], closed: false, wasInLoad: false)
-        let s1 = CourseSelectionServiceModel(id: 1, title: "Математический анализ", dependencies: [], closed: true, wasInLoad: true)
-        let s2 = CourseSelectionServiceModel(id: 2, title: "Операционные системы", dependencies: [DependenceModel(id: 5, title: "Аналитическая геометрия", closed: false)], closed: false, wasInLoad: false)
-        let s3 = CourseSelectionServiceModel(id: 3, title: "Программирование", dependencies: [DependenceModel(id: 1, title: "Математический анализ", closed: true)], closed: true, wasInLoad: false)
-        let s4 = CourseSelectionServiceModel(id: 4, title: "Линейная алгебра", dependencies: [DependenceModel(id: 3, title: "Программирование", closed: true), DependenceModel(id: 2, title: "Операционные системы", closed: false)], closed: false, wasInLoad: false)
-        
-//        let s5 = CourseSelectionServiceModel(id: 5, title: "Аналитическая геометрия", closed: false, wasInLoad: false, dependencies: [])
-//        let s1 = CourseSelectionServiceModel(id: 1, title: "Математический анализ", closed: true, wasInLoad: true, dependencies: [DependenceModel(id: 5, title: "Аналитическая геометрия", closed: false)])
-//        let s2 = CourseSelectionServiceModel(id: 2, title: "Операционные системы", closed: false, wasInLoad: false, dependencies: [])
-//        let s3 = CourseSelectionServiceModel(id: 3, title: "Программирование", closed: true, wasInLoad: false, dependencies: [])
-//        let s4 = CourseSelectionServiceModel(id: 4, title: "Линейная алгебра", closed: false, wasInLoad: false, dependencies: [DependenceModel(id: 3, title: "Программирование", closed: true), DependenceModel(id: 2, title: "Операционные системы", closed: false)])
-        let serviceModels = [s1, s2, s5, s3, s4]
-        
-        let c1 = CourseSelectionModel(id: 1, title: "A", closed: true, wasInLoad: true, courseChildren: [])
-        let c2 = CourseSelectionModel(id: 2, title: "B", closed: false, wasInLoad: false, courseChildren: [])
-        let c3 = CourseSelectionModel(id: 3, title: "C", closed: true, wasInLoad: false, courseChildren: [c1])
-        let c4 = CourseSelectionModel(id: 4, title: "D", closed: true, wasInLoad: true, courseChildren: [c2, c3])
-        c1.parentCourse = c3
-        c2.parentCourse = c4
-        c3.parentCourse = c4
-     //   let courses = [c1, c2, c3, c4]
-        
-        treeBuilder(serviceModels: serviceModels)
         setupView()
-        
+        output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = true
+        (navigationController as? CustomNavigationController)?.setupBackButton()
+        (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
         tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.isHidden = true
     }
     
-    var coursesDict: [Int: CourseSelectionModel] = [:]
-    private func treeBuilder(serviceModels: [CourseSelectionServiceModel]) {
-        for model in serviceModels {
-            let course = CourseSelectionModel(id: model.id, title: model.title, closed: model.closed ?? false, wasInLoad: model.wasInLoad ?? false)
-            coursesDict[model.id] = course
-        }
-        for model in serviceModels {
-            let parent = coursesDict[model.id]
-            for dep in model.dependencies {
-                if let course = coursesDict[dep.id] {
-                    course.parentCourse = parent
-                    parent?.courseChildren.append(course)
-                } else {
-                    let course = CourseSelectionModel(id: dep.id, title: dep.title, closed: dep.closed)
-                    coursesDict[dep.id] = course
-                }
-            }
-        }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        (navigationController as? CustomNavigationController)?.hideBackButton()
     }
-    
+        
     private func setupView() {
         view.addSubview(scrollView)
         
@@ -122,12 +90,37 @@ class CourseSelectionViewController: UIViewController {
             amountLable.leadingAnchor.constraint(equalTo: amountDescrLabel.trailingAnchor, constant: 20)
         ])
         
+        setupChooseButton()
+        setupScrollView()
+//        for courses in courseViews {
+//            print(courses.key.courseID, " : ", coursesDict[courses.key.courseID]?.parentCourse?.id)
+//            for course in courses.value.allDeps {
+//                print(course.courseID)
+//            }
+//        }
+    }
+    
+    private func setupScrollView() {
+        scrollView.backgroundColor = .clear
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        var y: CGFloat = 0//titleLabel.frame.maxY
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: amountLable.bottomAnchor, constant: 17),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)
+        ])
+                
+        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: 0)
+        scrollView.isScrollEnabled = true
+    }
+    
+    private func setupCourses() {
+        var y: CGFloat = 0
         var deps: [CourseView] = []
         var cur: [CourseView] = []
         let courses: [CourseSelectionModel] = Array(coursesDict.values)
-        setupCourses(courses: courses, x: 20, y: &y, deps: &deps, currentDeps: &cur)
+        setupCoursesViews(courses: courses, x: 20, y: &y, deps: &deps, currentDeps: &cur)
         countOfOpenCourses = courseViews.count
         
         for course in coursesDict.values {
@@ -154,29 +147,6 @@ class CourseSelectionViewController: UIViewController {
                 closeDependencies(view: course)
             }
         }
-        setupChooseButton()
-        setupScrollView()
-        for courses in courseViews {
-            print(courses.key.courseID, " : ", coursesDict[courses.key.courseID]?.parentCourse?.id)
-            for course in courses.value.allDeps {
-                print(course.courseID)
-            }
-        }
-    }
-    
-    private func setupScrollView() {
-        scrollView.backgroundColor = .clear
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: amountLable.bottomAnchor, constant: 17),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100)
-        ])
-                
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: 0)
-        scrollView.isScrollEnabled = true
     }
     
     private func getDeps(for course: CourseSelectionModel) -> [CourseSelectionModel] {
@@ -199,7 +169,7 @@ class CourseSelectionViewController: UIViewController {
     }
     
     var id = 0
-    private func setupCourses(courses: [CourseSelectionModel], x: CGFloat, y: inout CGFloat, deps: inout [CourseView], currentDeps: inout [CourseView]) {
+    private func setupCoursesViews(courses: [CourseSelectionModel], x: CGFloat, y: inout CGFloat, deps: inout [CourseView], currentDeps: inout [CourseView]) {
         var previousView: CourseView? = nil
         for course in courses {
             y += 10
@@ -218,7 +188,7 @@ class CourseSelectionViewController: UIViewController {
             y = courseView.frame.maxY
             var newDeps: [CourseView] = []
             var cur: [CourseView] = []
-            setupCourses(courses: course.courseChildren, x: x + 20, y: &y, deps: &newDeps, currentDeps: &cur)
+            setupCoursesViews(courses: course.courseChildren, x: x + 20, y: &y, deps: &newDeps, currentDeps: &cur)
             courseViews[courseView] = CourseSelectionViewModel(allDeps: newDeps, deps: cur)
             deps += newDeps
         }
@@ -235,9 +205,11 @@ class CourseSelectionViewController: UIViewController {
     }
     
     @objc func chooseButtonTapped() {
-        for course in selectedCourses {
-            print(course)
-        }
+        output.chooseButtonTapped(selectedCorses: selectedCourses)
+    }
+    
+    @objc func goBack() {
+        navigationController?.popViewController(animated: true)
     }
     
     private func select(id: Int, isOffline: Bool) {
@@ -280,13 +252,6 @@ class CourseSelectionViewController: UIViewController {
         amount = requaredAmount - selectedCourses.count
     }
     
-}
-
-protocol CourseSelecitonDelegate: AnyObject {
-    func openDependencies(view: CourseView)
-    func closeDependencies(view: CourseView)
-    func unselectCourse(id: Int)
-    func selectCourse(id: Int)
 }
 
 extension CourseSelectionViewController: CourseSelecitonDelegate {
@@ -362,17 +327,20 @@ extension CourseSelectionViewController: CourseSelecitonDelegate {
     func unselectCourse(id: Int) {
         unSelect(id: id)
     }
-    
-    
 }
-//extension StudentSettingsViewController: StudentSettingsViewInput {
-//
-//}
-//
-//extension StudentSettingsViewController {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        output.selectRowAt(index: indexPath.row)
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
-//}
-//
+
+extension CourseSelectionViewController: CourseSelectionViewInput {
+    func updateCourses(coursesDict: [Int: CourseSelectionModel]) {
+        self.coursesDict = coursesDict
+        setupCourses()
+    }
+    
+    func setupAmount(amount: Int) {
+        requaredAmount = amount
+        self.amount = amount
+    }
+    
+    func close() {
+        goBack()
+    }
+}

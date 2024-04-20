@@ -46,6 +46,7 @@ class EventViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateDatePicker()
         navigationItem.hidesBackButton = true
         (navigationController as? CustomNavigationController)?.setupBackButton()
         (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -56,9 +57,16 @@ class EventViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        updateDatePicker()
         (navigationController as? CustomNavigationController)?.hideBackButton()
     }
     
+    override func viewWillLayoutSubviews() {
+        updateDatePicker()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        updateDatePicker()
+    }
     
     private func setupTitle() {
         titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width, height: 30), title: "Выбор кусров")
@@ -89,16 +97,7 @@ class EventViewController: UIViewController {
             datePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ])
         
-        for subView in datePicker.subviews {
-            for view in subView.subviews {
-                view.backgroundColor = Colors.paleYellow.uiColor
-                view.layer.cornerRadius = 15
-                for sub in view.subviews {
-                    sub.backgroundColor = Colors.paleYellow.uiColor
-                    sub.layer.cornerRadius = 15
-                }
-            }
-        }
+    //    updateDatePicker()
         datePicker.isUserInteractionEnabled = false
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
     }
@@ -106,16 +105,7 @@ class EventViewController: UIViewController {
     @objc func dateChanged(_ sender: UIDatePicker) {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd.MM.yyyy HH:mm"
-        for subView in datePicker.subviews {
-            for view in subView.subviews {
-                view.backgroundColor = Colors.paleYellow.uiColor
-                view.layer.cornerRadius = 15
-                for sub in view.subviews {
-                    sub.backgroundColor = Colors.paleYellow.uiColor
-                    view.layer.cornerRadius = 15
-                }
-            }
-        }
+        updateDatePicker()
     }
     
     private func setupDescription() {
@@ -137,7 +127,7 @@ class EventViewController: UIViewController {
         descriptionTextField.textColor = .black
         descriptionTextField.text = ""
         descriptionTextField.textContainer.maximumNumberOfLines = 0
-        descriptionTextField.font = .systemFont(ofSize: 15, weight: .regular)
+        descriptionTextField.font = .systemFont(ofSize: 16, weight: .regular)
         descriptionTextField.textAlignment = .justified
         descriptionTextField.tintColor = .gray
         
@@ -163,6 +153,19 @@ class EventViewController: UIViewController {
             descriptionTextField.leadingAnchor.constraint(equalTo: textFieldView.leadingAnchor, constant: 5),
             descriptionTextField.trailingAnchor.constraint(equalTo: textFieldView.trailingAnchor, constant: -5),
         ])
+    }
+    
+    private func updateDatePicker() {
+        for subView in datePicker.subviews {
+            for view in subView.subviews {
+                view.backgroundColor = Colors.paleYellow.uiColor
+                view.layer.cornerRadius = 15
+                for sub in view.subviews {
+                    sub.backgroundColor = Colors.paleYellow.uiColor
+                    sub.layer.cornerRadius = 15
+                }
+            }
+        }
     }
     
     private func setupCreateButton() {
@@ -223,6 +226,22 @@ extension EventViewController: EventViewInput {
         datePicker.isUserInteractionEnabled = true
         descriptionTextField.isUserInteractionEnabled = true
         textFieldView.backgroundColor = .systemGray6
+    }
+    
+    func setupReadMode() {
+        datePicker.isUserInteractionEnabled = false
+        descriptionTextField.isUserInteractionEnabled = false
+        textFieldView.backgroundColor = .white
+    }
+    
+    func addGoOverButton() {
+        setupGoOverButton()
+    }
+    
+    func updateData(deadline: Date, descr: String) {
+        datePicker.date = deadline
+        descriptionTextField.text = descr
+        updateDatePicker()
     }
     
     func close() {

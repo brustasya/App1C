@@ -15,4 +15,6 @@ protocol AdminMainScreenViewOutput: AnyObject {
     func openTelegram()
     func openChatbot()
     func openSite()
+    func courseAggregationButtonTapped()
+    func openDepartmentCourses()
 }

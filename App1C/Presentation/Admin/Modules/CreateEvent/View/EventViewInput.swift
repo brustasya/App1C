@@ -12,4 +12,7 @@ protocol EventViewInput: AnyObject {
     func setupCreateMode()
     func setupSaveMode()
     func close()
+    func setupReadMode()
+    func addGoOverButton()
+    func updateData(deadline: Date, descr: String)
 }

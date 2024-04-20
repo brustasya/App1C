@@ -34,6 +34,20 @@ class CreateEventPresenter {
             }
         }
     }
+    
+    private func createSemester(model: CreateSemesterModel) {
+        eventsService.createSemester(model: model) { [weak self] result in
+            switch result {
+            case .success(_):
+                Logger.shared.printLog(log: "Success create event")
+                DispatchQueue.main.async {
+                    self?.viewInput?.close()
+                }
+            case .failure(let error):
+                Logger.shared.printLog(log: "Failed create event: \(error)")
+            }
+        }
+    }
 }
 
 extension CreateEventPresenter: EventViewOutput {
@@ -49,7 +63,16 @@ extension CreateEventPresenter: EventViewOutput {
             deadline: Date.toString(date: deadline),
             type: eventType.rawValue
         )
-        createEvent(model: model)
+        let semesterModel = CreateSemesterModel(
+            title: eventType.title,
+            description: descr,
+            deadline: Date.toString(date: deadline)
+        )
+        if eventType == .preliminaryCourseChoice {
+            createSemester(model: semesterModel)
+        } else {
+            createEvent(model: model)
+        }
     }
     
     func goOverButtonTapped() { }
@@ -62,7 +85,7 @@ extension CreateEventPresenter: EventViewOutput {
 extension Date {
     public static func toString(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YYYY-mm-dd hh:mm:ss"
+        dateFormatter.dateFormat = "YYYY-MM-dd HH:mm:ss"
         return dateFormatter.string(from: date)
     }
 }

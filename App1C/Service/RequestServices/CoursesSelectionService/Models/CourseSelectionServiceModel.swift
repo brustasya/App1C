@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct CourseSelectionServiceModel {
+struct PreliminaryChoiceModel: Codable {
+    let amount: Int
+    let courses: [CourseSelectionServiceModel]
+}
+
+struct CourseSelectionServiceModel: Codable {
     let id: Int
     let title: String
     let dependencies: [DependenceModel]
@@ -23,7 +28,7 @@ struct CourseSelectionServiceModel {
     }
 }
 
-struct DependenceModel {
+struct DependenceModel: Codable {
     let id: Int
     let title: String
     let closed: Bool

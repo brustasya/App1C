@@ -53,7 +53,8 @@ extension AdminCoordinator: EventsModuleOutput {
     }
     
     func moduleWantsToOpenEvent(id: Int) {
-        
+        let modifyVC = adminAssembly.makeModifyModule(id: id)
+        eventsNavigationController.pushViewController(modifyVC, animated: true)
     }
 
 }
@@ -145,6 +146,15 @@ extension AdminCoordinator: AdminsListForAdminModuleOutput {
 }
 
 extension AdminCoordinator: AdminMainScreenModuleOutput {
+    func moduleWantsToOpenCourses() {
+        let depCoursesVC = adminAssembly.makeDepartmentCoursesModule(moduleOutput: self)
+        mainScreenNavigationController.pushViewController(depCoursesVC, animated: true)
+    }
+    
+    func moduleWantsToOpenCourseAggregation() {
+        
+    }
+    
 }
 
 extension AdminCoordinator: StudentsListModuleOutput {

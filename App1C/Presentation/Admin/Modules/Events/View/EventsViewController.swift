@@ -17,6 +17,8 @@ class EventsViewController: UIViewController {
     private lazy var eventsTableView = UITableView()
     private lazy var eventsBackgroundView = UIView()
     private lazy var courseAggregationButton = UIButton()
+    
+    private var eventsConstraint: NSLayoutConstraint?
 
     private var output: EventsViewOutput
         
@@ -41,6 +43,7 @@ class EventsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        output.viewWillAppear()
         (navigationController as? CustomNavigationController)?.hideBackButton()
 
         tabBarController?.tabBar.isTranslucent = true
@@ -63,10 +66,11 @@ class EventsViewController: UIViewController {
         eventsBackgroundView.addSubview(eventsTableView)
         eventsBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         eventsTableView.translatesAutoresizingMaskIntoConstraints = false
-        eventsTableView.isScrollEnabled = true
+//        eventsTableView.isScrollEnabled = true
+//        eventsBackgroundView.backgroundColor = .white
+//        eventsTableView.layer.borderColor = UIColor.clear.cgColor
         
         NSLayoutConstraint.activate([
-            eventsTableView.heightAnchor.constraint(equalToConstant: 245),
             eventsBackgroundView.heightAnchor.constraint(equalTo: eventsTableView.heightAnchor, constant: 60),
             eventsBackgroundView.bottomAnchor.constraint(equalTo: eventsTableView.bottomAnchor, constant: 15),
             eventsBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25)
@@ -74,27 +78,48 @@ class EventsViewController: UIViewController {
     }
     
     private func setupCreateEvent() {
-        let title = UILabel(frame: CGRect(x: Int(view.frame.midX) - 100, y: 380, width: 200, height: 20))
+        let title = UILabel(frame: CGRect(x: Int(view.frame.midX) - 100, y: events.count * 80 + 120, width: 200, height: 20))
         title.text = "Создать событие"
         title.textColor = .black
         title.textAlignment = .center
         title.font = .systemFont(ofSize: 20, weight: .semibold)
         view.addSubview(title)
+        title.translatesAutoresizingMaskIntoConstraints = false
         
         let courseSelectionButton = ButtonView(frame: CGRect(x: 25, y: title.frame.maxY + 15, width: view.frame.width - 50, height: 45))
         courseSelectionButton.setTitle("Выбор курсов", for: .normal)
-        view.addSubview(courseSelectionButton)
+        setupButton(button: courseSelectionButton)
         courseSelectionButton.addTarget(self, action: #selector(createPreliminaryChoiceEventButtonTapped), for: .touchUpInside)
         
         let finalCourseSelectionButton = ButtonView(frame: CGRect(x: 25, y: courseSelectionButton.frame.maxY + 10, width: view.frame.width - 50, height: 45))
         finalCourseSelectionButton.setTitle("Выбор минимальной нагрузки", for: .normal)
-        view.addSubview(finalCourseSelectionButton)
+        setupButton(button: finalCourseSelectionButton)
         finalCourseSelectionButton.addTarget(self, action: #selector(createFinalChoiceEventButtonTapped), for: .touchUpInside)
         
         let estimationButton = ButtonView(frame: CGRect(x: 25, y: finalCourseSelectionButton.frame.maxY + 10, width: view.frame.width - 50, height: 45))
         estimationButton.setTitle("Выставление оценок", for: .normal)
-        view.addSubview(estimationButton)
+        setupButton(button: estimationButton)
         estimationButton.addTarget(self, action: #selector(createEstimatingEventButtonTapped), for: .touchUpInside)
+        
+        NSLayoutConstraint.activate([
+            title.topAnchor.constraint(equalTo: eventsBackgroundView.bottomAnchor, constant: 25),
+            title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            courseSelectionButton.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10),
+            finalCourseSelectionButton.topAnchor.constraint(equalTo: courseSelectionButton.bottomAnchor, constant: 10),
+            estimationButton.topAnchor.constraint(equalTo: finalCourseSelectionButton.bottomAnchor, constant: 10),
+        ])
+        
+    }
+    
+    private func setupButton(button: ButtonView) {
+        view.addSubview(button)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            button.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -50),
+            button.heightAnchor.constraint(equalToConstant: 45)
+        ])
     }
     
     @objc private func createPreliminaryChoiceEventButtonTapped() {
@@ -113,6 +138,10 @@ class EventsViewController: UIViewController {
 extension EventsViewController: EventsViewInput {
     func updateEvents(events: [EventModel]) {
         self.events = events
+        eventsConstraint?.isActive = false
+        let height = events.count > 0 ? CGFloat(events.count * 70) - 0.5 : 0
+        eventsConstraint = eventsTableView.heightAnchor.constraint(equalToConstant: height)
+        eventsConstraint?.isActive = true
         eventsTableView.reloadData()
     }
 }

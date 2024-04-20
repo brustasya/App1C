@@ -160,5 +160,15 @@ final class AdminAssembly: BaseAssembly {
         let vc = EventViewController(output: presenter)
         presenter.viewInput = vc
         return vc
-    }    
+    }
+    
+    func makeModifyModule(id: Int) -> UIViewController {
+        let presenter = ModifyEventPresenter(
+            id: id,
+            eventsService: serviceAssembly.makeEventsService()
+        )
+        let vc = EventViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
 }

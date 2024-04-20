@@ -8,7 +8,7 @@
 import Foundation
 
 struct EventDetailServiceModel: Codable {
-    let id: String
+    let id: Int
     let title: String
     let description: String
     let deadline: String?

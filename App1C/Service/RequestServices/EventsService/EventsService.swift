@@ -11,7 +11,7 @@ protocol EventsServiceProtocol {
     func events(completion: @escaping (Result<EventsModel, Error>) -> Void)
     func eventDetails(eventID: Int, completion: @escaping (Result<EventDetailServiceModel, Error>) -> Void)
     func getModifyEvent(eventID: Int, completion: @escaping (Result<EventDetailServiceModel, Error>) -> Void)
-    func modifyEvent(eventID: Int, eventModel: EventDetailServiceModel, completion: @escaping (Result<[String: Int], Error>) -> Void)
+    func modifyEvent(eventID: Int, eventModel: EventDetailServiceModel, completion: @escaping (Result<Data?, Error>) -> Void)
     func currentEvents(completion: @escaping (Result<CurrentEventsModel, Error>) -> Void)
     func watchEvent(eventID: Int, completion: @escaping (Result<Data?, Error>) -> Void)
     func createSemester(model: CreateSemesterModel, completion: @escaping (Result<Data?, Error>) -> Void)
@@ -56,7 +56,7 @@ class EventsService: EventsServiceProtocol {
         }
     }
     
-    func modifyEvent(eventID: Int, eventModel: EventDetailServiceModel, completion: @escaping (Result<[String: Int], Error>) -> Void) {
+    func modifyEvent(eventID: Int, eventModel: EventDetailServiceModel, completion: @escaping (Result<Data?, Error>) -> Void) {
         do {
             let request = try requestFactory.modifyEvent(for: eventID, with: eventModel)
             networkService.sendRequest(request, completion: completion)

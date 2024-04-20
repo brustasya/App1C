@@ -27,8 +27,7 @@ class AdminMainScreenController: MainScreenViewController {
         output.viewIsReady()
         
         setupCoursesView()
-        setupCourseAggregationButton()
-        (navigationController as? CustomNavigationController)?.setupBellButton()
+        //(navigationController as? CustomNavigationController)?.setupBellButton()
     }
     
     override func setupLinksViews() {
@@ -106,7 +105,7 @@ class AdminMainScreenController: MainScreenViewController {
     }
     
     @objc private func courseAggregationButtonTapped() {
-
+        output.courseAggregationButtonTapped()
     }
     
     @objc func telegramEditButtonTapped() {
@@ -178,10 +177,7 @@ extension AdminMainScreenController: AdminMainScreenViewInput {
 
 extension AdminMainScreenController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let selectedItem = dataSource.itemIdentifier(for: indexPath) {
-//            print("Selected item: \(selectedItem)")
-//            output.tripDidSelect(model: selectedItem)
-//        }
+        output.openDepartmentCourses()
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
