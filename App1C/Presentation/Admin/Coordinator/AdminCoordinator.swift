@@ -152,7 +152,8 @@ extension AdminCoordinator: AdminMainScreenModuleOutput {
     }
     
     func moduleWantsToOpenCourseAggregation() {
-        
+        let courseAggregationVC = adminAssembly.makeCoursesAgregationModule()
+        mainScreenNavigationController.pushViewController(courseAggregationVC, animated: true)
     }
     
 }

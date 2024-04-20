@@ -19,27 +19,19 @@ class CoursesAgregationViewController: UIViewController {
         CourseAgregationModel(id: 0, title: "Программирование", offline: 5, online: 0, isStarted: true),
         CourseAgregationModel(id: 0, title: "Тестирование", offline: 11, online: 1, isStarted: false),
         CourseAgregationModel(id: 0, title: "Математический анализ", offline: 5, online: 10, isStarted: false),
-        CourseAgregationModel(id: 0, title: "Линейная алгебра", offline: 4, online: 0, isStarted: false),
-//        CourseAgregationModel(id: 0, title: "Программирование", offline: 5, online: 0, isStarted: true),
-//        CourseAgregationModel(id: 0, title: "Тестирование", offline: 11, online: 1, isStarted: false),
-//        CourseAgregationModel(id: 0, title: "Математический анализ", offline: 5, online: 10, isStarted: false),
-//        CourseAgregationModel(id: 0, title: "Линейная алгебра", offline: 4, online: 0, isStarted: false),
-//        CourseAgregationModel(id: 0, title: "Программирование", offline: 5, online: 0, isStarted: true),
-//        CourseAgregationModel(id: 0, title: "Тестирование", offline: 11, online: 1, isStarted: false),
-//        CourseAgregationModel(id: 0, title: "Математический анализ", offline: 5, online: 10, isStarted: false),
-//        CourseAgregationModel(id: 0, title: "Линейная алгебра", offline: 4, online: 0, isStarted: false),
+        CourseAgregationModel(id: 0, title: "Линейная алгебра", offline: 4, online: 0, isStarted: false)
     ]
     
-//    private var output: PersonListViewOutput
-//
-//    init(output: PersonListViewOutput) {
-//        self.output = output
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    private var output: CoursesAgregationViewOutput
+
+    init(output: CoursesAgregationViewOutput) {
+        self.output = output
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,13 +41,22 @@ class CoursesAgregationViewController: UIViewController {
         setupFinishEstimatingButton()
         setupScrollView()
         setupTableView()
-       // output.viewIsReady()
+        output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = true
+        (navigationController as? CustomNavigationController)?.setupBackButton()
+        (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
         tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        (navigationController as? CustomNavigationController)?.hideBackButton()
     }
     
     private func setupTitle() {
@@ -87,7 +88,7 @@ class CoursesAgregationViewController: UIViewController {
         personTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            personTableView.heightAnchor.constraint(equalToConstant: CGFloat(Double(persons.count * 80) - 0.5)),
+            personTableView.heightAnchor.constraint(equalToConstant: 10000),
             personsView.heightAnchor.constraint(equalTo: personTableView.heightAnchor, constant: 30),
             personsView.bottomAnchor.constraint(equalTo: personTableView.bottomAnchor, constant: 15),
             personsView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: -10)
@@ -131,9 +132,28 @@ class CoursesAgregationViewController: UIViewController {
         scrollView.contentSize = CGSize(width: scrollView.frame.width, height: 0)
         scrollView.isScrollEnabled = true
     }
+    
+    @objc func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
+extension CoursesAgregationViewController: CoursesAgregationViewInput {
+    func updateCourses(courses: [CourseAgregationModel]) {
+        self.persons = courses
+        personTableView.reloadData()
+    }
+}
 
+extension CoursesAgregationViewController: SelectItemDelegate {
+    func select(id: Int) {
+        output.selectCourse(id: id, isSelect: true)
+    }
+    
+    func unSelect(id: Int) {
+        output.selectCourse(id: id, isSelect: false)
+    }
+}
 
 extension CoursesAgregationViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -145,6 +165,7 @@ extension CoursesAgregationViewController: UITableViewDataSource, UITableViewDel
             fatalError("Cannot create CourseAgregationCell")
         }
         cell.configure(with: persons[indexPath.row])
+        cell.delegate = self
         cell.selectionStyle = .none
         return cell
     }

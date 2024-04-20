@@ -10,7 +10,9 @@ import UIKit
 class CourseAgregationCell: UITableViewCell, ConfigurableViewProtocol {
     
     typealias ConfigurationModel = CourseAgregationModel
-        
+    
+    weak var delegate: SelectItemDelegate?
+    
     private lazy var titleLabel = UILabel()
     private lazy var infoButton = UIButton()
     private lazy var checkButton = UIButton()
@@ -19,6 +21,7 @@ class CourseAgregationCell: UITableViewCell, ConfigurableViewProtocol {
     private lazy var onlineLabel = UILabel()
     private lazy var onlineCountLabel = UILabel()
     private lazy var contentBackgroundView = UIView()
+    private lazy var id = 0
     
     private lazy var isStarted: Bool = false {
         didSet {
@@ -98,6 +101,11 @@ class CourseAgregationCell: UITableViewCell, ConfigurableViewProtocol {
     }
     
     @objc private func checkButtonTapped() {
+        if isStarted {
+            delegate?.unSelect(id: id)
+        } else {
+            delegate?.select(id: id)
+        }
         isStarted = !isStarted
     }
     
@@ -139,6 +147,7 @@ class CourseAgregationCell: UITableViewCell, ConfigurableViewProtocol {
         offlineCountLabel.text = "\(model.offline)"
         onlineCountLabel.text = "\(model.online)"
         isStarted = model.isStarted
+        id = model.id
     }
    
     override func prepareForReuse() {

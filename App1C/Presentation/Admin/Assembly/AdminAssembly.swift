@@ -171,4 +171,13 @@ final class AdminAssembly: BaseAssembly {
         presenter.viewInput = vc
         return vc
     }
+    
+    func makeCoursesAgregationModule()  -> UIViewController {
+        let presenter = CoursesAgregationPresenter(
+            coursesAggregationService: serviceAssembly.makeCoursesAggregationService()
+        )
+        let vc = CoursesAgregationViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
 }

@@ -20,6 +20,12 @@
 		85043AB52BD32D7400FEF431 /* CourseSelectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AB42BD32D7400FEF431 /* CourseSelectionService.swift */; };
 		85043AB82BD337D300FEF431 /* CourseSelecitonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AB72BD337D300FEF431 /* CourseSelecitonDelegate.swift */; };
 		85043ABA2BD33D0500FEF431 /* SelectedCoursesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AB92BD33D0500FEF431 /* SelectedCoursesModel.swift */; };
+		85043AC02BD3488E00FEF431 /* CoursesAgregationViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043ABF2BD3488E00FEF431 /* CoursesAgregationViewInput.swift */; };
+		85043AC22BD348A000FEF431 /* CoursesAgregationViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AC12BD348A000FEF431 /* CoursesAgregationViewOutput.swift */; };
+		85043AC42BD348F800FEF431 /* CoursesAgregationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AC32BD348F800FEF431 /* CoursesAgregationPresenter.swift */; };
+		85043AC62BD34AC600FEF431 /* CoursesAggregationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AC52BD34AC600FEF431 /* CoursesAggregationService.swift */; };
+		85043AC92BD34B5A00FEF431 /* CourseAggregationServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043AC82BD34B5A00FEF431 /* CourseAggregationServiceModel.swift */; };
+		85043ACB2BD34C5200FEF431 /* VerdictModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043ACA2BD34C5200FEF431 /* VerdictModel.swift */; };
 		85981EA42BB5E26800A0DBE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA32BB5E26800A0DBE7 /* AppDelegate.swift */; };
 		85981EA62BB5E26800A0DBE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA52BB5E26800A0DBE7 /* SceneDelegate.swift */; };
 		85981EA82BB5E26800A0DBE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA72BB5E26800A0DBE7 /* ViewController.swift */; };
@@ -259,6 +265,12 @@
 		85043AB42BD32D7400FEF431 /* CourseSelectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSelectionService.swift; sourceTree = "<group>"; };
 		85043AB72BD337D300FEF431 /* CourseSelecitonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSelecitonDelegate.swift; sourceTree = "<group>"; };
 		85043AB92BD33D0500FEF431 /* SelectedCoursesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCoursesModel.swift; sourceTree = "<group>"; };
+		85043ABF2BD3488E00FEF431 /* CoursesAgregationViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesAgregationViewInput.swift; sourceTree = "<group>"; };
+		85043AC12BD348A000FEF431 /* CoursesAgregationViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesAgregationViewOutput.swift; sourceTree = "<group>"; };
+		85043AC32BD348F800FEF431 /* CoursesAgregationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesAgregationPresenter.swift; sourceTree = "<group>"; };
+		85043AC52BD34AC600FEF431 /* CoursesAggregationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesAggregationService.swift; sourceTree = "<group>"; };
+		85043AC82BD34B5A00FEF431 /* CourseAggregationServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseAggregationServiceModel.swift; sourceTree = "<group>"; };
+		85043ACA2BD34C5200FEF431 /* VerdictModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerdictModel.swift; sourceTree = "<group>"; };
 		85981EA02BB5E26800A0DBE7 /* App1C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App1C.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85981EA32BB5E26800A0DBE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85981EA52BB5E26800A0DBE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -565,6 +577,33 @@
 				85043AB72BD337D300FEF431 /* CourseSelecitonDelegate.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		85043ABB2BD347F600FEF431 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				85043AC32BD348F800FEF431 /* CoursesAgregationPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		85043ABC2BD347FD00FEF431 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				85ED3B4B2BCEB3A100101A5F /* CoursesAgregationViewController.swift */,
+				85043ABF2BD3488E00FEF431 /* CoursesAgregationViewInput.swift */,
+				85043AC12BD348A000FEF431 /* CoursesAgregationViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		85043AC72BD34B4100FEF431 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				85043AC82BD34B5A00FEF431 /* CourseAggregationServiceModel.swift */,
+				85043ACA2BD34C5200FEF431 /* VerdictModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		85981E972BB5E26800A0DBE7 = {
@@ -1183,7 +1222,9 @@
 		85ED3AEB2BCB01E700101A5F /* CoursesAggregationService */ = {
 			isa = PBXGroup;
 			children = (
+				85043AC72BD34B4100FEF431 /* Models */,
 				85ED3B002BCB04B500101A5F /* CoursesAggregationURLRequestFactory.swift */,
+				85043AC52BD34AC600FEF431 /* CoursesAggregationService.swift */,
 			);
 			path = CoursesAggregationService;
 			sourceTree = "<group>";
@@ -1374,7 +1415,8 @@
 		85ED3B4A2BCEB37600101A5F /* CoursesAgregation */ = {
 			isa = PBXGroup;
 			children = (
-				85ED3B4B2BCEB3A100101A5F /* CoursesAgregationViewController.swift */,
+				85043ABC2BD347FD00FEF431 /* View */,
+				85043ABB2BD347F600FEF431 /* Presenter */,
 			);
 			path = CoursesAgregation;
 			sourceTree = "<group>";
@@ -2130,7 +2172,9 @@
 				85FDB5C62BD2B12900C71E28 /* CourseViewInput.swift in Sources */,
 				85ED3B442BCC305200101A5F /* EstimationModel.swift in Sources */,
 				85ED3B5F2BCF35A900101A5F /* CreateCourseModel.swift in Sources */,
+				85043AC22BD348A000FEF431 /* CoursesAgregationViewOutput.swift in Sources */,
 				85043AAB2BD323EB00FEF431 /* ModifyEventPresenter.swift in Sources */,
+				85043AC62BD34AC600FEF431 /* CoursesAggregationService.swift in Sources */,
 				85FDB55D2BD1603A00C71E28 /* CreateUserModel.swift in Sources */,
 				85FDB5992BD1EA2D00C71E28 /* CoursesService.swift in Sources */,
 				85ED3B572BCEFC6100101A5F /* CreateEventModel.swift in Sources */,
@@ -2247,6 +2291,7 @@
 				85FDB5572BD1524C00C71E28 /* AddAdminModuleOutput.swift in Sources */,
 				85981F1B2BBDC12900A0DBE7 /* LinkView.swift in Sources */,
 				85981F2F2BBE1B8100A0DBE7 /* TableView.swift in Sources */,
+				85043AC92BD34B5A00FEF431 /* CourseAggregationServiceModel.swift in Sources */,
 				85FDB56D2BD19BFA00C71E28 /* StudentDetailsModel.swift in Sources */,
 				85FDB5772BD1AA9B00C71E28 /* TeacherProfilePresenter.swift in Sources */,
 				85FDB54B2BD14ACD00C71E28 /* AddPersonViewController.swift in Sources */,
@@ -2291,16 +2336,19 @@
 				85043AB52BD32D7400FEF431 /* CourseSelectionService.swift in Sources */,
 				85043AB32BD32C6E00FEF431 /* CourseSelectionPresenter.swift in Sources */,
 				85ED3B492BCEA4C600101A5F /* EventViewController.swift in Sources */,
+				85043AC42BD348F800FEF431 /* CoursesAgregationPresenter.swift in Sources */,
 				85ED3B642BD0186E00101A5F /* VerificationViewController.swift in Sources */,
 				85FDB5472BD1445400C71E28 /* TeachersListModuleOutput.swift in Sources */,
 				85ED3AC42BCABE4600101A5F /* TFSError.swift in Sources */,
 				85FDB5AE2BD2933D00C71E28 /* AddTeachersViewController.swift in Sources */,
 				85981F072BBC9B8700A0DBE7 /* RoleSelectionViewController.swift in Sources */,
 				85ED3ACC2BCAC43D00101A5F /* URLRequestFactory.swift in Sources */,
+				85043AC02BD3488E00FEF431 /* CoursesAgregationViewInput.swift in Sources */,
 				85981F322BBEE28100A0DBE7 /* StudentMainScreenController.swift in Sources */,
 				85F0E2F32BC4B40400D2DBAB /* AdminSettingsModuleOutput.swift in Sources */,
 				85043AA22BD3163900FEF431 /* StudentMainScreenModuleOutput.swift in Sources */,
 				85FDB59B2BD1EB7000C71E28 /* AdminDepartmentCoursesModuleOutput.swift in Sources */,
+				85043ACB2BD34C5200FEF431 /* VerdictModel.swift in Sources */,
 				85981F022BBC887300A0DBE7 /* CoordinatorProtocol.swift in Sources */,
 				85F0E2E32BC4A91B00D2DBAB /* TeacherSettingsViewInput.swift in Sources */,
 				85ED3B2D2BCBE0C800101A5F /* TimeTableViewInput.swift in Sources */,

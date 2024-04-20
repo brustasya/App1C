@@ -74,4 +74,11 @@ final class ServiceAssembly {
             requestFactory: URLRequestFactory(host: host, port: port)
         )
     }
+    
+    func makeCoursesAggregationService() -> CoursesAggregationServiceProtocol {
+        CoursesAggregationService(
+            networkService: NetworkService(),
+            requestFactory: URLRequestFactory(host: host, port: port)
+        )
+    }
 }
