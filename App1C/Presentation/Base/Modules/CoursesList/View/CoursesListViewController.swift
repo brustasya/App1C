@@ -113,7 +113,7 @@ class CoursesListViewController: UIViewController {
     }
     
     @objc func addCourse() {
-        output.addCourseButtonTapped()
+        output.addCourseButtonTapped(navigationController: navigationController)
     }
     
     @objc func goBack() {
@@ -162,7 +162,7 @@ extension CoursesListViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        output.selectCourse(at: indexPath.row)
+        output.selectCourse(at: indexPath.row, navigationController: navigationController)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

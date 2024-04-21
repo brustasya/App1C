@@ -59,4 +59,14 @@ final class StudentAssembly: BaseAssembly {
         return vc
     }
     
+    func makeCoursesListModule(moduleOutput: StudentCoursesListModuleOutput) -> UIViewController {
+        let presenter = StudentCoursesListPresenter(
+            moduleOutput: moduleOutput,
+            gradesService: serviceAssembly.makeGradesService()
+        )
+        let vc = StudentCoursesListViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
 }

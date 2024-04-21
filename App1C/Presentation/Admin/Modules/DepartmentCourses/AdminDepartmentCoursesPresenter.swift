@@ -5,7 +5,7 @@
 //  Created by Станислава on 19.04.2024.
 //
 
-import Foundation
+import UIKit
 
 final class AdminDepartmentCoursesPresenter {
     weak var viewInput: CoursesListViewInput?
@@ -51,12 +51,12 @@ extension AdminDepartmentCoursesPresenter: CoursesListViewOutput {
         getCourses()
     }
     
-    func addCourseButtonTapped() {
-        moduleOutput?.moduleWantsToOPenAddCourse()
+    func addCourseButtonTapped(navigationController: UINavigationController?) {
+        moduleOutput?.moduleWantsToOPenAddCourse(navigationController: navigationController)
     }
     
-    func selectCourse(at index: Int) {
-        moduleOutput?.moduleWantsToOpenCourse(for: courses[index].id)
+    func selectCourse(at index: Int, navigationController: UINavigationController?) {
+        moduleOutput?.moduleWantsToOpenCourse(for: courses[index].id, navigationController: navigationController)
     }
     
     

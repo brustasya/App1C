@@ -5,9 +5,9 @@
 //  Created by Станислава on 19.04.2024.
 //
 
-import Foundation
+import UIKit
 
 protocol AdminDepartmentCoursesModuleOutput: AnyObject {
-    func moduleWantsToOPenAddCourse()
-    func moduleWantsToOpenCourse(for id: Int)
+    func moduleWantsToOPenAddCourse(navigationController: UINavigationController?)
+    func moduleWantsToOpenCourse(for id: Int, navigationController: UINavigationController?)
 }

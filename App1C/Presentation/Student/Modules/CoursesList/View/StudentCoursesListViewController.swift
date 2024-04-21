@@ -34,14 +34,24 @@ class StudentCoursesListViewController: UIViewController {
         StudentCourseModel(id: 0, title: "Тестирование программного обеспечения", isOffline: true, isRetake: false, grade: GradeModel(grade: 10)),
     ]
     
+    private var output: StudentCoursesListViewOutput
+
+    init(output: StudentCoursesListViewOutput) {
+        self.output = output
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
         view.addSubview(scrollView)
         setupScrollView()
-        setupClosedCourses()
-        setupCurrentCourses()
+        output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,7 +109,7 @@ class StudentCoursesListViewController: UIViewController {
             closedCoursesBackgroundView.bottomAnchor.constraint(equalTo: closedCoursesTableView.bottomAnchor, constant: 15)
         ])
         
-        closedCourseConstraint = closedCoursesTableView.heightAnchor.constraint(equalToConstant: CGFloat(closedCourses.count * 100) - 0.5)
+        closedCourseConstraint = closedCoursesTableView.heightAnchor.constraint(equalToConstant: CGFloat(closedCourses.count * 100))
         closedCourseConstraint?.isActive = true
         closedCoursesButton.addTarget(self, action: #selector(closedCoursesButtonTapped), for: .touchUpInside)
     }
@@ -128,7 +138,7 @@ class StudentCoursesListViewController: UIViewController {
             currentCoursesBackgroundView.bottomAnchor.constraint(equalTo: currentCoursesTableView.bottomAnchor, constant: 15)
         ])
         
-        currentCourseConstraint = currentCoursesTableView.heightAnchor.constraint(equalToConstant: CGFloat(currentCourses.count * 60) - 0.5)
+        currentCourseConstraint = currentCoursesTableView.heightAnchor.constraint(equalToConstant: CGFloat(currentCourses.count * 100))
         currentCourseConstraint?.isActive = true
         currentCoursesButton.addTarget(self, action: #selector(currentCoursesButtonTapped), for: .touchUpInside)
     }
@@ -172,10 +182,11 @@ extension StudentCoursesListViewController: UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let selectedItem = dataSource.itemIdentifier(for: indexPath) {
-//            print("Selected item: \(selectedItem)")
-//            output.tripDidSelect(model: selectedItem)
-//        }
+        if tableView == closedCoursesTableView {
+            output.selectClosedCourse(at: indexPath.row)
+        } else {
+            output.selectCurrentCourse(at: indexPath.row)
+        }
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -201,5 +212,16 @@ extension StudentCoursesListViewController: UITableViewDataSource, UITableViewDe
         } else {
             return 100
         }
+    }
+}
+
+extension StudentCoursesListViewController: StudentCoursesListViewInput {
+    func setupCourses(closedCourses: [StudentCourseModel], currentCourses: [StudentCourseModel]) {
+        self.closedCourses = closedCourses
+        self.currentCourses = currentCourses
+        setupClosedCourses()
+        setupCurrentCourses()
+        let height = CGFloat(closedCourses.count * 100 + currentCourses.count * 100 + 1000)
+        scrollView.contentSize.height = height
     }
 }

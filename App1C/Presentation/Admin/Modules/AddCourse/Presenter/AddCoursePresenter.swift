@@ -5,7 +5,7 @@
 //  Created by Станислава on 19.04.2024.
 //
 
-import Foundation
+import UIKit
 
 class AddCoursePresenter {
     weak var viewInput: CourseViewInput?
@@ -55,6 +55,8 @@ extension AddCoursePresenter: CourseDelegate {
 }
 
 extension AddCoursePresenter: CourseViewOutput {
+    func viewWillAppear() { }
+    
     
     func viewIsReady() {
         //viewInput?.setupAddMode()
@@ -82,9 +84,10 @@ extension AddCoursePresenter: CourseViewOutput {
         addCourse(model: model)
     }
     
-    func editButtonTapped() { }
+    func editButtonTapped(navigationController: UINavigationController?) { }
     
-    func saveButtonTapped() { }
+    func saveButtonTapped(name: String, chat: String, type: String, dayOfWeek: String,
+                          from: Date?, to: Date?, descr: String) { }
     
-    func selectItem(id: Int) { }
+    func selectItem(id: Int, navigationController: UINavigationController?) { }
 }

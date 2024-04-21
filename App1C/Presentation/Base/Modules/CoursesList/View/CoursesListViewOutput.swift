@@ -5,11 +5,11 @@
 //  Created by Станислава on 19.04.2024.
 //
 
-import Foundation
+import UIKit
 
 protocol CoursesListViewOutput: AnyObject {
     func viewIsReady()
     func viewWillAppear()
-    func addCourseButtonTapped()
-    func selectCourse(at index: Int)
+    func addCourseButtonTapped(navigationController: UINavigationController?)
+    func selectCourse(at index: Int, navigationController: UINavigationController?)
 }

@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol StudentCoursesListViewInput: AnyObject {
+    func setupCourses(closedCourses: [StudentCourseModel], currentCourses: [StudentCourseModel])
+}

@@ -192,4 +192,14 @@ final class AdminAssembly: BaseAssembly {
         return vc
     }
     
+    func makeCourseEditModule(id: Int) -> UIViewController {
+        let presenter = EditCoursePresenter(
+            id: id,
+            coursesService: serviceAssembly.makeCoursesService()
+        )
+        let vc = CourseViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
 }

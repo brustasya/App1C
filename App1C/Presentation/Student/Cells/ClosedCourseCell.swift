@@ -79,7 +79,7 @@ class ClosedCourseCell: UITableViewCell, ConfigurableViewProtocol {
         NSLayoutConstraint.activate([
             gradeView.centerYAnchor.constraint(equalTo: gradeBackgroundView.centerYAnchor),
             gradeView.leadingAnchor.constraint(equalTo: title.trailingAnchor, constant: 8),
-            gradeView.widthAnchor.constraint(equalToConstant: 70),
+            gradeView.widthAnchor.constraint(equalToConstant: 90),
             gradeView.heightAnchor.constraint(equalToConstant: 30)
         ])
         

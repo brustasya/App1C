@@ -32,7 +32,8 @@ final class StudentCoordinator: CoordinatorProtocol {
         let settingsVC = studentAssembly.makeSettingsModule(moduleOutput: self)
         self.settingsNavigationController = CustomNavigationController(rootViewController: settingsVC)
         
-        coursesListNavigationController = CustomNavigationController(rootViewController: StudentCoursesListViewController())
+        let coursesVC = studentAssembly.makeCoursesListModule(moduleOutput: self)
+        coursesListNavigationController = CustomNavigationController(rootViewController: coursesVC)
         
         let tabBarController = StudentTabBarController(
             mainScreenNavigationController: mainScreenNavigationController,
@@ -103,6 +104,10 @@ extension StudentCoordinator: StudentEventModuleOutput {
         let courseSelectionVC = studentAssembly.makeFinalCourseSelectionModule()
         mainScreenNavigationController.pushViewController(courseSelectionVC, animated: true)
     }
-    
-    
+}
+
+extension StudentCoordinator: StudentCoursesListModuleOutput {
+    func moduleWantsToOpenCourse(id: Int) {
+        
+    }
 }

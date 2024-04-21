@@ -82,6 +82,7 @@ class CourseViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        output.viewWillAppear()
         navigationItem.hidesBackButton = true
         (navigationController as? CustomNavigationController)?.setupBackButton()
         (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -531,11 +532,19 @@ class CourseViewController: UIViewController {
     }
     
     @objc func editProfile() {
-        output.editButtonTapped()
+        output.editButtonTapped(navigationController: navigationController)
     }
     
     @objc func saveProfile() {
-        output.saveButtonTapped()
+        output.saveButtonTapped(
+            name: nameTextField.text ?? "",
+            chat: chatTextField.text ?? "",
+            type: courseTypeLabel.text ?? "",
+            dayOfWeek: dayOfWeekLabel.text ?? "",
+            from: startDatePicker.date,
+            to: endDatePicker.date,
+            descr: descriptionTextField.text ?? ""
+        )
     }
     
     @objc func addProfile() {
@@ -659,7 +668,7 @@ extension CourseViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        output.selectItem(id: linksModels[indexPath.row].id)
+        output.selectItem(id: linksModels[indexPath.row].id, navigationController: navigationController)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

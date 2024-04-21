@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+protocol StudentCoursesListViewOutput: AnyObject {
+    func viewIsReady()
+    func selectClosedCourse(at index: Int)
+    func selectCurrentCourse(at index: Int)
+}

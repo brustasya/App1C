@@ -14,6 +14,7 @@ protocol CoursesURLRequestFactory: AnyObject {
     func getDeps(courseID: Int) throws -> URLRequest
     func changeDeps(courseID: Int, deps: [Int]) throws -> URLRequest
     func getTeacherCourses(for id: Int) throws -> URLRequest
+    func saveCourseDetails(for id: Int, with model: CourseDetailsModel) throws -> URLRequest
 }
 
 extension URLRequestFactory: CoursesURLRequestFactory {

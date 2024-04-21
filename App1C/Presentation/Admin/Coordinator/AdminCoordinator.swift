@@ -60,31 +60,32 @@ extension AdminCoordinator: EventsModuleOutput {
 }
 
 extension AdminCoordinator: AdminDepartmentCoursesModuleOutput {
-    func moduleWantsToOPenAddCourse() {
+    func moduleWantsToOPenAddCourse(navigationController: UINavigationController?) {
         let addCourseVC = adminAssembly.makeAddCourseModule(moduleOutput: self)
-        settingsNavigationController.pushViewController(addCourseVC, animated: true)
+        navigationController?.pushViewController(addCourseVC, animated: true)
     }
     
-    func moduleWantsToOpenCourse(for id: Int) {
+    func moduleWantsToOpenCourse(for id: Int, navigationController: UINavigationController?) {
         let courseVC = adminAssembly.makeCourseDetailesModule(id: id, moduleOutput: self)
-        settingsNavigationController.pushViewController(courseVC, animated: true)
+        navigationController?.pushViewController(courseVC, animated: true)
     }
 }
 
 extension AdminCoordinator: CourseDetailesModuleOutput {
-    func moduleWantsToOpenEditModule(id: Int) {
+    func moduleWantsToOpenEditModule(id: Int, navigationController: UINavigationController?) {
+        let editCourseVC = adminAssembly.makeCourseEditModule(id: id)
+        navigationController?.pushViewController(editCourseVC, animated: true)
+    }
+    
+    func moduleWantsToOpenDeps(navigationController: UINavigationController?) {
         
     }
     
-    func moduleWantsToOpenDeps() {
+    func moduleWantsToOpenStudents(navigationController: UINavigationController?) {
         
     }
     
-    func moduleWantsToOpenStudents() {
-        
-    }
-    
-    func moduleWantsToOpenTeachers() {
+    func moduleWantsToOpenTeachers(navigationController: UINavigationController?) {
         
     }
     

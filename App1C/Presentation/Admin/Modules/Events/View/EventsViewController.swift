@@ -139,7 +139,9 @@ extension EventsViewController: EventsViewInput {
     func updateEvents(events: [EventModel]) {
         self.events = events
         eventsConstraint?.isActive = false
-        let height = events.count > 0 ? CGFloat(events.count * 70) - 0.5 : 0
+        var height = events.count > 0 ? CGFloat(events.count * 70) - 0.5 : 0
+        height = height > 280 ? 245 : height
+        eventsTableView.isScrollEnabled = height == 245
         eventsConstraint = eventsTableView.heightAnchor.constraint(equalToConstant: height)
         eventsConstraint?.isActive = true
         eventsTableView.reloadData()
