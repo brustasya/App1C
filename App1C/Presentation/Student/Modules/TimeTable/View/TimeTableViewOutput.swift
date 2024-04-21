@@ -8,5 +8,6 @@
 import Foundation
 
 protocol TimeTableViewOutput: AnyObject {
-    
+    func openDay(day: Int)
+    func viewIsReady()
 }

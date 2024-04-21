@@ -8,5 +8,5 @@
 import Foundation
 
 protocol TimeTableViewInput: AnyObject {
-    
+    func updateTimeTable(with timeTable: [TimetableModel])
 }

@@ -131,6 +131,9 @@ class AddPersonViewController: UIViewController {
         createTitle(title: emailTitle)
         emailTitle.text = "Логин (почта):"
         emailTextField.placeholder = "Email"
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
+        surnameTextField.autocorrectionType = .no
         
         view.addSubview(emailView)
         emailView.addSubview(emailTextField)

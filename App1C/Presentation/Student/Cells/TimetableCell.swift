@@ -35,7 +35,7 @@ class TimetableCell: UITableViewCell, ConfigurableViewProtocol {
         
         timeLabel.textColor = .black
         timeLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        timeLabel.textAlignment = .right
+        timeLabel.textAlignment = .center
     }
     
     func configure(with model: ConfigurationModel) {

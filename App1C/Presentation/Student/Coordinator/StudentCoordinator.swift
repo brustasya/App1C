@@ -90,7 +90,8 @@ extension StudentCoordinator: StudentMainScreenModuleOutput {
     }
     
     func moduleWantsToOpenTimeTable() {
-        
+        let timeTableVC = studentAssembly.makeTimeTableModule()
+        mainScreenNavigationController.pushViewController(timeTableVC, animated: true)
     }
 }
 

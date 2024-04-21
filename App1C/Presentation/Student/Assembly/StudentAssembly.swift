@@ -69,4 +69,13 @@ final class StudentAssembly: BaseAssembly {
         return vc
     }
     
+    func makeTimeTableModule() -> UIViewController {
+        let presenter = TimeTablePresenter(
+            timeTableService: serviceAssembly.makeTimeTableService()
+        )
+        let vc = TimeTableViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
 }

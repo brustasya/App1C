@@ -10,15 +10,26 @@ import UIKit
 class TimeTableViewController: UIViewController {
     
     private lazy var timeTable: [TimetableModel] = [
-        TimetableModel(time: "9:00 - 10:25", titles: ["Программирование"]),
-        TimetableModel(time: "10:45 - 12:10", titles: ["Программирование", "Тестирование"]),
-        TimetableModel(time: "12:20 - 13:45", titles: ["Разработка программного обеспечения. Java"]),
-        TimetableModel(time: "14:00 - 15:25", titles: []),
-        
+//        TimetableModel(time: "9:00 - 10:25", titles: ["Программирование"]),
+//        TimetableModel(time: "10:45 - 12:10", titles: ["Программирование", "Тестирование"]),
+//        TimetableModel(time: "12:20 - 13:45", titles: ["Разработка программного обеспечения. Java"]),
+//        TimetableModel(time: "14:00 - 15:25", titles: []),
     ]
+    
     private lazy var timeTableView = UITableView()
     private lazy var separatorView = UIView()
     private lazy var weekDaySelector = UIView()
+    
+    private var output: TimeTableViewOutput
+
+    init(output: TimeTableViewOutput) {
+        self.output = output
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +38,22 @@ class TimeTableViewController: UIViewController {
         
         setupTitle()
         setupTimeTableView()
+        output.viewIsReady()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.hidesBackButton = true
+        (navigationController as? CustomNavigationController)?.setupBackButton()
+        (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        
+        tabBarController?.tabBar.isTranslucent = true
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        (navigationController as? CustomNavigationController)?.hideBackButton()
     }
     
     private func setupTitle() {
@@ -87,14 +114,24 @@ class TimeTableViewController: UIViewController {
             
         ])
     }
+    
+    @objc func goBack() {
+        navigationController?.popViewController(animated: true)
+    }
 }
+
+extension TimeTableViewController: TimeTableViewInput {
+    func updateTimeTable(with timeTable: [TimetableModel]) {
+        self.timeTable = timeTable
+        timeTableView.reloadData()
+    }
+}
+
 
 extension TimeTableViewController: SelectorDelegate {
     func select(at index: Int) {
-        print(index)
+        output.openDay(day: index + 1)
     }
-    
-    
 }
 
 extension TimeTableViewController: UITableViewDataSource, UITableViewDelegate {

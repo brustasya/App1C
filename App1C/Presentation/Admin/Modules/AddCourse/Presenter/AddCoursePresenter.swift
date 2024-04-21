@@ -59,8 +59,8 @@ extension AddCoursePresenter: CourseViewOutput {
     
     
     func viewIsReady() {
-        //viewInput?.setupAddMode()
-        viewInput?.setupReadMode()
+        viewInput?.setupAddMode()
+       // viewInput?.setupReadMode()
         //viewInput?.setupEditMode()
     }
     

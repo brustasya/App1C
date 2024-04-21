@@ -86,8 +86,7 @@ extension StudentMainScreenController: StudentMainScreenViewInput {
 extension StudentMainScreenController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == baseTableView {
-           // output.openTimeTable()
-            navigationController?.pushViewController(TimeTableViewController(), animated: true)
+            output.openTimeTable()
         } else {
             output.selectEvent(at: indexPath.row)
         }

@@ -49,6 +49,7 @@ class VerificationViewController: UIViewController {
     private func setupTextFields() {
         loginTextField.placeholder = "Email"
         passwordTextField.placeholder = "Пароль"
+        passwordTextField.isSecureTextEntry = true
         
         createTextField(backgroundView: loginView, textField: loginTextField)
         createTextField(backgroundView: passwordView, textField: passwordTextField)
