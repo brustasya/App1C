@@ -77,7 +77,8 @@ class EventCell: UITableViewCell, ConfigurableViewProtocol {
     
     func configure(with model: ConfigurationModel) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "d MMMM"
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        dateFormatter.dateFormat = "d MMMM HH:mm"
         deadlineLabel.text = dateFormatter.string(from: model.deadline)
         eventImageView.image = makeEventImage(for: model.type)
         titleLabel.text = model.title

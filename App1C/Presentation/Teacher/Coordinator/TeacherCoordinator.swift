@@ -81,8 +81,8 @@ extension TeacherCoordinator: TeacherMainScreenModuleOutput {
 }
 
 extension TeacherCoordinator: TeacherEventModuleOutput {
-    func moduleWantsToOpenEstimation(courseID: Int) {
-        let estimationVC = teacherAssembly.makeEstimationnModule(courseID: courseID)
+    func moduleWantsToOpenEstimation(courseID: Int, courseTitle: String) {
+        let estimationVC = teacherAssembly.makeEstimationnModule(courseID: courseID, courseTitle: courseTitle)
         mainScreenNavigationController.pushViewController(estimationVC, animated: true)
     }
 }

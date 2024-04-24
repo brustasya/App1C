@@ -141,6 +141,7 @@ class CoursesAgregationViewController: UIViewController {
 extension CoursesAgregationViewController: CoursesAgregationViewInput {
     func updateCourses(courses: [CourseAgregationModel]) {
         self.persons = courses
+        scrollView.contentSize.height = CGFloat(persons.count * 80 - 80)
         personTableView.reloadData()
     }
 }

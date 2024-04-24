@@ -22,3 +22,4 @@ extension URLRequestFactory: TimeTableURLRequestFactory {
         return request
     }
 }
+

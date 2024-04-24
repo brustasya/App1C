@@ -76,7 +76,7 @@ class TeacherEventPresenter {
 
 extension TeacherEventPresenter: EventViewOutput {
     func selectCourse(at index: Int) {
-        moduleOutput?.moduleWantsToOpenEstimation(courseID: courses[index].id)
+        moduleOutput?.moduleWantsToOpenEstimation(courseID: courses[index].id, courseTitle: courses[index].title)
     }
     
     func viewIsReady() {

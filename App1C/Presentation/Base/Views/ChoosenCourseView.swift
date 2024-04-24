@@ -125,6 +125,10 @@ final class ChoosenCourseView: UIView {
         closed = model.closed
         countOfDependencies = model.courseChildren.count
         
+        if countOfDependencies == 0 {
+            openButton.isHidden = true
+        }
+        
         backgroundColor = .white
         
         layer.borderColor = model.isStarted

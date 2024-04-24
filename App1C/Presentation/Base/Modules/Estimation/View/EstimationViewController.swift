@@ -120,6 +120,10 @@ extension EstimationViewController: EstimationViewInput {
         setupTableView()
     }
     
+    func setTitle(title: String) {
+        titleLabel.text = title
+    }
+    
     func close() {
         goBack()
     }

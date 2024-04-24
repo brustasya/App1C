@@ -13,15 +13,18 @@ class EstimationPresenter {
     private let gradesService: GradesServiceProtocol
     private let usersListService: UsersListServiceProtocol
     private let courseID: Int
+    private let courseTitle: String
     private var eventType: EventType = .estimating
     private var finishEstimatiom = false
     
     init(
         courseID: Int,
+        courseTitle: String,
         usersListService: UsersListServiceProtocol,
         gradesService: GradesServiceProtocol
     ) {
         self.courseID = courseID
+        self.courseTitle = courseTitle
         self.gradesService = gradesService
         self.usersListService = usersListService
     }
@@ -70,6 +73,7 @@ class EstimationPresenter {
 
 extension EstimationPresenter: EstimationViewOutput {
     func viewIsReady() {
+        viewInput?.setTitle(title: courseTitle)
         getGrades()
     }
     

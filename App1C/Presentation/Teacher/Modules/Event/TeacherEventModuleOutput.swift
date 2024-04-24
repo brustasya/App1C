@@ -8,5 +8,5 @@
 import Foundation
 
 protocol TeacherEventModuleOutput: AnyObject {
-    func moduleWantsToOpenEstimation(courseID: Int)
+    func moduleWantsToOpenEstimation(courseID: Int, courseTitle: String)
 }

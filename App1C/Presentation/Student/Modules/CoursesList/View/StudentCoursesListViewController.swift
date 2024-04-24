@@ -221,7 +221,7 @@ extension StudentCoursesListViewController: StudentCoursesListViewInput {
         self.currentCourses = currentCourses
         setupClosedCourses()
         setupCurrentCourses()
-        let height = CGFloat(closedCourses.count * 100 + currentCourses.count * 100 + 1000)
+        let height = CGFloat(closedCourses.count * 100 + currentCourses.count * 100 + 1400)
         scrollView.contentSize.height = height
     }
 }
