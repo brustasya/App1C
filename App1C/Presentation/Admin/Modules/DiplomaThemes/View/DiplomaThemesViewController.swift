@@ -55,7 +55,7 @@ final class DiplomaThemesViewController: UIViewController {
 
         let daysOfWeek = ["Бакалавриат", "Магистратура"]
         courseSelector = SelectorView(
-            frame: CGRect(x: view.frame.midX - 170, y: 70, width: 350, height: 50),
+            frame: CGRect(x: view.frame.midX - 170, y: 70, width: 350, height: 40),
             buttonsTitles: daysOfWeek,
             delegate: self,
             width: 150,

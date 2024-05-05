@@ -117,7 +117,8 @@ class EventsViewController: UIViewController {
         diplomaSpeechButton.addTarget(self, action: #selector(createDiplomaSpeechEventButtonTapped), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: eventsBackgroundView.bottomAnchor, constant: 20),
+           // title.topAnchor.constraint(equalTo: eventsBackgroundView.bottomAnchor, constant: 20),
+            title.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -370),
             title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             courseSelectionButton.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10),
             finalCourseSelectionButton.topAnchor.constraint(equalTo: courseSelectionButton.bottomAnchor, constant: 10),
@@ -153,7 +154,7 @@ class EventsViewController: UIViewController {
     }
     
     @objc private func createThemeSelectionButtonTapped() {
-        output.createEvent(type: .diplomaThemeChoice)
+        output.createThemeSelectionEvent()
     }
     
     @objc private func createThemeCorrectionEventButtonTapped() {
@@ -161,7 +162,7 @@ class EventsViewController: UIViewController {
     }
     
     @objc private func createDiplomaSpeechEventButtonTapped() {
-        output.createEvent(type: .diplomaSpeech)
+        output.createDiplomaSpeechEvent()
     }
 }
 

@@ -16,6 +16,8 @@ protocol EventsURLRequestFactory: AnyObject {
     func watchEvent(eventID: Int) throws -> URLRequest
     func createSemester(with model: CreateSemesterModel) throws -> URLRequest
     func createEvent( with model: CreateEventModel) throws -> URLRequest
+    func createThemeSelectionEvent(with model: CreateThemeSelectionModel) throws -> URLRequest
+    func createDiplomaSpeechEvent(with model: CreateDiplomaSpeechModel) throws -> URLRequest
 }
 
 extension URLRequestFactory: EventsURLRequestFactory {
@@ -91,6 +93,26 @@ extension URLRequestFactory: EventsURLRequestFactory {
     
     func createEvent(with model: CreateEventModel) throws -> URLRequest {
         guard let url = url(with: "/create/event"),
+              var request = makeRequest(with: model, url: url) else {
+            throw TFSError.makeRequest
+        }
+        request.httpMethod = "POST"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func createThemeSelectionEvent(with model: CreateThemeSelectionModel) throws -> URLRequest {
+        guard let url = url(with: "/create/event/diploma"),
+              var request = makeRequest(with: model, url: url) else {
+            throw TFSError.makeRequest
+        }
+        request.httpMethod = "POST"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func createDiplomaSpeechEvent(with model: CreateDiplomaSpeechModel) throws -> URLRequest {
+        guard let url = url(with: "/create/event/speech"),
               var request = makeRequest(with: model, url: url) else {
             throw TFSError.makeRequest
         }

@@ -13,3 +13,4 @@ struct CreateEventModel: Codable {
     let deadline: String
     let type: String
 }
+

@@ -8,5 +8,9 @@
 import Foundation
 
 protocol ThemeSelectionEventViewInput: AnyObject {
-    
+    func setupCreateMode()
+    func setupSaveMode()
+    func setupReadMode()
+    func updateData(model: ThemeSelectionEventModel, isEdit: Bool)
+    func close()
 }

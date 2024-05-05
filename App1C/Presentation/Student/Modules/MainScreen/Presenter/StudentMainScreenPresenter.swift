@@ -59,8 +59,14 @@ final class StudentMainScreenPresenter {
             return .finalCourseChoice
         case EventType.estimating.title:
             return .estimating
+        case EventType.diplomaSpeech.title:
+            return .diplomaSpeech
+        case EventType.diplomaThemeChoice.title:
+            return .diplomaThemeChoice
+        case EventType.diplomaThemeCorrection.title:
+            return .diplomaThemeCorrection
         default:
-            return .estimating
+            return .diplomaSpeech
         }
     }
 }
@@ -71,7 +77,14 @@ extension StudentMainScreenPresenter: StudentMainScreenViewOutput {
     }
     
     func selectEvent(at index: Int) {
-        moduleOutput?.moduleWantsToOpenEvent(id: events[index].id)
+        switch events[index].type {
+        case .diplomaThemeChoice:
+            moduleOutput?.moduleWantsToOpenThemeSelectionEvent(id: events[index].id)
+        case .diplomaSpeech:
+            moduleOutput?.moduleWantsToOpenDiplomaSpeechEvent(id: events[index].id)
+        default:
+            moduleOutput?.moduleWantsToOpenEvent(id: events[index].id)
+        }
     }
     
     func viewIsReady() {

@@ -12,4 +12,6 @@ protocol EventsViewOutput: AnyObject {
     func viewWillAppear()
     func selectRow(at index: Int)
     func createEvent(type: EventType)
+    func createThemeSelectionEvent()
+    func createDiplomaSpeechEvent()
 }

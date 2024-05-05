@@ -47,6 +47,26 @@ final class AdminCoordinator: CoordinatorProtocol {
 }
 
 extension AdminCoordinator: EventsModuleOutput {
+    func moduleWantsToOpenThemeSelectionEvent(id: Int) {
+        let modifyEventVC = adminAssembly.makeModifyThemeSelectionModule(id: id)
+        eventsNavigationController.pushViewController(modifyEventVC, animated: true)
+    }
+    
+    func moduleWantsToOpenDiplomaSpeechEvent(id: Int) {
+        let modifyEventVC = adminAssembly.makeModifyDiplomaSpeechModule(id: id)
+        eventsNavigationController.pushViewController(modifyEventVC, animated: true)
+    }
+    
+    func moduleWantsToCreateDiplomaSpeechEvent() {
+        let createDiplomaSpeechEventVC = adminAssembly.makeCreateDiplomaSpeechEventModule()
+        eventsNavigationController.pushViewController(createDiplomaSpeechEventVC, animated: true)
+    }
+    
+    func moduleWantsToCreateThemeSelectionEvent() {
+        let createThemeSelectionEventVC = adminAssembly.makeCreateThemeSelectionEventModule()
+        eventsNavigationController.pushViewController(createThemeSelectionEventVC, animated: true)
+    }
+    
     func moduleWantsToCreateEvent(type: EventType) {
         let createEventVC = adminAssembly.makeCreateEventModule(eventType: type)
         eventsNavigationController.pushViewController(createEventVC, animated: true)

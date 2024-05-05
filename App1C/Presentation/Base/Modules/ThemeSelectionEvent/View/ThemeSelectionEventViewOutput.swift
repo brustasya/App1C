@@ -9,6 +9,6 @@ import Foundation
 
 protocol ThemeSelectionEventViewOutput: AnyObject {
     func viewIsReady()
-    func createButtonTapped(deadline: Date, descr: String)
-    func saveButtonTapped(deadline: Date, descr: String)
+    func createButtonTapped(model: ThemeSelectionEventModel)
+    func saveButtonTapped(model: ThemeSelectionEventModel)
 }

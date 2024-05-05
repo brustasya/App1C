@@ -162,12 +162,50 @@ final class AdminAssembly: BaseAssembly {
         return vc
     }
     
+    func makeCreateThemeSelectionEventModule() -> UIViewController {
+        let presenter = CreateThemeSelectionEventPresenter(
+            eventsService: serviceAssembly.makeEventsService()
+        )
+        let vc = ThemeSelectionEventViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeCreateDiplomaSpeechEventModule() -> UIViewController {
+        let presenter = CreateDiplomaSpeechEventPresenter(
+            eventsService: serviceAssembly.makeEventsService()
+        )
+        let vc = DiplomaSpeechEventViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
     func makeModifyModule(id: Int) -> UIViewController {
         let presenter = ModifyEventPresenter(
             id: id,
             eventsService: serviceAssembly.makeEventsService()
         )
         let vc = EventViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeModifyThemeSelectionModule(id: Int) -> UIViewController {
+        let presenter = ModifyThemeSelectionEventPresenter(
+            id: id,
+            eventsService: serviceAssembly.makeEventsService()
+        )
+        let vc = ThemeSelectionEventViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeModifyDiplomaSpeechModule(id: Int) -> UIViewController {
+        let presenter = ModifyDiplomaSpeechEventPresenter(
+            id: id,
+            eventsService: serviceAssembly.makeEventsService()
+        )
+        let vc = DiplomaSpeechEventViewController(output: presenter)
         presenter.viewInput = vc
         return vc
     }

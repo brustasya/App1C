@@ -84,6 +84,16 @@ extension StudentCoordinator: TimeTableModuleOutput {
 }
 
 extension StudentCoordinator: StudentMainScreenModuleOutput {
+    func moduleWantsToOpenThemeSelectionEvent(id: Int) {
+        let eventVC = studentAssembly.makeThemeSelectionEventModule(id: id)
+        mainScreenNavigationController.pushViewController(eventVC, animated: true)
+    }
+    
+    func moduleWantsToOpenDiplomaSpeechEvent(id: Int) {
+        let eventVC = studentAssembly.makeDiplomaSpeechEventModule(id: id)
+        mainScreenNavigationController.pushViewController(eventVC, animated: true)
+    }
+    
     func moduleWantsToOpenNotifications() {
         let notificationsVC = studentAssembly.makeNotificationsModule(moduleOutput: self)
         mainScreenNavigationController.pushViewController(notificationsVC, animated: true)

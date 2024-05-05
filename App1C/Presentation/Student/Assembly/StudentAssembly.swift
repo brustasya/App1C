@@ -41,6 +41,23 @@ final class StudentAssembly: BaseAssembly {
         return vc
     }
     
+    func makeThemeSelectionEventModule(id: Int) -> UIViewController {
+        let presenter = ThemeSellectionEventPresenter(id: id, eventsService: serviceAssembly.makeEventsService())
+        let vc = ThemeSelectionEventViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeDiplomaSpeechEventModule(id: Int) -> UIViewController {
+        let presenter = DiplomaSpeechEventPresenter(
+            id: id,
+            eventsService: serviceAssembly.makeEventsService()
+        )
+        let vc = DiplomaSpeechEventViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
     func makeCourseSelectionModule() -> UIViewController {
         let presenter = CourseSelectionPresenter(
             courseSelectionService: serviceAssembly.makeCourseSelectionService()

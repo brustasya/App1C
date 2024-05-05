@@ -78,6 +78,20 @@
 		8586961C2BE79B8A0004F2DD /* ThemeSelectionEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586961B2BE79B8A0004F2DD /* ThemeSelectionEventViewController.swift */; };
 		8586961E2BE79BAE0004F2DD /* ThemeSelectionEventViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586961D2BE79BAE0004F2DD /* ThemeSelectionEventViewInput.swift */; };
 		858696202BE79BBD0004F2DD /* ThemeSelectionEventViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586961F2BE79BBD0004F2DD /* ThemeSelectionEventViewOutput.swift */; };
+		858696242BE7B6510004F2DD /* CreateThemeSelectionEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696232BE7B6510004F2DD /* CreateThemeSelectionEventPresenter.swift */; };
+		858696282BE7CEEC0004F2DD /* DiplomaSpeechEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696272BE7CEEC0004F2DD /* DiplomaSpeechEventViewController.swift */; };
+		8586962A2BE7CF150004F2DD /* DiplomaSpeechEventViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696292BE7CF150004F2DD /* DiplomaSpeechEventViewInput.swift */; };
+		8586962C2BE7CF450004F2DD /* DiplomaSpeechEventViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586962B2BE7CF450004F2DD /* DiplomaSpeechEventViewOutput.swift */; };
+		8586962F2BE7DDDB0004F2DD /* SpeechType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586962E2BE7DDDB0004F2DD /* SpeechType.swift */; };
+		858696332BE7E3B80004F2DD /* CreateDiplomaSpeechEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696322BE7E3B80004F2DD /* CreateDiplomaSpeechEventPresenter.swift */; };
+		858696362BE7F7850004F2DD /* ThemeSelectionEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696352BE7F7850004F2DD /* ThemeSelectionEventModel.swift */; };
+		858696392BE7FB950004F2DD /* DiplomaSpeechEventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696382BE7FB950004F2DD /* DiplomaSpeechEventModel.swift */; };
+		8586963B2BE804540004F2DD /* CreateThemeSelectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586963A2BE804540004F2DD /* CreateThemeSelectionModel.swift */; };
+		8586963D2BE805640004F2DD /* CreateDiplomaSpeechModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586963C2BE805640004F2DD /* CreateDiplomaSpeechModel.swift */; };
+		858696432BE817400004F2DD /* ModifyThemeSelectionEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696422BE817400004F2DD /* ModifyThemeSelectionEventPresenter.swift */; };
+		858696452BE8175E0004F2DD /* ModifyDiplomaSpeechEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696442BE8175E0004F2DD /* ModifyDiplomaSpeechEventPresenter.swift */; };
+		858696492BE836870004F2DD /* DiplomaSpeechEventPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696482BE836870004F2DD /* DiplomaSpeechEventPresenter.swift */; };
+		8586964B2BE8369A0004F2DD /* ThemeSelectionEventPresenter in Sources */ = {isa = PBXBuildFile; fileRef = 8586964A2BE8369A0004F2DD /* ThemeSelectionEventPresenter */; };
 		85981EA42BB5E26800A0DBE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA32BB5E26800A0DBE7 /* AppDelegate.swift */; };
 		85981EA62BB5E26800A0DBE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA52BB5E26800A0DBE7 /* SceneDelegate.swift */; };
 		85981EA82BB5E26800A0DBE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA72BB5E26800A0DBE7 /* ViewController.swift */; };
@@ -375,6 +389,20 @@
 		8586961B2BE79B8A0004F2DD /* ThemeSelectionEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionEventViewController.swift; sourceTree = "<group>"; };
 		8586961D2BE79BAE0004F2DD /* ThemeSelectionEventViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionEventViewInput.swift; sourceTree = "<group>"; };
 		8586961F2BE79BBD0004F2DD /* ThemeSelectionEventViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionEventViewOutput.swift; sourceTree = "<group>"; };
+		858696232BE7B6510004F2DD /* CreateThemeSelectionEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateThemeSelectionEventPresenter.swift; sourceTree = "<group>"; };
+		858696272BE7CEEC0004F2DD /* DiplomaSpeechEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiplomaSpeechEventViewController.swift; sourceTree = "<group>"; };
+		858696292BE7CF150004F2DD /* DiplomaSpeechEventViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiplomaSpeechEventViewInput.swift; sourceTree = "<group>"; };
+		8586962B2BE7CF450004F2DD /* DiplomaSpeechEventViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiplomaSpeechEventViewOutput.swift; sourceTree = "<group>"; };
+		8586962E2BE7DDDB0004F2DD /* SpeechType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechType.swift; sourceTree = "<group>"; };
+		858696322BE7E3B80004F2DD /* CreateDiplomaSpeechEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiplomaSpeechEventPresenter.swift; sourceTree = "<group>"; };
+		858696352BE7F7850004F2DD /* ThemeSelectionEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSelectionEventModel.swift; sourceTree = "<group>"; };
+		858696382BE7FB950004F2DD /* DiplomaSpeechEventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiplomaSpeechEventModel.swift; sourceTree = "<group>"; };
+		8586963A2BE804540004F2DD /* CreateThemeSelectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateThemeSelectionModel.swift; sourceTree = "<group>"; };
+		8586963C2BE805640004F2DD /* CreateDiplomaSpeechModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiplomaSpeechModel.swift; sourceTree = "<group>"; };
+		858696422BE817400004F2DD /* ModifyThemeSelectionEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyThemeSelectionEventPresenter.swift; sourceTree = "<group>"; };
+		858696442BE8175E0004F2DD /* ModifyDiplomaSpeechEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyDiplomaSpeechEventPresenter.swift; sourceTree = "<group>"; };
+		858696482BE836870004F2DD /* DiplomaSpeechEventPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiplomaSpeechEventPresenter.swift; sourceTree = "<group>"; };
+		8586964A2BE8369A0004F2DD /* ThemeSelectionEventPresenter */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThemeSelectionEventPresenter; sourceTree = "<group>"; };
 		85981EA02BB5E26800A0DBE7 /* App1C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App1C.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85981EA32BB5E26800A0DBE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85981EA52BB5E26800A0DBE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -928,6 +956,7 @@
 		858696192BE79AE60004F2DD /* ThemeSelectionEvent */ = {
 			isa = PBXGroup;
 			children = (
+				858696342BE7F7560004F2DD /* Models */,
 				8586961A2BE79B0D0004F2DD /* View */,
 			);
 			path = ThemeSelectionEvent;
@@ -941,6 +970,129 @@
 				8586961F2BE79BBD0004F2DD /* ThemeSelectionEventViewOutput.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		858696212BE7B5AE0004F2DD /* CreateThemeSelectionEvent */ = {
+			isa = PBXGroup;
+			children = (
+				858696222BE7B5F50004F2DD /* Presenter */,
+			);
+			path = CreateThemeSelectionEvent;
+			sourceTree = "<group>";
+		};
+		858696222BE7B5F50004F2DD /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				858696232BE7B6510004F2DD /* CreateThemeSelectionEventPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		858696252BE7CE750004F2DD /* DiplomaSpeechEvent */ = {
+			isa = PBXGroup;
+			children = (
+				858696372BE7FB770004F2DD /* Models */,
+				858696262BE7CEBC0004F2DD /* View */,
+			);
+			path = DiplomaSpeechEvent;
+			sourceTree = "<group>";
+		};
+		858696262BE7CEBC0004F2DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				858696272BE7CEEC0004F2DD /* DiplomaSpeechEventViewController.swift */,
+				858696292BE7CF150004F2DD /* DiplomaSpeechEventViewInput.swift */,
+				8586962B2BE7CF450004F2DD /* DiplomaSpeechEventViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8586962D2BE7DDC50004F2DD /* SpeechType */ = {
+			isa = PBXGroup;
+			children = (
+				8586962E2BE7DDDB0004F2DD /* SpeechType.swift */,
+			);
+			path = SpeechType;
+			sourceTree = "<group>";
+		};
+		858696302BE7E37D0004F2DD /* CreateDiplomaSpeechEvent */ = {
+			isa = PBXGroup;
+			children = (
+				858696312BE7E3970004F2DD /* Presenter */,
+			);
+			path = CreateDiplomaSpeechEvent;
+			sourceTree = "<group>";
+		};
+		858696312BE7E3970004F2DD /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				858696322BE7E3B80004F2DD /* CreateDiplomaSpeechEventPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		858696342BE7F7560004F2DD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				858696352BE7F7850004F2DD /* ThemeSelectionEventModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		858696372BE7FB770004F2DD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				858696382BE7FB950004F2DD /* DiplomaSpeechEventModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8586963E2BE813200004F2DD /* ModifyThemeSelectionEvent */ = {
+			isa = PBXGroup;
+			children = (
+				858696402BE817190004F2DD /* Presenter */,
+			);
+			path = ModifyThemeSelectionEvent;
+			sourceTree = "<group>";
+		};
+		8586963F2BE816E90004F2DD /* ModifyDiplomaSpeechEvent */ = {
+			isa = PBXGroup;
+			children = (
+				858696412BE817220004F2DD /* Presenter */,
+			);
+			path = ModifyDiplomaSpeechEvent;
+			sourceTree = "<group>";
+		};
+		858696402BE817190004F2DD /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				858696422BE817400004F2DD /* ModifyThemeSelectionEventPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		858696412BE817220004F2DD /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				858696442BE8175E0004F2DD /* ModifyDiplomaSpeechEventPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		858696462BE836390004F2DD /* ThemeSelectionEvent */ = {
+			isa = PBXGroup;
+			children = (
+				8586964A2BE8369A0004F2DD /* ThemeSelectionEventPresenter */,
+			);
+			path = ThemeSelectionEvent;
+			sourceTree = "<group>";
+		};
+		858696472BE836480004F2DD /* DiplomaSpeechEvent */ = {
+			isa = PBXGroup;
+			children = (
+				858696482BE836870004F2DD /* DiplomaSpeechEventPresenter.swift */,
+			);
+			path = DiplomaSpeechEvent;
 			sourceTree = "<group>";
 		};
 		85981E972BB5E26800A0DBE7 = {
@@ -1349,6 +1501,7 @@
 		85981F1C2BBDDFEF00A0DBE7 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				8586962D2BE7DDC50004F2DD /* SpeechType */,
 				85043B0C2BD534F500FEF431 /* Controllers */,
 				85FDB5CB2BD2C05700C71E28 /* Courses */,
 				85F0E2C02BC1EBA500D2DBAB /* States */,
@@ -1679,6 +1832,8 @@
 				85ED3B272BCB303400101A5F /* CurrentEventsModel.swift */,
 				85ED3B542BCEFC0000101A5F /* CreateSemesterModel.swift */,
 				85ED3B562BCEFC6100101A5F /* CreateEventModel.swift */,
+				8586963A2BE804540004F2DD /* CreateThemeSelectionModel.swift */,
+				8586963C2BE805640004F2DD /* CreateDiplomaSpeechModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1705,6 +1860,8 @@
 		85ED3B382BCC24F900101A5F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				858696472BE836480004F2DD /* DiplomaSpeechEvent */,
+				858696462BE836390004F2DD /* ThemeSelectionEvent */,
 				85043AA32BD31B6B00FEF431 /* Event */,
 				85FDB59C2BD1F48700C71E28 /* FinalCourseSelection */,
 				85FDB5842BD1CFB500C71E28 /* StudentDetails */,
@@ -1734,6 +1891,7 @@
 		85ED3B3D2BCC2E0A00101A5F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				858696252BE7CE750004F2DD /* DiplomaSpeechEvent */,
 				858696192BE79AE60004F2DD /* ThemeSelectionEvent */,
 				858695F62BE545620004F2DD /* Notification */,
 				858695E52BE50CE20004F2DD /* Notifications */,
@@ -1780,6 +1938,10 @@
 		85ED3B4D2BCEB5A100101A5F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				8586963F2BE816E90004F2DD /* ModifyDiplomaSpeechEvent */,
+				8586963E2BE813200004F2DD /* ModifyThemeSelectionEvent */,
+				858696302BE7E37D0004F2DD /* CreateDiplomaSpeechEvent */,
+				858696212BE7B5AE0004F2DD /* CreateThemeSelectionEvent */,
 				858695FC2BE691A50004F2DD /* DiplomaThemes */,
 				85043B0F2BD5383D00FEF431 /* EditCourse */,
 				85043ACC2BD35F6800FEF431 /* CourseDetailes */,
@@ -2526,6 +2688,7 @@
 				85981F2B2BBE173000A0DBE7 /* LargeBaseCell.swift in Sources */,
 				85ED3B052BCB05E800101A5F /* GradesURLRequestFactory.swift in Sources */,
 				85FDB5D92BD2DCA700C71E28 /* EventsViewOutput.swift in Sources */,
+				858696392BE7FB950004F2DD /* DiplomaSpeechEventModel.swift in Sources */,
 				85ED3AFF2BCB04A300101A5F /* CoursesURLRequestFactory.swift in Sources */,
 				85FDB5912BD1E36400C71E28 /* AdminDepartmentCoursesPresenter.swift in Sources */,
 				85FDB5D32BD2DC1200C71E28 /* EventViewInput.swift in Sources */,
@@ -2539,6 +2702,7 @@
 				85ED3B5F2BCF35A900101A5F /* CreateCourseModel.swift in Sources */,
 				85043AC22BD348A000FEF431 /* CoursesAgregationViewOutput.swift in Sources */,
 				85043AAB2BD323EB00FEF431 /* ModifyEventPresenter.swift in Sources */,
+				8586963B2BE804540004F2DD /* CreateThemeSelectionModel.swift in Sources */,
 				85043AF82BD4656900FEF431 /* EstimationViewInput.swift in Sources */,
 				858696062BE6994F0004F2DD /* DiplomaThemesPresenter.swift in Sources */,
 				85043AC62BD34AC600FEF431 /* CoursesAggregationService.swift in Sources */,
@@ -2563,6 +2727,7 @@
 				85981EB82BBAD3F100A0DBE7 /* RootCoordinator.swift in Sources */,
 				85043AD82BD40B9300FEF431 /* ChoosenCourseSelectionDelegate.swift in Sources */,
 				85F0E2DF2BC4859A00D2DBAB /* RootCoordinatorProtocol.swift in Sources */,
+				8586963D2BE805640004F2DD /* CreateDiplomaSpeechModel.swift in Sources */,
 				85981EE02BBC768800A0DBE7 /* Colors.swift in Sources */,
 				85043AD32BD4059E00FEF431 /* ClosedCourseModel.swift in Sources */,
 				85ED3B702BD03E9B00101A5F /* AdminMainScreenViewInput.swift in Sources */,
@@ -2584,6 +2749,7 @@
 				85043AD62BD40AA600FEF431 /* ChoosenCourseView.swift in Sources */,
 				85981EE42BBC7B6E00A0DBE7 /* AuthorizationAssembly.swift in Sources */,
 				85043A9E2BD314D600FEF431 /* StudentMainScreenViewOutput.swift in Sources */,
+				858696432BE817400004F2DD /* ModifyThemeSelectionEventPresenter.swift in Sources */,
 				85FDB5D12BD2DBE400C71E28 /* CreateEventPresenter.swift in Sources */,
 				85043B052BD488BF00FEF431 /* StudentCoursesListViewInput.swift in Sources */,
 				85F0E2BF2BC1C92800D2DBAB /* CurrentCourseCell.swift in Sources */,
@@ -2600,6 +2766,7 @@
 				85043ADC2BD424AB00FEF431 /* ChoosenCourseSelectionViewModel.swift in Sources */,
 				85981F002BBC869000A0DBE7 /* TeacherCoordinator.swift in Sources */,
 				85F0E2C82BC43D5A00D2DBAB /* SelectorView.swift in Sources */,
+				8586962A2BE7CF150004F2DD /* DiplomaSpeechEventViewInput.swift in Sources */,
 				858696162BE6C57D0004F2DD /* DiplomasInfoURLRequestFactory.swift in Sources */,
 				8586961C2BE79B8A0004F2DD /* ThemeSelectionEventViewController.swift in Sources */,
 				85F0E30C2BC5EAAC00D2DBAB /* DayTimeCell.swift in Sources */,
@@ -2611,6 +2778,7 @@
 				85F0E2D72BC4809400D2DBAB /* StudentSettingsViewInput.swift in Sources */,
 				85FDB5832BD1C9C400C71E28 /* AdminDetailsPresenter.swift in Sources */,
 				85FDB56F2BD19CFD00C71E28 /* UserDetailsModel.swift in Sources */,
+				8586964B2BE8369A0004F2DD /* ThemeSelectionEventPresenter in Sources */,
 				85981F0B2BBC9BBB00A0DBE7 /* RoleSelectionModuleOutput.swift in Sources */,
 				85FDB5CD2BD2C07000C71E28 /* CourseType.swift in Sources */,
 				85981EF22BBC7F3700A0DBE7 /* AdminCoordinator.swift in Sources */,
@@ -2625,6 +2793,7 @@
 				858696082BE699C90004F2DD /* DiplomaThemesModuleOutput.swift in Sources */,
 				85FDB52F2BD08FE100C71E28 /* AddStudentModuleOutput.swift in Sources */,
 				85981EFC2BBC843900A0DBE7 /* EventsViewController.swift in Sources */,
+				858696242BE7B6510004F2DD /* CreateThemeSelectionEventPresenter.swift in Sources */,
 				85ED3AF72BCB044000101A5F /* VerificationURLRequestFactory.swift in Sources */,
 				85FDB5D52BD2DC2300C71E28 /* EventViewOutput.swift in Sources */,
 				85F0E2EF2BC4B3E200D2DBAB /* AdminSettingsViewOutput.swift in Sources */,
@@ -2713,6 +2882,7 @@
 				85043AA82BD31BA500FEF431 /* StudentEventModuleOutput.swift in Sources */,
 				85981F292BBDF94A00A0DBE7 /* ConfigurableViewProtocol.swift in Sources */,
 				85FDB5972BD1E90E00C71E28 /* CoursesModel.swift in Sources */,
+				858696332BE7E3B80004F2DD /* CreateDiplomaSpeechEventPresenter.swift in Sources */,
 				85043AE92BD44E8D00FEF431 /* TeacherMainScreenViewInput.swift in Sources */,
 				85FDB5202BD0881C00C71E28 /* StudentsListPresenter.swift in Sources */,
 				85F0E2E92BC4A94700D2DBAB /* TeacherSettingsModuleOutput.swift in Sources */,
@@ -2765,9 +2935,11 @@
 				85981F1E2BBDE00500A0DBE7 /* Images.swift in Sources */,
 				85ED3AD02BCAC57B00101A5F /* MainPageURLRequestFactory.swift in Sources */,
 				85ED3B6C2BD018D800101A5F /* VerificationModuleOutput.swift in Sources */,
+				858696362BE7F7850004F2DD /* ThemeSelectionEventModel.swift in Sources */,
 				85ED3B312BCBE12900101A5F /* TimeTableModuleOutput.swift in Sources */,
 				85F0E2B12BC065FA00D2DBAB /* StudentSettingsViewController.swift in Sources */,
 				858695F52BE5185E0004F2DD /* NotificationCell.swift in Sources */,
+				858696282BE7CEEC0004F2DD /* DiplomaSpeechEventViewController.swift in Sources */,
 				85ED3B142BCB07E000101A5F /* VerificationModel.swift in Sources */,
 				858695FB2BE546AD0004F2DD /* NotificationModuleOutput.swift in Sources */,
 				85981F242BBDECC200A0DBE7 /* EventCell.swift in Sources */,
@@ -2781,9 +2953,11 @@
 				85981F0F2BBC9C0500A0DBE7 /* RoleSelectionViewOutput.swift in Sources */,
 				85FDB5B62BD296A800C71E28 /* AddTeachersViewOutput.swift in Sources */,
 				85ED3B092BCB062800101A5F /* UsersListURLRequestFactory.swift in Sources */,
+				8586962F2BE7DDDB0004F2DD /* SpeechType.swift in Sources */,
 				85ED3B662BD0188600101A5F /* VerificationViewInput.swift in Sources */,
 				85981EDB2BBC49A500A0DBE7 /* TeacherTabBarController.swift in Sources */,
 				85043ABA2BD33D0500FEF431 /* SelectedCoursesModel.swift in Sources */,
+				858696452BE8175E0004F2DD /* ModifyDiplomaSpeechEventPresenter.swift in Sources */,
 				85ED3B6A2BD018AB00101A5F /* VerificationPresenter.swift in Sources */,
 				85FDB51C2BD087EC00C71E28 /* StudentsListViewInput.swift in Sources */,
 				85FDB5AC2BD28A8400C71E28 /* AddDependenciesViewController.swift in Sources */,
@@ -2795,6 +2969,7 @@
 				85F0E2CD2BC44C7700D2DBAB /* TimetableCell.swift in Sources */,
 				85981F122BBCA6E500A0DBE7 /* Roles.swift in Sources */,
 				85FDB53E2BD1361100C71E28 /* AdminsListForAdminPresenter.swift in Sources */,
+				858696492BE836870004F2DD /* DiplomaSpeechEventPresenter.swift in Sources */,
 				85FDB54D2BD14AFC00C71E28 /* AddPersonViewInput.swift in Sources */,
 				85ED3AF52BCB042200101A5F /* VerificationService.swift in Sources */,
 				85F0E2E52BC4A92A00D2DBAB /* TeacherSettingsViewOutput.swift in Sources */,
@@ -2803,6 +2978,7 @@
 				85F0E2BB2BC0796F00D2DBAB /* ClosedCourseCell.swift in Sources */,
 				85FDB5222BD0882D00C71E28 /* StudentsListModuleOutput.swift in Sources */,
 				85ED3B532BCEB5F200101A5F /* CourseAgregationCell.swift in Sources */,
+				8586962C2BE7CF450004F2DD /* DiplomaSpeechEventViewOutput.swift in Sources */,
 				8586961E2BE79BAE0004F2DD /* ThemeSelectionEventViewInput.swift in Sources */,
 				85F0E30F2BC611CF00D2DBAB /* BaseAssembly.swift in Sources */,
 				85043B112BD538C800FEF431 /* EditCoursePresenter.swift in Sources */,

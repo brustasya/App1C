@@ -51,8 +51,14 @@ final class EventsPresenter {
             return .finalCourseChoice
         case EventType.estimating.rawValue:
             return .estimating
+        case EventType.diplomaSpeech.rawValue:
+            return .diplomaSpeech
+        case EventType.diplomaThemeChoice.rawValue:
+            return .diplomaThemeChoice
+        case EventType.diplomaThemeCorrection.rawValue:
+            return .diplomaThemeCorrection
         default:
-            return .estimating
+            return .message
         }
     }
 }
@@ -72,6 +78,14 @@ extension EventsPresenter: EventsViewOutput {
         moduleOutput?.moduleWantsToCreateEvent(type: type)
     }
     
+    func createThemeSelectionEvent() {
+        moduleOutput?.moduleWantsToCreateThemeSelectionEvent()
+    }
+    
+    func createDiplomaSpeechEvent() {
+        moduleOutput?.moduleWantsToCreateDiplomaSpeechEvent()
+    }
+    
     func viewIsReady() {
         getEvents()
     }
@@ -81,6 +95,13 @@ extension EventsPresenter: EventsViewOutput {
     }
     
     func selectRow(at index: Int) {
-        moduleOutput?.moduleWantsToOpenEvent(id: events[index].id)
+        switch events[index].type {
+        case .diplomaThemeChoice:
+            moduleOutput?.moduleWantsToOpenThemeSelectionEvent(id: events[index].id)
+        case .diplomaSpeech:
+            moduleOutput?.moduleWantsToOpenDiplomaSpeechEvent(id: events[index].id)
+        default:
+            moduleOutput?.moduleWantsToOpenEvent(id: events[index].id)
+        }
     }
 }

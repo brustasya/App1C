@@ -9,6 +9,8 @@ import Foundation
 
 protocol StudentMainScreenModuleOutput: AnyObject {
     func moduleWantsToOpenEvent(id: Int)
+    func moduleWantsToOpenThemeSelectionEvent(id: Int)
+    func moduleWantsToOpenDiplomaSpeechEvent(id: Int)
     func moduleWantsToOpenTimeTable()
     func moduleWantsToOpenNotifications()
 }

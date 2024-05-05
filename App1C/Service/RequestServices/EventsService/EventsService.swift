@@ -16,6 +16,8 @@ protocol EventsServiceProtocol {
     func watchEvent(eventID: Int, completion: @escaping (Result<Data?, Error>) -> Void)
     func createSemester(model: CreateSemesterModel, completion: @escaping (Result<Data?, Error>) -> Void)
     func createEvent(model: CreateEventModel, completion: @escaping (Result<Data?, Error>) -> Void)
+    func createThemeSelectionEvent(model: CreateThemeSelectionModel, completion: @escaping (Result<Data?, Error>) -> Void)
+    func createDiplomaSpeechEvent(model: CreateDiplomaSpeechModel, completion: @escaping (Result<Data?, Error>) -> Void)
 }
 
 class EventsService: EventsServiceProtocol {
@@ -95,6 +97,24 @@ class EventsService: EventsServiceProtocol {
     func createEvent(model: CreateEventModel, completion: @escaping (Result<Data?, Error>) -> Void) {
         do {
             let request = try requestFactory.createEvent(with: model)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func createThemeSelectionEvent(model: CreateThemeSelectionModel, completion: @escaping (Result<Data?, Error>) -> Void) {
+        do {
+            let request = try requestFactory.createThemeSelectionEvent(with: model)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func createDiplomaSpeechEvent(model: CreateDiplomaSpeechModel, completion: @escaping (Result<Data?, Error>) -> Void) {
+        do {
+            let request = try requestFactory.createDiplomaSpeechEvent(with: model)
             networkService.sendRequest(request, completion: completion)
         } catch {
             completion(.failure(error))
