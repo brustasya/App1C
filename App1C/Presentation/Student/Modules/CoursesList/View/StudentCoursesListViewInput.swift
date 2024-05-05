@@ -9,4 +9,5 @@ import Foundation
 
 protocol StudentCoursesListViewInput: AnyObject {
     func setupCourses(closedCourses: [StudentCourseModel], currentCourses: [StudentCourseModel])
+    func updateCourses(closedCourses: [StudentCourseModel], currentCourses: [StudentCourseModel])
 }

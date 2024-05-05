@@ -14,4 +14,6 @@ protocol StudentMainScreenViewOutput: AnyObject {
     func openSite()
     func openTimeTable()
     func selectEvent(at index: Int)
+    func openNotifications()
+    func viewWillAppear()
 }

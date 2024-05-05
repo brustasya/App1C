@@ -1,0 +1,51 @@
+//
+//  DiplomaThemesPresenter.swift
+//  App1C
+//
+//  Created by Станислава on 04.05.2024.
+//
+
+import Foundation
+
+final class DiplomaThemesPresenter {
+    weak var viewInput: DiplomaThemesViewInput?
+    weak var moduleOutput: DiplomaThemesModuleOutput?
+        
+    private let diplomasInfoService: DiplomasInfoServiceProtocol
+    private var students: [BaseModel] = []
+    
+    init(
+        moduleOutput: DiplomaThemesModuleOutput,
+        diplomasInfoService: DiplomasInfoServiceProtocol
+    ) {
+        self.moduleOutput = moduleOutput
+        self.diplomasInfoService = diplomasInfoService
+    }
+    
+    private func getStudents(for bachelor: Bool) {
+        diplomasInfoService.getDiplomas(bachelor: bachelor) { [weak self] result in
+            switch result {
+            case .success(let model):
+                let students = model.diplomas.map({
+                    BaseModel(id: $0.studentID, title: $0.studentFullName, image: Images.largePerson.uiImage)
+                })
+                self?.students = students
+                DispatchQueue.main.async {
+                    self?.viewInput?.setupStudents(students: students)
+                }
+            case .failure(let failure):
+                Logger.shared.printLog(log: "Failed load students: \(failure)")
+            }
+        }
+    }
+}
+
+extension DiplomaThemesPresenter: DiplomaThemesViewOutput {
+    func selectType(bachelor: Bool) {
+        getStudents(for: bachelor)
+    }
+    
+    func selectStudent(index: Int) {
+        
+    }
+}

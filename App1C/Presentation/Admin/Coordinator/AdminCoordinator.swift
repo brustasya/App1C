@@ -91,7 +91,24 @@ extension AdminCoordinator: CourseDetailesModuleOutput {
     
 }
 
+extension AdminCoordinator: DiplomaThemesModuleOutput {
+    
+}
+
 extension AdminCoordinator: AdminSettingsModuleOutput {
+    func moduleWantsToOpenDiplomaThemes() {
+        let diplomaThemesVC = adminAssembly.makeDiplomaThemesModule(moduleOutput: self)
+        settingsNavigationController.pushViewController(diplomaThemesVC, animated: true)
+    }
+    
+    func moduleWantsToOpenSRWResults() {
+        
+    }
+    
+    func moduleWantsToOpenSRWGrades() {
+        
+    }
+    
     func moduleWantsToOpenTeachersList() {
         let teachersList = adminAssembly.makeTeachersListModule(moduleOutput: self)
         settingsNavigationController.pushViewController(teachersList, animated: true)

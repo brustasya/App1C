@@ -202,4 +202,13 @@ final class AdminAssembly: BaseAssembly {
         return vc
     }
     
+    func makeDiplomaThemesModule(moduleOutput: DiplomaThemesModuleOutput) -> UIViewController {
+        let presenter = DiplomaThemesPresenter(
+            moduleOutput: moduleOutput,
+            diplomasInfoService: serviceAssembly.makeDiplomasInfoService()
+        )
+        let vc = DiplomaThemesViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
 }

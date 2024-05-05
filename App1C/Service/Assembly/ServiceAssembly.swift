@@ -9,7 +9,7 @@ import Foundation
 
 final class ServiceAssembly {
    // private let host = "37.77.106.55"
-    private let host = "192.168.100.5"
+    private let host = "192.168.100.5"//"192.168.1.13"//"192.168.100.5"
     private let port = 8080
     
     func makeVerificationService() -> VerificationServiceProtocol {
@@ -84,6 +84,20 @@ final class ServiceAssembly {
     
     func makeGradesService() -> GradesServiceProtocol {
         GradesService(
+            networkService: NetworkService(),
+            requestFactory: URLRequestFactory(host: host, port: port)
+        )
+    }
+    
+    func makeDiplomaSpeechesService() -> DiplomaSpeechesServiceProtocol {
+        DiplomaSpeechesService(
+            networkService: NetworkService(),
+            requestFactory: URLRequestFactory(host: host, port: port)
+        )
+    }
+    
+    func makeDiplomasInfoService() -> DiplomasInfoServiceProtocol {
+        DiplomasInfoService(
             networkService: NetworkService(),
             requestFactory: URLRequestFactory(host: host, port: port)
         )

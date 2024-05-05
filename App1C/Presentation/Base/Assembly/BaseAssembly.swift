@@ -23,6 +23,25 @@ class BaseAssembly {
         return vc
     }
     
+    func makeNotificationsModule(moduleOutput: NotificationsModuleOutput) -> UIViewController {
+        let presenter = NotificationsPresenter(
+            moduleOutput: moduleOutput,
+            eventsService: serviceAssembly.makeEventsService())
+        let vc = NotificationsViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeNotificationModule(id: Int, moduleOutput: NotificationModuleOutput) -> UIViewController {
+        let presenter = NotificationPresenter(
+            id: id,
+            moduleOutput: moduleOutput,
+            eventsService: serviceAssembly.makeEventsService())
+        let vc = EventViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
     func makeAdminDetailsModule(for id: Int) -> UIViewController {
         let presenter = AdminDetailsPresenter(
             id: id,

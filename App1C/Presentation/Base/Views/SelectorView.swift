@@ -18,10 +18,14 @@ class SelectorView: UIView {
     var dayButtons: [UIButton] = []
     var selectedDayIndex: Int?
     var buttonsTitles: [String] = []
+    var width: CGFloat = 50
+    var color: UIColor = Colors.yellow.uiColor
     
-    init(frame: CGRect, buttonsTitles: [String], delegate: SelectorDelegate?) {
+    init(frame: CGRect, buttonsTitles: [String], delegate: SelectorDelegate?, width: CGFloat = 50, color: UIColor = Colors.yellow.uiColor) {
         self.buttonsTitles = buttonsTitles
         self.delegate = delegate
+        self.width = width
+        self.color = color
         super.init(frame: frame)
 
         setupButtons()
@@ -48,7 +52,7 @@ class SelectorView: UIView {
     }
         
     private func layoutButtons() {
-        let buttonWidth: CGFloat = 50//frame.width / CGFloat(dayButtons.count)
+        let buttonWidth: CGFloat = width
         let buttonHeight = frame.height
         
         for (index, button) in dayButtons.enumerated() {
@@ -69,7 +73,7 @@ class SelectorView: UIView {
     private func updateButtonAppearance() {
         for (index, button) in dayButtons.enumerated() {
             if let selectedDayIndex = selectedDayIndex, index == selectedDayIndex {
-                button.backgroundColor = Colors.yellow.uiColor // Цвет выделенного дня
+                button.backgroundColor = color
                 button.setTitleColor(.black, for: .normal)
             } else {
                 button.backgroundColor = .clear

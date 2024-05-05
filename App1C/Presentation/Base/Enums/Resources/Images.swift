@@ -41,6 +41,7 @@ enum Images: String, CaseIterable, Codable, Equatable {
     case checkmark = "checkmark"
     case info = "info.circle"
     case plus = "plus.circle"
+    case exclamationmark = "exclamationmark.triangle"
     
     var uiImage: UIImage? {
         return UIImage(named: self.rawValue)

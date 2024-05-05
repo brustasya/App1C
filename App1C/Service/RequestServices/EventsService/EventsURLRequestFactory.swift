@@ -70,7 +70,7 @@ extension URLRequestFactory: EventsURLRequestFactory {
     }
     
     func watchEvent(eventID: Int) throws -> URLRequest {
-        guard let url = url(with: "/watched", query: "event_id=\(eventID)") else {
+        guard let url = url(with: "/watched/\(eventID)") else {
             throw TFSError.makeRequest
         }
         var request = makeRequest(url: url)

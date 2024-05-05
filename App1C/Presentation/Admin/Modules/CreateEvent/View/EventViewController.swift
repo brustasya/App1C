@@ -13,6 +13,7 @@ class EventViewController: UIViewController {
     private lazy var descriptionTextField = UITextView()
     private lazy var deadlineLabel = UILabel()
     private lazy var textFieldView = UIView()
+    private lazy var messageLabel = UILabel()
     
     private lazy var scrollView = UIScrollView()
 
@@ -33,6 +34,7 @@ class EventViewController: UIViewController {
     init(output: EventViewOutput) {
         self.output = output
         super.init(nibName: nil, bundle: nil)
+        updateDatePicker()
     }
     
     required init?(coder: NSCoder) {
@@ -43,7 +45,6 @@ class EventViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
         setupTitle()
         setupDeadline()
         setupDescription()
@@ -76,7 +77,7 @@ class EventViewController: UIViewController {
     }
     
     private func setupTitle() {
-        titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width, height: 30), title: "Выбор кусров")
+        titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width, height: 30), title: "")
         view.addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -104,7 +105,7 @@ class EventViewController: UIViewController {
             datePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ])
         
-    //    updateDatePicker()
+        updateDatePicker()
         datePicker.isUserInteractionEnabled = false
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
     }
@@ -209,14 +210,39 @@ class EventViewController: UIViewController {
         scrollView.contentSize.height = CGFloat(courses.count * 80 + 20)
     }
     
+    private func setupMessageLabel() {
+        view.addSubview(messageLabel)
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        messageLabel.numberOfLines = 0
+        messageLabel.textColor = .black
+        messageLabel.font = .systemFont(ofSize: 17, weight: .regular)
+        messageLabel.textAlignment = .justified
+        
+        NSLayoutConstraint.activate([
+            messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
+            messageLabel.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -60),
+            messageLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            messageLabel.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -300)
+        ])
+    }
+    
     private func updateDatePicker() {
         for subView in datePicker.subviews {
-            for view in subView.subviews {
-                view.backgroundColor = Colors.paleYellow.uiColor
-                view.layer.cornerRadius = 15
-                for sub in view.subviews {
+            for views in subView.subviews {
+                views.backgroundColor = Colors.paleYellow.uiColor
+                views.layer.cornerRadius = 15
+                for sub in views.subviews {
                     sub.backgroundColor = Colors.paleYellow.uiColor
                     sub.layer.cornerRadius = 15
+                    for subV in sub.subviews {
+                        subV.backgroundColor = Colors.paleYellow.uiColor
+                        subV.layer.cornerRadius = 15
+                        for subVi in subV.subviews {
+                            subVi.backgroundColor = Colors.paleYellow.uiColor
+                            subVi.layer.cornerRadius = 15
+                        }
+                    }
                 }
             }
         }
@@ -298,6 +324,19 @@ extension EventViewController: EventViewInput {
         updateDatePicker()
     }
     
+    func updateCourses(courses: [CourseModel]) {
+        self.courses = courses
+        setupTableView()
+    }
+    
+    func setupMessage(text: String) {
+        deadlineLabel.isHidden = true
+        datePicker.isHidden = true
+        descriptionView.isHidden = true
+        messageLabel.text = text
+        setupMessageLabel()
+    }
+    
     func close() {
         goBack()
     }
@@ -323,11 +362,6 @@ extension EventViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
-    }
-    
-    func updateCourses(courses: [CourseModel]) {
-        self.courses = courses
-        setupTableView()
     }
 }
 

@@ -26,6 +26,14 @@ class SettingsViewController: UIViewController {
         BaseModel(id: 2, title: "Архив студентов", image: Images.archive.uiImage),
         BaseModel(id: 3, title: "Список курсов", image: Images.books.uiImage),
     ]
+    
+    lazy var diplomaBackgroundView = UIView()
+    lazy var diplomaTableView = UITableView()
+    lazy var diploma: [BaseModel] = [
+        BaseModel(id: 0, title: "Темы дипломов", image: Images.book.uiImage),
+        BaseModel(id: 1, title: "Результаты НИРов", image: Images.exclamationmark.uiImage),
+        BaseModel(id: 2, title: "Оценки за НИРы", image: Images.estimating.uiImage),
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,14 +101,43 @@ class SettingsViewController: UIViewController {
             educationBackgroundView.bottomAnchor.constraint(equalTo: educationTableView.bottomAnchor, constant: 15)
         ])
     }
+    
+    func setupDiplomaElements() {
+        diplomaTableView.register(BaseCell.self, forCellReuseIdentifier: "BaseCell")
+        diplomaTableView.delegate = self
+        diplomaTableView.dataSource = self
+        
+        diplomaBackgroundView = TableView(
+            contentView: view,
+            frame: view.frame,
+            title: "Диплом",
+            tableView: diplomaTableView
+        )
+        
+        diplomaBackgroundView.backgroundColor = .systemGray6
+      
+        view.addSubview(diplomaBackgroundView)
+        diplomaBackgroundView.addSubview(diplomaTableView)
+        diplomaBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        diplomaTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            diplomaBackgroundView.topAnchor.constraint(equalTo: educationBackgroundView.bottomAnchor, constant: -10),
+            diplomaTableView.heightAnchor.constraint(equalToConstant: CGFloat(diploma.count * 45) - 0.5),
+            diplomaBackgroundView.heightAnchor.constraint(equalTo: diplomaTableView.heightAnchor, constant: 60),
+            diplomaBackgroundView.bottomAnchor.constraint(equalTo: diplomaTableView.bottomAnchor, constant: 15)
+        ])
+    }
 }
 
 extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == baseTableView {
             return baseElements.count
-        } else {
+        } else if tableView == educationTableView {
             return education.count
+        } else {
+            return diploma.count
         }
     }
     
@@ -110,8 +147,10 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         if tableView == baseTableView {
             cell.configure(with: baseElements[indexPath.row])
-        } else {
+        } else if tableView == educationTableView {
             cell.configure(with: education[indexPath.row])
+        } else {
+            cell.configure(with: diploma[indexPath.row])
         }
         return cell
     }

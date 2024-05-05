@@ -15,12 +15,7 @@ class CoursesAgregationViewController: UIViewController {
     private lazy var titleLabel = UILabel()
     private lazy var personsView = UIView()
     private lazy var personTableView = UITableView()
-    private lazy var persons: [CourseAgregationModel] = [
-        CourseAgregationModel(id: 0, title: "Программирование", offline: 5, online: 0, isStarted: true),
-        CourseAgregationModel(id: 0, title: "Тестирование", offline: 11, online: 1, isStarted: false),
-        CourseAgregationModel(id: 0, title: "Математический анализ", offline: 5, online: 10, isStarted: false),
-        CourseAgregationModel(id: 0, title: "Линейная алгебра", offline: 4, online: 0, isStarted: false)
-    ]
+    private lazy var persons: [CourseAgregationModel] = []
     
     private var output: CoursesAgregationViewOutput
 

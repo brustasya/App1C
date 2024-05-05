@@ -10,4 +10,5 @@ import Foundation
 protocol AdminSettingsViewOutput: AnyObject {
     func selectRowAt(index: Int)
     func selectEducationRowAt(index: Int)
+    func selectDiplomaRowAt(index: Int)
 }

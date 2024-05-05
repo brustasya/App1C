@@ -14,6 +14,7 @@ enum EventType: String {
     case estimating = "ESTIMATING"
     case diplomaSpeech = "DIPLOMA_SPEECH"
     case diplomaThemeCorrection = "DIPLOMA_THEME_CORRECTION"
+    case message = "MESSAGE"
     
     var title: String {
         switch self {
@@ -23,8 +24,14 @@ enum EventType: String {
             return "Выбор минимальной нагрузки"
         case .estimating:
             return "Выставление оценок"
-        default:
-            return ""
+        case .diplomaThemeChoice:
+            return "Выбор темы диплома"
+        case .diplomaSpeech:
+            return "Контроль НИР\nПредзащита / Защита"
+        case .diplomaThemeCorrection:
+            return "Уточнение темы диплома"
+        case .message:
+            return "Сообщение от администратора"
         }
     }
 }

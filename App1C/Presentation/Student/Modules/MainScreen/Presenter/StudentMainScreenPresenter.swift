@@ -42,6 +42,7 @@ final class StudentMainScreenPresenter {
                 })
                 self?.events = events
                 DispatchQueue.main.async {
+                    self?.viewInput?.setupBell(newEvents: model.unseenEvents ?? false)
                     self?.viewInput?.updateEvents(events: events)
                 }
             case .failure(let failure):
@@ -77,6 +78,10 @@ extension StudentMainScreenPresenter: StudentMainScreenViewOutput {
         getMainPage()
     }
     
+    func viewWillAppear() {
+        getMainPage()
+    }
+    
     func openTelegram() {
         mainScreenService.openURL(url: tgLink)
     }
@@ -87,5 +92,9 @@ extension StudentMainScreenPresenter: StudentMainScreenViewOutput {
     
     func openSite() {
         mainScreenService.openURL(url: siteLink)
+    }
+    
+    func openNotifications() {
+        moduleOutput?.moduleWantsToOpenNotifications()
     }
 }

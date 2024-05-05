@@ -33,7 +33,8 @@ class StudentCoursesListPresenter {
                 self?.lastCourses = lastCourses
                 self?.currentCourses = currentSemester
                 DispatchQueue.main.async {
-                    self?.viewInput?.setupCourses(closedCourses: lastCourses, currentCourses: currentSemester)
+                    //self?.viewInput?.setupCourses(closedCourses: lastCourses, currentCourses: currentSemester)
+                    self?.viewInput?.updateCourses(closedCourses: lastCourses, currentCourses: currentSemester)
                 }
             case .failure(let error):
                 Logger.shared.printLog(log: "Failed load courses: \(error)")

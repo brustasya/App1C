@@ -16,23 +16,14 @@ class StudentCoursesListViewController: UIViewController {
     private lazy var closedCoursesButton = UIButton(type: .system)
     private lazy var closedCoursesState: ListState = .open
     private var closedCourseConstraint: NSLayoutConstraint?
-    private lazy var closedCourses: [StudentCourseModel] = [
-        StudentCourseModel(id: 0, title: "Тестирование программного обеспечения", isOffline: true, isRetake: false, grade: GradeModel(grade: 10)),
-        StudentCourseModel(id: 1, title: "Программирование", isOffline: false, isRetake: true, grade: GradeModel(grade: 3)),
-        StudentCourseModel(id: 2, title: "Разработка программного обеспечения. Java", isOffline: true, isRetake: true, grade: GradeModel(grade: 5)),
-    ]
+    private lazy var closedCourses: [StudentCourseModel] = []
     
     private lazy var currentCoursesBackgroundView = UIView()
     private lazy var currentCoursesTableView = UITableView()
     private lazy var currentCoursesButton = UIButton(type: .system)
     private lazy var currentCoursesState: ListState = .open
     private var currentCourseConstraint: NSLayoutConstraint?
-    private lazy var currentCourses: [StudentCourseModel] = [
-        StudentCourseModel(id: 0, title: "Тестирование программного обеспечения", isOffline: true, isRetake: false, grade: GradeModel(grade: 10)),
-        StudentCourseModel(id: 1, title: "Программирование", isOffline: false, isRetake: true, grade: GradeModel(grade: 3)),
-        StudentCourseModel(id: 2, title: "Разработка программного обеспечения. Java", isOffline: true, isRetake: true, grade: GradeModel(grade: 5)),
-        StudentCourseModel(id: 0, title: "Тестирование программного обеспечения", isOffline: true, isRetake: false, grade: GradeModel(grade: 10)),
-    ]
+    private lazy var currentCourses: [StudentCourseModel] = []
     
     private var output: StudentCoursesListViewOutput
 
@@ -51,7 +42,11 @@ class StudentCoursesListViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         setupScrollView()
-        output.viewIsReady()
+        setupClosedCourses()
+        setupCurrentCourses()
+//        closedCoursesButtonTapped()
+//        currentCoursesButtonTapped()
+      //  output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,12 +54,17 @@ class StudentCoursesListViewController: UIViewController {
         (navigationController as? CustomNavigationController)?.hideBackButton()
         tabBarController?.tabBar.isTranslucent = false
         tabBarController?.tabBar.isHidden = false
+        output.viewIsReady()
+        let height = CGFloat(closedCourses.count * 100 + currentCourses.count * 100 + 200)
+        scrollView.contentSize.height = height
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupScrollView()
-    }
+//    override func beginAppearanceTransition(_ isAppearing: Bool, animated: Bool) {
+//        super.beginAppearanceTransition(isAppearing, animated: animated)
+//        if isAppearing {
+//
+//        }
+//    }
     
     private func setupScrollView() {
         scrollView.backgroundColor = .clear
@@ -77,9 +77,7 @@ class StudentCoursesListViewController: UIViewController {
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         
-        let height = CGFloat(closedCourses.count * 100 + currentCourses.count * 60 + 200)
-        
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: height)
+       // scrollView.contentSize = CGSize(width: scrollView.frame.width, height: view.frame.height)
         scrollView.isScrollEnabled = true
     }
 
@@ -112,6 +110,7 @@ class StudentCoursesListViewController: UIViewController {
         closedCourseConstraint = closedCoursesTableView.heightAnchor.constraint(equalToConstant: CGFloat(closedCourses.count * 100))
         closedCourseConstraint?.isActive = true
         closedCoursesButton.addTarget(self, action: #selector(closedCoursesButtonTapped), for: .touchUpInside)
+      //  closedCoursesButtonTapped()
     }
     
     private func setupCurrentCourses() {
@@ -141,6 +140,7 @@ class StudentCoursesListViewController: UIViewController {
         currentCourseConstraint = currentCoursesTableView.heightAnchor.constraint(equalToConstant: CGFloat(currentCourses.count * 100))
         currentCourseConstraint?.isActive = true
         currentCoursesButton.addTarget(self, action: #selector(currentCoursesButtonTapped), for: .touchUpInside)
+      //  currentCoursesButtonTapped()
     }
     
     @objc private func closedCoursesButtonTapped() {
@@ -149,10 +149,12 @@ class StudentCoursesListViewController: UIViewController {
             closedCoursesButton.setImage(Images.down.uiImage, for: .normal)
             closedCourseConstraint?.isActive = false
             closedCoursesState = .close
+            scrollView.contentSize.height -= CGFloat(closedCourses.count * 100)
         case .close:
             closedCoursesButton.setImage(Images.up.uiImage, for: .normal)
             closedCourseConstraint?.isActive = true
             closedCoursesState = .open
+            scrollView.contentSize.height += CGFloat(closedCourses.count * 100)
         }
     }
     
@@ -162,11 +164,13 @@ class StudentCoursesListViewController: UIViewController {
             currentCoursesButton.setImage(Images.down.uiImage, for: .normal)
             currentCourseConstraint?.isActive = false
             currentCoursesState = .close
+            scrollView.contentSize.height -= CGFloat(currentCourses.count * 100)
             return
         case .close:
             currentCoursesButton.setImage(Images.up.uiImage, for: .normal)
             currentCourseConstraint?.isActive = true
             currentCoursesState = .open
+            scrollView.contentSize.height += CGFloat(currentCourses.count * 100)
             return
         }
     }
@@ -221,7 +225,33 @@ extension StudentCoursesListViewController: StudentCoursesListViewInput {
         self.currentCourses = currentCourses
         setupClosedCourses()
         setupCurrentCourses()
-        let height = CGFloat(closedCourses.count * 100 + currentCourses.count * 100 + 1400)
+        let height = CGFloat(closedCourses.count * 100 + currentCourses.count * 100 + 200)
         scrollView.contentSize.height = height
+        closedCoursesButtonTapped()
+        currentCoursesButtonTapped()
+    }
+    
+    func updateCourses(closedCourses: [StudentCourseModel], currentCourses: [StudentCourseModel]) {
+        self.closedCourses = closedCourses
+        self.currentCourses = currentCourses
+
+        closedCourseConstraint?.isActive = false
+        closedCourseConstraint = closedCoursesTableView.heightAnchor.constraint(equalToConstant: CGFloat(closedCourses.count * 100))
+        closedCourseConstraint?.isActive = true
+        closedCoursesTableView.reloadData()
+        
+        currentCourseConstraint?.isActive = false
+        currentCourseConstraint = currentCoursesTableView.heightAnchor.constraint(equalToConstant: CGFloat(currentCourses.count * 100))
+        currentCourseConstraint?.isActive = true
+        currentCoursesTableView.reloadData()
+        
+        let height = CGFloat(closedCourses.count * 100 + currentCourses.count * 100 + 200)
+        scrollView.contentSize.height = height
+        
+        currentCoursesButton.setImage(Images.up.uiImage, for: .normal)
+        closedCoursesButton.setImage(Images.up.uiImage, for: .normal)
+
+//        closedCoursesButtonTapped()
+//        currentCoursesButtonTapped()
     }
 }

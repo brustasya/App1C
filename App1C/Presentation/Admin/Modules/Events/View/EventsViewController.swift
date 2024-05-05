@@ -101,12 +101,30 @@ class EventsViewController: UIViewController {
         setupButton(button: estimationButton)
         estimationButton.addTarget(self, action: #selector(createEstimatingEventButtonTapped), for: .touchUpInside)
         
+        let themeSelectionButton = ButtonView(frame: CGRect(x: 25, y: estimationButton.frame.maxY + 10, width: view.frame.width - 50, height: 45))
+        themeSelectionButton.setTitle("Выбор темы диплома", for: .normal)
+        setupButton(button: themeSelectionButton)
+        themeSelectionButton.addTarget(self, action: #selector(createThemeSelectionButtonTapped), for: .touchUpInside)
+        
+        let themeCorrectionButton = ButtonView(frame: CGRect(x: 25, y: themeSelectionButton.frame.maxY + 10, width: view.frame.width - 50, height: 45))
+        themeCorrectionButton.setTitle("Уточнение темы диплома", for: .normal)
+        setupButton(button: themeCorrectionButton)
+        themeCorrectionButton.addTarget(self, action: #selector(createThemeCorrectionEventButtonTapped), for: .touchUpInside)
+        
+        let diplomaSpeechButton = ButtonView(frame: CGRect(x: 25, y: themeCorrectionButton.frame.maxY + 10, width: view.frame.width - 50, height: 45))
+        diplomaSpeechButton.setTitle("Контроль НИР / Предзащита / Защита", for: .normal)
+        setupButton(button: diplomaSpeechButton)
+        diplomaSpeechButton.addTarget(self, action: #selector(createDiplomaSpeechEventButtonTapped), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
-            title.topAnchor.constraint(equalTo: eventsBackgroundView.bottomAnchor, constant: 25),
+            title.topAnchor.constraint(equalTo: eventsBackgroundView.bottomAnchor, constant: 20),
             title.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             courseSelectionButton.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 10),
             finalCourseSelectionButton.topAnchor.constraint(equalTo: courseSelectionButton.bottomAnchor, constant: 10),
             estimationButton.topAnchor.constraint(equalTo: finalCourseSelectionButton.bottomAnchor, constant: 10),
+            themeSelectionButton.topAnchor.constraint(equalTo: estimationButton.bottomAnchor, constant: 10),
+            themeCorrectionButton.topAnchor.constraint(equalTo: themeSelectionButton.bottomAnchor, constant: 10),
+            diplomaSpeechButton.topAnchor.constraint(equalTo: themeCorrectionButton.bottomAnchor, constant: 10),
         ])
         
     }
@@ -123,15 +141,27 @@ class EventsViewController: UIViewController {
     }
     
     @objc private func createPreliminaryChoiceEventButtonTapped() {
-        output.createPreliminaryChoice()
+        output.createEvent(type: .preliminaryCourseChoice)
     }
     
     @objc private func createFinalChoiceEventButtonTapped() {
-        output.createFinalChoice()
+        output.createEvent(type: .finalCourseChoice)
     }
     
     @objc private func createEstimatingEventButtonTapped() {
-        output.createEstimating()
+        output.createEvent(type: .estimating)
+    }
+    
+    @objc private func createThemeSelectionButtonTapped() {
+        output.createEvent(type: .diplomaThemeChoice)
+    }
+    
+    @objc private func createThemeCorrectionEventButtonTapped() {
+        output.createEvent(type: .diplomaThemeCorrection)
+    }
+    
+    @objc private func createDiplomaSpeechEventButtonTapped() {
+        output.createEvent(type: .diplomaSpeech)
     }
 }
 
@@ -140,8 +170,8 @@ extension EventsViewController: EventsViewInput {
         self.events = events
         eventsConstraint?.isActive = false
         var height = events.count > 0 ? CGFloat(events.count * 70) - 0.5 : 0
-        height = height > 280 ? 245 : height
-        eventsTableView.isScrollEnabled = height == 245
+        height = height > 210 ? 193 : height
+        eventsTableView.isScrollEnabled = height == 193
         eventsConstraint = eventsTableView.heightAnchor.constraint(equalToConstant: height)
         eventsConstraint?.isActive = true
         eventsTableView.reloadData()

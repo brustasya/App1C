@@ -25,6 +25,7 @@ class AdminSettingsViewController: SettingsViewController {
         
         setupBaseElements()
         setupEducationElements()
+        setupDiplomaElements()
     }
 }
 
@@ -36,8 +37,10 @@ extension AdminSettingsViewController {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == baseTableView {
             output.selectRowAt(index: indexPath.row)
-        } else {
+        } else if tableView == educationTableView {
             output.selectEducationRowAt(index: indexPath.row)
+        } else {
+            output.selectDiplomaRowAt(index: indexPath.row)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }

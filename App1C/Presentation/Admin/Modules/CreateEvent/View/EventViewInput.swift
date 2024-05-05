@@ -16,4 +16,5 @@ protocol EventViewInput: AnyObject {
     func addGoOverButton()
     func updateData(deadline: Date, descr: String)
     func updateCourses(courses: [CourseModel])
+    func setupMessage(text: String) 
 }

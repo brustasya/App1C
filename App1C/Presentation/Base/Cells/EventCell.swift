@@ -102,6 +102,8 @@ class EventCell: UITableViewCell, ConfigurableViewProtocol {
             return Images.book.uiImage
         case .diplomaThemeCorrection:
             return Images.book.uiImage
+        case .message:
+            return nil
         }
     }
     

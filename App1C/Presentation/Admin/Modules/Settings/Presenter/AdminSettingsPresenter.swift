@@ -10,19 +10,28 @@ import Foundation
 final class AdminSettingsPresenter {
     weak var viewInput: AdminSettingsViewInput?
     weak var moduleOutput: AdminSettingsModuleOutput?
-        
-//    private let telemetryService: TelemetryServiceProtocol
-    
+            
     init(
         moduleOutput: AdminSettingsModuleOutput
-//        telemetryService: TelemetryServiceProtocol
     ) {
         self.moduleOutput = moduleOutput
-//        self.telemetryService = telemetryService
     }
 }
 
 extension AdminSettingsPresenter: AdminSettingsViewOutput {
+    func selectDiplomaRowAt(index: Int) {
+        switch index {
+        case 0:
+            moduleOutput?.moduleWantsToOpenDiplomaThemes()
+        case 1:
+            moduleOutput?.moduleWantsToOpenSRWResults()
+        case 2:
+            moduleOutput?.moduleWantsToOpenSRWGrades()
+        default:
+            return
+        }
+    }
+    
     func selectRowAt(index: Int) {
         switch index {
         case 0:

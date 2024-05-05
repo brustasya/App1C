@@ -26,8 +26,17 @@ class StudentMainScreenController: MainScreenViewController {
         super.viewDidLoad()
             
         setupSheduleView()
+        setupEventsTableView()
+
         output.viewIsReady()
-        //(navigationController as? CustomNavigationController)?.setupBellButton()
+        
+        (navigationController as? CustomNavigationController)?.bellButton.addTarget(self, action: #selector(openNotifications), for: .touchUpInside)
+        (navigationController as? CustomNavigationController)?.bellBageButton.addTarget(self, action: #selector(openNotifications), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        output.viewWillAppear()
     }
     
     private func setupSheduleView() {
@@ -74,12 +83,24 @@ class StudentMainScreenController: MainScreenViewController {
     @objc private func openSite() {
         output.openSite()
     }
+    
+    @objc private func openNotifications() {
+        output.openNotifications()
+    }
 }
 
 extension StudentMainScreenController: StudentMainScreenViewInput {
     func updateEvents(events: [EventModel]) {
         self.events = events
-        setupEventsTableView()
+        let height = events.count != 0 ? CGFloat(Double(events.count * 70) - 0.5) : 0
+        tableHeightConstraint?.isActive = false
+        tableHeightConstraint = eventsTableView.heightAnchor.constraint(equalToConstant: height)
+        tableHeightConstraint?.isActive = true
+        eventsTableView.reloadData()
+    }
+    
+    func setupBell(newEvents: Bool) {
+        (navigationController as? CustomNavigationController)?.bellBageButton.isHidden = !newEvents
     }
 }
 

@@ -11,7 +11,5 @@ protocol EventsViewOutput: AnyObject {
     func viewIsReady()
     func viewWillAppear()
     func selectRow(at index: Int)
-    func createPreliminaryChoice()
-    func createFinalChoice()
-    func createEstimating()
+    func createEvent(type: EventType)
 }

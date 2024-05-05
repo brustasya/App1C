@@ -10,6 +10,7 @@ import UIKit
 class CustomNavigationController: UINavigationController {
 
     lazy var bellButton = UIButton(type: .system)
+    lazy var bellBageButton = UIButton(type: .system)
     lazy var backButton =  UIButton(type: .system)
 
     override func viewDidLoad() {
@@ -79,31 +80,29 @@ class CustomNavigationController: UINavigationController {
     }
     
     func setupBellBadgeButton() {
-        let bellButton = UIButton(type: .system)
-        navigationBar.addSubview(bellButton)
-        bellButton.translatesAutoresizingMaskIntoConstraints = false
+        bellBageButton = UIButton(type: .system)
+        navigationBar.addSubview(bellBageButton)
+        bellBageButton.translatesAutoresizingMaskIntoConstraints = false
         
-        bellButton.setImage(Images.bellBadge.uiImage, for: .normal)
-        bellButton.tintColor = .darkGray
+        bellBageButton.setImage(Images.bellBadge.uiImage, for: .normal)
+        bellBageButton.tintColor = .darkGray
         
         let badgeImageView = UIImageView()
         badgeImageView.backgroundColor = Colors.red.uiColor
         badgeImageView.layer.cornerRadius = 4
-        bellButton.addSubview(badgeImageView)
+        bellBageButton.addSubview(badgeImageView)
         badgeImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            bellButton.centerYAnchor.constraint(equalTo: navigationBar.centerYAnchor),
-            bellButton.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -20),
-            bellButton.heightAnchor.constraint(equalToConstant: 50),
+            bellBageButton.centerYAnchor.constraint(equalTo: navigationBar.centerYAnchor),
+            bellBageButton.trailingAnchor.constraint(equalTo: navigationBar.trailingAnchor, constant: -20),
+            bellBageButton.heightAnchor.constraint(equalToConstant: 50),
             
             badgeImageView.heightAnchor.constraint(equalToConstant: 8),
             badgeImageView.widthAnchor.constraint(equalToConstant: 8),
-            badgeImageView.topAnchor.constraint(equalTo: bellButton.topAnchor, constant: 13.5),
-            badgeImageView.trailingAnchor.constraint(equalTo: bellButton.trailingAnchor, constant: -3.5)
+            badgeImageView.topAnchor.constraint(equalTo: bellBageButton.topAnchor, constant: 13.5),
+            badgeImageView.trailingAnchor.constraint(equalTo: bellBageButton.trailingAnchor, constant: -3.5)
         ])
-        
-        bellButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
     }
     
     func setupBackButton() {

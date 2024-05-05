@@ -10,4 +10,5 @@ import Foundation
 protocol StudentMainScreenModuleOutput: AnyObject {
     func moduleWantsToOpenEvent(id: Int)
     func moduleWantsToOpenTimeTable()
+    func moduleWantsToOpenNotifications()
 }

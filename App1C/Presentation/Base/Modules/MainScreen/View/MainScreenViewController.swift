@@ -24,11 +24,18 @@ class MainScreenViewController: UIViewController {
     
     lazy var baseTableView = UITableView()
     lazy var baseElements: [BaseModel] = []
+    var tableHeightConstraint: NSLayoutConstraint?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        
+        (navigationController as? CustomNavigationController)?.setupBellButton()
+        (navigationController as? CustomNavigationController)?.setupBellBadgeButton()
+        (navigationController as? CustomNavigationController)?.bellBageButton.isHidden = true
+
         
         setupLinksViews()
     }
@@ -38,6 +45,15 @@ class MainScreenViewController: UIViewController {
         (navigationController as? CustomNavigationController)?.hideBackButton()
         tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.isHidden = false
+        (navigationController as? CustomNavigationController)?.bellButton.isHidden = false
+    }
+    
+    override func beginAppearanceTransition(_ isAppearing: Bool, animated: Bool) {
+        super.beginAppearanceTransition(isAppearing, animated: animated)
+        if !isAppearing {
+            (navigationController as? CustomNavigationController)?.bellButton.isHidden = true
+            (navigationController as? CustomNavigationController)?.bellBageButton.isHidden = true
+        }
     }
     
     func setupLinksViews() {
@@ -120,10 +136,13 @@ class MainScreenViewController: UIViewController {
         eventsTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            eventsTableView.heightAnchor.constraint(equalToConstant: CGFloat(Double(events.count * 70) - 0.5)),
+          //  eventsTableView.heightAnchor.constraint(equalToConstant: CGFloat(Double(events.count * 70) - 0.5)),
             eventsBackgroundView.heightAnchor.constraint(equalTo: eventsTableView.heightAnchor, constant: 60),
             eventsBackgroundView.bottomAnchor.constraint(equalTo: eventsTableView.bottomAnchor, constant: 15)
         ])
+        
+        tableHeightConstraint = eventsTableView.heightAnchor.constraint(equalToConstant: 0)
+        tableHeightConstraint?.isActive = true
     }
 }
 

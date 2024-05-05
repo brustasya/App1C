@@ -67,16 +67,9 @@ extension Date {
 }
 
 extension EventsPresenter: EventsViewOutput {
-    func createPreliminaryChoice() {
-        moduleOutput?.moduleWantsToCreateEvent(type: .preliminaryCourseChoice)
-    }
     
-    func createFinalChoice() {
-        moduleOutput?.moduleWantsToCreateEvent(type: .finalCourseChoice)
-    }
-    
-    func createEstimating() {
-        moduleOutput?.moduleWantsToCreateEvent(type: .estimating)
+    func createEvent(type: EventType) {
+        moduleOutput?.moduleWantsToCreateEvent(type: type)
     }
     
     func viewIsReady() {

@@ -84,6 +84,11 @@ extension StudentCoordinator: TimeTableModuleOutput {
 }
 
 extension StudentCoordinator: StudentMainScreenModuleOutput {
+    func moduleWantsToOpenNotifications() {
+        let notificationsVC = studentAssembly.makeNotificationsModule(moduleOutput: self)
+        mainScreenNavigationController.pushViewController(notificationsVC, animated: true)
+    }
+    
     func moduleWantsToOpenEvent(id: Int) {
         let eventVC = studentAssembly.makeEventModule(id: id, moduleOutput: self)
         mainScreenNavigationController.pushViewController(eventVC, animated: true)
@@ -111,4 +116,15 @@ extension StudentCoordinator: StudentCoursesListModuleOutput {
     func moduleWantsToOpenCourse(id: Int) {
         
     }
+}
+
+extension StudentCoordinator: NotificationsModuleOutput {
+    func moduleWantsToOpenNotification(id: Int) {
+        let notificationController = studentAssembly.makeNotificationModule(id: id, moduleOutput: self)
+        mainScreenNavigationController.pushViewController(notificationController, animated: true)
+    }
+}
+
+extension StudentCoordinator: NotificationModuleOutput {
+    
 }
