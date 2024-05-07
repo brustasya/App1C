@@ -31,6 +31,9 @@ class StudentEventPresenter {
             case .success(let model):
                 self?.eventType = (self?.getEventType(type: model.type)) ?? .estimating
                 DispatchQueue.main.async {
+                    if self?.eventType != .diplomaThemeCorrection {
+                        self?.viewInput?.addGoOverButton()
+                    }
                     self?.viewInput?.updateData(deadline: Date.toDate(dateString: model.deadline), descr: model.description)
                     self?.viewInput?.setTitle(title: model.title)
                 }
@@ -48,6 +51,8 @@ class StudentEventPresenter {
             return .finalCourseChoice
         case EventType.estimating.rawValue:
             return .estimating
+        case EventType.diplomaThemeCorrection.rawValue:
+            return .diplomaThemeCorrection
         default:
             return .estimating
         }
@@ -60,7 +65,6 @@ extension StudentEventPresenter: EventViewOutput {
     func viewIsReady() {
         getEvent()
         viewInput?.setupReadMode()
-        viewInput?.addGoOverButton()
     }
     
     func createButtonTapped(deadline: Date, descr: String) { }

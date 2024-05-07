@@ -30,6 +30,15 @@ final class StudentAssembly: BaseAssembly {
         return vc
     }
     
+    func makeDiplomaModule() -> UIViewController {
+        let presenter = StudentDiplomaPresenter(
+            diplomasInfoService: serviceAssembly.makeDiplomasInfoService()
+        )
+        let vc = StudentDiplomaViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
     func makeEventModule(id: Int, moduleOutput: StudentEventModuleOutput) -> UIViewController {
         let presenter = StudentEventPresenter(
             id: id,
@@ -42,7 +51,10 @@ final class StudentAssembly: BaseAssembly {
     }
     
     func makeThemeSelectionEventModule(id: Int) -> UIViewController {
-        let presenter = ThemeSellectionEventPresenter(id: id, eventsService: serviceAssembly.makeEventsService())
+        let presenter = ThemeSelectionEventPresenter(
+            id: id,
+            eventsService: serviceAssembly.makeEventsService()
+        )
         let vc = ThemeSelectionEventViewController(output: presenter)
         presenter.viewInput = vc
         return vc

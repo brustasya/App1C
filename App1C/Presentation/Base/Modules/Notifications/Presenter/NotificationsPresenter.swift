@@ -37,6 +37,17 @@ class NotificationsPresenter {
             }
         }
     }
+    
+    private func watchedEvent(id: Int) {
+        eventsService.watchEvent(eventID: id) { result in
+            switch result {
+            case .success(_):
+                Logger.shared.printLog(log: "Success watch event")
+            case .failure(let failure):
+                Logger.shared.printLog(log: "Failed watch event: \(failure)")
+            }
+        }
+    }
 }
 
 extension NotificationsPresenter: NotificationsViewOutput {
@@ -49,7 +60,19 @@ extension NotificationsPresenter: NotificationsViewOutput {
     }
     
     func selectedRowAt(index: Int) {
-        moduleOutput?.moduleWantsToOpenNotification(id: events[index].id)
+        watchedEvent(id: events[index].id)
+        if events[index].title == EventType.diplomaThemeChoice.title {
+            moduleOutput?.moduleWantsToOpenThemeSelectionEvent(id: events[index].id)
+        } else if events[index].title == SpeechType.rw1.title ||
+                    events[index].title == SpeechType.rw2.title ||
+                    events[index].title ==  SpeechType.rw3.title ||
+                    events[index].title == SpeechType.predefending.title ||
+                    events[index].title ==  SpeechType.defending.title
+        {
+            moduleOutput?.moduleWantsToOpenDiplomaSpeechEvent(id: events[index].id)
+        } else {
+            moduleOutput?.moduleWantsToOpenNotification(id: events[index].id)
+        }
     }
     
     

@@ -112,6 +112,20 @@ extension AdminCoordinator: CourseDetailesModuleOutput {
 }
 
 extension AdminCoordinator: DiplomaThemesModuleOutput {
+    func moduleWantsToOpenDiploma(studentID: Int, bachelor: Bool) {
+        let diplomaVC = adminAssembly.makeDiplomaModule(studentID: studentID, bachelor: bachelor, moduleOutput: self)
+        settingsNavigationController.pushViewController(diplomaVC, animated: true)
+    }
+    
+    
+}
+
+extension AdminCoordinator: AdminDiplomaModuleOutput {
+    func moduleWantToEditDiploma(studentID: Int, bachelor: Bool, model: DiplomaModel) {
+        let editDiplomaVC = adminAssembly.makeEditDiplomaModule(studentID: studentID, bachelor: bachelor, model: model)
+        settingsNavigationController.pushViewController(editDiplomaVC, animated: true)
+    }
+    
     
 }
 

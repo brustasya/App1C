@@ -13,6 +13,7 @@ final class DiplomaThemesPresenter {
         
     private let diplomasInfoService: DiplomasInfoServiceProtocol
     private var students: [BaseModel] = []
+    private var bachelor: Bool = true
     
     init(
         moduleOutput: DiplomaThemesModuleOutput,
@@ -43,9 +44,10 @@ final class DiplomaThemesPresenter {
 extension DiplomaThemesPresenter: DiplomaThemesViewOutput {
     func selectType(bachelor: Bool) {
         getStudents(for: bachelor)
+        self.bachelor = bachelor
     }
     
     func selectStudent(index: Int) {
-        
+        moduleOutput?.moduleWantsToOpenDiploma(studentID: students[index].id, bachelor: bachelor)
     }
 }

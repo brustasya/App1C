@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ThemeSellectionEventPresenter {
+class ThemeSelectionEventPresenter {
     weak var viewInput: ThemeSelectionEventViewInput?
     
     private let eventsService: EventsServiceProtocol
@@ -34,7 +34,7 @@ class ThemeSellectionEventPresenter {
                     workDeadline: Date.toDate(dateString: model.workDiplomaDeadline)
                 )
                 DispatchQueue.main.async {
-                    self?.viewInput?.updateData(model: eventModel, isEdit: true)
+                    self?.viewInput?.updateData(model: eventModel, isEdit: false)
                 }
             case .failure(let error):
                 Logger.shared.printLog(log: "Failed load event: \(error)")
@@ -43,7 +43,7 @@ class ThemeSellectionEventPresenter {
     }
 }
 
-extension ThemeSellectionEventPresenter: ThemeSelectionEventViewOutput {
+extension ThemeSelectionEventPresenter: ThemeSelectionEventViewOutput {
     func createButtonTapped(model: ThemeSelectionEventModel) { }
     
     func saveButtonTapped(model: ThemeSelectionEventModel) { }

@@ -9,4 +9,6 @@ import Foundation
 
 protocol NotificationsModuleOutput: AnyObject {
     func moduleWantsToOpenNotification(id: Int)
+    func moduleWantsToOpenThemeSelectionEvent(id: Int)
+    func moduleWantsToOpenDiplomaSpeechEvent(id: Int)
 }

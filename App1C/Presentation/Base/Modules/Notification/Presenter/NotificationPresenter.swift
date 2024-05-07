@@ -52,12 +52,12 @@ class NotificationPresenter {
                             self?.viewInput?.addGoOverButton()
                         }
                         self?.viewInput?.updateData(deadline: deadline, descr: model.description)
-                    case .diplomaThemeChoice:
-                        break
-                    case .diplomaSpeech:
+                    case .diplomaThemeChoice, .diplomaSpeech:
                         break
                     case .diplomaThemeCorrection:
-                        break
+                        let deadline = Date.toDate(dateString: model.deadline)
+                        self?.viewInput?.setupReadMode()
+                        self?.viewInput?.updateData(deadline: deadline, descr: model.description)
                     case .message:
                         self?.viewInput?.setupMessage(text: model.description)
                     }
@@ -78,6 +78,8 @@ class NotificationPresenter {
             return .finalCourseChoice
         case EventType.estimating.rawValue:
             return .estimating
+        case EventType.diplomaThemeCorrection.rawValue:
+            return .diplomaThemeCorrection
         default:
             return .message
         }

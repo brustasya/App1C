@@ -378,6 +378,7 @@ class DiplomaSpeechEventViewController: UIViewController {
         descriptionTextField.isUserInteractionEnabled = edit
         conferenceTextField.isUserInteractionEnabled = edit
         timetableTextField.isUserInteractionEnabled = edit
+        typeView.isUserInteractionEnabled = edit
         textFieldView.backgroundColor = edit ? .systemGray6 : .white
     }
 }

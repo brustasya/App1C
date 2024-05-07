@@ -8,5 +8,5 @@
 import Foundation
 
 protocol DiplomaThemesModuleOutput: AnyObject {
-    
+    func moduleWantsToOpenDiploma(studentID: Int, bachelor: Bool)
 }

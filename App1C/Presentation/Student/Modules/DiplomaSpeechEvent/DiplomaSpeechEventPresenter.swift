@@ -34,7 +34,7 @@ class DiplomaSpeechEventPresenter {
                 )
                     
                 DispatchQueue.main.async {
-                    self?.viewInput?.updateData(model: eventModel, isEdit: true)
+                    self?.viewInput?.updateData(model: eventModel, isEdit: false)
                     self?.viewInput?.setTitle(title: model.title)
                 }
             case .failure(let error):
@@ -67,7 +67,7 @@ extension DiplomaSpeechEventPresenter: DiplomaSpeechEventViewOutput {
     func saveButtonTapped(model: DiplomaSpeechEventModel) { }
     
     func viewIsReady() {
-        viewInput?.setupSaveMode()
+        viewInput?.setupReadMode()
         getEvent()
     }
 }

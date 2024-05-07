@@ -34,10 +34,13 @@ final class StudentCoordinator: CoordinatorProtocol {
         
         let coursesVC = studentAssembly.makeCoursesListModule(moduleOutput: self)
         coursesListNavigationController = CustomNavigationController(rootViewController: coursesVC)
+        let diplomaVC = studentAssembly.makeDiplomaModule()
+        let diplomaNavigationController = CustomNavigationController(rootViewController: diplomaVC)
         
         let tabBarController = StudentTabBarController(
             mainScreenNavigationController: mainScreenNavigationController,
-            coursesListNavigationController: coursesListNavigationController,
+            coursesListNavigationController: coursesListNavigationController, 
+            diplomaNavigationController: diplomaNavigationController,
             settingsNavigationController: settingsNavigationController
         )
         

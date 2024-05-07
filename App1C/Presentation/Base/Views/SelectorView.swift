@@ -20,12 +20,14 @@ class SelectorView: UIView {
     var buttonsTitles: [String] = []
     var width: CGFloat = 50
     var color: UIColor = Colors.yellow.uiColor
+    var borderColor: UIColor = .clear
     
-    init(frame: CGRect, buttonsTitles: [String], delegate: SelectorDelegate?, width: CGFloat = 50, color: UIColor = Colors.yellow.uiColor) {
+    init(frame: CGRect, buttonsTitles: [String], delegate: SelectorDelegate?, width: CGFloat = 50, color: UIColor = Colors.yellow.uiColor, borderColor: UIColor = .clear) {
         self.buttonsTitles = buttonsTitles
         self.delegate = delegate
         self.width = width
         self.color = color
+        self.borderColor = borderColor
         super.init(frame: frame)
 
         setupButtons()
@@ -59,6 +61,8 @@ class SelectorView: UIView {
             let xPosition = CGFloat(index) * (frame.width / CGFloat(dayButtons.count))
             button.frame = CGRect(x: xPosition, y: 0, width: buttonWidth, height: buttonHeight)
             button.backgroundColor = .clear
+            button.layer.borderColor = borderColor.cgColor
+            button.layer.borderWidth = 1
             button.setTitleColor(.darkGray, for: .normal)
             button.layer.cornerRadius = buttonHeight / 2
         }

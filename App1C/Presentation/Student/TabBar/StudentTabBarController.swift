@@ -9,13 +9,16 @@ import UIKit
 
 class StudentTabBarController: TabBarController {
     private var coursesListNavigationController: UINavigationController
+    private var diplomaNavigationController: UINavigationController
     
     init(
         mainScreenNavigationController: UINavigationController,
         coursesListNavigationController: UINavigationController,
+        diplomaNavigationController: UINavigationController,
         settingsNavigationController: UINavigationController
     ) {
         self.coursesListNavigationController = coursesListNavigationController
+        self.diplomaNavigationController = diplomaNavigationController
         
         super.init(
             mainScreenNavigationController: mainScreenNavigationController,
@@ -32,9 +35,12 @@ class StudentTabBarController: TabBarController {
     private func setupTabBar() {
         coursesListNavigationController.tabBarItem = UITabBarItem(title: "Курсы", image: Images.graduationcap.uiImage, tag: 1)
         
+        diplomaNavigationController.tabBarItem = UITabBarItem(title: "Диплом", image: Images.book.uiImage, tag: 1)
+        
         setViewControllers([
             mainScreenNavigationController,
             coursesListNavigationController,
+            diplomaNavigationController,
             settingsNavigationController
         ], animated: false)
     }

@@ -249,4 +249,28 @@ final class AdminAssembly: BaseAssembly {
         presenter.viewInput = vc
         return vc
     }
+    
+    func makeDiplomaModule(studentID: Int, bachelor: Bool, moduleOutput: AdminDiplomaModuleOutput) -> UIViewController {
+        let presenter = AdminDiplomaPresenter(
+            studentID: studentID,
+            bachelor: bachelor,
+            moduleOutput: moduleOutput,
+            diplomasInfoService: serviceAssembly.makeDiplomasInfoService()
+        )
+        let vc = DiplomaViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeEditDiplomaModule(studentID: Int, bachelor: Bool, model: DiplomaModel) -> UIViewController {
+        let presenter = EditDiplomaPresenter(
+            studentID: studentID,
+            bachelor: bachelor,
+            model: model,
+            diplomasInfoService: serviceAssembly.makeDiplomasInfoService()
+        )
+        let vc = EditDiplomaViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
 }
