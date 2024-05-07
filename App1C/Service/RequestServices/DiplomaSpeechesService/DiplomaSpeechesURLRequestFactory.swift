@@ -9,6 +9,7 @@ import Foundation
 
 protocol DiplomaSpeechesURLRequestFactory: AnyObject {
     func getSpeeches(type: String, bachelor: Bool) throws -> URLRequest
+    func result(studentID: Int, speechID: Int, result: Bool) throws -> URLRequest
 }
 
 extension URLRequestFactory: DiplomaSpeechesURLRequestFactory {
@@ -19,6 +20,18 @@ extension URLRequestFactory: DiplomaSpeechesURLRequestFactory {
         
         var request = makeRequest(url: url)
         request.httpMethod = "GET"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func result(studentID: Int, speechID: Int, result: Bool) throws -> URLRequest {
+        guard let url = url(with: "/student/\(studentID)/speech-result/\(speechID)"),
+              var request = makeRequest(with: result, url: url)
+        else {
+            throw TFSError.makeRequest
+        }
+        
+        request.httpMethod = "POST"
         addHeader(request: &request)
         return request
     }

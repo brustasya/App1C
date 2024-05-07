@@ -625,7 +625,7 @@ extension FinalCourseSelectionViewController: SelectItemDelegate {
 }
 
 extension FinalCourseSelectionViewController: SelectorDelegate {
-    func select(at index: Int) {
+    func select(at index: Int, sender: SelectorView) {
         switch index {
         case 0:
             subTitleLabel.text = "Выбранные курсы"

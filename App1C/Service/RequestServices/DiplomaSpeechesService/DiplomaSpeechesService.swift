@@ -9,6 +9,7 @@ import Foundation
 
 protocol DiplomaSpeechesServiceProtocol: AnyObject {
     func getSpeeches(type: String, bachelor: Bool, completion: @escaping (Result<DiplomaSpeechesModel, Error>) -> Void)
+    func result(studentID: Int, speechID: Int, result: Bool, completion: @escaping (Result<Data?, Error>) -> Void)
 }
 
 class DiplomaSpeechesService: DiplomaSpeechesServiceProtocol {
@@ -25,6 +26,15 @@ class DiplomaSpeechesService: DiplomaSpeechesServiceProtocol {
     func getSpeeches(type: String, bachelor: Bool, completion: @escaping (Result<DiplomaSpeechesModel, Error>) -> Void) {
         do {
             let request = try requestFactory.getSpeeches(type: type, bachelor: bachelor)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func result(studentID: Int, speechID: Int, result: Bool, completion: @escaping (Result<Data?, Error>) -> Void) {
+        do {
+            let request = try requestFactory.result(studentID: studentID, speechID: speechID, result: result)
             networkService.sendRequest(request, completion: completion)
         } catch {
             completion(.failure(error))

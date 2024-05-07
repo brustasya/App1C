@@ -129,7 +129,7 @@ extension TimeTableViewController: TimeTableViewInput {
 
 
 extension TimeTableViewController: SelectorDelegate {
-    func select(at index: Int) {
+    func select(at index: Int, sender: SelectorView) {
         output.openDay(day: index + 1)
     }
 }

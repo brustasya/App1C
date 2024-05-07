@@ -231,7 +231,7 @@ class StudentDiplomaViewController: UIViewController {
 }
 
 extension StudentDiplomaViewController: SelectorDelegate {
-    func select(at index: Int) {
+    func select(at index: Int, sender: SelectorView) {
         output.selectDegree(bachelor: index == 0)
     }
 }

@@ -1,24 +1,25 @@
 //
-//  DiplomaThemesViewController.swift
+//  DiplomaSpeechesResultsViewController.swift
 //  App1C
 //
-//  Created by Станислава on 04.05.2024.
+//  Created by Станислава on 07.05.2024.
 //
 
 import UIKit
 
-final class DiplomaThemesViewController: UIViewController {
+final class DiplomaSpeechesResultsViewController: UIViewController {
     
     private lazy var titleLabel = UILabel()
     private lazy var addStudentButton = UIButton()
-    private lazy var courseSelector = UIView()
+    private lazy var degreeSelector = UIView()//SelectorView(frame: .zero, buttonsTitles: [], delegate: nil)
+    private lazy var speechSelector = UIView()//SelectorView(frame: .zero, buttonsTitles: [], delegate: nil)
     private lazy var studentsView = UIView()
     private lazy var studentsTableView = UITableView()
-    private lazy var students: [DiplomaThemeModel] = []
+    private lazy var students: [SpeechResultModel] = []
     
-    private var output: DiplomaThemesViewOutput
+    private var output: DiplomaSpeechesResultsViewOutput
 
-    init(output: DiplomaThemesViewOutput) {
+    init(output: DiplomaSpeechesResultsViewOutput) {
         self.output = output
         super.init(nibName: nil, bundle: nil)
     }
@@ -50,22 +51,30 @@ final class DiplomaThemesViewController: UIViewController {
     }
     
     private func setupTitle() {
-        titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width, height: 30), title: "Темы дипломов")
-        view.addSubview(titleLabel)
-
-        let daysOfWeek = ["Бакалавриат", "Магистратура"]
-        courseSelector = SelectorView(
-            frame: CGRect(x: view.frame.midX - 170, y: 70, width: 350, height: 40),
-            buttonsTitles: daysOfWeek,
+        let degrees = ["Бакалавриат", "Магистратура"]
+        degreeSelector = SelectorView(
+            frame: CGRect(x: view.frame.midX - 160, y: 25, width: 330, height: 40),
+            buttonsTitles: degrees,
             delegate: self,
             width: 150,
             color: Colors.paleYellow.uiColor
         )
-        view.addSubview(courseSelector)
+        view.addSubview(degreeSelector)
+        
+        let speeches = ["НИР 1", "НИР 2", "НИР 3", "Предзащита",]
+        speechSelector = SelectorView(
+            frame: CGRect(x: view.frame.midX - 175, y: degreeSelector.frame.maxY + 20, width: 350, height: 40),
+            buttonsTitles: speeches,
+            delegate: self,
+            width: 80,
+            color: Colors.yellow.uiColor,
+            fontSize: 12
+        )
+        view.addSubview(speechSelector)
     }
     
     private func setupTableView() {
-        studentsTableView.register(DiplomaThemeCell.self, forCellReuseIdentifier: "DiplomaThemeCell")
+        studentsTableView.register(SpeechResultCell.self, forCellReuseIdentifier: "SpeechResultCell")
         studentsTableView.delegate = self
         studentsTableView.dataSource = self
         
@@ -92,7 +101,7 @@ final class DiplomaThemesViewController: UIViewController {
             studentsTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             studentsView.heightAnchor.constraint(equalTo: studentsTableView.heightAnchor, constant: 30),
             studentsView.bottomAnchor.constraint(equalTo: studentsTableView.bottomAnchor, constant: 15),
-            studentsView.topAnchor.constraint(equalTo: courseSelector.bottomAnchor, constant: 0)
+            studentsView.topAnchor.constraint(equalTo: speechSelector.bottomAnchor, constant: 0)
         ])
     }
     
@@ -101,35 +110,58 @@ final class DiplomaThemesViewController: UIViewController {
     }
 }
 
-extension DiplomaThemesViewController: DiplomaThemesViewInput {
-    func setupStudents(students: [DiplomaThemeModel]) {
+extension DiplomaSpeechesResultsViewController: DiplomaSpeechesResultsViewInput {
+    func setupStudents(students: [SpeechResultModel]) {
         self.students = students
         studentsTableView.reloadData()
     }
 }
 
-extension DiplomaThemesViewController: SelectorDelegate {
+extension DiplomaSpeechesResultsViewController: SelectorDelegate {
     func select(at index: Int, sender: SelectorView) {
-        output.selectType(bachelor: index == 0)
+        if sender == degreeSelector {
+            output.selectDegree(bachelor: index == 0)
+        } else {
+            switch index {
+            case 0:
+                output.selectSpeech(type: .rw1)
+            case 1:
+                output.selectSpeech(type: .rw2)
+            case 2:
+                output.selectSpeech(type: .rw3)
+            case 3:
+                output.selectSpeech(type: .predefending)
+            default:
+                break
+            }
+        }
     }
 }
 
-extension DiplomaThemesViewController: UITableViewDataSource, UITableViewDelegate {
+extension DiplomaSpeechesResultsViewController: SpeechSelectorDelegate {
+    func select(studentID: Int, speechID: Int) {
+        output.addResult(studentID: studentID, speechID: speechID, result: true)
+    }
+    
+    func unSelect(studentID: Int, speechID: Int) {
+        output.addResult(studentID: studentID, speechID: speechID, result: false)
+    }
+}
+
+extension DiplomaSpeechesResultsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return students.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DiplomaThemeCell", for: indexPath) as? DiplomaThemeCell else {
-            fatalError("Cannot create DiplomaThemeCell")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SpeechResultCell", for: indexPath) as? SpeechResultCell else {
+            fatalError("Cannot create SpeechResultCell")
         }
         cell.configure(with: students[indexPath.row])
+        cell.delegate = self
+        cell.selectionStyle = .none
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        output.selectStudent(index: indexPath.row)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
 }
+
 

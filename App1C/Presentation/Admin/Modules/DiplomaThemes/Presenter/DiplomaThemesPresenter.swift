@@ -12,7 +12,7 @@ final class DiplomaThemesPresenter {
     weak var moduleOutput: DiplomaThemesModuleOutput?
         
     private let diplomasInfoService: DiplomasInfoServiceProtocol
-    private var students: [BaseModel] = []
+    private var students: [DiplomaThemeModel] = []
     private var bachelor: Bool = true
     
     init(
@@ -28,7 +28,7 @@ final class DiplomaThemesPresenter {
             switch result {
             case .success(let model):
                 let students = model.diplomas.map({
-                    BaseModel(id: $0.studentID, title: $0.studentFullName, image: Images.largePerson.uiImage)
+                    DiplomaThemeModel(id: $0.studentID, name: $0.studentFullName, theme: $0.theme ?? "")
                 })
                 self?.students = students
                 DispatchQueue.main.async {

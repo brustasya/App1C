@@ -120,7 +120,7 @@ extension StudentsListViewController: StudentsListViewInput {
 }
 
 extension StudentsListViewController: SelectorDelegate {
-    func select(at index: Int) {
+    func select(at index: Int, sender: SelectorView) {
         output.selectCourse(at: index)
     }
 }

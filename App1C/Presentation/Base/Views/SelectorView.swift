@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SelectorDelegate: AnyObject {
-    func select(at index: Int)
+    func select(at index: Int, sender: SelectorView)
 }
 
 class SelectorView: UIView {
@@ -21,13 +21,15 @@ class SelectorView: UIView {
     var width: CGFloat = 50
     var color: UIColor = Colors.yellow.uiColor
     var borderColor: UIColor = .clear
+    var fontSize: CGFloat = 16
     
-    init(frame: CGRect, buttonsTitles: [String], delegate: SelectorDelegate?, width: CGFloat = 50, color: UIColor = Colors.yellow.uiColor, borderColor: UIColor = .clear) {
+    init(frame: CGRect, buttonsTitles: [String], delegate: SelectorDelegate?, width: CGFloat = 50, color: UIColor = Colors.yellow.uiColor, borderColor: UIColor = .clear, fontSize: CGFloat = 16) {
         self.buttonsTitles = buttonsTitles
         self.delegate = delegate
         self.width = width
         self.color = color
         self.borderColor = borderColor
+        self.fontSize = fontSize
         super.init(frame: frame)
 
         setupButtons()
@@ -42,6 +44,7 @@ class SelectorView: UIView {
         for (index, day) in buttonsTitles.enumerated() {
             let button = UIButton()
             button.setTitle(day, for: .normal)
+            button.titleLabel?.font = .systemFont(ofSize: fontSize)
             button.tag = index
            
             button.addTarget(self, action: #selector(dayButtonTapped(_:)), for: .touchUpInside)
@@ -70,7 +73,7 @@ class SelectorView: UIView {
     
     @objc private func dayButtonTapped(_ sender: UIButton) {
         selectedDayIndex = sender.tag
-        delegate?.select(at: selectedDayIndex ?? 0)
+        delegate?.select(at: selectedDayIndex ?? 0, sender: self)
         updateButtonAppearance()
     }
     

@@ -8,5 +8,5 @@
 import Foundation
 
 protocol DiplomaThemesViewInput: AnyObject {
-    func setupStudents(students: [BaseModel])
+    func setupStudents(students: [DiplomaThemeModel])
 }

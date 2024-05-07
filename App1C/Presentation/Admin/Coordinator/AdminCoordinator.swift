@@ -136,7 +136,8 @@ extension AdminCoordinator: AdminSettingsModuleOutput {
     }
     
     func moduleWantsToOpenSRWResults() {
-        
+        let diplomaSpeechesResultsVC = adminAssembly.makeDiplomaSpeechesResultsModule()
+        settingsNavigationController.pushViewController(diplomaSpeechesResultsVC, animated: true)
     }
     
     func moduleWantsToOpenSRWGrades() {

@@ -26,7 +26,7 @@ class ModifyDiplomaSpeechEventPresenter {
             switch result {
             case .success(let model):
                 let eventModel = DiplomaSpeechEventModel(
-                    type: self?.getSpeechType(type: model.type) ?? .rw1,
+                    type: self?.getSpeechType(type: model.speechType) ?? .rw1,
                     deadline: Date.toDate(dateString: model.deadline),
                     timetableURL: model.timetableLink,
                     conferenceURL: model.zoomLink,
@@ -42,7 +42,7 @@ class ModifyDiplomaSpeechEventPresenter {
         }
     }
     
-    private func getSpeechType(type: String) -> SpeechType {
+    private func getSpeechType(type: String?) -> SpeechType {
         switch type {
         case SpeechType.rw1.rawValue:
             return .rw1

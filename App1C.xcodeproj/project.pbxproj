@@ -108,6 +108,15 @@
 		858696722BEA6FC20004F2DD /* StudentDiplomaViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696712BEA6FC20004F2DD /* StudentDiplomaViewInput.swift */; };
 		858696742BEA6FD00004F2DD /* StudentDiplomaViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696732BEA6FD00004F2DD /* StudentDiplomaViewOutput.swift */; };
 		858696762BEA6FE60004F2DD /* StudentDiplomaPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696752BEA6FE60004F2DD /* StudentDiplomaPresenter.swift */; };
+		8586967B2BEA894C0004F2DD /* DiplomaSpeechesResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586967A2BEA894C0004F2DD /* DiplomaSpeechesResultsViewController.swift */; };
+		8586967D2BEA895C0004F2DD /* DiplomaSpeechesResultsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586967C2BEA895C0004F2DD /* DiplomaSpeechesResultsViewInput.swift */; };
+		8586967F2BEA896C0004F2DD /* DiplomaSpeechesResultsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586967E2BEA896C0004F2DD /* DiplomaSpeechesResultsViewOutput.swift */; };
+		858696812BEA897A0004F2DD /* DiplomaSpeechesResultsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696802BEA897A0004F2DD /* DiplomaSpeechesResultsPresenter.swift */; };
+		858696832BEAB3310004F2DD /* SpeechResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696822BEAB3310004F2DD /* SpeechResultCell.swift */; };
+		858696852BEABE210004F2DD /* SpeechResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696842BEABE210004F2DD /* SpeechResultModel.swift */; };
+		858696882BEABF950004F2DD /* SpeechSelectorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696872BEABF950004F2DD /* SpeechSelectorDelegate.swift */; };
+		8586968A2BEAD7C90004F2DD /* DiplomaThemeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696892BEAD7C90004F2DD /* DiplomaThemeCell.swift */; };
+		8586968C2BEAD87F0004F2DD /* DiplomaThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8586968B2BEAD87F0004F2DD /* DiplomaThemeModel.swift */; };
 		85981EA42BB5E26800A0DBE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA32BB5E26800A0DBE7 /* AppDelegate.swift */; };
 		85981EA62BB5E26800A0DBE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA52BB5E26800A0DBE7 /* SceneDelegate.swift */; };
 		85981EA82BB5E26800A0DBE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA72BB5E26800A0DBE7 /* ViewController.swift */; };
@@ -435,6 +444,15 @@
 		858696712BEA6FC20004F2DD /* StudentDiplomaViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDiplomaViewInput.swift; sourceTree = "<group>"; };
 		858696732BEA6FD00004F2DD /* StudentDiplomaViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDiplomaViewOutput.swift; sourceTree = "<group>"; };
 		858696752BEA6FE60004F2DD /* StudentDiplomaPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDiplomaPresenter.swift; sourceTree = "<group>"; };
+		8586967A2BEA894C0004F2DD /* DiplomaSpeechesResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiplomaSpeechesResultsViewController.swift; sourceTree = "<group>"; };
+		8586967C2BEA895C0004F2DD /* DiplomaSpeechesResultsViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiplomaSpeechesResultsViewInput.swift; sourceTree = "<group>"; };
+		8586967E2BEA896C0004F2DD /* DiplomaSpeechesResultsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiplomaSpeechesResultsViewOutput.swift; sourceTree = "<group>"; };
+		858696802BEA897A0004F2DD /* DiplomaSpeechesResultsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiplomaSpeechesResultsPresenter.swift; sourceTree = "<group>"; };
+		858696822BEAB3310004F2DD /* SpeechResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechResultCell.swift; sourceTree = "<group>"; };
+		858696842BEABE210004F2DD /* SpeechResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechResultModel.swift; sourceTree = "<group>"; };
+		858696872BEABF950004F2DD /* SpeechSelectorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSelectorDelegate.swift; sourceTree = "<group>"; };
+		858696892BEAD7C90004F2DD /* DiplomaThemeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiplomaThemeCell.swift; sourceTree = "<group>"; };
+		8586968B2BEAD87F0004F2DD /* DiplomaThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiplomaThemeModel.swift; sourceTree = "<group>"; };
 		85981EA02BB5E26800A0DBE7 /* App1C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App1C.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85981EA32BB5E26800A0DBE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85981EA52BB5E26800A0DBE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1237,6 +1255,9 @@
 		858696782BEA835C0004F2DD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8586967A2BEA894C0004F2DD /* DiplomaSpeechesResultsViewController.swift */,
+				8586967C2BEA895C0004F2DD /* DiplomaSpeechesResultsViewInput.swift */,
+				8586967E2BEA896C0004F2DD /* DiplomaSpeechesResultsViewOutput.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1244,8 +1265,17 @@
 		858696792BEA83650004F2DD /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				858696802BEA897A0004F2DD /* DiplomaSpeechesResultsPresenter.swift */,
 			);
 			path = Presenter;
+			sourceTree = "<group>";
+		};
+		858696862BEABF740004F2DD /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				858696872BEABF950004F2DD /* SpeechSelectorDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		85981E972BB5E26800A0DBE7 = {
@@ -1372,6 +1402,7 @@
 		85981ECB2BBC3E7700A0DBE7 /* Admin */ = {
 			isa = PBXGroup;
 			children = (
+				858696862BEABF740004F2DD /* Protocols */,
 				85ED3B4F2BCEB5CA00101A5F /* Models */,
 				85ED3B4E2BCEB5C300101A5F /* Cells */,
 				85ED3B4D2BCEB5A100101A5F /* Modules */,
@@ -2133,6 +2164,8 @@
 				85ED3B522BCEB5F200101A5F /* CourseAgregationCell.swift */,
 				85FDB5A32BD287F700C71E28 /* AddDependenceCell.swift */,
 				85FDB5A52BD2880700C71E28 /* AddTeacherCell.swift */,
+				858696822BEAB3310004F2DD /* SpeechResultCell.swift */,
+				858696892BEAD7C90004F2DD /* DiplomaThemeCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2143,6 +2176,8 @@
 				85ED3B502BCEB5E000101A5F /* CourseAgregationModel.swift */,
 				85FDB5A72BD2889300C71E28 /* AddDependenceModel.swift */,
 				85FDB5A92BD288A100C71E28 /* AddTeacherModel.swift */,
+				858696842BEABE210004F2DD /* SpeechResultModel.swift */,
+				8586968B2BEAD87F0004F2DD /* DiplomaThemeModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2924,6 +2959,7 @@
 				85F0E3032BC5AAC000D2DBAB /* AdminListPresenter.swift in Sources */,
 				8586960C2BE6A0F60004F2DD /* DiplomaSpeechesURLRequestFactory.swift in Sources */,
 				858696602BE9301F0004F2DD /* EditDiplomaViewInput.swift in Sources */,
+				8586967F2BEA896C0004F2DD /* DiplomaSpeechesResultsViewOutput.swift in Sources */,
 				85981EDD2BBC4AB300A0DBE7 /* AdminTabBarController.swift in Sources */,
 				85ED3B402BCC2EA000101A5F /* EstimationCell.swift in Sources */,
 				85ED3B742BD03ECF00101A5F /* AdminMainScreenPresenter.swift in Sources */,
@@ -2972,6 +3008,7 @@
 				85F0E2DB2BC480C000D2DBAB /* StudentSettingsPresenter.swift in Sources */,
 				85FDB5932BD1E3BA00C71E28 /* CoursesListViewInput.swift in Sources */,
 				85ED3AE52BCAEDEF00101A5F /* LinksModel.swift in Sources */,
+				8586967B2BEA894C0004F2DD /* DiplomaSpeechesResultsViewController.swift in Sources */,
 				85FDB5322BD09EAA00C71E28 /* CreateStudentModel.swift in Sources */,
 				85ED3AC12BC9549100101A5F /* CourseSelectedModel.swift in Sources */,
 				858696022BE698CE0004F2DD /* DiplomaThemesViewInput.swift in Sources */,
@@ -3020,6 +3057,7 @@
 				85981F172BBD772100A0DBE7 /* CustomNavigationController.swift in Sources */,
 				85FDB5622BD176B200C71E28 /* ProfileViewInput.swift in Sources */,
 				85ED3AD82BCACC6B00101A5F /* Logger.swift in Sources */,
+				858696882BEABF950004F2DD /* SpeechSelectorDelegate.swift in Sources */,
 				85043B012BD470C100FEF431 /* GradesService.swift in Sources */,
 				85043B0E2BD5351100FEF431 /* RootControllerType.swift in Sources */,
 				85F0E2ED2BC4B3D300D2DBAB /* AdminSettingsViewInput.swift in Sources */,
@@ -3032,6 +3070,7 @@
 				85FDB56D2BD19BFA00C71E28 /* StudentDetailsModel.swift in Sources */,
 				85043AFA2BD4657A00FEF431 /* EstimationViewOutput.swift in Sources */,
 				85FDB5772BD1AA9B00C71E28 /* TeacherProfilePresenter.swift in Sources */,
+				858696832BEAB3310004F2DD /* SpeechResultCell.swift in Sources */,
 				85FDB54B2BD14ACD00C71E28 /* AddPersonViewController.swift in Sources */,
 				85043B0B2BD4899B00FEF431 /* StudentCoursesListModuleOutput.swift in Sources */,
 				85043AD02BD3604700FEF431 /* CourseDetailesModuleOutput.swift in Sources */,
@@ -3077,6 +3116,7 @@
 				858696572BE91D190004F2DD /* AdminDiplomaPresenter.swift in Sources */,
 				85043AF42BD4523300FEF431 /* TeacherEventModuleOutput.swift in Sources */,
 				858696762BEA6FE60004F2DD /* StudentDiplomaPresenter.swift in Sources */,
+				858696812BEA897A0004F2DD /* DiplomaSpeechesResultsPresenter.swift in Sources */,
 				85043AA52BD31B8300FEF431 /* StudentEventPresenter.swift in Sources */,
 				85FDB51E2BD0880200C71E28 /* StudentsListViewOutput.swift in Sources */,
 				85FDB5812BD1C54600C71E28 /* AdminPersonalDataPresenter.swift in Sources */,
@@ -3093,6 +3133,7 @@
 				85ED3AC42BCABE4600101A5F /* TFSError.swift in Sources */,
 				85043AEF2BD44FD400FEF431 /* TeacherMainScreenModuleOutput.swift in Sources */,
 				85FDB5AE2BD2933D00C71E28 /* AddTeachersViewController.swift in Sources */,
+				8586967D2BEA895C0004F2DD /* DiplomaSpeechesResultsViewInput.swift in Sources */,
 				85043AFC2BD4674700FEF431 /* EstimationPresenter.swift in Sources */,
 				85981F072BBC9B8700A0DBE7 /* RoleSelectionViewController.swift in Sources */,
 				85ED3ACC2BCAC43D00101A5F /* URLRequestFactory.swift in Sources */,
@@ -3108,6 +3149,7 @@
 				858696702BEA6FAD0004F2DD /* StudentDiplomaViewController.swift in Sources */,
 				85981F0D2BBC9BD000A0DBE7 /* RoleSelectionViewInput.swift in Sources */,
 				85981F1E2BBDE00500A0DBE7 /* Images.swift in Sources */,
+				8586968C2BEAD87F0004F2DD /* DiplomaThemeModel.swift in Sources */,
 				85ED3AD02BCAC57B00101A5F /* MainPageURLRequestFactory.swift in Sources */,
 				85ED3B6C2BD018D800101A5F /* VerificationModuleOutput.swift in Sources */,
 				858696362BE7F7850004F2DD /* ThemeSelectionEventModel.swift in Sources */,
@@ -3133,6 +3175,7 @@
 				85981EDB2BBC49A500A0DBE7 /* TeacherTabBarController.swift in Sources */,
 				85043ABA2BD33D0500FEF431 /* SelectedCoursesModel.swift in Sources */,
 				858696452BE8175E0004F2DD /* ModifyDiplomaSpeechEventPresenter.swift in Sources */,
+				8586968A2BEAD7C90004F2DD /* DiplomaThemeCell.swift in Sources */,
 				85ED3B6A2BD018AB00101A5F /* VerificationPresenter.swift in Sources */,
 				85FDB51C2BD087EC00C71E28 /* StudentsListViewInput.swift in Sources */,
 				85FDB5AC2BD28A8400C71E28 /* AddDependenciesViewController.swift in Sources */,
@@ -3160,6 +3203,7 @@
 				85981EC02BBC22A600A0DBE7 /* SettingsViewController.swift in Sources */,
 				85FDB5DD2BD2DCCA00C71E28 /* EventsModuleOutput.swift in Sources */,
 				85FDB5A42BD287F700C71E28 /* AddDependenceCell.swift in Sources */,
+				858696852BEABE210004F2DD /* SpeechResultModel.swift in Sources */,
 				85F0E2D32BC4720C00D2DBAB /* TitleView.swift in Sources */,
 				858695F12BE50EC00004F2DD /* NotificationsModuleOutput.swift in Sources */,
 				8586965E2BE92FC00004F2DD /* EditDiplomaViewController.swift in Sources */,

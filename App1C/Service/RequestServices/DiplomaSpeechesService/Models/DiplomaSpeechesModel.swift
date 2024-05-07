@@ -13,8 +13,8 @@ struct DiplomaSpeechesModel: Codable {
 
 struct DiplomaSpeecheServiceModel: Codable {
     let studentID: Int
-    let fullName: String
-    let theme: String
+    let fullName: String?
+    let theme: String?
     let result: Bool
     let speechID: Int
     
@@ -22,7 +22,7 @@ struct DiplomaSpeecheServiceModel: Codable {
         case studentID = "student_id"
         case fullName = "full_name"
         case theme = "theme"
-        case result = "resul"
+        case result = "result"
         case speechID = "speech_id"
     }
 }

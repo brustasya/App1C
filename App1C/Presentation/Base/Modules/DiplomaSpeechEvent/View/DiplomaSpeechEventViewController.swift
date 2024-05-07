@@ -349,13 +349,13 @@ class DiplomaSpeechEventViewController: UIViewController {
         switch typeLabel.text {
         case SpeechType.rw1.title:
             return .rw1
-        case SpeechType.rw1.title:
+        case SpeechType.rw2.title:
             return .rw2
-        case SpeechType.rw1.title:
+        case SpeechType.rw3.title:
             return .rw3
-        case SpeechType.rw1.title:
+        case SpeechType.predefending.title:
             return .predefending
-        case SpeechType.rw1.title:
+        case SpeechType.defending.title:
             return .defending
         default:
             return .rw1

@@ -250,6 +250,15 @@ final class AdminAssembly: BaseAssembly {
         return vc
     }
     
+    func makeDiplomaSpeechesResultsModule() -> UIViewController {
+        let presenter = DiplomaSpeechesResultsPresenter(
+            diplomasSpeechesService: serviceAssembly.makeDiplomaSpeechesService()
+        )
+        let vc = DiplomaSpeechesResultsViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
     func makeDiplomaModule(studentID: Int, bachelor: Bool, moduleOutput: AdminDiplomaModuleOutput) -> UIViewController {
         let presenter = AdminDiplomaPresenter(
             studentID: studentID,
