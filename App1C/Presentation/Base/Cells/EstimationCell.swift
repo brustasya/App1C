@@ -23,6 +23,7 @@ class EstimationCell: UITableViewCell, ConfigurableViewProtocol {
     private lazy var gradeModel: GradeModel = GradeModel(grade: 0)
     
     private var studentID: Int = 0
+    private var gradeID: Int = 0
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -112,6 +113,7 @@ class EstimationCell: UITableViewCell, ConfigurableViewProtocol {
         self.gradeModel = model.grade
         editTextField.text = (gradeModel.grade > 0 && gradeModel.grade <= 10) ? "\(gradeModel.grade)" : ""
         self.studentID = model.studentID
+        self.gradeID = model.gradeID
         setupGrade()
     }
     
@@ -123,7 +125,7 @@ class EstimationCell: UITableViewCell, ConfigurableViewProtocol {
             setupGrade()
             
             if let grade = Int(editTextField.text ?? "") {
-                delegate?.estimate(id: studentID, grade: grade)
+                delegate?.estimate(studentID: studentID, gradeID: gradeID, grade: grade)
             }
         } else {
             editButton.setImage(Images.checkmark.uiImage, for: .normal)

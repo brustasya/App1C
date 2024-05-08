@@ -13,18 +13,7 @@ class EstimationViewController: UIViewController {
     private lazy var personsView = UIView()
     private lazy var personTableView = UITableView()
     private lazy var finishEstimatingButton = UIButton()
-    private lazy var persons: [EstimationModel] = [
-        EstimationModel(studentID: 0, name: "Бобрускина Станислава Алексеевна", grade: GradeModel(grade: 0)),
-        EstimationModel(studentID: 0, name: "Лосюков Андрей Михайлович", grade: GradeModel(grade: 10)),
-        EstimationModel(studentID: 0, name: "Кузьмина Екатерина Андреевна", grade: GradeModel(grade: 7)),
-        EstimationModel(studentID: 0, name: "Татьянченко Дмитрий Витальевич", grade: GradeModel(grade: 6)),
-        EstimationModel(studentID: 0, name: "Сергеева Ирина Олеговна", grade: GradeModel(grade: 2)),
-        EstimationModel(studentID: 0, name: "Бобрускина Станислава Алексеевна", grade: GradeModel(grade: 0)),
-        EstimationModel(studentID: 0, name: "Лосюков Андрей Михайлович", grade: GradeModel(grade: 10)),
-        EstimationModel(studentID: 0, name: "Кузьмина Екатерина Андреевна", grade: GradeModel(grade: 7)),
-        EstimationModel(studentID: 0, name: "Татьянченко Дмитрий Витальевич", grade: GradeModel(grade: 6)),
-        EstimationModel(studentID: 0, name: "Сергеева Ирина Олеговна", grade: GradeModel(grade: 2))
-    ]
+    private lazy var persons: [EstimationModel] = []
     
     private var output: EstimationViewOutput
 
@@ -151,11 +140,11 @@ extension EstimationViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 protocol EstimationDelegate: AnyObject {
-    func estimate(id: Int, grade: Int)
+    func estimate(studentID: Int, gradeID: Int, grade: Int)
 }
 
 extension EstimationViewController: EstimationDelegate {
-    func estimate(id: Int, grade: Int) {
-        output.estimate(id: id, grade: grade)
+    func estimate(studentID: Int, gradeID: Int, grade: Int) {
+        output.estimate(id: studentID, grade: grade)
     }
 }

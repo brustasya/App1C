@@ -9,6 +9,7 @@ import Foundation
 
 struct EstimationModel {
     let studentID: Int
+    let gradeID: Int
     let name: String
     let grade: GradeModel
 }

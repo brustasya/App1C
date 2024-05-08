@@ -17,6 +17,7 @@ class StudentDiplomaViewController: UIViewController {
     private lazy var themeTitle = UILabel()
     private lazy var themeView = UIView()
     private lazy var themeTextField = UITextField()
+    private lazy var themeLabel = UILabel()
     
     private lazy var gradeTitle = UILabel()
     
@@ -78,11 +79,22 @@ class StudentDiplomaViewController: UIViewController {
         themeTitle.text = "Тема"
         createTitle(title: themeTitle)
         createLargeTextField(textField: themeTextField, backgroundView: themeView)
+        view.addSubview(themeLabel)
+        themeLabel.translatesAutoresizingMaskIntoConstraints = false
+
         themeTextField.placeholder = "Не указана"
+        themeLabel.textColor = .black
+        themeLabel.font = .systemFont(ofSize: 17)
+        themeLabel.text = "Не указана"
+        themeLabel.numberOfLines = 0
+        themeLabel.isHidden = true
         
         NSLayoutConstraint.activate([
             themeTitle.topAnchor.constraint(equalTo: degreeSelector.bottomAnchor, constant: 25),
-            themeView.topAnchor.constraint(equalTo: themeTitle.bottomAnchor, constant: 5)
+            themeView.topAnchor.constraint(equalTo: themeTitle.bottomAnchor, constant: 5),
+            themeLabel.leadingAnchor.constraint(equalTo: themeTextField.leadingAnchor),
+            themeLabel.topAnchor.constraint(equalTo: themeTextField.topAnchor),
+            themeLabel.trailingAnchor.constraint(lessThanOrEqualTo: themeView.trailingAnchor)
         ])
     }
     
@@ -92,7 +104,7 @@ class StudentDiplomaViewController: UIViewController {
         gradeTitle.font = .systemFont(ofSize: 17, weight: .medium)
         
         NSLayoutConstraint.activate([
-            gradeTitle.topAnchor.constraint(equalTo: themeView.bottomAnchor, constant: 20)
+            gradeTitle.topAnchor.constraint(equalTo: themeLabel.bottomAnchor, constant: 30)
         ])
     }
     
@@ -256,6 +268,13 @@ extension StudentDiplomaViewController: StudentDiplomaViewInput {
             default:
                 themeTitle.text = "Тема"
             }
+            themeLabel.text = model.theme
+            themeLabel.isHidden = false
+            themeTextField.isHidden = true
+        } else {
+            themeLabel.text = "Не указана"
+            themeLabel.isHidden = true
+            themeTextField.isHidden = false
         }
     }
 }

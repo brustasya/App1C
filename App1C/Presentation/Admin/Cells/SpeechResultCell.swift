@@ -61,7 +61,7 @@ class SpeechResultCell: UITableViewCell, ConfigurableViewProtocol {
             nameLabel.leadingAnchor.constraint(equalTo: contentBackgroundView.leadingAnchor, constant: 15),
             themeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             themeLabel.leadingAnchor.constraint(equalTo: contentBackgroundView.leadingAnchor, constant: 15),
-            themeLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentBackgroundView.trailingAnchor, constant: -10),
+            themeLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentBackgroundView.trailingAnchor, constant: -15),
             checkButton.topAnchor.constraint(equalTo: themeLabel.bottomAnchor, constant: 8),
             checkButton.trailingAnchor.constraint(equalTo: contentBackgroundView.trailingAnchor, constant: -10),
             resultLabel.trailingAnchor.constraint(equalTo: checkButton.leadingAnchor, constant: -5),

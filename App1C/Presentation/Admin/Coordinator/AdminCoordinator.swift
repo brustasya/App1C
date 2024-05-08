@@ -141,7 +141,8 @@ extension AdminCoordinator: AdminSettingsModuleOutput {
     }
     
     func moduleWantsToOpenSRWGrades() {
-        
+        let gradesVC = adminAssembly.makeDiplomaEstimatingResultsModule()
+        settingsNavigationController.pushViewController(gradesVC, animated: true)
     }
     
     func moduleWantsToOpenTeachersList() {

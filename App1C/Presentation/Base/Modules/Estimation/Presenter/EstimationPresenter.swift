@@ -59,7 +59,7 @@ class EstimationPresenter {
             [weak self] result in
             switch result {
             case .success(let model):
-                let students = model.students.map({ EstimationModel(studentID: $0.id, name: $0.fullName, grade: GradeModel(grade: $0.grade ?? 0)) })
+                let students = model.students.map({ EstimationModel(studentID: $0.id, gradeID: 0, name: $0.fullName, grade: GradeModel(grade: $0.grade ?? 0)) })
                 self?.finishEstimatiom = model.estimationFinished ?? false
                 DispatchQueue.main.async {
                     self?.viewInput?.setupGrades(grades: students)

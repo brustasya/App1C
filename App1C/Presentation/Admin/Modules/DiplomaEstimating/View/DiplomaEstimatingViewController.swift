@@ -1,13 +1,13 @@
 //
-//  DiplomaSpeechesResultsViewController.swift
+//  DiplomaEstimatingViewController.swift
 //  App1C
 //
-//  Created by Станислава on 07.05.2024.
+//  Created by Станислава on 08.05.2024.
 //
 
 import UIKit
 
-final class DiplomaSpeechesResultsViewController: UIViewController {
+final class DiplomaEstimatingViewController: UIViewController {
     
     private lazy var titleLabel = UILabel()
     private lazy var addStudentButton = UIButton()
@@ -15,11 +15,11 @@ final class DiplomaSpeechesResultsViewController: UIViewController {
     private lazy var speechSelector = UIView()
     private lazy var studentsView = UIView()
     private lazy var studentsTableView = UITableView()
-    private lazy var students: [SpeechResultModel] = []
+    private lazy var students: [EstimationModel] = []
     
-    private var output: DiplomaSpeechesResultsViewOutput
+    private var output: DiplomaEstimatingViewOutput
 
-    init(output: DiplomaSpeechesResultsViewOutput) {
+    init(output: DiplomaEstimatingViewOutput) {
         self.output = output
         super.init(nibName: nil, bundle: nil)
     }
@@ -61,20 +61,19 @@ final class DiplomaSpeechesResultsViewController: UIViewController {
         )
         view.addSubview(degreeSelector)
         
-        let speeches = ["НИР 1", "НИР 2", "НИР 3", "Предзащита",]
+        let speeches = ["Осень", "Весна", "Итог"]
         speechSelector = SelectorView(
-            frame: CGRect(x: view.frame.midX - 175, y: degreeSelector.frame.maxY + 20, width: 350, height: 40),
+            frame: CGRect(x: view.frame.midX - 150, y: degreeSelector.frame.maxY + 20, width: 300, height: 40),
             buttonsTitles: speeches,
             delegate: self,
-            width: 80,
-            color: Colors.yellow.uiColor,
-            fontSize: 12
+            width: 100,
+            color: Colors.yellow.uiColor
         )
         view.addSubview(speechSelector)
     }
     
     private func setupTableView() {
-        studentsTableView.register(SpeechResultCell.self, forCellReuseIdentifier: "SpeechResultCell")
+        studentsTableView.register(EstimationCell.self, forCellReuseIdentifier: "EstimationCell")
         studentsTableView.delegate = self
         studentsTableView.dataSource = self
         
@@ -90,7 +89,6 @@ final class DiplomaSpeechesResultsViewController: UIViewController {
         studentsTableView.layer.borderColor = UIColor.clear.cgColor
         studentsTableView.layer.cornerRadius = 0
         studentsTableView.isScrollEnabled = true
-        studentsTableView.separatorColor = .clear
         
         view.addSubview(studentsView)
         studentsView.addSubview(studentsTableView)
@@ -110,27 +108,25 @@ final class DiplomaSpeechesResultsViewController: UIViewController {
     }
 }
 
-extension DiplomaSpeechesResultsViewController: DiplomaSpeechesResultsViewInput {
-    func setupStudents(students: [SpeechResultModel]) {
+extension DiplomaEstimatingViewController: DiplomaEstimatingViewInput {
+    func setupStudents(students: [EstimationModel]) {
         self.students = students
         studentsTableView.reloadData()
     }
 }
 
-extension DiplomaSpeechesResultsViewController: SelectorDelegate {
+extension DiplomaEstimatingViewController: SelectorDelegate {
     func select(at index: Int, sender: SelectorView) {
         if sender == degreeSelector {
             output.selectDegree(bachelor: index == 0)
         } else {
             switch index {
             case 0:
-                output.selectSpeech(type: .rw1)
+                output.selectGrade(type: .autumn)
             case 1:
-                output.selectSpeech(type: .rw2)
+                output.selectGrade(type: .spring)
             case 2:
-                output.selectSpeech(type: .rw3)
-            case 3:
-                output.selectSpeech(type: .predefending)
+                output.selectGrade(type: .final)
             default:
                 break
             }
@@ -138,28 +134,31 @@ extension DiplomaSpeechesResultsViewController: SelectorDelegate {
     }
 }
 
-extension DiplomaSpeechesResultsViewController: SpeechSelectorDelegate {
-    func select(studentID: Int, speechID: Int) {
-        output.addResult(studentID: studentID, speechID: speechID, result: true)
-    }
-    
-    func unSelect(studentID: Int, speechID: Int) {
-        output.addResult(studentID: studentID, speechID: speechID, result: false)
+extension DiplomaEstimatingViewController: EstimationDelegate {
+    func estimate(studentID: Int, gradeID: Int, grade: Int) {
+        output.estimate(studentID: studentID, gradeID: gradeID, grade: grade)
     }
 }
 
-extension DiplomaSpeechesResultsViewController: UITableViewDataSource, UITableViewDelegate {
+extension DiplomaEstimatingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return students.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SpeechResultCell", for: indexPath) as? SpeechResultCell else {
-            fatalError("Cannot create SpeechResultCell")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "EstimationCell", for: indexPath) as? EstimationCell else {
+            fatalError("Cannot create EstimationCell")
         }
         cell.configure(with: students[indexPath.row])
         cell.delegate = self
         cell.selectionStyle = .none
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
 }
+
+
+

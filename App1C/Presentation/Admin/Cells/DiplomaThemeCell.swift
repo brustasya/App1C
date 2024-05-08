@@ -48,7 +48,7 @@ class DiplomaThemeCell: UITableViewCell, ConfigurableViewProtocol {
             nameLabel.leadingAnchor.constraint(equalTo: contentBackgroundView.leadingAnchor, constant: 15),
             themeLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
             themeLabel.leadingAnchor.constraint(equalTo: contentBackgroundView.leadingAnchor, constant: 15),
-            themeLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentBackgroundView.trailingAnchor, constant: -10),
+            themeLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentBackgroundView.trailingAnchor, constant: -15),
             contentBackgroundView.bottomAnchor.constraint(equalTo: themeLabel.bottomAnchor, constant: 15),
             contentView.bottomAnchor.constraint(equalTo: contentBackgroundView.bottomAnchor, constant: 8)
         ])
