@@ -47,6 +47,18 @@ class BaseAssembly {
         return vc
     }
     
+    func makeCourseDependensiesModule(moduleOutput: CourseDependensiesModuleOutput, courseID: Int, courseTitle: String) -> UIViewController {
+        let presenter = CourseDependensiesPresenter(
+            moduleOutput: moduleOutput,
+            coursesService: serviceAssembly.makeCoursesService(),
+            courseID: courseID,
+            courseTitle: courseTitle
+        )
+        let vc = CourseDependensiesViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
     func makeNotificationsModule(moduleOutput: NotificationsModuleOutput) -> UIViewController {
         let presenter = NotificationsPresenter(
             moduleOutput: moduleOutput,

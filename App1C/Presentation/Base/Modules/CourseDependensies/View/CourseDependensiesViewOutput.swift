@@ -1,5 +1,5 @@
 //
-//  CoursePersonListViewOutput.swift
+//  CourseDependensiesViewOutput.swift
 //  App1C
 //
 //  Created by Станислава on 08.05.2024.
@@ -7,9 +7,8 @@
 
 import UIKit
 
-protocol CoursePersonListViewOutput: AnyObject {
+protocol CourseDependensiesViewOutput: AnyObject {
     func viewIsReady()
     func viewWillAppear()
-    func selectedRowAt(index: Int, controller: UINavigationController?)
     func addButtonTapped(controller: UINavigationController?)
 }

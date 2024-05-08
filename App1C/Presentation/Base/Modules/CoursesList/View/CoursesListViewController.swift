@@ -126,7 +126,7 @@ extension CoursesListViewController: CoursesListViewInput {
         titleLabel.text = title
     }
     
-    func setupStudents(courses: [CourseModel]) {
+    func setupCourses(courses: [CourseModel]) {
         self.courses = courses
         scrollView.contentSize.height = CGFloat(courses.count * 80 + 20)
         coursesTableView.reloadData()

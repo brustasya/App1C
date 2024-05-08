@@ -36,6 +36,7 @@ class CoursePersonListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        output.viewWillAppear()
         navigationItem.hidesBackButton = true
         (navigationController as? CustomNavigationController)?.setupBackButton()
         (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -78,7 +79,8 @@ class CoursePersonListViewController: UIViewController {
         personTableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            personTableView.heightAnchor.constraint(equalToConstant: CGFloat(Double(persons.count * 50) - 0.5)),
+            //personTableView.heightAnchor.constraint(equalToConstant: CGFloat(300)),
+            personTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             personsView.heightAnchor.constraint(equalTo: personTableView.heightAnchor, constant: 60),
             personsView.bottomAnchor.constraint(equalTo: personTableView.bottomAnchor, constant: 15),
             personsView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10)
@@ -102,6 +104,11 @@ extension CoursePersonListViewController: CoursePersonListViewInput {
     
     func updateTitle(title: String) {
         titleLabel.text = title
+    }
+    
+    func updatePersons(with persons: [BaseModel]) {
+        self.persons = persons
+        personTableView.reloadData()
     }
     
     func setupAddButton(title: String) {

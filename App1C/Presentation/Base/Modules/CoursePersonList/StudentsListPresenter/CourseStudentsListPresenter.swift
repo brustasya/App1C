@@ -48,6 +48,8 @@ class CourseStudentsListPresenter {
 }
 
 extension CourseStudentsListPresenter: CoursePersonListViewOutput {
+    func viewWillAppear() { }
+    
     func viewIsReady() {
         viewInput?.updateTitle(title: courseTitle)
         getStudents()

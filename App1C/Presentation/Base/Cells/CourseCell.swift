@@ -37,47 +37,53 @@ class CourseCell: UITableViewCell, ConfigurableViewProtocol {
         contentBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            contentBackgroundView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            contentBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
             contentBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             contentBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            contentBackgroundView.heightAnchor.constraint(equalToConstant: 65),
             
-            titleLabel.centerYAnchor.constraint(equalTo: contentBackgroundView.centerYAnchor),
+            titleLabel.topAnchor.constraint(equalTo: contentBackgroundView.topAnchor, constant: 20),
             titleLabel.leadingAnchor.constraint(equalTo: contentBackgroundView.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: forwardButton.leadingAnchor, constant: -8),
-            titleLabel.heightAnchor.constraint(equalToConstant: 35.9),
+
+            contentBackgroundView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             
             forwardButton.heightAnchor.constraint(equalToConstant: 20),
             forwardButton.trailingAnchor.constraint(equalTo: contentBackgroundView.trailingAnchor, constant: -10),
-            forwardButton.centerYAnchor.constraint(equalTo: contentBackgroundView.centerYAnchor)
+            forwardButton.centerYAnchor.constraint(equalTo: contentBackgroundView.centerYAnchor),
+            
+            contentView.bottomAnchor.constraint(equalTo: contentBackgroundView.bottomAnchor, constant: 10)
         ])
         
         titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         titleLabel.textColor = .black
-        titleLabel.numberOfLines = 2
+        titleLabel.numberOfLines = 0
         
         forwardButton.image = Images.forward.uiImage
         forwardButton.tintColor = .gray
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        contentView.backgroundColor = .white
-        if selected {
-            UIView.animate(withDuration: 0.3, animations: {
-                self.contentBackgroundView.backgroundColor = .systemGray6
-            }, completion: { finished in
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.contentBackgroundView.backgroundColor = Colors.lightYellow.uiColor
-                })
-            })
-        } else {
-            contentBackgroundView.backgroundColor = Colors.lightYellow.uiColor
-        }
-    }
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//        contentView.backgroundColor = .white
+//        if selected {
+//            UIView.animate(withDuration: 0.3, animations: {
+//                self.contentBackgroundView.backgroundColor = .systemGray6
+//            }, completion: { finished in
+//                UIView.animate(withDuration: 0.3, animations: {
+//                    self.contentBackgroundView.backgroundColor = Colors.lightYellow.uiColor
+//                })
+//            })
+//        } else {
+//            contentBackgroundView.backgroundColor = Colors.lightYellow.uiColor
+//        }
+//    }
     
     func configure(with model: ConfigurationModel) {
         titleLabel.text = model.title
+    }
+    
+    func hideButton() {
+        forwardButton.isHidden = true
     }
    
     override func prepareForReuse() {

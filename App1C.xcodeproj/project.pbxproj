@@ -133,6 +133,11 @@
 		858696AF2BEBDAD30004F2DD /* CourseStudentsListModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696AE2BEBDAD30004F2DD /* CourseStudentsListModuleOutput.swift */; };
 		858696B12BEBDC740004F2DD /* CourseTeachersListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696B02BEBDC740004F2DD /* CourseTeachersListPresenter.swift */; };
 		858696B32BEBDC950004F2DD /* CourseTeachersListModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696B22BEBDC950004F2DD /* CourseTeachersListModuleOutput.swift */; };
+		858696B72BEBFFA90004F2DD /* CourseDependensiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696B62BEBFFA90004F2DD /* CourseDependensiesViewController.swift */; };
+		858696B92BEBFFBF0004F2DD /* CourseDependensiesViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696B82BEBFFBF0004F2DD /* CourseDependensiesViewInput.swift */; };
+		858696BB2BEBFFD00004F2DD /* CourseDependensiesViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696BA2BEBFFD00004F2DD /* CourseDependensiesViewOutput.swift */; };
+		858696BE2BEC07A70004F2DD /* CourseDependensiesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696BD2BEC07A70004F2DD /* CourseDependensiesPresenter.swift */; };
+		858696C02BEC07CD0004F2DD /* CourseDependensiesModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858696BF2BEC07CD0004F2DD /* CourseDependensiesModuleOutput.swift */; };
 		85981EA42BB5E26800A0DBE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA32BB5E26800A0DBE7 /* AppDelegate.swift */; };
 		85981EA62BB5E26800A0DBE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA52BB5E26800A0DBE7 /* SceneDelegate.swift */; };
 		85981EA82BB5E26800A0DBE7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85981EA72BB5E26800A0DBE7 /* ViewController.swift */; };
@@ -485,6 +490,11 @@
 		858696AE2BEBDAD30004F2DD /* CourseStudentsListModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseStudentsListModuleOutput.swift; sourceTree = "<group>"; };
 		858696B02BEBDC740004F2DD /* CourseTeachersListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTeachersListPresenter.swift; sourceTree = "<group>"; };
 		858696B22BEBDC950004F2DD /* CourseTeachersListModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTeachersListModuleOutput.swift; sourceTree = "<group>"; };
+		858696B62BEBFFA90004F2DD /* CourseDependensiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDependensiesViewController.swift; sourceTree = "<group>"; };
+		858696B82BEBFFBF0004F2DD /* CourseDependensiesViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDependensiesViewInput.swift; sourceTree = "<group>"; };
+		858696BA2BEBFFD00004F2DD /* CourseDependensiesViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDependensiesViewOutput.swift; sourceTree = "<group>"; };
+		858696BD2BEC07A70004F2DD /* CourseDependensiesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDependensiesPresenter.swift; sourceTree = "<group>"; };
+		858696BF2BEC07CD0004F2DD /* CourseDependensiesModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDependensiesModuleOutput.swift; sourceTree = "<group>"; };
 		85981EA02BB5E26800A0DBE7 /* App1C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App1C.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85981EA32BB5E26800A0DBE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85981EA52BB5E26800A0DBE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -1375,6 +1385,34 @@
 			path = TeachersListPresenter;
 			sourceTree = "<group>";
 		};
+		858696B42BEBFF770004F2DD /* CourseDependensies */ = {
+			isa = PBXGroup;
+			children = (
+				858696BC2BEC07540004F2DD /* Presenter */,
+				858696B52BEBFF890004F2DD /* View */,
+			);
+			path = CourseDependensies;
+			sourceTree = "<group>";
+		};
+		858696B52BEBFF890004F2DD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				858696B62BEBFFA90004F2DD /* CourseDependensiesViewController.swift */,
+				858696B82BEBFFBF0004F2DD /* CourseDependensiesViewInput.swift */,
+				858696BA2BEBFFD00004F2DD /* CourseDependensiesViewOutput.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		858696BC2BEC07540004F2DD /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				858696BD2BEC07A70004F2DD /* CourseDependensiesPresenter.swift */,
+				858696BF2BEC07CD0004F2DD /* CourseDependensiesModuleOutput.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		85981E972BB5E26800A0DBE7 = {
 			isa = PBXGroup;
 			children = (
@@ -2178,6 +2216,7 @@
 		85ED3B3D2BCC2E0A00101A5F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				858696B42BEBFF770004F2DD /* CourseDependensies */,
 				8586964C2BE90C2D0004F2DD /* Diploma */,
 				858696252BE7CE750004F2DD /* DiplomaSpeechEvent */,
 				858696192BE79AE60004F2DD /* ThemeSelectionEvent */,
@@ -3013,11 +3052,13 @@
 				85FDB55D2BD1603A00C71E28 /* CreateUserModel.swift in Sources */,
 				85FDB5992BD1EA2D00C71E28 /* CoursesService.swift in Sources */,
 				85ED3B572BCEFC6100101A5F /* CreateEventModel.swift in Sources */,
+				858696B92BEBFFBF0004F2DD /* CourseDependensiesViewInput.swift in Sources */,
 				85F0E2DD2BC480D700D2DBAB /* StudentSettingsModuleOutput.swift in Sources */,
 				85ED3B592BCEFE7500101A5F /* EventsService.swift in Sources */,
 				85ED3B682BD0189B00101A5F /* VerificationViewOutput.swift in Sources */,
 				85043AE12BD42A3800FEF431 /* FinalCourseSelectionViewInput.swift in Sources */,
 				858696002BE698920004F2DD /* DiplomaThemesViewController.swift in Sources */,
+				858696B72BEBFFA90004F2DD /* CourseDependensiesViewController.swift in Sources */,
 				85ED3B282BCB303400101A5F /* CurrentEventsModel.swift in Sources */,
 				85FDB55B2BD152AA00C71E28 /* AddTeacherModuleOutput.swift in Sources */,
 				85F0E3052BC5AC5300D2DBAB /* AdminListModuleOutput.swift in Sources */,
@@ -3106,6 +3147,7 @@
 				8586966B2BEA4FE40004F2DD /* DiplomaServiceModel.swift in Sources */,
 				85ED3AF72BCB044000101A5F /* VerificationURLRequestFactory.swift in Sources */,
 				85FDB5D52BD2DC2300C71E28 /* EventViewOutput.swift in Sources */,
+				858696C02BEC07CD0004F2DD /* CourseDependensiesModuleOutput.swift in Sources */,
 				85F0E2EF2BC4B3E200D2DBAB /* AdminSettingsViewOutput.swift in Sources */,
 				85F0E2B32BC0661300D2DBAB /* TeacherSettingsViewController.swift in Sources */,
 				85F0E30A2BC5EA2300D2DBAB /* DayTimeModel.swift in Sources */,
@@ -3168,6 +3210,7 @@
 				85981F172BBD772100A0DBE7 /* CustomNavigationController.swift in Sources */,
 				85FDB5622BD176B200C71E28 /* ProfileViewInput.swift in Sources */,
 				85ED3AD82BCACC6B00101A5F /* Logger.swift in Sources */,
+				858696BE2BEC07A70004F2DD /* CourseDependensiesPresenter.swift in Sources */,
 				858696882BEABF950004F2DD /* SpeechSelectorDelegate.swift in Sources */,
 				85043B012BD470C100FEF431 /* GradesService.swift in Sources */,
 				85043B0E2BD5351100FEF431 /* RootControllerType.swift in Sources */,
@@ -3289,6 +3332,7 @@
 				85FDB5B62BD296A800C71E28 /* AddTeachersViewOutput.swift in Sources */,
 				85ED3B092BCB062800101A5F /* UsersListURLRequestFactory.swift in Sources */,
 				8586962F2BE7DDDB0004F2DD /* SpeechType.swift in Sources */,
+				858696BB2BEBFFD00004F2DD /* CourseDependensiesViewOutput.swift in Sources */,
 				85ED3B662BD0188600101A5F /* VerificationViewInput.swift in Sources */,
 				85981EDB2BBC49A500A0DBE7 /* TeacherTabBarController.swift in Sources */,
 				85043ABA2BD33D0500FEF431 /* SelectedCoursesModel.swift in Sources */,

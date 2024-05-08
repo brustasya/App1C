@@ -11,4 +11,5 @@ protocol CoursePersonListViewInput: AnyObject {
     func setupPersonTable(with persons: [BaseModel], title: String)
     func updateTitle(title: String)
     func setupAddButton(title: String)
+    func updatePersons(with persons: [BaseModel])
 }

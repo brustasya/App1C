@@ -9,7 +9,7 @@ import UIKit
 
 protocol CourseDetailesModuleOutput: AnyObject {
     func moduleWantsToOpenEditModule(id: Int, navigationController: UINavigationController?)
-    func moduleWantsToOpenDeps(navigationController: UINavigationController?)
+    func moduleWantsToOpenDeps(courseID: Int, courseTitle: String, navigationController: UINavigationController?)
     func moduleWantsToOpenStudents(courseID: Int, courseTitle: String, navigationController: UINavigationController?)
     func moduleWantsToOpenTeachers(courseID: Int, courseTitle: String, navigationController: UINavigationController?)
 }

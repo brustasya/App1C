@@ -38,7 +38,7 @@ class CourseTeachersListPresenter {
                 })
                 self?.teachers = teachers
                 DispatchQueue.main.async {
-                    self?.viewInput?.setupPersonTable(with: teachers, title: "Преподаватели")
+                    self?.viewInput?.updatePersons(with: teachers)
                 }
             case .failure(let failure):
                 Logger.shared.printLog(log: "Failed load teachers: \(failure)")
@@ -48,10 +48,15 @@ class CourseTeachersListPresenter {
 }
 
 extension CourseTeachersListPresenter: CoursePersonListViewOutput {
+    func viewWillAppear() {
+        getTeachers()
+    }
+    
     func viewIsReady() {
         viewInput?.updateTitle(title: courseTitle)
+        viewInput?.setupPersonTable(with: teachers, title: "Преподаватели")
         if TokenService.shared.role == .admin {
-            viewInput?.setupAddButton(title: "Добавить преподавателя")
+            viewInput?.setupAddButton(title: "Добавить преподавателей")
         }
         getTeachers()
     }

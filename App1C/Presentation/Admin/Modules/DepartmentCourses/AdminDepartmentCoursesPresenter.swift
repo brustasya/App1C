@@ -32,7 +32,7 @@ final class AdminDepartmentCoursesPresenter {
                 })
                 self?.courses = courses
                 DispatchQueue.main.async {
-                    self?.viewInput?.setupStudents(courses: courses)
+                    self?.viewInput?.setupCourses(courses: courses)
                 }
             case .failure(let error):
                 Logger.shared.printLog(log: "Failed load courses: \(error)")

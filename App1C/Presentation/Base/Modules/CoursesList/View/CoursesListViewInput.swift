@@ -9,7 +9,7 @@ import Foundation
 
 protocol CoursesListViewInput: AnyObject {
     func setupTitle(title: String)
-    func setupStudents(courses: [CourseModel])
+    func setupCourses(courses: [CourseModel])
     func setupBaseMode()
     func setupAdminMode()
 }

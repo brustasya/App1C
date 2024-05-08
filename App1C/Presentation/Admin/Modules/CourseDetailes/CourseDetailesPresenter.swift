@@ -106,7 +106,7 @@ extension CourseDetailesPresenter: CourseViewOutput {
         case 1:
             moduleOutput?.moduleWantsToOpenStudents(courseID: self.id, courseTitle: courseTitle, navigationController: navigationController)
         case 2:
-            moduleOutput?.moduleWantsToOpenDeps(navigationController: navigationController)
+            moduleOutput?.moduleWantsToOpenDeps(courseID: self.id, courseTitle: courseTitle, navigationController: navigationController)
         case 3:
             break
         default:

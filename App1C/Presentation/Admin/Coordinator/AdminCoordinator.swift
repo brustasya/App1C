@@ -110,6 +110,13 @@ extension AdminCoordinator: CourseTeachersListModuleOutput {
     
 }
 
+extension AdminCoordinator: CourseDependensiesModuleOutput {
+    func addButtonTapped(courseID: Int, controller: UINavigationController?) {
+        
+    }
+    
+}
+
 extension AdminCoordinator: CourseDetailesModuleOutput {
     func moduleWantsToOpenStudents(courseID: Int, courseTitle: String, navigationController: UINavigationController?) {
         let studentsVC = adminAssembly.makeCourseStudentsListModule(moduleOutput: self, courseID: courseID, courseTitle: courseTitle)
@@ -126,8 +133,9 @@ extension AdminCoordinator: CourseDetailesModuleOutput {
         navigationController?.pushViewController(editCourseVC, animated: true)
     }
     
-    func moduleWantsToOpenDeps(navigationController: UINavigationController?) {
-        
+    func moduleWantsToOpenDeps(courseID: Int, courseTitle: String, navigationController: UINavigationController?) {
+        let depsVC = adminAssembly.makeCourseDependensiesModule(moduleOutput: self, courseID: courseID, courseTitle: courseTitle)
+        navigationController?.pushViewController(depsVC, animated: true)
     }
     
 }
