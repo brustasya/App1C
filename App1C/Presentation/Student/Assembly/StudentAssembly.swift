@@ -32,7 +32,8 @@ final class StudentAssembly: BaseAssembly {
     
     func makeDiplomaModule() -> UIViewController {
         let presenter = StudentDiplomaPresenter(
-            diplomasInfoService: serviceAssembly.makeDiplomasInfoService()
+            diplomasInfoService: serviceAssembly.makeDiplomasInfoService(), 
+            diplomasSpeechesService: serviceAssembly.makeDiplomaSpeechesService()
         )
         let vc = StudentDiplomaViewController(output: presenter)
         presenter.viewInput = vc

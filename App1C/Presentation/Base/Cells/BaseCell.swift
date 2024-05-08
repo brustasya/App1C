@@ -87,5 +87,3 @@ class BaseCell: UITableViewCell, ConfigurableViewProtocol {
         leftImageView.image = nil
     }
 }
-
-

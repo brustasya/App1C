@@ -9,6 +9,7 @@ import Foundation
 
 protocol TokenServiceProtocol: AnyObject {
     var roles: [Roles] { get }
+    var role: Roles { get set }
     var token: String { get set }
     var refreshToken: String { get set }
     var id: Int { get set }
@@ -19,6 +20,7 @@ protocol TokenServiceProtocol: AnyObject {
 
 final class TokenService: TokenServiceProtocol {
     var roles: [Roles] = []
+    var role: Roles = .student
     var token: String = ""
     var refreshToken: String = ""
     var id: Int = 0

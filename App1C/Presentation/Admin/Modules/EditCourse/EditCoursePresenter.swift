@@ -137,6 +137,14 @@ class EditCoursePresenter {
 }
 
 extension EditCoursePresenter: CourseViewOutput {
+    func addDepsButtonTapped(controller: UINavigationController?) {
+        
+    }
+    
+    func addTeachersButtonTapped(controller: UINavigationController?) {
+        
+    }
+    
     func viewWillAppear() { }
     
     func selectItem(id: Int, navigationController: UINavigationController?) {}
@@ -146,10 +154,6 @@ extension EditCoursePresenter: CourseViewOutput {
         viewInput?.setupEditMode()
         getCourse()
     }
-    
-    func addDepsButtonTapped() { }
-    
-    func addTeachersButtonTapped() { }
     
     func addButtonTapped(name: String, chat: String, type: String, descr: String) { }
     

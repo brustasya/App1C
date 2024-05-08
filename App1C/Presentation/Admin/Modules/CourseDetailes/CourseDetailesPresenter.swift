@@ -16,6 +16,7 @@ class CourseDetailesPresenter {
     
     private lazy var teachers: [Int] = []
     private lazy var courses: [Int] = []
+    private lazy var courseTitle: String = ""
     
     init(
         id: Int,
@@ -42,6 +43,7 @@ class CourseDetailesPresenter {
                         to = Date.toDate(dateString: day.to)
                     }
                 }
+                self?.courseTitle = model.title
                 let type = (self?.getType(type: model.type ?? "")) ?? "Не указан"
                 DispatchQueue.main.async {
                     self?.viewInput?.setTitle(title: model.title)
@@ -100,9 +102,9 @@ extension CourseDetailesPresenter: CourseViewOutput {
     func selectItem(id: Int, navigationController: UINavigationController?) {
         switch id {
         case 0:
-            moduleOutput?.moduleWantsToOpenTeachers(navigationController: navigationController)
+            moduleOutput?.moduleWantsToOpenTeachers(courseID: self.id, courseTitle: courseTitle, navigationController: navigationController)
         case 1:
-            moduleOutput?.moduleWantsToOpenStudents(navigationController: navigationController)
+            moduleOutput?.moduleWantsToOpenStudents(courseID: self.id, courseTitle: courseTitle, navigationController: navigationController)
         case 2:
             moduleOutput?.moduleWantsToOpenDeps(navigationController: navigationController)
         case 3:
@@ -120,9 +122,9 @@ extension CourseDetailesPresenter: CourseViewOutput {
         //viewInput?.setupEditMode()
     }
     
-    func addDepsButtonTapped() { }
+    func addDepsButtonTapped(controller: UINavigationController?) { }
     
-    func addTeachersButtonTapped() { }
+    func addTeachersButtonTapped(controller: UINavigationController?) { }
     
     func addButtonTapped(name: String, chat: String, type: String, descr: String) { }
     

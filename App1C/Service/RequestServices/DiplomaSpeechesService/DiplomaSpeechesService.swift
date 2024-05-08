@@ -12,6 +12,7 @@ protocol DiplomaSpeechesServiceProtocol: AnyObject {
     func result(studentID: Int, speechID: Int, result: Bool, completion: @escaping (Result<Data?, Error>) -> Void)
     func getGrades(type: String, bachelor: Bool, completion: @escaping (Result<DiplomaGradesModel, Error>) -> Void)
     func estimate(studentID: Int, gradeID: Int, result: Int, completion: @escaping (Result<Data?, Error>) -> Void)
+    func getSpeeches(studentID: Int, bachelor: Bool, completion: @escaping (Result<DiplomaSpeechesResultsServiceModel, Error>) -> Void)
 }
 
 class DiplomaSpeechesService: DiplomaSpeechesServiceProtocol {
@@ -28,6 +29,15 @@ class DiplomaSpeechesService: DiplomaSpeechesServiceProtocol {
     func getSpeeches(type: String, bachelor: Bool, completion: @escaping (Result<DiplomaSpeechesModel, Error>) -> Void) {
         do {
             let request = try requestFactory.getSpeeches(type: type, bachelor: bachelor)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func getSpeeches(studentID: Int, bachelor: Bool, completion: @escaping (Result<DiplomaSpeechesResultsServiceModel, Error>) -> Void) {
+        do {
+            let request = try requestFactory.getSpeeches(studentID: studentID, bachelor: bachelor)
             networkService.sendRequest(request, completion: completion)
         } catch {
             completion(.failure(error))

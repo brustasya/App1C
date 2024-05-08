@@ -91,21 +91,42 @@ extension AdminCoordinator: AdminDepartmentCoursesModuleOutput {
     }
 }
 
+extension AdminCoordinator: CourseStudentsListModuleOutput {
+    func moduleWantsToOpenStudent(studentID: Int, controller: UINavigationController?) {
+        let studentVC = adminAssembly.makeStudentProfileModule(for: studentID)
+        controller?.pushViewController(studentVC, animated: true)
+    }
+}
+
+extension AdminCoordinator: CourseTeachersListModuleOutput {
+    func moduleWantsToOpenTeacher(teacherID: Int, controller: UINavigationController?) {
+        let teacherVC = adminAssembly.makeTeacherProfileModule(for: teacherID)
+        controller?.pushViewController(teacherVC, animated: true)
+    }
+    
+    func moduleWantsToAddTeachers(courseID: Int, controller: UINavigationController?) {
+        
+    }
+    
+}
+
 extension AdminCoordinator: CourseDetailesModuleOutput {
+    func moduleWantsToOpenStudents(courseID: Int, courseTitle: String, navigationController: UINavigationController?) {
+        let studentsVC = adminAssembly.makeCourseStudentsListModule(moduleOutput: self, courseID: courseID, courseTitle: courseTitle)
+        navigationController?.pushViewController(studentsVC, animated: true)
+    }
+    
+    func moduleWantsToOpenTeachers(courseID: Int, courseTitle: String, navigationController: UINavigationController?) {
+        let teachersVC = adminAssembly.makeCourseTeachersListModule(moduleOutput: self, courseID: courseID, courseTitle: courseTitle)
+        navigationController?.pushViewController(teachersVC, animated: true)
+    }
+    
     func moduleWantsToOpenEditModule(id: Int, navigationController: UINavigationController?) {
         let editCourseVC = adminAssembly.makeCourseEditModule(id: id)
         navigationController?.pushViewController(editCourseVC, animated: true)
     }
     
     func moduleWantsToOpenDeps(navigationController: UINavigationController?) {
-        
-    }
-    
-    func moduleWantsToOpenStudents(navigationController: UINavigationController?) {
-        
-    }
-    
-    func moduleWantsToOpenTeachers(navigationController: UINavigationController?) {
         
     }
     
@@ -255,14 +276,14 @@ extension AdminCoordinator: AddStudentModuleOutput {
 }
 
 extension AdminCoordinator: AddCourseModuleOutput {
-    func moduleWantsToOpenAddDeps(delegate: CourseDelegate) {
+    func moduleWantsToOpenAddDeps(delegate: CourseDelegate, controller: UINavigationController?) {
         let addDepsVC = adminAssembly.makeAddDependenciesModule(id: -1, delegate: delegate)
-        settingsNavigationController.pushViewController(addDepsVC, animated: true)
+        controller?.pushViewController(addDepsVC, animated: true)
     }
     
-    func moduleWantsToOpenAddTeachers(delegate: CourseDelegate) {
+    func moduleWantsToOpenAddTeachers(delegate: CourseDelegate, controller: UINavigationController?) {
         let addTeachersVC = adminAssembly.makeAddTeachersModule(id: -1, delegate: delegate)
-        settingsNavigationController.pushViewController(addTeachersVC, animated: true)
+        controller?.pushViewController(addTeachersVC, animated: true)
     }
 }
 

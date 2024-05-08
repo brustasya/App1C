@@ -524,11 +524,11 @@ class CourseViewController: UIViewController {
     }
     
     @objc func addDependencies() {
-        output.addDepsButtonTapped()
+        output.addDepsButtonTapped(controller: navigationController)
     }
     
     @objc func addTeachers() {
-        output.addTeachersButtonTapped()
+        output.addTeachersButtonTapped(controller: navigationController)
     }
     
     @objc func editProfile() {

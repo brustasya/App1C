@@ -1,13 +1,13 @@
 //
-//  PersonListViewController.swift
+//  CoursePersonListViewController.swift
 //  App1C
 //
-//  Created by Станислава on 09.04.2024.
+//  Created by Станислава on 08.05.2024.
 //
 
 import UIKit
 
-class PersonListViewController: UIViewController {
+class CoursePersonListViewController: UIViewController {
     
     private lazy var titleLabel = UILabel()
     private lazy var personsView = UIView()
@@ -15,9 +15,9 @@ class PersonListViewController: UIViewController {
     private lazy var persons: [BaseModel] = []
     private lazy var addButton = UIButton()
     
-    private var output: PersonListViewOutput
+    private var output: CoursePersonListViewOutput
     
-    init(output: PersonListViewOutput) {
+    init(output: CoursePersonListViewOutput) {
         self.output = output
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,7 +54,7 @@ class PersonListViewController: UIViewController {
         view.addSubview(titleLabel)
     }
     
-    private func setupTableView() {
+    private func setupTableView(title: String) {
         personTableView.register(BaseCell.self, forCellReuseIdentifier: "BaseCell")
         personTableView.delegate = self
         personTableView.dataSource = self
@@ -62,7 +62,7 @@ class PersonListViewController: UIViewController {
         personsView = TableView(
             contentView: view,
             frame: view.frame,
-            title: "",
+            title: title,
             tableView: personTableView,
             margin: 0
         )
@@ -70,6 +70,7 @@ class PersonListViewController: UIViewController {
         personsView.backgroundColor = .white
         personTableView.layer.borderColor = UIColor.clear.cgColor
         personTableView.layer.cornerRadius = 0
+        personTableView.isScrollEnabled = true
         
         view.addSubview(personsView)
         personsView.addSubview(personTableView)
@@ -78,25 +79,25 @@ class PersonListViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             personTableView.heightAnchor.constraint(equalToConstant: CGFloat(Double(persons.count * 50) - 0.5)),
-            personsView.heightAnchor.constraint(equalTo: personTableView.heightAnchor, constant: 30),
+            personsView.heightAnchor.constraint(equalTo: personTableView.heightAnchor, constant: 60),
             personsView.bottomAnchor.constraint(equalTo: personTableView.bottomAnchor, constant: 15),
             personsView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10)
         ])
     }
     
     @objc private func goBack() {
-        output.goBack()
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func addStudentButtonTapped() {
-        output.addButtonTapped()
+        output.addButtonTapped(controller: navigationController)
     }
 }
 
-extension PersonListViewController: PersonListViewInput {
-    func setupPersonTable(with persons: [BaseModel]) {
+extension CoursePersonListViewController: CoursePersonListViewInput {
+    func setupPersonTable(with persons: [BaseModel], title: String) {
         self.persons = persons
-        setupTableView()
+        setupTableView(title: title)
     }
     
     func updateTitle(title: String) {
@@ -113,7 +114,7 @@ extension PersonListViewController: PersonListViewInput {
     }
 }
 
-extension PersonListViewController: UITableViewDataSource, UITableViewDelegate {
+extension CoursePersonListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return persons.count
     }
@@ -127,7 +128,7 @@ extension PersonListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        output.selectedRowAt(index: indexPath.row)
+        output.selectedRowAt(index: indexPath.row, controller: navigationController)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

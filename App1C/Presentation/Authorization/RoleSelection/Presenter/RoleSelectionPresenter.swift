@@ -25,6 +25,7 @@ final class RoleSelectionPresenter {
     }
     
     private func authorize(role: Roles) {
+        TokenService.shared.role = role
         verificationService.authorize(with: AuthorizeModel(
             login: TokenService.shared.login,
             password: TokenService.shared.password,

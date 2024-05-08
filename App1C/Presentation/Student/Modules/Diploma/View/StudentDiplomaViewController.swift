@@ -32,6 +32,12 @@ class StudentDiplomaViewController: UIViewController {
     
     private lazy var editButton = UIButton()
     
+    private lazy var speeches: [SpeechModel] = []
+    private lazy var speechesTableView = UITableView()
+    private lazy var speechesBackgroundView = UIView()
+    private var tableHeightConstraint: NSLayoutConstraint?
+
+    
     private var output: StudentDiplomaViewOutput
 
     init(output: StudentDiplomaViewOutput) {
@@ -50,6 +56,7 @@ class StudentDiplomaViewController: UIViewController {
         setupTheme()
         setupGrade()
         setupTeacher()
+        setupSpeechesTableView()
         output.viewIsReady()
     }
     
@@ -153,6 +160,34 @@ class StudentDiplomaViewController: UIViewController {
         ])
     }
     
+    func setupSpeechesTableView() {
+        speechesTableView.register(SpeechCell.self, forCellReuseIdentifier: "SpeechCell")
+        speechesTableView.delegate = self
+        speechesTableView.dataSource = self
+        
+        speechesBackgroundView = TableView(
+            contentView: view,
+            frame: view.frame,
+            title: "НИР",
+            tableView: speechesTableView
+        )
+        
+        view.addSubview(speechesBackgroundView)
+        speechesBackgroundView.addSubview(speechesTableView)
+        speechesBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        speechesTableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+          //  eventsTableView.heightAnchor.constraint(equalToConstant: CGFloat(Double(events.count * 70) - 0.5)),
+            speechesBackgroundView.heightAnchor.constraint(equalTo: speechesTableView.heightAnchor, constant: 60),
+            speechesBackgroundView.bottomAnchor.constraint(equalTo: speechesTableView.bottomAnchor, constant: 15),
+            speechesBackgroundView.topAnchor.constraint(equalTo: postView.bottomAnchor, constant: 10)
+        ])
+        
+        tableHeightConstraint = speechesTableView.heightAnchor.constraint(equalToConstant: 0)
+        tableHeightConstraint?.isActive = true
+    }
+    
     private func createTitle(title: UILabel) {
         view.addSubview(title)
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -249,6 +284,15 @@ extension StudentDiplomaViewController: SelectorDelegate {
 }
 
 extension StudentDiplomaViewController: StudentDiplomaViewInput {
+    func setupSpeeches(speeches: [SpeechModel]) {
+        self.speeches = speeches
+        speechesTableView.reloadData()
+        
+        tableHeightConstraint?.isActive = false
+        tableHeightConstraint = speechesTableView.heightAnchor.constraint(equalToConstant: CGFloat(speeches.count * 40))
+        tableHeightConstraint?.isActive = true
+    }
+    
     func updateData(model: DiplomaModel) {
         themeTextField.text = model.theme
         nameTextField.text = model.name
@@ -276,6 +320,25 @@ extension StudentDiplomaViewController: StudentDiplomaViewInput {
             themeLabel.isHidden = true
             themeTextField.isHidden = false
         }
+    }
+}
+
+extension StudentDiplomaViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return speeches.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SpeechCell", for: indexPath) as? SpeechCell else {
+            fatalError("Cannot create SpeechCell")
+        }
+        cell.configure(with: speeches[indexPath.row])
+        cell.selectionStyle = .none
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
     }
 }
 

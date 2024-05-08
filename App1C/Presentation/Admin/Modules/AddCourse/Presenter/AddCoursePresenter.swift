@@ -64,12 +64,12 @@ extension AddCoursePresenter: CourseViewOutput {
         //viewInput?.setupEditMode()
     }
     
-    func addDepsButtonTapped() {
-        moduleOutput?.moduleWantsToOpenAddDeps(delegate: self)
+    func addDepsButtonTapped(controller: UINavigationController?) {
+        moduleOutput?.moduleWantsToOpenAddDeps(delegate: self, controller: controller)
     }
     
-    func addTeachersButtonTapped() {
-        moduleOutput?.moduleWantsToOpenAddTeachers(delegate: self)
+    func addTeachersButtonTapped(controller: UINavigationController?) {
+        moduleOutput?.moduleWantsToOpenAddTeachers(delegate: self, controller: controller)
     }
     
     func addButtonTapped(name: String, chat: String, type: String, descr: String) {

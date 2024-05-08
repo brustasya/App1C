@@ -9,4 +9,5 @@ import Foundation
 
 protocol StudentDiplomaViewInput: AnyObject {
     func updateData(model: DiplomaModel)
+    func setupSpeeches(speeches: [SpeechModel])
 }

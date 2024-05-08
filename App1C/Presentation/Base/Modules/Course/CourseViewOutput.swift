@@ -10,8 +10,8 @@ import UIKit
 protocol CourseViewOutput: AnyObject {
     func viewIsReady()
     func viewWillAppear()
-    func addDepsButtonTapped()
-    func addTeachersButtonTapped()
+    func addDepsButtonTapped(controller: UINavigationController?)
+    func addTeachersButtonTapped(controller: UINavigationController?)
     func addButtonTapped(name: String, chat: String, type: String, descr: String)
     func editButtonTapped(navigationController: UINavigationController?)
     func saveButtonTapped(name: String, chat: String, type: String, dayOfWeek: String,

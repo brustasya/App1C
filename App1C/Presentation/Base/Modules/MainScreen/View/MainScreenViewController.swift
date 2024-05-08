@@ -14,11 +14,7 @@ class MainScreenViewController: UIViewController {
     lazy var siteView = UIView()
     lazy var baseView = UIView()
     
-    lazy var events: [EventModel] = [
-        EventModel(id: 0, title: "Выбор курсов", deadline: Date(), type: .preliminaryCourseChoice),
-        EventModel(id: 0, title: "Выбор минимальной нагрузки", deadline: Date(), type: .finalCourseChoice),
-        EventModel(id: 0, title: "Выбор темы диплома", deadline: Date(), type: .diplomaSpeech)
-    ]
+    lazy var events: [EventModel] = []
     lazy var eventsTableView = UITableView()
     lazy var eventsBackgroundView = UIView()
     

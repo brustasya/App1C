@@ -12,12 +12,23 @@ protocol DiplomaSpeechesURLRequestFactory: AnyObject {
     func result(studentID: Int, speechID: Int, result: Bool) throws -> URLRequest
     func getGrades(type: String, bachelor: Bool) throws -> URLRequest
     func estimate(studentID: Int, gradeID: Int, result: Int) throws -> URLRequest
-    
+    func getSpeeches(studentID: Int, bachelor: Bool) throws -> URLRequest
 }
 
 extension URLRequestFactory: DiplomaSpeechesURLRequestFactory {
     func getSpeeches(type: String, bachelor: Bool) throws -> URLRequest {
         guard let url = url(with: "/diploma/speech", query: "bachelor=\(bachelor)&type=\(type)") else {
+            throw TFSError.makeRequest
+        }
+        
+        var request = makeRequest(url: url)
+        request.httpMethod = "GET"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func getSpeeches(studentID: Int, bachelor: Bool) throws -> URLRequest {
+        guard let url = url(with: "/student/\(studentID)/speeches", query: "bachelor=\(bachelor)") else {
             throw TFSError.makeRequest
         }
         

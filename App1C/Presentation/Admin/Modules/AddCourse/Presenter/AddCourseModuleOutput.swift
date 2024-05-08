@@ -5,9 +5,9 @@
 //  Created by Станислава on 19.04.2024.
 //
 
-import Foundation
+import UIKit
 
 protocol AddCourseModuleOutput: AnyObject {
-    func moduleWantsToOpenAddDeps(delegate: CourseDelegate)
-    func moduleWantsToOpenAddTeachers(delegate: CourseDelegate)
+    func moduleWantsToOpenAddDeps(delegate: CourseDelegate, controller: UINavigationController?)
+    func moduleWantsToOpenAddTeachers(delegate: CourseDelegate, controller: UINavigationController?)
 }

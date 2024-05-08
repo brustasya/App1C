@@ -23,6 +23,30 @@ class BaseAssembly {
         return vc
     }
     
+    func makeCourseStudentsListModule(moduleOutput: CourseStudentsListModuleOutput, courseID: Int, courseTitle: String) -> UIViewController {
+        let presenter = CourseStudentsListPresenter(
+            moduleOutput: moduleOutput,
+            usersListService: serviceAssembly.makeUsersListService(),
+            courseID: courseID,
+            courseTitle: courseTitle
+        )
+        let vc = CoursePersonListViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeCourseTeachersListModule(moduleOutput: CourseTeachersListModuleOutput, courseID: Int, courseTitle: String) -> UIViewController {
+        let presenter = CourseTeachersListPresenter(
+            moduleOutput: moduleOutput,
+            usersListService: serviceAssembly.makeUsersListService(),
+            courseID: courseID,
+            courseTitle: courseTitle
+        )
+        let vc = CoursePersonListViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
     func makeNotificationsModule(moduleOutput: NotificationsModuleOutput) -> UIViewController {
         let presenter = NotificationsPresenter(
             moduleOutput: moduleOutput,
