@@ -64,7 +64,7 @@ extension CourseDependensiesPresenter: CourseDependensiesViewOutput {
     }
     
     func addButtonTapped(controller: UINavigationController?) {
-        moduleOutput?.addButtonTapped(courseID: courseID, controller: controller)
+        moduleOutput?.moduleWantsToAddDependensies(courseID: courseID, controller: controller)
     }
     
 }

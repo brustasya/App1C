@@ -105,14 +105,16 @@ extension AdminCoordinator: CourseTeachersListModuleOutput {
     }
     
     func moduleWantsToAddTeachers(courseID: Int, controller: UINavigationController?) {
-        
+        let addTeachersVC = adminAssembly.makeAddTeachersModule(id: courseID)
+        controller?.pushViewController(addTeachersVC, animated: true)
     }
     
 }
 
 extension AdminCoordinator: CourseDependensiesModuleOutput {
-    func addButtonTapped(courseID: Int, controller: UINavigationController?) {
-        
+    func moduleWantsToAddDependensies(courseID: Int, controller: UINavigationController?) {
+        let addDepsVC = adminAssembly.makeAddDependenciesModule(id: courseID)
+        controller?.pushViewController(addDepsVC, animated: true)
     }
     
 }

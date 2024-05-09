@@ -21,6 +21,11 @@ class AddTeacherCell: UITableViewCell, ConfigurableViewProtocol {
     private lazy var isSelect = false {
         didSet {
             checkButton.tintColor = isSelect ? Colors.darkgreen.uiColor : .gray
+            if isSelect {
+                checkButton.setImage(Images.fillCheck.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
+            } else {
+                checkButton.setImage(Images.check.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
+            }
         }
     }
     

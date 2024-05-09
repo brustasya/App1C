@@ -26,6 +26,11 @@ class CourseAgregationCell: UITableViewCell, ConfigurableViewProtocol {
     private lazy var isStarted: Bool = false {
         didSet {
             checkButton.tintColor = isStarted ? Colors.darkgreen.uiColor : .gray
+            if isStarted {
+                checkButton.setImage(Images.fillCheck.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
+            } else {
+                checkButton.setImage(Images.check.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
+            }
         }
     }
     

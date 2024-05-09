@@ -12,5 +12,6 @@ struct StudentCourseModel {
     let title: String
     let isOffline: Bool
     let isRetake: Bool
+    let wasInLoad: Bool
     let grade: GradeModel
 }

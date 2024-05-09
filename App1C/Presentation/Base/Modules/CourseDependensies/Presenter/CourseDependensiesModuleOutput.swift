@@ -8,5 +8,5 @@
 import UIKit
 
 protocol CourseDependensiesModuleOutput: AnyObject {
-    func addButtonTapped(courseID: Int, controller: UINavigationController?)
+    func moduleWantsToAddDependensies(courseID: Int, controller: UINavigationController?)
 }

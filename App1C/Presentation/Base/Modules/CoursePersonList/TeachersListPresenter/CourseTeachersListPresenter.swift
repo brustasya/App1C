@@ -33,7 +33,8 @@ class CourseTeachersListPresenter {
         usersListService.getTeachers(courseID: courseID) { [weak self] result in
             switch result {
             case .success(let model):
-                let teachers = model.teachers.map({
+                let courseTeachers = model.teachers.filter({ $0.teachCourse ?? false })
+                let teachers = courseTeachers.map({
                     BaseModel(id: $0.id, title: $0.fullName, image: Images.largePerson.uiImage)
                 })
                 self?.teachers = teachers

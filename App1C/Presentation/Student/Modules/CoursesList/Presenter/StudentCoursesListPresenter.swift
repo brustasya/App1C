@@ -28,8 +28,8 @@ class StudentCoursesListPresenter {
         gradesService.getGrades(studentID: TokenService.shared.id) { [weak self] result in
             switch result {
             case .success(let model):
-                let lastCourses = model.lastSemesters.map({ StudentCourseModel(id: $0.courseID, title: $0.courseTitle, isOffline: $0.isOffline, isRetake: $0.isRetake, grade: GradeModel(grade: $0.grade ?? 0)) })
-                let currentSemester = model.currentSemester.map({ StudentCourseModel(id: $0.courseID, title: $0.courseTitle, isOffline: $0.isOffline, isRetake: $0.isRetake, grade: GradeModel(grade: $0.grade ?? 0)) })
+                let lastCourses = model.lastSemesters.map({ StudentCourseModel(id: $0.courseID, title: $0.courseTitle, isOffline: $0.isOffline, isRetake: $0.isRetake, wasInLoad: $0.inLoad, grade: GradeModel(grade: $0.grade ?? 0)) })
+                let currentSemester = model.currentSemester.map({ StudentCourseModel(id: $0.courseID, title: $0.courseTitle, isOffline: $0.isOffline, isRetake: $0.isRetake, wasInLoad: $0.inLoad, grade: GradeModel(grade: $0.grade ?? 0)) })
                 self?.lastCourses = lastCourses
                 self?.currentCourses = currentSemester
                 DispatchQueue.main.async {
