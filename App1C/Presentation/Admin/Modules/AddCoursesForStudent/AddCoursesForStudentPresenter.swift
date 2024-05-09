@@ -62,6 +62,7 @@ class AddCoursesForStudentPresenter {
 
 extension AddCoursesForStudentPresenter: AddDependenciesViewOutput {
     func viewIsReady() {
+        viewInput?.setTitle(title: "Добавить курсы")
         getCourses()
     }
     

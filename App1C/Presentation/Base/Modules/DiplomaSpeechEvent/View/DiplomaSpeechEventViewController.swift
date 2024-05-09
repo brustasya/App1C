@@ -15,6 +15,7 @@ class DiplomaSpeechEventViewController: UIViewController {
     private lazy var deadlineLabel = UILabel()
     private lazy var textFieldView = UIView()
     private lazy var messageLabel = UILabel()
+    private lazy var typeTitle = UILabel()
     private lazy var typeLabel = UILabel()
     private lazy var typeView = UIView()
     private lazy var timetableTextField = UITextField()
@@ -25,6 +26,8 @@ class DiplomaSpeechEventViewController: UIViewController {
     private lazy var coursesView = UIView()
     private lazy var coursesTableView = UITableView()
     private lazy var courses: [CourseModel] = []
+    
+    private lazy var isReadMode = false
     
     let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
@@ -107,7 +110,6 @@ class DiplomaSpeechEventViewController: UIViewController {
     }
     
     private func setupType() {
-        let typeTitle = UILabel()
         view.addSubview(typeTitle)
         typeTitle.translatesAutoresizingMaskIntoConstraints = false
         typeTitle.font = .systemFont(ofSize: 18, weight: .semibold)
@@ -124,16 +126,16 @@ class DiplomaSpeechEventViewController: UIViewController {
         typeView.backgroundColor = Colors.paleYellow.uiColor
         
         typeLabel.textColor = .black
-        typeLabel.text = "Не указан"
+        typeLabel.text = SpeechType.rw1.title
         
         NSLayoutConstraint.activate([
             typeTitle.centerYAnchor.constraint(equalTo: typeView.centerYAnchor),
             typeTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
 
             typeView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            typeView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
             typeView.heightAnchor.constraint(equalToConstant: 40),
             typeView.widthAnchor.constraint(equalToConstant: 200),
-            typeView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
             
             typeLabel.heightAnchor.constraint(equalToConstant: 40),
             typeLabel.widthAnchor.constraint(equalToConstant: 200),
@@ -158,7 +160,7 @@ class DiplomaSpeechEventViewController: UIViewController {
         deadlineLabel.text = "Дедлайн: "
         
         NSLayoutConstraint.activate([
-            deadlineLabel.topAnchor.constraint(equalTo: typeView.bottomAnchor, constant: 25),
+//            deadlineLabel.topAnchor.constraint(equalTo: typeView.bottomAnchor, constant: 25),
             deadlineLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             datePicker.centerYAnchor.constraint(equalTo: deadlineLabel.centerYAnchor),
             datePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
@@ -292,6 +294,28 @@ class DiplomaSpeechEventViewController: UIViewController {
         })
     }
     
+    private func setDatePicker() {
+        for subView in datePicker.subviews {
+            for views in subView.subviews {
+                views.backgroundColor = Colors.paleYellow.uiColor
+                views.layer.cornerRadius = 15
+                for sub in views.subviews {
+                    sub.backgroundColor = Colors.paleYellow.uiColor
+                    sub.layer.cornerRadius = 15
+                    for subV in sub.subviews {
+                        subV.backgroundColor = Colors.paleYellow.uiColor
+                        subV.layer.cornerRadius = 15
+                        for subVi in subV.subviews {
+                            subVi.backgroundColor = Colors.paleYellow.uiColor
+                            subVi.layer.cornerRadius = 15
+                        }
+                    }
+                }
+            }
+        }
+        view.setNeedsLayout()
+    }
+    
     private func updateDatePicker() {
 //        for subView in datePicker.subviews {
 //            for views in subView.subviews {
@@ -392,19 +416,36 @@ extension DiplomaSpeechEventViewController: DiplomaSpeechEventViewInput {
     func setupCreateMode() {
         setupCreateButton()
         changeEditEnable(edit: true)
+        NSLayoutConstraint.activate([
+            deadlineLabel.topAnchor.constraint(equalTo: typeView.bottomAnchor, constant: 25),
+        ])
     }
     
     func setupSaveMode() {
         setupSaveButton()
         changeEditEnable(edit: true)
+        NSLayoutConstraint.activate([
+            deadlineLabel.topAnchor.constraint(equalTo: typeView.bottomAnchor, constant: 25),
+        ])
     }
     
     func setupReadMode() {
+        isReadMode = true
+        setDatePicker()
         changeEditEnable(edit: false)
+        typeTitle.isHidden = true
+        typeView.isHidden = true
+        
+        NSLayoutConstraint.activate([
+            deadlineLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 25),
+        ])
     }
     
     func updateData(model: DiplomaSpeechEventModel, isEdit: Bool) {
         datePicker.date = model.deadline
+        if isReadMode {
+            setDatePicker()
+        }
         descriptionTextField.text = model.description
         typeLabel.text = model.type.title
         

@@ -133,6 +133,10 @@ extension AddDependenciesViewController: AddDependenciesViewInput {
         setupTableView()
     }
     
+    func setTitle(title: String) {
+        titleLabel.text = title
+    }
+    
     func close() {
         goBack()
     }

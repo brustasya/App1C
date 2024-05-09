@@ -9,5 +9,6 @@ import Foundation
 
 protocol AddDependenciesViewInput: AnyObject {
     func updateCourses(with courses: [AddDependenceModel])
+    func setTitle(title: String)
     func close()
 }
