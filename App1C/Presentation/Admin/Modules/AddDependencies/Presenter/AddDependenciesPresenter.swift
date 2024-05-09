@@ -43,7 +43,7 @@ class AddDependenciesPresenter {
             switch result {
             case .success(let model):
                 let courses = model.courses.map({
-                    AddDependenceModel(id: $0.id, title: $0.title, isCourseDependency: $0.isCourseDependency)
+                    AddDependenceModel(id: $0.id, title: $0.title, isCourseDependency: $0.isCourseDependency ?? false)
                 })
                 for course in courses {
                     if course.isCourseDependency {

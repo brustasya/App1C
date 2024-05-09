@@ -15,6 +15,8 @@ protocol CoursesServiceProtocol {
     func createCourse(model: CreateCourseModel, completion: @escaping (Result<Data?, Error>) -> Void)
     func getTeacherCourses(teacherID: Int, completion: @escaping (Result<CoursesModel, Error>) -> Void)
     func saveCourseDetailes(courseID: Int, model: CourseDetailsModel, completion: @escaping (Result<Data?, Error>) -> Void)
+    func getCourses(studentID: Int, completion: @escaping (Result<GetAddStudentCoursesModel, Error>) -> Void)
+    func addCourses(studentID: Int, courses: AddStudentCoursesModel, completion: @escaping (Result<Data?, Error>) -> Void)
 }
 
 class CoursesService: CoursesServiceProtocol {
@@ -84,6 +86,24 @@ class CoursesService: CoursesServiceProtocol {
     func getTeacherCourses(teacherID: Int, completion: @escaping (Result<CoursesModel, Error>) -> Void) {
         do {
             let request = try requestFactory.getTeacherCourses(for: teacherID)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func getCourses(studentID: Int, completion: @escaping (Result<GetAddStudentCoursesModel, Error>) -> Void) {
+        do {
+            let request = try requestFactory.getCourses(studentID: studentID)
+            networkService.sendRequest(request, completion: completion)
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func addCourses(studentID: Int, courses: AddStudentCoursesModel, completion: @escaping (Result<Data?, Error>) -> Void) {
+        do {
+            let request = try requestFactory.addCourses(studentID: studentID, courses: courses)
             networkService.sendRequest(request, completion: completion)
         } catch {
             completion(.failure(error))

@@ -28,7 +28,7 @@ final class AdminDepartmentCoursesPresenter {
             case .success(let model):
                 let courses = model.courses.map({
                     CourseModel(id: $0.id, title: $0.title,
-                                isTeacherCourse: $0.isTeacherCourse ?? false, isCourseDependency: $0.isCourseDependency)
+                                isTeacherCourse: $0.isTeacherCourse ?? false, isCourseDependency: $0.isCourseDependency ?? false)
                 })
                 self?.courses = courses
                 DispatchQueue.main.async {

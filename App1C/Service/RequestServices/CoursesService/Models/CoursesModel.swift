@@ -15,7 +15,7 @@ struct ServerCourseModel: Codable {
     let id: Int
     let title: String
     let isTeacherCourse: Bool?
-    let isCourseDependency: Bool
+    let isCourseDependency: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id = "id"

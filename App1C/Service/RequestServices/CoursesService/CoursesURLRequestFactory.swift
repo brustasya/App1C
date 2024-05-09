@@ -15,6 +15,8 @@ protocol CoursesURLRequestFactory: AnyObject {
     func changeDeps(courseID: Int, deps: [Int]) throws -> URLRequest
     func getTeacherCourses(for id: Int) throws -> URLRequest
     func saveCourseDetails(for id: Int, with model: CourseDetailsModel) throws -> URLRequest
+    func getCourses(studentID: Int) throws -> URLRequest
+    func addCourses(studentID: Int, courses: AddStudentCoursesModel) throws -> URLRequest
 }
 
 extension URLRequestFactory: CoursesURLRequestFactory {
@@ -85,6 +87,26 @@ extension URLRequestFactory: CoursesURLRequestFactory {
         
         var request = makeRequest(url: url)
         request.httpMethod = "GET"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func getCourses(studentID: Int) throws -> URLRequest {
+        guard let url = url(with: "/student/\(studentID)/add-course") else {
+            throw TFSError.makeRequest
+        }
+        var request = makeRequest(url: url)
+        request.httpMethod = "GET"
+        addHeader(request: &request)
+        return request
+    }
+    
+    func addCourses(studentID: Int, courses: AddStudentCoursesModel) throws -> URLRequest {
+        guard let url = url(with: "/student/\(studentID)/add-course"),
+              var request = makeRequest(with: courses, url: url) else {
+            throw TFSError.makeRequest
+        }
+        request.httpMethod = "POST"
         addHeader(request: &request)
         return request
     }

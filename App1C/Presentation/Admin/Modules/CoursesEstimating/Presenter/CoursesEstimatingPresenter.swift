@@ -5,7 +5,7 @@
 //  Created by Станислава on 09.05.2024.
 //
 
-import Foundation
+import UIKit
 
 class CoursesEstimatingPresenter {
     weak var moduleOutput: CoursesEstimatingModuleOutput?
@@ -59,6 +59,10 @@ class CoursesEstimatingPresenter {
 }
 
 extension CoursesEstimatingPresenter: CoursesEstimatingViewOutput {
+    func addButtonTapped(controller: UINavigationController?) {
+        moduleOutput?.moduleWantsToAddCourses(studentID: studentID, controller: controller)
+    }
+    
     func setGrade(courseId: Int, grade: Int, isRetake: Bool) {
         let model = EstimateServerModel(grade: grade, isRetake: isRetake)
         estimate(courseID: courseId, model: model)

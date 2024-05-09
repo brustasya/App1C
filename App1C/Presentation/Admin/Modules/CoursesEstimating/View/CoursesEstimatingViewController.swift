@@ -45,6 +45,7 @@ final class CoursesEstimatingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        output.viewIsReady()
         navigationItem.hidesBackButton = true
         (navigationController as? CustomNavigationController)?.setupBackButton()
         (navigationController as? CustomNavigationController)?.backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -121,6 +122,7 @@ final class CoursesEstimatingViewController: UIViewController {
     }
     
     @objc func addButtonTapped() {
+        output.addButtonTapped(controller: navigationController)
     }
     
     private func showTypesAlert(cell: CourseEstimationCell) {
@@ -157,7 +159,7 @@ extension CoursesEstimatingViewController: CoursesEstimatingViewInput {
         self.currentCourses = currentCourses
         self.unusedCourses = unusedCourses
         
-        if courses.count == 0 {
+        if courses.count == 0 || page == 1 {
             switch page {
             case 1:
                 courses = currentCourses

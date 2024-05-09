@@ -34,7 +34,7 @@ class CourseDependensiesPresenter {
             switch result {
             case .success(let model):
                 var courses = model.courses.map({
-                    CourseModel(id: $0.id, title: $0.title, isTeacherCourse: false, isCourseDependency: $0.isCourseDependency)
+                    CourseModel(id: $0.id, title: $0.title, isTeacherCourse: false, isCourseDependency: $0.isCourseDependency ?? false)
                 })
                 courses = courses.filter({ $0.isCourseDependency })
                 self?.courses = courses

@@ -34,7 +34,7 @@ class TeacherEventPresenter {
         coursesService.getTeacherCourses(teacherID: TokenService.shared.id) { [weak self] result in
             switch result {
             case .success(let model):
-                let courses = model.courses.map({ CourseModel(id: $0.id, title: $0.title, isTeacherCourse: $0.isTeacherCourse ?? true, isCourseDependency: $0.isCourseDependency) })
+                let courses = model.courses.map({ CourseModel(id: $0.id, title: $0.title, isTeacherCourse: $0.isTeacherCourse ?? true, isCourseDependency: $0.isCourseDependency ?? false) })
                 self?.courses = courses
                 DispatchQueue.main.async {
                     self?.viewInput?.updateCourses(courses: courses)

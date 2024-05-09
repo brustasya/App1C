@@ -121,7 +121,10 @@ extension AdminCoordinator: CourseTeachersListModuleOutput {
 }
 
 extension AdminCoordinator: CoursesEstimatingModuleOutput {
-    
+    func moduleWantsToAddCourses(studentID: Int, controller: UINavigationController?) {
+        let addCoursesVC = adminAssembly.makeAddCoursesModule(studentID: studentID)
+        controller?.pushViewController(addCoursesVC, animated: true)
+    }
 }
 
 extension AdminCoordinator: CourseDependensiesModuleOutput {

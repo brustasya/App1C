@@ -313,4 +313,14 @@ final class AdminAssembly: BaseAssembly {
         presenter.viewInput = vc
         return vc
     }
+    
+    func makeAddCoursesModule(studentID: Int) -> UIViewController {
+        let presenter = AddCoursesForStudentPresenter(
+            studentID: studentID,
+            coursesService: serviceAssembly.makeCoursesService()
+        )
+        let vc = AddDependenciesViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
 }
