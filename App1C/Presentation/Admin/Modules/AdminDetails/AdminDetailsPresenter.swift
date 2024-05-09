@@ -5,11 +5,13 @@
 //  Created by Станислава on 19.04.2024.
 //
 
-import Foundation
+import UIKit
 
 final class AdminDetailsPresenter: AdminProfilePresenter { }
 
 extension AdminDetailsPresenter: ProfileViewOutput {
+    func openGrades(controller: UINavigationController?) { }
+    
     func viewIsReady() {
         viewInput?.setupFields()
         viewInput?.changeEnable(isEdit: false)

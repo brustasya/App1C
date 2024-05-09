@@ -9,5 +9,5 @@ import Foundation
 
 protocol CoursesEstimatingViewOutput: AnyObject {
     func viewIsReady()
-    func setGrade(grade: Int, inLoad: Bool)
+    func setGrade(courseId: Int, grade: Int, isRetake: Bool)
 }

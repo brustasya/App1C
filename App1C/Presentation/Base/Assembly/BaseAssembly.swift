@@ -88,10 +88,11 @@ class BaseAssembly {
         return vc
     }
     
-    func makeStudentProfileModule(for id: Int) -> UIViewController {
+    func makeStudentProfileModule(for id: Int, moduleOutput: StudentDetailsModuleOutput) -> UIViewController {
         let presenter = StudentPersonalDataPresenter(
             id: id,
-            profileService: serviceAssembly.makeProfileService()
+            profileService: serviceAssembly.makeProfileService(), 
+            moduleOutput: moduleOutput
         )
         let vc = ProfileViewController(output: presenter)
         presenter.viewInput = vc

@@ -5,7 +5,7 @@
 //  Created by Станислава on 18.04.2024.
 //
 
-import Foundation
+import UIKit
 
 protocol ProfileViewOutput: AnyObject {
     func viewIsReady()
@@ -14,4 +14,5 @@ protocol ProfileViewOutput: AnyObject {
                           telegram: String?, semester: Int, isInAcademicLeave: Bool,
                           workPlace: String?, job: String?, from: Date?, to: Date?)
     func goBack() -> Bool
+    func openGrades(controller: UINavigationController?)
 }

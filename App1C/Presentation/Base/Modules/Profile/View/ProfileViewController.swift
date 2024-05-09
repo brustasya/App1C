@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController {
     
     private lazy var saveButton = UIButton()
     private lazy var editButton = UIButton()
+    private lazy var gradesButton = UIButton()
     
     let startDatePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
@@ -414,6 +415,10 @@ class ProfileViewController: UIViewController {
             statusLabel.text = "Учится"
         }
     }
+    
+    @objc func gradesButtonTapped() {
+        output.openGrades(controller: navigationController)
+    }
 }
 
 extension ProfileViewController: ProfileViewInput {
@@ -473,6 +478,16 @@ extension ProfileViewController: ProfileViewInput {
         
         saveButton.addTarget(self, action: #selector(saveProfile), for: .touchUpInside)
     }
+    
+    func setupGradesButton() {
+        let y = tabBarController?.tabBar.frame.minY ?? view.frame.maxY
+        gradesButton = ButtonView(frame: CGRect(x: 25, y: editButton.frame.minY - 55, width: view.frame.width - 50, height: 45))
+        view.addSubview(gradesButton)
+        gradesButton.setTitle("Оценки", for: .normal)
+        
+        gradesButton.addTarget(self, action: #selector(gradesButtonTapped), for: .touchUpInside)
+    }
+    
     
     func changeEnable(isEdit: Bool) {
         nameTextField.isUserInteractionEnabled = isEdit

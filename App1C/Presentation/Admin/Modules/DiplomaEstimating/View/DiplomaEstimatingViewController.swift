@@ -159,6 +159,3 @@ extension DiplomaEstimatingViewController: UITableViewDataSource, UITableViewDel
         return 60
     }
 }
-
-
-

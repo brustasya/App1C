@@ -5,16 +5,32 @@
 //  Created by Станислава on 18.04.2024.
 //
 
-import Foundation
+import UIKit
 
-final class StudentPersonalDataPresenter: StudentProfilePresenter { }
+final class StudentPersonalDataPresenter: StudentProfilePresenter { 
+    weak var moduleOutput: StudentDetailsModuleOutput?
+    
+    init(
+        id: Int,
+        profileService: ProfileServiceProtocol,
+        moduleOutput: StudentDetailsModuleOutput
+    ) {
+        self.moduleOutput = moduleOutput
+        super.init(id: id, profileService: profileService)
+    }
+}
 
 extension StudentPersonalDataPresenter: ProfileViewOutput {
+    func openGrades(controller: UINavigationController?) {
+        moduleOutput?.moduleWantsToOpenGrades(studentID: id, controller: controller)
+    }
+    
     func viewIsReady() {
         viewInput?.setupStudentFields()
         viewInput?.setupEditButton()
         viewInput?.setupSaveButton()
         viewInput?.changeEnable(isEdit: false)
+        viewInput?.setupGradesButton()
         
         getStudent()
     }

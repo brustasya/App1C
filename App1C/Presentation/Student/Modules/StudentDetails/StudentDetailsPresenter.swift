@@ -5,15 +5,22 @@
 //  Created by Станислава on 19.04.2024.
 //
 
-import Foundation
+import UIKit
 
-final class StudentDetailsPresenter: StudentProfilePresenter { }
+final class StudentDetailsPresenter: StudentProfilePresenter {
+    
+}
 
 extension StudentDetailsPresenter: ProfileViewOutput {
+    func openGrades(controller: UINavigationController?) { 
+        
+    }
+    
     func viewIsReady() {
         viewInput?.setupStudentFields()
         viewInput?.changeEnable(isEdit: false)
         viewInput?.setupTitle(title: "Данные студента")
+        viewInput?.setupGradesButton()
         
         getStudent()
     }

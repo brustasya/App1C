@@ -19,4 +19,5 @@ protocol ProfileViewInput: AnyObject {
                            workPlace: String?, job: String?)
     func updateUserData(name: String, surname: String, patronymic: String?,
                         telegram: String?, from: Date?, to: Date?)
+    func setupGradesButton()
 }

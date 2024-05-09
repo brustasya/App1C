@@ -49,13 +49,19 @@ final class StudentCoordinator: CoordinatorProtocol {
     }
 }
 
+extension StudentCoordinator: StudentDetailsModuleOutput {
+    func moduleWantsToOpenGrades(studentID: Int, controller: UINavigationController?) { }
+    
+    
+}
+
 extension StudentCoordinator: StudentSettingsModuleOutput {
     func moduleWantsToOpenDepartmentCourses() {
         
     }
     
     func moduleWantsToOpenProfile() {
-        let profileVC = studentAssembly.makeStudentProfileModule(for: TokenService.shared.id)
+        let profileVC = studentAssembly.makeStudentProfileModule(for: TokenService.shared.id, moduleOutput: self)
         settingsNavigationController.pushViewController(profileVC, animated: true)
     }
     

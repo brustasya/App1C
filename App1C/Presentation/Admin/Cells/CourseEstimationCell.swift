@@ -10,6 +10,8 @@ import UIKit
 class CourseEstimationCell: UITableViewCell, ConfigurableViewProtocol {
     
     typealias ConfigurationModel = StudentCourseModel
+    
+    weak var delegate: CourseEstimatingDelegate?
         
     private lazy var contentBackgroundView = UIView()
     private lazy var titleLabel = UILabel()
@@ -26,6 +28,8 @@ class CourseEstimationCell: UITableViewCell, ConfigurableViewProtocol {
             retakeButton.tintColor = isRetake ? Colors.red.uiColor : .gray
         }
     }
+    private var grade = 0
+    private var courseID = 0
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -58,10 +62,10 @@ class CourseEstimationCell: UITableViewCell, ConfigurableViewProtocol {
         
         NSLayoutConstraint.activate([
             contentBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            contentBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            contentBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            contentBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            contentBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
             
-            titleLabel.topAnchor.constraint(equalTo: contentBackgroundView.topAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: contentBackgroundView.topAnchor, constant: 12),
             titleLabel.leadingAnchor.constraint(equalTo: contentBackgroundView.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentBackgroundView.trailingAnchor, constant: -16),
             
@@ -76,12 +80,12 @@ class CourseEstimationCell: UITableViewCell, ConfigurableViewProtocol {
             retakeView.widthAnchor.constraint(equalToConstant: 100),
             
             regimLabel.topAnchor.constraint(equalTo: gradeBackgroundView.bottomAnchor, constant: 8),
-            regimLabel.leadingAnchor.constraint(equalTo: contentBackgroundView.centerXAnchor),
+            regimLabel.leadingAnchor.constraint(equalTo: loadLabel.leadingAnchor, constant: 120),
             
             loadLabel.topAnchor.constraint(equalTo: gradeBackgroundView.bottomAnchor, constant: 8),
             loadLabel.leadingAnchor.constraint(equalTo: contentBackgroundView.leadingAnchor, constant: 16),
             
-            contentBackgroundView.bottomAnchor.constraint(equalTo: regimLabel.bottomAnchor, constant: 10),
+            contentBackgroundView.bottomAnchor.constraint(equalTo: regimLabel.bottomAnchor, constant: 12),
             contentView.bottomAnchor.constraint(equalTo: contentBackgroundView.bottomAnchor, constant: 5)
             
             
@@ -109,7 +113,7 @@ class CourseEstimationCell: UITableViewCell, ConfigurableViewProtocol {
     
     private func setGrade(with model: GradeModel) {
         gradeView = GradeView(model: model, contentView: contentView, frame: contentView.frame)
-        gradeBackgroundView.addSubview(gradeView)
+        contentView.addSubview(gradeView)
         gradeView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -118,6 +122,9 @@ class CourseEstimationCell: UITableViewCell, ConfigurableViewProtocol {
             gradeView.widthAnchor.constraint(equalToConstant: 90),
             gradeView.heightAnchor.constraint(equalToConstant: 30)
         ])
+        
+        let tapGuesterRecognizer = UITapGestureRecognizer(target: self, action: #selector(gradeButtonTapped))
+        gradeView.addGestureRecognizer(tapGuesterRecognizer)
     }
     
     private func setupRetake() {
@@ -126,13 +133,15 @@ class CourseEstimationCell: UITableViewCell, ConfigurableViewProtocol {
         retakeButton.translatesAutoresizingMaskIntoConstraints = false
         createSmallTitleLable(title: title, view: retakeView)
         title.text = "Пересдача:"
-        retakeButton.setImage(Images.info.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
+        retakeButton.setImage(Images.check.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
         retakeButton.tintColor = .gray
         
         NSLayoutConstraint.activate([
             retakeButton.leadingAnchor.constraint(equalTo: title.trailingAnchor, constant: 8),
             retakeButton.centerYAnchor.constraint(equalTo: retakeView.centerYAnchor)
         ])
+        
+        retakeButton.addTarget(self, action: #selector(retakeButtonTapped), for: .touchUpInside)
     }
     
     func configure(with model: ConfigurationModel) {
@@ -140,16 +149,27 @@ class CourseEstimationCell: UITableViewCell, ConfigurableViewProtocol {
         regimLabel.text = model.isOffline ? "Очно" : "Экстерн"
         loadLabel.text = model.wasInLoad ? "В нагрузке" : "Не в нагрузке"
         isRetake = model.isRetake
+        retakeButton.tintColor = isRetake ? Colors.red.uiColor : .gray
         gradeView.removeFromSuperview()
         setGrade(with: model.grade)
+        self.grade = model.grade.grade
+        courseID = model.id
     }
     
     func setGrade(grade: Int) {
+        gradeView.removeFromSuperview()
         setGrade(with: GradeModel(grade: grade))
+        self.grade = grade
+        delegate?.estimate(courseID: courseID, grade: grade, isRetake: isRetake)
     }
     
     @objc private func retakeButtonTapped() {
         isRetake = !isRetake
+        delegate?.estimate(courseID: courseID, grade: grade, isRetake: isRetake)
+    }
+    
+    @objc private func gradeButtonTapped() {
+        delegate?.setGrade(cell: self)
     }
     
     private func createSmallTitleLable(title: UILabel, view: UIView) {

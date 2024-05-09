@@ -142,6 +142,28 @@ final class AdminAssembly: BaseAssembly {
         return vc
     }
     
+    func makeCoursesEstimatingModule(studentID: Int, moduleOutput: CoursesEstimatingModuleOutput) -> UIViewController {
+        let presenter = CoursesEstimatingPresenter(
+            studentID: studentID,
+            moduleOutput: moduleOutput,
+            gradesService: serviceAssembly.makeGradesService()
+        )
+        let vc = CoursesEstimatingViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+//    func makeStudentDetailsModule(studentID: Int, moduleOutput: StudentDetailsModuleOutput) -> UIViewController {
+//        let presenter = StudentDetailsPresenter(
+//            id: studentID,
+//            profileService: serviceAssembly.makeProfileService(), 
+//            moduleOutput: moduleOutput
+//        )
+//        let vc = ProfileViewController(output: presenter)
+//        presenter.viewInput = vc
+//        return vc
+//    }
+    
     func makeEventsModule(moduleOutput: EventsModuleOutput) -> UIViewController {
         let presenter = EventsPresenter(
             moduleOutput: moduleOutput,

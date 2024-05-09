@@ -93,9 +93,18 @@ extension AdminCoordinator: AdminDepartmentCoursesModuleOutput {
 
 extension AdminCoordinator: CourseStudentsListModuleOutput {
     func moduleWantsToOpenStudent(studentID: Int, controller: UINavigationController?) {
-        let studentVC = adminAssembly.makeStudentProfileModule(for: studentID)
+        let studentVC = adminAssembly.makeStudentProfileModule(for: studentID, moduleOutput: self)
         controller?.pushViewController(studentVC, animated: true)
     }
+}
+
+extension AdminCoordinator: StudentDetailsModuleOutput {
+    func moduleWantsToOpenGrades(studentID: Int, controller: UINavigationController?) {
+        let gradesVC = adminAssembly.makeCoursesEstimatingModule(studentID: studentID, moduleOutput: self)
+        controller?.pushViewController(gradesVC, animated: true)
+    }
+    
+    
 }
 
 extension AdminCoordinator: CourseTeachersListModuleOutput {
@@ -108,6 +117,10 @@ extension AdminCoordinator: CourseTeachersListModuleOutput {
         let addTeachersVC = adminAssembly.makeAddTeachersModule(id: courseID)
         controller?.pushViewController(addTeachersVC, animated: true)
     }
+    
+}
+
+extension AdminCoordinator: CoursesEstimatingModuleOutput {
     
 }
 
@@ -265,7 +278,7 @@ extension AdminCoordinator: AdminMainScreenModuleOutput {
 
 extension AdminCoordinator: StudentsListModuleOutput {
     func moduleWantsToOpenStudentDetails(for id: Int) {
-        let studentVC = adminAssembly.makeStudentProfileModule(for: id)
+        let studentVC = adminAssembly.makeStudentProfileModule(for: id, moduleOutput: self)
         settingsNavigationController.pushViewController(studentVC, animated: true)
     }
     

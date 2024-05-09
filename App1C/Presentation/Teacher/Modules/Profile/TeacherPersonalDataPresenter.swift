@@ -5,7 +5,7 @@
 //  Created by Станислава on 18.04.2024.
 //
 
-import Foundation
+import UIKit
 
 final class TeacherPersonalDataPresenter: TeacherProfilePresenter {
     private func makeWorkTimeModel(from: Date?, to: Date?) -> WorkTimeModel? {
@@ -23,6 +23,8 @@ final class TeacherPersonalDataPresenter: TeacherProfilePresenter {
 }
 
 extension TeacherPersonalDataPresenter: ProfileViewOutput {
+    func openGrades(controller: UINavigationController?) { }
+    
     func viewIsReady() {
         viewInput?.setupFields()
         viewInput?.setupEditButton()
