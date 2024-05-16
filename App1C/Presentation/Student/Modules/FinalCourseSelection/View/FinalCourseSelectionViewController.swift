@@ -287,7 +287,9 @@ class FinalCourseSelectionViewController: UIViewController {
         
         for course in courses {
             y += 10
-            let courseView = CourseView(frame: CGRect(x: x, y: y, width: view.frame.width - x - 20, height: 70))
+            let courseView = CourseView(
+                frame: CGRect(x: x, y: y, width: view.frame.width - x - 20, height: 70)
+            )
             courseView.isDep = isDeps
             courseView.configure(with: course)
             courseView.delegate = self
@@ -299,7 +301,9 @@ class FinalCourseSelectionViewController: UIViewController {
             y = courseView.frame.maxY
             var cur: [CourseView] = []
             
-            setupStartedCoursesViews(courses: course.courseChildren, x: x + 20, y: &y, currentDeps: &cur, isDeps: true)
+            setupStartedCoursesViews(
+                courses: course.courseChildren, x: x + 20, y: &y, currentDeps: &cur, isDeps: true
+            )
             
             startedCourseViews[courseView] = CourseSelectionViewModel(allDeps: cur, deps: cur)
         }

@@ -9,7 +9,7 @@ import UIKit
 
 final class StudentPersonalDataPresenter: StudentProfilePresenter { 
     weak var moduleOutput: StudentDetailsModuleOutput?
-    
+        
     init(
         id: Int,
         profileService: ProfileServiceProtocol,
@@ -27,10 +27,20 @@ extension StudentPersonalDataPresenter: ProfileViewOutput {
     
     func viewIsReady() {
         viewInput?.setupStudentFields()
-        viewInput?.setupEditButton()
-        viewInput?.setupSaveButton()
-        viewInput?.changeEnable(isEdit: false)
-        viewInput?.setupGradesButton()
+
+        if TokenService.shared.id != id || TokenService.shared.role != .student {
+            viewInput?.setupTitle(title: "Данные студента")
+        }
+        
+        if TokenService.shared.role == .admin || TokenService.shared.id == id {
+            viewInput?.setupEditButton()
+            viewInput?.setupSaveButton()
+            viewInput?.changeEnable(isEdit: false)
+        }
+        
+        if TokenService.shared.role == .admin {
+            viewInput?.setupGradesButton()
+        }
         
         getStudent()
     }

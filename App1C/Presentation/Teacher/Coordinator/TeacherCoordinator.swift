@@ -27,9 +27,10 @@ final class TeacherCoordinator: CoordinatorProtocol {
     func start(in window: UIWindow?) {
         let mainScreenVC = teacherAssembly.makeMainScreenModule(moduleOutput: self)
         mainScreenNavigationController = CustomNavigationController(rootViewController: mainScreenVC)
-        let settingsVC = teacherAssembly.makeSettingsModule(moduleOutput: self)//profileAssembly.makeProfileModule(moduleOutput: self)
+        let settingsVC = teacherAssembly.makeSettingsModule(moduleOutput: self)
         self.settingsNavigationController = CustomNavigationController(rootViewController: settingsVC)
-        let coursesListNavigationController = CustomNavigationController(rootViewController: TeacherCoursesListViewController())
+        let coursesVC = teacherAssembly.makeTeacherCoursesModule(moduleOutput: self)
+        let coursesListNavigationController = CustomNavigationController(rootViewController: coursesVC)
         
         let tabBarController = TeacherTabBarController(
             mainScreenNavigationController: mainScreenNavigationController,
@@ -44,7 +45,8 @@ final class TeacherCoordinator: CoordinatorProtocol {
 
 extension TeacherCoordinator: TeacherSettingsModuleOutput {
     func moduleWantsToOpenDepartmentCourses() {
-        
+        let coursesVC = teacherAssembly.makeDepartmentCoursesModule(moduleOutput: self)
+        settingsNavigationController.pushViewController(coursesVC, animated: true)
     }
     
     func moduleWantsToOpenProfile() {
@@ -62,6 +64,69 @@ extension TeacherCoordinator: TeacherSettingsModuleOutput {
     }
 }
 
+extension TeacherCoordinator: AdminDepartmentCoursesModuleOutput {
+    func moduleWantsToOPenAddCourse(navigationController: UINavigationController?) {}
+    
+    func moduleWantsToOpenCourse(for id: Int, navigationController: UINavigationController?) {
+        let courseVC = teacherAssembly.makeCourseDetailesModule(id: id, isEditEnable: false, moduleOutput: self)
+        settingsNavigationController.pushViewController(courseVC, animated: true)
+    }
+}
+
+extension TeacherCoordinator: TeacherCoursesListModuleOutput {
+    func moduleWantsToOpenCourse(id: Int, isEditEnable: Bool, controller: UINavigationController?) {
+        let courseVC = teacherAssembly.makeCourseDetailesModule(id: id, isEditEnable: isEditEnable, moduleOutput: self)
+        controller?.pushViewController(courseVC, animated: true)
+    }
+}
+
+extension TeacherCoordinator: CourseDetailesModuleOutput {
+    func moduleWantsToOpenStudents(courseID: Int, courseTitle: String, navigationController: UINavigationController?) {
+        let studentsVC = teacherAssembly.makeCourseStudentsListModule(moduleOutput: self, courseID: courseID, courseTitle: courseTitle)
+        navigationController?.pushViewController(studentsVC, animated: true)
+    }
+    
+    func moduleWantsToOpenTeachers(courseID: Int, courseTitle: String, navigationController: UINavigationController?) {
+        let teachersVC = teacherAssembly.makeCourseTeachersListModule(moduleOutput: self, courseID: courseID, courseTitle: courseTitle)
+        navigationController?.pushViewController(teachersVC, animated: true)
+    }
+    
+    func moduleWantsToOpenEditModule(id: Int, navigationController: UINavigationController?) {
+        let editCourseVC = teacherAssembly.makeCourseEditModule(id: id)
+        navigationController?.pushViewController(editCourseVC, animated: true)
+    }
+    
+    func moduleWantsToOpenDeps(courseID: Int, courseTitle: String, navigationController: UINavigationController?) {
+        let depsVC = teacherAssembly.makeCourseDependensiesModule(moduleOutput: self, courseID: courseID, courseTitle: courseTitle)
+        navigationController?.pushViewController(depsVC, animated: true)
+    }
+}
+
+extension TeacherCoordinator: CourseStudentsListModuleOutput {
+    func moduleWantsToOpenStudent(studentID: Int, controller: UINavigationController?) {
+        let studentVC = teacherAssembly.makeStudentProfileModule(for: studentID, moduleOutput: self)
+        controller?.pushViewController(studentVC, animated: true)
+    }
+}
+
+extension TeacherCoordinator: StudentDetailsModuleOutput {
+    func moduleWantsToOpenGrades(studentID: Int, controller: UINavigationController?) { }
+}
+
+extension TeacherCoordinator: CourseTeachersListModuleOutput {
+    func moduleWantsToOpenTeacher(teacherID: Int, controller: UINavigationController?) {
+        let teacherVC = teacherAssembly.makeTeacherProfileModule(for: teacherID)
+        controller?.pushViewController(teacherVC, animated: true)
+    }
+    
+    func moduleWantsToAddTeachers(courseID: Int, controller: UINavigationController?) { }
+    
+}
+
+extension TeacherCoordinator: CourseDependensiesModuleOutput {
+    func moduleWantsToAddDependensies(courseID: Int, controller: UINavigationController?) {}
+}
+
 extension TeacherCoordinator: AdminListModuleOutput {
     func moduleWantsToCloseAdminList() {
         settingsNavigationController.popViewController(animated: true)
@@ -74,10 +139,32 @@ extension TeacherCoordinator: AdminListModuleOutput {
 }
 
 extension TeacherCoordinator: TeacherMainScreenModuleOutput {
+    func moduleWantsToOpenNotifications() {
+        let notificationsVC = teacherAssembly.makeNotificationsModule(moduleOutput: self)
+        mainScreenNavigationController.pushViewController(notificationsVC, animated: true)
+    }
+    
     func moduleWantsToOpenEvent(id: Int) {
         let teacherEventVC = teacherAssembly.makeEventModule(id: id, moduleOutput: self)
         mainScreenNavigationController.pushViewController(teacherEventVC, animated: true)
     }
+}
+
+extension TeacherCoordinator: NotificationsModuleOutput {
+    func moduleWantsToOpenNotification(id: Int) {
+        let notificationController = teacherAssembly.makeNotificationModule(id: id, moduleOutput: self)
+        mainScreenNavigationController.pushViewController(notificationController, animated: true)
+    }
+    
+    func moduleWantsToOpenThemeSelectionEvent(id: Int) {
+    }
+    
+    func moduleWantsToOpenDiplomaSpeechEvent(id: Int) {
+    }
+}
+
+extension TeacherCoordinator: NotificationModuleOutput {
+    
 }
 
 extension TeacherCoordinator: TeacherEventModuleOutput {

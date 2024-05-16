@@ -102,9 +102,11 @@ final class CourseView: UIView {
     @objc private func selectCourse() {
         if isSelected {
             checkButton.tintColor = .gray
+            checkButton.setImage(Images.check.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
             delegate?.unselectCourse(id: courseID)
         } else {
             checkButton.tintColor = Colors.darkgreen.uiColor
+            checkButton.setImage(Images.fillCheck.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
             delegate?.selectCourse(id: courseID)
         }
     }
@@ -169,6 +171,7 @@ final class CourseView: UIView {
         statusLabel.text = isOffline ? "Очно" : "Экстерн"
         statusLabel.isHidden = closed
         checkButton.tintColor = Colors.darkgreen.uiColor
+        checkButton.setImage(Images.fillCheck.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
         isSelected = true
     }
     
@@ -176,12 +179,14 @@ final class CourseView: UIView {
         statusLabel.text = takenAsLoad ? "В нагрузку" : "Не в нагрузку"
         statusLabel.isHidden = false
         checkButton.tintColor = Colors.darkgreen.uiColor
+        checkButton.setImage(Images.fillCheck.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
         isSelected = true
     }
     
     func unSelect() {
         statusLabel.isHidden = true
         checkButton.tintColor = .gray
+        checkButton.setImage(Images.check.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
         isSelected = false
     }
 }

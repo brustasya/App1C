@@ -9,4 +9,5 @@ import Foundation
 
 protocol TeacherMainScreenModuleOutput: AnyObject {
     func moduleWantsToOpenEvent(id: Int)
+    func moduleWantsToOpenNotifications()
 }

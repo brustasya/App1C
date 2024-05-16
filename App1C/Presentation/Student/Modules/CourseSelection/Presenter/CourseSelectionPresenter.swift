@@ -19,10 +19,16 @@ class CourseSelectionPresenter {
         self.courseSelectionService = courseSelectionService
     }
     
-    private func treeBuilder(serviceModels: [CourseSelectionServiceModel]) -> [Int: CourseSelectionModel] {
+    private func treeBuilder(serviceModels: [CourseSelectionServiceModel]) 
+    -> [Int: CourseSelectionModel] {
         var coursesDict: [Int: CourseSelectionModel] = [:]
         for model in serviceModels {
-            let course = CourseSelectionModel(id: model.id, title: model.title, closed: model.closed ?? false, wasInLoad: model.wasInLoad ?? false)
+            let course = CourseSelectionModel(
+                id: model.id,
+                title: model.title,
+                closed: model.closed ?? false,
+                wasInLoad: model.wasInLoad ?? false
+            )
             coursesDict[model.id] = course
         }
         for model in serviceModels {
@@ -32,7 +38,11 @@ class CourseSelectionPresenter {
                     course.parentCourse = parent
                     parent?.courseChildren.append(course)
                 } else {
-                    let course = CourseSelectionModel(id: dep.id, title: dep.title, closed: dep.closed)
+                    let course = CourseSelectionModel(
+                        id: dep.id,
+                        title: dep.title,
+                        closed: dep.closed
+                    )
                     coursesDict[dep.id] = course
                 }
             }

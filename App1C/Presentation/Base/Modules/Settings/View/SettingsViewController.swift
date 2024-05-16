@@ -15,7 +15,8 @@ class SettingsViewController: UIViewController {
         BaseModel(id: 0, title: "Личные данные", image: Images.person.uiImage),
         BaseModel(id: 1, title: "Cписок администраторов", image: Images.persons.uiImage),
         BaseModel(id: 2, title: "Чат кафедры", image: Images.chat.uiImage),
-        BaseModel(id: 3, title: "Выход", image: Images.exit.uiImage),
+        BaseModel(id: 3, title: "Сменить роль", image: Images.uturn.uiImage),
+        BaseModel(id: 4, title: "Выход", image: Images.exit.uiImage),
     ]
     
     lazy var educationBackgroundView = UIView()
@@ -23,7 +24,7 @@ class SettingsViewController: UIViewController {
     lazy var education: [BaseModel] = [
         BaseModel(id: 0, title: "Список преподавателей", image: Images.graduationcap.uiImage),
         BaseModel(id: 1, title: "Cписок студентов", image: Images.persons.uiImage),
-        BaseModel(id: 2, title: "Архив студентов", image: Images.archive.uiImage),
+       // BaseModel(id: 2, title: "Архив студентов", image: Images.archive.uiImage),
         BaseModel(id: 3, title: "Список курсов", image: Images.books.uiImage),
     ]
     

@@ -10,7 +10,7 @@ import Foundation
 class TeacherProfilePresenter {
     weak var viewInput: ProfileViewInput?
        
-    private let id: Int
+    let id: Int
     private let profileService: ProfileServiceProtocol
     var isEdit = false
     

@@ -35,6 +35,8 @@ class VerificationViewController: UIViewController {
         setupTextFields()
         setupLoginButton()
         setupImage()
+//        loginTextField.text = "stasyabobr@yandex.ru"//"Stanislava.Bobruskina@yandex.ru"
+//        passwordTextField.text = "a37cf2d4-abb6-4eb0-ab39-95dd956a3872"//"8efa741e-d811-44b3-b8ec-75934cf51a94"
         loginTextField.text = "Stanislava.Bobruskina@yandex.ru"
         passwordTextField.text = "8efa741e-d811-44b3-b8ec-75934cf51a94"
        // output.viewIsReady()

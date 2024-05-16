@@ -90,11 +90,31 @@ class BaseAssembly {
     
     func makeStudentProfileModule(for id: Int, moduleOutput: StudentDetailsModuleOutput) -> UIViewController {
         let presenter = StudentPersonalDataPresenter(
-            id: id,
-            profileService: serviceAssembly.makeProfileService(), 
+            id: id, 
+            profileService: serviceAssembly.makeProfileService(),
             moduleOutput: moduleOutput
         )
         let vc = ProfileViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeCourseEditModule(id: Int) -> UIViewController {
+        let presenter = EditCoursePresenter(
+            id: id,
+            coursesService: serviceAssembly.makeCoursesService()
+        )
+        let vc = CourseViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeDepartmentCoursesModule(moduleOutput: AdminDepartmentCoursesModuleOutput) -> UIViewController {
+        let presenter = AdminDepartmentCoursesPresenter(
+            moduleOutput: moduleOutput,
+            coursesService: serviceAssembly.makeCoursesService()
+        )
+        let vc = CoursesListViewController(output: presenter)
         presenter.viewInput = vc
         return vc
     }
@@ -105,6 +125,18 @@ class BaseAssembly {
             profileService: serviceAssembly.makeProfileService()
         )
         let vc = ProfileViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
+    func makeCourseDetailesModule(id: Int, isEditEnable: Bool = false, moduleOutput: CourseDetailesModuleOutput) -> UIViewController {
+        let presenter = CourseDetailesPresenter(
+            id: id,
+            isEditEnable: isEditEnable,
+            moduleOutput: moduleOutput,
+            coursesService: serviceAssembly.makeCoursesService()
+        )
+        let vc = CourseViewController(output: presenter)
         presenter.viewInput = vc
         return vc
     }

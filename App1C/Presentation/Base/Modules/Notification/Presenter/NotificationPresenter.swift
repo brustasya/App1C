@@ -45,13 +45,20 @@ class NotificationPresenter {
                 DispatchQueue.main.async {
                     self?.viewInput?.setTitle(title: model.title)
                     switch type {
-                    case .preliminaryCourseChoice, .finalCourseChoice, .estimating:
+                    case .preliminaryCourseChoice, .finalCourseChoice:
                         let deadline = Date.toDate(dateString: model.deadline)
                         self?.viewInput?.setupReadMode()
                         if deadline >= Date.now {
                             self?.viewInput?.addGoOverButton()
                         }
                         self?.viewInput?.updateData(deadline: deadline, descr: model.description)
+                    case .estimating:
+                        let deadline = Date.toDate(dateString: model.deadline)
+                        self?.viewInput?.setupReadMode()
+                        self?.viewInput?.updateData(deadline: deadline, descr: model.description)
+                        if deadline >= Date.now {
+                            //self?.viewInput?.addGoOverButton()
+                        }
                     case .diplomaThemeChoice, .diplomaSpeech:
                         break
                     case .diplomaThemeCorrection:

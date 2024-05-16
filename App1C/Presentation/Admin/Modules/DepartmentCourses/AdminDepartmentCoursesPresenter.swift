@@ -47,7 +47,11 @@ extension AdminDepartmentCoursesPresenter: CoursesListViewOutput {
     }
     
     func viewIsReady() {
-        viewInput?.setupAdminMode()
+        if TokenService.shared.role == .admin {
+            viewInput?.setupAdminMode()
+        } else {
+            viewInput?.setupBaseMode()
+        }
         getCourses()
     }
     

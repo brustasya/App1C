@@ -42,6 +42,7 @@ final class TeacherMainScreenPresenter {
                 })
                 self?.events = events
                 DispatchQueue.main.async {
+                    self?.viewInput?.setupBell(newEvents: model.unseenEvents ?? false)
                     self?.viewInput?.updateEvents(events: events)
                 }
             case .failure(let failure):
@@ -65,6 +66,10 @@ final class TeacherMainScreenPresenter {
 }
 
 extension TeacherMainScreenPresenter: TeacherMainScreenViewOutput {
+    func openNotifications() {
+        moduleOutput?.moduleWantsToOpenNotifications()
+    }
+    
     func selectEvent(at index: Int) {
         moduleOutput?.moduleWantsToOpenEvent(id: events[index].id)
     }

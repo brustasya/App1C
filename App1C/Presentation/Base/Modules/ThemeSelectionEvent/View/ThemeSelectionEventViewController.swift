@@ -337,11 +337,11 @@ extension ThemeSelectionEventViewController: ThemeSelectionEventViewInput {
         }
         
         if let themesURL = model.themesURL {
-            descriptionTextField.text = isEdit ? themesURL : "Ссылка на список тем"
-            descriptionTextField.textColor = isEdit ? .black : .systemBlue
+            themesTextField.text = isEdit ? themesURL : "Ссылка на список тем"
+            themesTextField.textColor = isEdit ? .black : .systemBlue
         } else {
-            descriptionTextField.text = isEdit ? "" : "Не указана"
-            descriptionTextField.textColor = .black
+            themesTextField.text = isEdit ? "" : "Не указана"
+            themesTextField.textColor = .black
         }
         
         updateDatePickers()

@@ -86,7 +86,7 @@ extension AdminCoordinator: AdminDepartmentCoursesModuleOutput {
     }
     
     func moduleWantsToOpenCourse(for id: Int, navigationController: UINavigationController?) {
-        let courseVC = adminAssembly.makeCourseDetailesModule(id: id, moduleOutput: self)
+        let courseVC = adminAssembly.makeCourseDetailesModule(id: id, isEditEnable: true, moduleOutput: self)
         navigationController?.pushViewController(courseVC, animated: true)
     }
 }
@@ -103,8 +103,6 @@ extension AdminCoordinator: StudentDetailsModuleOutput {
         let gradesVC = adminAssembly.makeCoursesEstimatingModule(studentID: studentID, moduleOutput: self)
         controller?.pushViewController(gradesVC, animated: true)
     }
-    
-    
 }
 
 extension AdminCoordinator: CourseTeachersListModuleOutput {

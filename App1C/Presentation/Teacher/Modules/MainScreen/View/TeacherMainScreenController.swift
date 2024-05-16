@@ -24,7 +24,8 @@ class TeacherMainScreenController: MainScreenViewController {
         super.viewDidLoad()
             
         output.viewIsReady()
-        //(navigationController as? CustomNavigationController)?.setupBellButton()
+        (navigationController as? CustomNavigationController)?.bellButton.addTarget(self, action: #selector(openNotifications), for: .touchUpInside)
+        (navigationController as? CustomNavigationController)?.bellBageButton.addTarget(self, action: #selector(openNotifications), for: .touchUpInside)
     }
     
     override func setupLinksViews() {
@@ -47,7 +48,7 @@ class TeacherMainScreenController: MainScreenViewController {
         super.setupEventsTableView()
         
         NSLayoutConstraint.activate([
-            eventsBackgroundView.topAnchor.constraint(equalTo: telegramView.bottomAnchor, constant: 20)
+            eventsBackgroundView.topAnchor.constraint(equalTo: telegramView.bottomAnchor, constant: 20),
         ])
     }
     
@@ -62,6 +63,10 @@ class TeacherMainScreenController: MainScreenViewController {
     @objc private func openSite() {
         output.openSite()
     }
+    
+    @objc private func openNotifications() {
+        output.openNotifications()
+    }
 }
 
 extension TeacherMainScreenController {
@@ -75,6 +80,14 @@ extension TeacherMainScreenController: TeacherMainScreenViewInput {
     func updateEvents(events: [EventModel]) {
         self.events = events
         setupEventsTableView()
+        let height = events.count != 0 ? CGFloat(Double(events.count * 70) - 0.5) : 0
+        tableHeightConstraint?.isActive = false
+        tableHeightConstraint = eventsTableView.heightAnchor.constraint(equalToConstant: height)
+        tableHeightConstraint?.isActive = true
+    }
+    
+    func setupBell(newEvents: Bool) {
+        (navigationController as? CustomNavigationController)?.bellBageButton.isHidden = !newEvents
     }
 }
 

@@ -13,3 +13,4 @@ protocol StudentsListViewOutput: AnyObject {
     func selectCourse(at index: Int)
     func selectStudent(at index: Int)
 }
+

@@ -147,7 +147,7 @@ class CourseEstimationCell: UITableViewCell, ConfigurableViewProtocol {
     func configure(with model: ConfigurationModel) {
         titleLabel.text = model.title
         regimLabel.text = model.isOffline ? "Очно" : "Экстерн"
-        loadLabel.text = model.wasInLoad ? "В нагрузке" : "Не в нагрузке"
+        loadLabel.text = !model.wasInLoad ? "В нагрузке" : "Не в нагрузке"
         isRetake = model.isRetake
         retakeButton.tintColor = isRetake ? Colors.red.uiColor : .gray
         gradeView.removeFromSuperview()

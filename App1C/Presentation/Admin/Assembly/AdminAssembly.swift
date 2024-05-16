@@ -100,16 +100,6 @@ final class AdminAssembly: BaseAssembly {
         return vc
     }
     
-    func makeDepartmentCoursesModule(moduleOutput: AdminDepartmentCoursesModuleOutput) -> UIViewController {
-        let presenter = AdminDepartmentCoursesPresenter(
-            moduleOutput: moduleOutput,
-            coursesService: serviceAssembly.makeCoursesService()
-        )
-        let vc = CoursesListViewController(output: presenter)
-        presenter.viewInput = vc
-        return vc
-    }
-    
     func makeAddDependenciesModule(id: Int, delegate: CourseDelegate? = nil) -> UIViewController  {
         let presenter = AddDependenciesPresenter(
             id: id,
@@ -237,27 +227,6 @@ final class AdminAssembly: BaseAssembly {
             coursesAggregationService: serviceAssembly.makeCoursesAggregationService()
         )
         let vc = CoursesAgregationViewController(output: presenter)
-        presenter.viewInput = vc
-        return vc
-    }
-    
-    func makeCourseDetailesModule(id: Int, moduleOutput: CourseDetailesModuleOutput) -> UIViewController {
-        let presenter = CourseDetailesPresenter(
-            id: id,
-            moduleOutput: moduleOutput,
-            coursesService: serviceAssembly.makeCoursesService()
-        )
-        let vc = CourseViewController(output: presenter)
-        presenter.viewInput = vc
-        return vc
-    }
-    
-    func makeCourseEditModule(id: Int) -> UIViewController {
-        let presenter = EditCoursePresenter(
-            id: id,
-            coursesService: serviceAssembly.makeCoursesService()
-        )
-        let vc = CourseViewController(output: presenter)
         presenter.viewInput = vc
         return vc
     }

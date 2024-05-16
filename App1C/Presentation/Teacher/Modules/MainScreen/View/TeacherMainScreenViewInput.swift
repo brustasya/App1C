@@ -9,4 +9,5 @@ import Foundation
 
 protocol TeacherMainScreenViewInput: AnyObject {
     func updateEvents(events: [EventModel])
+    func setupBell(newEvents: Bool)
 }

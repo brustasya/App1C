@@ -13,6 +13,7 @@ class CourseDetailesPresenter {
     
     private let coursesService: CoursesServiceProtocol
     private let id: Int
+    private let isEditEnable: Bool
     
     private lazy var teachers: [Int] = []
     private lazy var courses: [Int] = []
@@ -20,10 +21,12 @@ class CourseDetailesPresenter {
     
     init(
         id: Int,
+        isEditEnable: Bool,
         moduleOutput: CourseDetailesModuleOutput,
         coursesService: CoursesServiceProtocol
     ) {
         self.id = id
+        self.isEditEnable = isEditEnable
         self.moduleOutput = moduleOutput
         self.coursesService = coursesService
     }
@@ -117,7 +120,9 @@ extension CourseDetailesPresenter: CourseViewOutput {
     func viewIsReady() {
         //viewInput?.setupAddMode()
         viewInput?.setupReadMode()
-        viewInput?.addEditButton()
+        if isEditEnable {
+            viewInput?.addEditButton()
+        }
         getCourse()
         //viewInput?.setupEditMode()
     }

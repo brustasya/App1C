@@ -30,6 +30,16 @@ final class TeacherAssembly: BaseAssembly {
         return vc
     }
     
+    func makeTeacherCoursesModule(moduleOutput: TeacherCoursesListModuleOutput) -> UIViewController {
+        let presenter = TeacherCoursesListPresenter(
+            moduleOutput: moduleOutput,
+            coursesService: serviceAssembly.makeCoursesService()
+        )
+        let vc = TeacherCoursesListViewController(output: presenter)
+        presenter.viewInput = vc
+        return vc
+    }
+    
     func makeEventModule(id: Int, moduleOutput: TeacherEventModuleOutput) -> UIViewController {
         let presenter = TeacherEventPresenter(
             id: id,

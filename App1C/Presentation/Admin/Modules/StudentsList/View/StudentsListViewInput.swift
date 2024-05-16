@@ -10,3 +10,4 @@ import Foundation
 protocol StudentsListViewInput: AnyObject {
     func setupStudents(students: [BaseModel])
 }
+

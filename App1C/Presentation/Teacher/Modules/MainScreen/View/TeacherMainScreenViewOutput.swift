@@ -13,4 +13,5 @@ protocol TeacherMainScreenViewOutput: AnyObject {
     func openChatbot()
     func openSite()
     func selectEvent(at index: Int)
+    func openNotifications()
 }

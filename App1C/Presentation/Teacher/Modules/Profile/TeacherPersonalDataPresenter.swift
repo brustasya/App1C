@@ -27,9 +27,15 @@ extension TeacherPersonalDataPresenter: ProfileViewOutput {
     
     func viewIsReady() {
         viewInput?.setupFields()
-        viewInput?.setupEditButton()
-        viewInput?.setupSaveButton()
-        viewInput?.changeEnable(isEdit: false)
+        if TokenService.shared.id != id || TokenService.shared.role != .teacher {
+            viewInput?.setupTitle(title: "Данные преподавателя")
+        }
+        
+        if TokenService.shared.role == .admin || TokenService.shared.id == id {
+            viewInput?.setupEditButton()
+            viewInput?.setupSaveButton()
+            viewInput?.changeEnable(isEdit: false)
+        }
         
         getTeacher()
     }

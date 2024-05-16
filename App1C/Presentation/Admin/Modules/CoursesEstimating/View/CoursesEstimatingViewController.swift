@@ -193,7 +193,7 @@ extension CoursesEstimatingViewController: SelectorDelegate {
         case 2:
             subTitleLabel.text = "Закрытые, но не проставленные курсы"
             page = 3
-            courses = unusedCourses
+            courses = lastCourses//unusedCourses
             coursesTableView.reloadData()
         default:
             break

@@ -101,9 +101,11 @@ final class ChoosenCourseView: UIView {
     @objc private func selectCourse() {
         if isSelected {
             checkButton.tintColor = .gray
+            checkButton.setImage(Images.check.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
             delegate?.unselectChoosenCourse(id: courseID)
         } else {
             checkButton.tintColor = Colors.darkgreen.uiColor
+            checkButton.setImage(Images.fillCheck.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
             delegate?.selectChoosenCourse(id: courseID)
         }
     }
@@ -159,6 +161,7 @@ final class ChoosenCourseView: UIView {
         statusLabel.isHidden = closed
         loadLabel.isHidden = closed
         checkButton.tintColor = Colors.darkgreen.uiColor
+        checkButton.setImage(Images.fillCheck.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
         isSelected = true
         if !closed && (titleLabel.text ?? "").count > 24 {
             titleLabel.frame.origin.y -= 9
@@ -169,6 +172,7 @@ final class ChoosenCourseView: UIView {
         statusLabel.isHidden = true
         loadLabel.isHidden = true
         checkButton.tintColor = .gray
+        checkButton.setImage(Images.check.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
         isSelected = false
         if !closed {
             titleLabel.frame.origin.y += 9
