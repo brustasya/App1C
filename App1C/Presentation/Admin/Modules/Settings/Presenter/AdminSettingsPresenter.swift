@@ -11,10 +11,14 @@ final class AdminSettingsPresenter {
     weak var viewInput: AdminSettingsViewInput?
     weak var moduleOutput: AdminSettingsModuleOutput?
             
+    private let openURLService: OpenURLServiceProtocol
+    
     init(
-        moduleOutput: AdminSettingsModuleOutput
+        moduleOutput: AdminSettingsModuleOutput,
+        openURLService: OpenURLServiceProtocol
     ) {
         self.moduleOutput = moduleOutput
+        self.openURLService = openURLService
     }
 }
 
@@ -39,7 +43,7 @@ extension AdminSettingsPresenter: AdminSettingsViewOutput {
         case 1:
             moduleOutput?.moduleWantsToOpenAdminList()
         case 2:
-            return
+            openURLService.openURL(url: TokenService.shared.chatURL)
         case 3:
             moduleOutput?.moduleWantsToOpenRoleSelection()
         case 4:

@@ -170,8 +170,6 @@ extension AdminCoordinator: AdminDiplomaModuleOutput {
         let editDiplomaVC = adminAssembly.makeEditDiplomaModule(studentID: studentID, bachelor: bachelor, model: model)
         settingsNavigationController.pushViewController(editDiplomaVC, animated: true)
     }
-    
-    
 }
 
 extension AdminCoordinator: AdminSettingsModuleOutput {

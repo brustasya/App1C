@@ -165,9 +165,9 @@ extension CoursesListViewController: UITableViewDataSource, UITableViewDelegate 
         output.selectCourse(at: indexPath.row, navigationController: navigationController)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 80
+//    }
 }
 
 

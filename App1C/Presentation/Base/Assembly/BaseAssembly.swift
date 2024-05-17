@@ -136,7 +136,8 @@ class BaseAssembly {
             id: id,
             isEditEnable: isEditEnable,
             moduleOutput: moduleOutput,
-            coursesService: serviceAssembly.makeCoursesService()
+            coursesService: serviceAssembly.makeCoursesService(),
+            openURLService: serviceAssembly.makeOpenURLService()
         )
         let vc = CourseViewController(output: presenter)
         presenter.viewInput = vc

@@ -14,7 +14,10 @@ final class StudentAssembly: BaseAssembly {
     }
     
     func makeSettingsModule(moduleOutput: StudentSettingsModuleOutput) -> UIViewController {
-        let presenter = StudentSettingsPresenter(moduleOutput: moduleOutput)
+        let presenter = StudentSettingsPresenter(
+            moduleOutput: moduleOutput,
+            openURLService: serviceAssembly.makeOpenURLService()
+        )
         let vc = StudentSettingsViewController(output: presenter)
         presenter.viewInput = vc
         return vc

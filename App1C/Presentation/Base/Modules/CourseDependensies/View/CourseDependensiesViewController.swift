@@ -52,7 +52,7 @@ class CourseDependensiesViewController: UIViewController {
     }
     
     private func setupTitle() {
-        titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width, height: 30), title: "")
+        titleLabel = TitleView(frame: CGRect(x: 30, y: 25, width: view.frame.width - 60, height: 60), title: "")
         view.addSubview(titleLabel)
     }
     

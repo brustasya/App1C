@@ -10,11 +10,15 @@ import Foundation
 final class StudentSettingsPresenter {
     weak var viewInput: StudentSettingsViewInput?
     weak var moduleOutput: StudentSettingsModuleOutput?
-            
+     
+    private let openURLService: OpenURLServiceProtocol
+    
     init(
-        moduleOutput: StudentSettingsModuleOutput
+        moduleOutput: StudentSettingsModuleOutput,
+        openURLService: OpenURLServiceProtocol
     ) {
         self.moduleOutput = moduleOutput
+        self.openURLService = openURLService
     }
 }
 
@@ -28,7 +32,7 @@ extension StudentSettingsPresenter: StudentSettingsViewOutput {
         case 2:
             moduleOutput?.moduleWantsToOpenDepartmentCourses()
         case 3:
-            return
+            openURLService.openURL(url: TokenService.shared.chatURL)
         case 4:
             moduleOutput?.moduleWantsToOpenRoleSelection()
         case 5:

@@ -11,14 +11,14 @@ final class TeacherSettingsPresenter {
     weak var viewInput: TeacherSettingsViewInput?
     weak var moduleOutput: TeacherSettingsModuleOutput?
         
-//    private let telemetryService: TelemetryServiceProtocol
+    private let openURLService: OpenURLServiceProtocol
     
     init(
-        moduleOutput: TeacherSettingsModuleOutput
-//        telemetryService: TelemetryServiceProtocol
+        moduleOutput: TeacherSettingsModuleOutput,
+        openURLService: OpenURLServiceProtocol
     ) {
         self.moduleOutput = moduleOutput
-//        self.telemetryService = telemetryService
+        self.openURLService = openURLService
     }
 }
 
@@ -32,7 +32,7 @@ extension TeacherSettingsPresenter: TeacherSettingsViewOutput {
         case 2:
             moduleOutput?.moduleWantsToOpenDepartmentCourses()
         case 3:
-            return
+            openURLService.openURL(url: TokenService.shared.chatURL)
         case 4:
             moduleOutput?.moduleWantsToOpenRoleSelection()
         case 5:

@@ -37,20 +37,22 @@ class AdminDiplomaPresenter {
             switch result {
             case .success(let model):
                 let model = bachelor ? model.bachelor : model.master
-                let diplomaModel = DiplomaModel(
-                    studentName: model.studentFullName,
-                    theme: model.theme ?? "",
-                    themeType: getType(type: model.type),
-                    grade: model.grade ?? 0,
-                    name: model.adviserName ?? "",
-                    contacts: model.adviserContacts ?? "",
-                    post: model.adviserWorkplace ?? "",
-                    work: model.adviserJob ?? ""
-                )
-                self?.model = diplomaModel
-                DispatchQueue.main.async {
-                    self?.viewInput?.setupTitle(title: model.studentFullName)
-                    self?.viewInput?.updateData(model: diplomaModel)
+                if let model {
+                    let diplomaModel = DiplomaModel(
+                        studentName: model.studentFullName,
+                        theme: model.theme ?? "",
+                        themeType: getType(type: model.type),
+                        grade: model.grade ?? 0,
+                        name: model.adviserName ?? "",
+                        contacts: model.adviserContacts ?? "",
+                        post: model.adviserWorkplace ?? "",
+                        work: model.adviserJob ?? ""
+                    )
+                    self?.model = diplomaModel
+                    DispatchQueue.main.async {
+                        self?.viewInput?.setupTitle(title: model.studentFullName)
+                        self?.viewInput?.updateData(model: diplomaModel)
+                    }
                 }
             case .failure(let failure):
                 Logger.shared.printLog(log: "Failed load diploma: \(failure)")

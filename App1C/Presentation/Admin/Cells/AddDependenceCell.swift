@@ -53,10 +53,13 @@ class AddDependenceCell: UITableViewCell, ConfigurableViewProtocol {
         contentBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            contentBackgroundView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            //contentBackgroundView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            contentBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             contentBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             contentBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            contentBackgroundView.heightAnchor.constraint(equalToConstant: 60),
+            contentBackgroundView.bottomAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            contentView.bottomAnchor.constraint(equalTo: contentBackgroundView.bottomAnchor, constant: 5)
+            //contentBackgroundView.heightAnchor.constraint(equalToConstant: 60),
         ])
 
         setupTitle()
@@ -69,12 +72,13 @@ class AddDependenceCell: UITableViewCell, ConfigurableViewProtocol {
             
             titleLabel.leadingAnchor.constraint(equalTo: checkButton.trailingAnchor, constant: 12),
             titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentBackgroundView.trailingAnchor, constant: -12),
-            titleLabel.centerYAnchor.constraint(equalTo: contentBackgroundView.centerYAnchor)
+            titleLabel.topAnchor.constraint(equalTo: contentBackgroundView.topAnchor, constant: 16),
+            //titleLabel.centerYAnchor.constraint(equalTo: contentBackgroundView.centerYAnchor)
         ])
         
         titleLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         titleLabel.textColor = .black
-        titleLabel.numberOfLines = 2
+        titleLabel.numberOfLines = 0
         
         checkButton.tintColor = .gray
         checkButton.setImage(Images.check.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)

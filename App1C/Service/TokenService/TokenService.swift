@@ -15,6 +15,7 @@ protocol TokenServiceProtocol: AnyObject {
     var id: Int { get set }
     var login: String { get }
     var password: String { get }
+    var chatURL: String { get set }
     func setupLoginData(login: String, password: String, roles: [Roles])
 }
 
@@ -26,6 +27,7 @@ final class TokenService: TokenServiceProtocol {
     var id: Int = 0
     var login: String = ""
     var password: String = ""
+    var chatURL: String = ""
     
     static let shared: TokenServiceProtocol = TokenService()
     

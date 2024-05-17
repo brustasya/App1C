@@ -33,6 +33,7 @@ final class AdminMainScreenPresenter {
                 self?.tgLink = model.telegramChannelURL
                 self?.chatbotLink = model.telegramBotURL
                 self?.siteLink = model.siteURL
+                TokenService.shared.chatURL = model.telegramChannelURL
                 DispatchQueue.main.async {
                     self?.viewInput?.setupBell(newEvents: model.unseenEvents ?? false)
                     if model.startedCourseAggregation {
@@ -53,6 +54,7 @@ final class AdminMainScreenPresenter {
         mainScreenService.updateLinks(with: LinksModel(telegramChannelURL: tgURL, telegramBotURL: chatbotURL, siteURL: siteURL)) { result in
             switch result {
             case .success(_):
+                TokenService.shared.chatURL = tgURL
                 Logger.shared.printLog(log: "Sucsess update urls")
             case .failure(let failure):
                 Logger.shared.printLog(log: "Failed update urls: \(failure)")

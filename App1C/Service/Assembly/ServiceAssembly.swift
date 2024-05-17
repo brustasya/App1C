@@ -8,8 +8,8 @@
 import Foundation
 
 final class ServiceAssembly {
-   // private let host = "37.77.106.55"
-    private let host = "192.168.100.5" //"192.168.1.11"//192.168.100.5"//"192.168.1.13"//"192.168.100.5"
+    private let host = "37.77.106.55"
+   // private let host = "192.168.100.5" // Локальный хост
     private let port = 8080
     
     func makeVerificationService() -> VerificationServiceProtocol {
@@ -101,5 +101,9 @@ final class ServiceAssembly {
             networkService: NetworkService(),
             requestFactory: URLRequestFactory(host: host, port: port)
         )
+    }
+    
+    func makeOpenURLService() -> OpenURLServiceProtocol {
+        OpenURLService()
     }
 }

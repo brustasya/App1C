@@ -8,8 +8,8 @@
 import Foundation
 
 struct DiplomaInfoServiceModel: Codable {
-    let bachelor: DiplomaDetailsServiceModel
-    let master: DiplomaDetailsServiceModel
+    let bachelor: DiplomaDetailsServiceModel?
+    let master: DiplomaDetailsServiceModel?
 }
 
 struct DiplomaDetailsServiceModel: Codable {

@@ -14,7 +14,10 @@ final class AdminAssembly: BaseAssembly {
     }
     
     func makeSettingsModule(moduleOutput: AdminSettingsModuleOutput) -> UIViewController {
-        let presenter = AdminSettingsPresenter(moduleOutput: moduleOutput)
+        let presenter = AdminSettingsPresenter(
+            moduleOutput: moduleOutput, 
+            openURLService: serviceAssembly.makeOpenURLService()
+        )
         let vc = AdminSettingsViewController(output: presenter)
         presenter.viewInput = vc
         return vc

@@ -59,6 +59,7 @@
 		852A04BF2BF6E76400D25D82 /* CoursesAgregationModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A04BE2BF6E76400D25D82 /* CoursesAgregationModuleOutput.swift */; };
 		852A04C12BF6EA1900D25D82 /* FinalCourseSelectionModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A04C02BF6EA1900D25D82 /* FinalCourseSelectionModuleOutput.swift */; };
 		852A04C32BF6EDF900D25D82 /* CourseSelectionModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A04C22BF6EDF900D25D82 /* CourseSelectionModuleOutput.swift */; };
+		852A04C62BF6F1D300D25D82 /* OpenURLService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A04C52BF6F1D300D25D82 /* OpenURLService.swift */; };
 		858695E92BE50E120004F2DD /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858695E82BE50E120004F2DD /* NotificationsViewController.swift */; };
 		858695EB2BE50E3B0004F2DD /* NotificationsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858695EA2BE50E3B0004F2DD /* NotificationsViewInput.swift */; };
 		858695ED2BE50E500004F2DD /* NotificationsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858695EC2BE50E500004F2DD /* NotificationsViewOutput.swift */; };
@@ -435,6 +436,7 @@
 		852A04BE2BF6E76400D25D82 /* CoursesAgregationModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesAgregationModuleOutput.swift; sourceTree = "<group>"; };
 		852A04C02BF6EA1900D25D82 /* FinalCourseSelectionModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalCourseSelectionModuleOutput.swift; sourceTree = "<group>"; };
 		852A04C22BF6EDF900D25D82 /* CourseSelectionModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSelectionModuleOutput.swift; sourceTree = "<group>"; };
+		852A04C52BF6F1D300D25D82 /* OpenURLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenURLService.swift; sourceTree = "<group>"; };
 		858695E82BE50E120004F2DD /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		858695EA2BE50E3B0004F2DD /* NotificationsViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewInput.swift; sourceTree = "<group>"; };
 		858695EC2BE50E500004F2DD /* NotificationsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewOutput.swift; sourceTree = "<group>"; };
@@ -983,6 +985,14 @@
 				852A04BC2BF6E5C100D25D82 /* SelectCourseItemDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		852A04C42BF6F1A700D25D82 /* OpenURLService */ = {
+			isa = PBXGroup;
+			children = (
+				852A04C52BF6F1D300D25D82 /* OpenURLService.swift */,
+			);
+			path = OpenURLService;
 			sourceTree = "<group>";
 		};
 		858695E52BE50CE20004F2DD /* Notifications */ = {
@@ -1547,6 +1557,7 @@
 		85981EC42BBC3DE700A0DBE7 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				852A04C42BF6F1A700D25D82 /* OpenURLService */,
 				85ED3AE92BCB00CA00101A5F /* RequestServices */,
 				85ED3AE12BCAE0CA00101A5F /* TokenService */,
 				85ED3ACA2BCAC43200101A5F /* URLRequestFactory */,
@@ -3275,6 +3286,7 @@
 				85F0E2DB2BC480C000D2DBAB /* StudentSettingsPresenter.swift in Sources */,
 				85FDB5932BD1E3BA00C71E28 /* CoursesListViewInput.swift in Sources */,
 				85ED3AE52BCAEDEF00101A5F /* LinksModel.swift in Sources */,
+				852A04C62BF6F1D300D25D82 /* OpenURLService.swift in Sources */,
 				8586967B2BEA894C0004F2DD /* DiplomaSpeechesResultsViewController.swift in Sources */,
 				85FDB5322BD09EAA00C71E28 /* CreateStudentModel.swift in Sources */,
 				85ED3AC12BC9549100101A5F /* CourseSelectedModel.swift in Sources */,

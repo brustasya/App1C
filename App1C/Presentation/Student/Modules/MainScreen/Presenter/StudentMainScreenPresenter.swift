@@ -34,6 +34,7 @@ final class StudentMainScreenPresenter {
                 self?.tgLink = model.telegramChannelURL
                 self?.chatbotLink = model.telegramBotURL
                 self?.siteLink = model.siteURL
+                TokenService.shared.chatURL = model.telegramChannelURL
                 let events = model.events.map({
                     EventModel(id: $0.id, title: $0.title,
                                deadline: Date.toDate(dateString: $0.deadline ) ,

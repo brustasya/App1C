@@ -204,7 +204,7 @@ class ThemeSelectionEventViewController: UIViewController {
             title.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             title.widthAnchor.constraint(equalToConstant: 145),
             title.centerYAnchor.constraint(equalTo: datePicker.centerYAnchor),
-            datePicker.leadingAnchor.constraint(equalTo: title.trailingAnchor, constant: 15)
+            datePicker.leadingAnchor.constraint(equalTo: title.trailingAnchor, constant: 8)
         ])
         
         updateDatePicker(datePicker: datePicker)

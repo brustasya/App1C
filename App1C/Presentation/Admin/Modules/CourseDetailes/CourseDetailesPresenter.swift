@@ -12,23 +12,27 @@ class CourseDetailesPresenter {
     weak var moduleOutput: CourseDetailesModuleOutput?
     
     private let coursesService: CoursesServiceProtocol
+    private let openURLService: OpenURLServiceProtocol
     private let id: Int
     private let isEditEnable: Bool
     
     private lazy var teachers: [Int] = []
     private lazy var courses: [Int] = []
     private lazy var courseTitle: String = ""
+    private lazy var chatURL: String = ""
     
     init(
         id: Int,
         isEditEnable: Bool,
         moduleOutput: CourseDetailesModuleOutput,
-        coursesService: CoursesServiceProtocol
+        coursesService: CoursesServiceProtocol,
+        openURLService: OpenURLServiceProtocol
     ) {
         self.id = id
         self.isEditEnable = isEditEnable
         self.moduleOutput = moduleOutput
         self.coursesService = coursesService
+        self.openURLService = openURLService
     }
     
     func getCourse() {
@@ -36,6 +40,7 @@ class CourseDetailesPresenter {
             switch result {
             case .success(let model):
                 print(model)
+                self?.chatURL = model.chat
                 var dayOfWeek = "Не указан"
                 var from: Date?
                 var to: Date?
@@ -111,20 +116,18 @@ extension CourseDetailesPresenter: CourseViewOutput {
         case 2:
             moduleOutput?.moduleWantsToOpenDeps(courseID: self.id, courseTitle: courseTitle, navigationController: navigationController)
         case 3:
-            break
+            openURLService.openURL(url: chatURL)
         default:
             return
         }
     }
     
     func viewIsReady() {
-        //viewInput?.setupAddMode()
         viewInput?.setupReadMode()
         if isEditEnable {
             viewInput?.addEditButton()
         }
         getCourse()
-        //viewInput?.setupEditMode()
     }
     
     func addDepsButtonTapped(controller: UINavigationController?) { }
