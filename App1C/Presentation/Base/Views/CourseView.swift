@@ -96,7 +96,8 @@ final class CourseView: UIView {
         statusLabel.isHidden = true
         
         checkButton.addTarget(self, action: #selector(selectCourse), for: .touchUpInside)
-        openButton.addTarget(self, action: #selector(openButtonTapped), for: .touchUpInside)        
+        openButton.addTarget(self, action: #selector(openButtonTapped), for: .touchUpInside)
+        infoButton.addTarget(self, action: #selector(getInfo), for: .touchUpInside)
     }
     
     @objc private func selectCourse() {
@@ -120,6 +121,10 @@ final class CourseView: UIView {
             delegate?.openDependencies(view: self)
         }
         isDepsOpen = !isDepsOpen
+    }
+    
+    @objc func getInfo() {
+        delegate?.getInfo(id: courseID)
     }
     
     func configure(with model: CourseSelectionModel) {

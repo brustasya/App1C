@@ -34,6 +34,7 @@ final class AdminMainScreenPresenter {
                 self?.chatbotLink = model.telegramBotURL
                 self?.siteLink = model.siteURL
                 DispatchQueue.main.async {
+                    self?.viewInput?.setupBell(newEvents: model.unseenEvents ?? false)
                     if model.startedCourseAggregation {
                         self?.viewInput?.setupCourseAggregationButton()
                     }
@@ -61,6 +62,10 @@ final class AdminMainScreenPresenter {
 }
 
 extension AdminMainScreenPresenter: AdminMainScreenViewOutput {
+    func openNotifications() {
+        moduleOutput?.moduleWantsToOpenNotifications()
+    }
+    
     func openDepartmentCourses() {
         moduleOutput?.moduleWantsToOpenCourses()
     }

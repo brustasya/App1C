@@ -44,6 +44,10 @@ final class TeacherCoordinator: CoordinatorProtocol {
 }
 
 extension TeacherCoordinator: TeacherSettingsModuleOutput {
+    func moduleWantsToOpenAuthorization() {
+        rootCoordinator?.openAuthorization()
+    }
+    
     func moduleWantsToOpenDepartmentCourses() {
         let coursesVC = teacherAssembly.makeDepartmentCoursesModule(moduleOutput: self)
         settingsNavigationController.pushViewController(coursesVC, animated: true)
@@ -164,7 +168,9 @@ extension TeacherCoordinator: NotificationsModuleOutput {
 }
 
 extension TeacherCoordinator: NotificationModuleOutput {
+    func moduleWantsToOpenCourseSelection() {}
     
+    func moduleWantsToOpenFinalCourseSelection() {}
 }
 
 extension TeacherCoordinator: TeacherEventModuleOutput {

@@ -17,4 +17,5 @@ protocol AdminMainScreenViewOutput: AnyObject {
     func openSite()
     func courseAggregationButtonTapped()
     func openDepartmentCourses()
+    func openNotifications()
 }

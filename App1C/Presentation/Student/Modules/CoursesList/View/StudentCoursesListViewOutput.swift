@@ -5,10 +5,10 @@
 //  Created by Станислава on 21.04.2024.
 //
 
-import Foundation
+import UIKit
 
 protocol StudentCoursesListViewOutput: AnyObject {
     func viewIsReady()
-    func selectClosedCourse(at index: Int)
-    func selectCurrentCourse(at index: Int)
+    func selectClosedCourse(at index: Int, navigationController: UINavigationController?)
+    func selectCurrentCourse(at index: Int, navigationController: UINavigationController?)
 }

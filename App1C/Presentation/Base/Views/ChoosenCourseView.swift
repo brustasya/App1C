@@ -96,6 +96,7 @@ final class ChoosenCourseView: UIView {
         
         checkButton.addTarget(self, action: #selector(selectCourse), for: .touchUpInside)
         openButton.addTarget(self, action: #selector(openButtonTapped), for: .touchUpInside)
+        infoButton.addTarget(self, action: #selector(getInfo), for: .touchUpInside)
     }
     
     @objc private func selectCourse() {
@@ -119,6 +120,10 @@ final class ChoosenCourseView: UIView {
             delegate?.openChoosenDependencies(view: self)
         }
         isDepsOpen = !isDepsOpen
+    }
+    
+    @objc private func getInfo() {
+        delegate?.getInfo(id: courseID)
     }
     
     func configure(with model: ChoosenCourseSelectionModel) {

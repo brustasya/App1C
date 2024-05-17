@@ -79,7 +79,7 @@ extension AdminCoordinator: EventsModuleOutput {
 
 }
 
-extension AdminCoordinator: AdminDepartmentCoursesModuleOutput {
+extension AdminCoordinator: AdminDepartmentCoursesModuleOutput, CoursesAgregationModuleOutput {
     func moduleWantsToOPenAddCourse(navigationController: UINavigationController?) {
         let addCourseVC = adminAssembly.makeAddCourseModule(moduleOutput: self)
         navigationController?.pushViewController(addCourseVC, animated: true)
@@ -175,6 +175,10 @@ extension AdminCoordinator: AdminDiplomaModuleOutput {
 }
 
 extension AdminCoordinator: AdminSettingsModuleOutput {
+    func moduleWantsToOpenAuthorization() {
+        rootCoordinator?.openAuthorization()
+    }
+    
     func moduleWantsToOpenDiplomaThemes() {
         let diplomaThemesVC = adminAssembly.makeDiplomaThemesModule(moduleOutput: self)
         settingsNavigationController.pushViewController(diplomaThemesVC, animated: true)
@@ -265,16 +269,36 @@ extension AdminCoordinator: AdminsListForAdminModuleOutput {
 }
 
 extension AdminCoordinator: AdminMainScreenModuleOutput {
+    func moduleWantsToOpenNotifications() {
+        let notificationsVC = adminAssembly.makeNotificationsModule(moduleOutput: self)
+        mainScreenNavigationController.pushViewController(notificationsVC, animated: true)
+    }
+    
     func moduleWantsToOpenCourses() {
         let depCoursesVC = adminAssembly.makeDepartmentCoursesModule(moduleOutput: self)
         mainScreenNavigationController.pushViewController(depCoursesVC, animated: true)
     }
     
     func moduleWantsToOpenCourseAggregation() {
-        let courseAggregationVC = adminAssembly.makeCoursesAgregationModule()
+        let courseAggregationVC = adminAssembly.makeCoursesAgregationModule(moduleOutput: self)
         mainScreenNavigationController.pushViewController(courseAggregationVC, animated: true)
     }
     
+}
+
+extension AdminCoordinator: NotificationsModuleOutput {
+    func moduleWantsToOpenNotification(id: Int) {
+        let notificationController = adminAssembly.makeNotificationModule(id: id, moduleOutput: self)
+        mainScreenNavigationController.pushViewController(notificationController, animated: true)
+    }
+}
+
+extension AdminCoordinator: NotificationModuleOutput {
+    func moduleWantsToOpenCourseSelection() {}
+    
+    func moduleWantsToOpenFinalCourseSelection() {}
+    
+    func moduleWantsToOpenEstimation(courseID: Int, courseTitle: String) {}
 }
 
 extension AdminCoordinator: StudentsListModuleOutput {

@@ -45,11 +45,11 @@ final class RootCoordinator: CoordinatorProtocol {
     }
     
     func openRoleSelection() {
-//        var roles = roles
-//        roles.append(.student)
-//        roles.append(.teacher)
         window?.rootViewController = authorizationAssembly.makeRoleSelectionModule(moduleOutput: self)
-        
+    }
+    
+    func openAuthorization() {
+        window?.rootViewController = authorizationAssembly.makeVerificationModule(moduleOutput: self)
     }
     
     private func openStudentModule() {
@@ -83,10 +83,8 @@ extension RootCoordinator: VerificationModuleOutput, RootCoordinatorProtocol {
     func userWantsToOpenRoleSelection() {
         openRoleSelection()
     }
+    
+    func userWantsToOpenAuthorization() {
+        openAuthorization()
+    }
 }
-
-//extension RootCoordinator: RootCoordinatorProtocol {
-//    func userWantsToOpenRoleSelection() {
-//        openRoleSelection()
-//    }
-//}

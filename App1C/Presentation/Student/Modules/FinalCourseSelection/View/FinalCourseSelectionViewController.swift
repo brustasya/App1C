@@ -29,13 +29,7 @@ class FinalCourseSelectionViewController: UIViewController {
     
     private lazy var coursesView = UIView()
     private lazy var coursesTableView = UITableView()
-    private lazy var courses: [AddDependenceModel] = [
-        AddDependenceModel(id: 0, title: "Программирование", isCourseDependency: true),
-        AddDependenceModel(id: 0, title: "Тестирование", isCourseDependency: false),
-        AddDependenceModel(id: 0, title: "Математический анализ", isCourseDependency: true),
-        AddDependenceModel(id: 0, title: "Линейная алгебра", isCourseDependency: false),
-        AddDependenceModel(id: 0, title: "Аналитическая геометрия", isCourseDependency: false),
-    ]
+    private lazy var courses: [AddDependenceModel] = []
     
     var choosenCoursesDict: [Int: ChoosenCourseSelectionModel] = [:]
     var startedCoursesDict: [Int: CourseSelectionModel] = [:]
@@ -73,32 +67,7 @@ class FinalCourseSelectionViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        
-        let s5 = CourseSelectionServiceModel(id: 5, title: "Аналитическая геометрия", dependencies: [], closed: false, wasInLoad: false)
-        let s1 = CourseSelectionServiceModel(id: 1, title: "Математический анализ", dependencies: [], closed: true, wasInLoad: true)
-        let s2 = CourseSelectionServiceModel(id: 2, title: "Операционные системы", dependencies: [DependenceModel(id: 5, title: "Аналитическая геометрия", closed: false)], closed: false, wasInLoad: false)
-        let s3 = CourseSelectionServiceModel(id: 3, title: "Программирование", dependencies: [DependenceModel(id: 1, title: "Математический анализ", closed: true)], closed: true, wasInLoad: false)
-        let s4 = CourseSelectionServiceModel(id: 4, title: "Линейная алгебра", dependencies: [DependenceModel(id: 3, title: "Программирование", closed: true), DependenceModel(id: 2, title: "Операционные системы", closed: false)], closed: false, wasInLoad: false)
-        
-//        let s5 = CourseSelectionServiceModel(id: 5, title: "Аналитическая геометрия", closed: false, wasInLoad: false, dependencies: [])
-//        let s1 = CourseSelectionServiceModel(id: 1, title: "Математический анализ", closed: true, wasInLoad: true, dependencies: [DependenceModel(id: 5, title: "Аналитическая геометрия", closed: false)])
-//        let s2 = CourseSelectionServiceModel(id: 2, title: "Операционные системы", closed: false, wasInLoad: false, dependencies: [])
-//        let s3 = CourseSelectionServiceModel(id: 3, title: "Программирование", closed: true, wasInLoad: false, dependencies: [])
-//        let s4 = CourseSelectionServiceModel(id: 4, title: "Линейная алгебра", closed: false, wasInLoad: false, dependencies: [DependenceModel(id: 3, title: "Программирование", closed: true), DependenceModel(id: 2, title: "Операционные системы", closed: false)])
-        let serviceModels = [s1, s2, s5, s3, s4]
-        
-        let c1 = CourseSelectionModel(id: 1, title: "A", closed: true, wasInLoad: true, courseChildren: [])
-        let c2 = CourseSelectionModel(id: 2, title: "B", closed: false, wasInLoad: false, courseChildren: [])
-        let c3 = CourseSelectionModel(id: 3, title: "C", closed: true, wasInLoad: false, courseChildren: [c1])
-        let c4 = CourseSelectionModel(id: 4, title: "D", closed: true, wasInLoad: true, courseChildren: [c2, c3])
-        c1.parentCourse = c3
-        c2.parentCourse = c4
-        c3.parentCourse = c4
-     //   let courses = [c1, c2, c3, c4]
-        
-        treeBuilder(serviceModels: serviceModels)
         setupView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -167,12 +136,6 @@ class FinalCourseSelectionViewController: UIViewController {
         setupPageControl()
         setupScrollView()
         output.viewIsReady()
-//        for courses in startedCourseViews {
-//            print(courses.key.courseID, " : ", startedCoursesDict[courses.key.courseID]?.parentCourse?.id)
-//            for course in courses.value.allDeps {
-//                print(course.courseID)
-//            }
-//        }
     }
     
     private func setupSubTitle() {
@@ -425,18 +388,20 @@ class FinalCourseSelectionViewController: UIViewController {
 }
 
 extension FinalCourseSelectionViewController: ChoosenCourseSelectionDelegate {
+    func getInfo(id: Int) {
+        output.openCourse(id: id, navigationController: navigationController)
+    }
+    
     func openChoosenDependencies(view: ChoosenCourseView) {
         if let deps = choosenCourseViews[view]?.deps {
             for courseView in choosenCourseViews.keys {
                 if courseView.y > view.y && !(choosenCourseViews[view]?.allDeps.contains(courseView) ?? true) {
-                   // print("Move down", courseView.courseID, " \(courseView.id)")
                     courseView.frame.origin.y += CGFloat(deps.count * 80)
                 }
             }
             for dep in deps {
                 dep.isHidden = false
                 dep.isOpen = true
-             //   print("Open ", dep.courseID," \(dep.id)")
                 countOfOpenChoosenCourses += 1
             }
         }
@@ -444,7 +409,6 @@ extension FinalCourseSelectionViewController: ChoosenCourseSelectionDelegate {
     
     func closeChoosenDependencies(view: ChoosenCourseView) {
         if let deps = choosenCourseViews[view]?.deps {
-         //   print("close deps for \(view.courseID)")
             for dep in deps {
                 if dep.countOfDependencies > 0 && dep.isOpen {
                     closeChoosenDependencies(view: dep)
@@ -456,14 +420,12 @@ extension FinalCourseSelectionViewController: ChoosenCourseSelectionDelegate {
                     countOfCloseDeps += 1
                     dep.isHidden = true
                     dep.isOpen = false
-                //    print("Close ", dep.courseID, " \(dep.id)")
                     countOfOpenChoosenCourses -= 1
                 }
             }
             
             for courseView in choosenCourseViews.keys {
                 if courseView.y > view.y && !(choosenCourseViews[view]?.allDeps.contains(courseView) ?? true) {
-                 //   print("Move up", courseView.courseID, " \(courseView.id)", "for \(countOfCloseDeps)")
                     courseView.frame.origin.y -= CGFloat(countOfCloseDeps * 80)
                 }
             }
@@ -522,8 +484,6 @@ extension FinalCourseSelectionViewController: ChoosenCourseSelectionDelegate {
         
         present(alertController, animated: true, completion: nil)
     }
-    
-    
 }
 
 extension FinalCourseSelectionViewController: CourseSelecitonDelegate {
@@ -531,14 +491,12 @@ extension FinalCourseSelectionViewController: CourseSelecitonDelegate {
         if let deps = startedCourseViews[view]?.deps {
             for courseView in startedCourseViews.keys {
                 if courseView.y > view.y && !(startedCourseViews[view]?.allDeps.contains(courseView) ?? true) {
-                  //  print("Move down", courseView.courseID, " \(courseView.id)")
                     courseView.frame.origin.y += CGFloat(deps.count * 80)
                 }
             }
             for dep in deps {
                 dep.isHidden = false
                 dep.isOpen = true
-               // print("Open ", dep.courseID," \(dep.id)")
                 countOfOpenStartesCourses += 1
             }
         }
@@ -546,7 +504,6 @@ extension FinalCourseSelectionViewController: CourseSelecitonDelegate {
     
     func closeDependencies(view: CourseView) {
         if let deps = startedCourseViews[view]?.deps {
-          //  print("close deps for \(view.courseID)")
             for dep in deps {
                 if dep.countOfDependencies > 0 && dep.isOpen {
                     closeDependencies(view: dep)
@@ -558,7 +515,6 @@ extension FinalCourseSelectionViewController: CourseSelecitonDelegate {
                     countOfCloseDeps += 1
                     dep.isHidden = true
                     dep.isOpen = false
-                //    print("Close ", dep.courseID, " \(dep.id)")
                     countOfOpenStartesCourses -= 1
                 }
             }

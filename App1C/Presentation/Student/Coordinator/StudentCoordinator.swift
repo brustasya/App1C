@@ -51,13 +51,20 @@ final class StudentCoordinator: CoordinatorProtocol {
 
 extension StudentCoordinator: StudentDetailsModuleOutput {
     func moduleWantsToOpenGrades(studentID: Int, controller: UINavigationController?) { }
-    
-    
+}
+
+extension StudentCoordinator: AdminDepartmentCoursesModuleOutput {
+    func moduleWantsToOPenAddCourse(navigationController: UINavigationController?) {}
 }
 
 extension StudentCoordinator: StudentSettingsModuleOutput {
+    func moduleWantsToOpeAuthorization() {
+        rootCoordinator?.openAuthorization()
+    }
+    
     func moduleWantsToOpenDepartmentCourses() {
-        
+        let coursesVC = studentAssembly.makeDepartmentCoursesModule(moduleOutput: self)
+        settingsNavigationController.pushViewController(coursesVC, animated: true)
     }
     
     func moduleWantsToOpenProfile() {
@@ -121,20 +128,65 @@ extension StudentCoordinator: StudentMainScreenModuleOutput {
 
 extension StudentCoordinator: StudentEventModuleOutput {
     func moduleWantsToOpenCourseSelection() {
-        let courseSelectionVC = studentAssembly.makeCourseSelectionModule()
+        let courseSelectionVC = studentAssembly.makeCourseSelectionModule(moduleOutput: self)
         mainScreenNavigationController.pushViewController(courseSelectionVC, animated: true)
     }
     
     func moduleWantsToOpenFinalCourseSelection() {
-        let courseSelectionVC = studentAssembly.makeFinalCourseSelectionModule()
+        let courseSelectionVC = studentAssembly.makeFinalCourseSelectionModule(moduleOutput: self)
         mainScreenNavigationController.pushViewController(courseSelectionVC, animated: true)
     }
 }
 
-extension StudentCoordinator: StudentCoursesListModuleOutput {
-    func moduleWantsToOpenCourse(id: Int) {
-        
+extension StudentCoordinator: StudentCoursesListModuleOutput, FinalCourseSelectionModuleOutput, CourseSelectionModuleOutput {
+    func moduleWantsToOpenCourse(for id: Int, navigationController: UINavigationController?) {
+        let courseVC = studentAssembly.makeCourseDetailesModule(id: id, moduleOutput: self)
+        navigationController?.pushViewController(courseVC, animated: true)
     }
+}
+
+extension StudentCoordinator: CourseDetailesModuleOutput {
+    func moduleWantsToOpenStudents(courseID: Int, courseTitle: String, navigationController: UINavigationController?) {
+        let studentsVC = studentAssembly.makeCourseStudentsListModule(moduleOutput: self, courseID: courseID, courseTitle: courseTitle)
+        navigationController?.pushViewController(studentsVC, animated: true)
+    }
+    
+    func moduleWantsToOpenTeachers(courseID: Int, courseTitle: String, navigationController: UINavigationController?) {
+        let teachersVC = studentAssembly.makeCourseTeachersListModule(moduleOutput: self, courseID: courseID, courseTitle: courseTitle)
+        navigationController?.pushViewController(teachersVC, animated: true)
+    }
+    
+    func moduleWantsToOpenEditModule(id: Int, navigationController: UINavigationController?) {
+        let editCourseVC = studentAssembly.makeCourseEditModule(id: id)
+        navigationController?.pushViewController(editCourseVC, animated: true)
+    }
+    
+    func moduleWantsToOpenDeps(courseID: Int, courseTitle: String, navigationController: UINavigationController?) {
+        let depsVC = studentAssembly.makeCourseDependensiesModule(moduleOutput: self, courseID: courseID, courseTitle: courseTitle)
+        navigationController?.pushViewController(depsVC, animated: true)
+    }
+}
+
+extension StudentCoordinator: CourseStudentsListModuleOutput {
+    func moduleWantsToOpenStudent(studentID: Int, controller: UINavigationController?) {
+        let studentVC = studentAssembly.makeStudentProfileModule(for: studentID, moduleOutput: self)
+        controller?.pushViewController(studentVC, animated: true)
+    }
+}
+
+
+extension StudentCoordinator: CourseTeachersListModuleOutput {
+    func moduleWantsToOpenTeacher(teacherID: Int, controller: UINavigationController?) {
+        let teacherVC = studentAssembly.makeTeacherProfileModule(for: teacherID)
+        controller?.pushViewController(teacherVC, animated: true)
+    }
+    
+    func moduleWantsToAddTeachers(courseID: Int, controller: UINavigationController?) { }
+    
+}
+
+extension StudentCoordinator: CourseDependensiesModuleOutput {
+    func moduleWantsToAddDependensies(courseID: Int, controller: UINavigationController?) {}
 }
 
 extension StudentCoordinator: NotificationsModuleOutput {
@@ -145,5 +197,5 @@ extension StudentCoordinator: NotificationsModuleOutput {
 }
 
 extension StudentCoordinator: NotificationModuleOutput {
-    
+    func moduleWantsToOpenEstimation(courseID: Int, courseTitle: String) {}    
 }

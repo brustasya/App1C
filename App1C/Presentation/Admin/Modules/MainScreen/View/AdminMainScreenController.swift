@@ -27,7 +27,13 @@ class AdminMainScreenController: MainScreenViewController {
         output.viewIsReady()
         
         setupCoursesView()
-        //(navigationController as? CustomNavigationController)?.setupBellButton()
+        (navigationController as? CustomNavigationController)?.bellButton.addTarget(self, action: #selector(openNotifications), for: .touchUpInside)
+        (navigationController as? CustomNavigationController)?.bellBageButton.addTarget(self, action: #selector(openNotifications), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        output.viewIsReady()
     }
     
     override func setupLinksViews() {
@@ -108,6 +114,10 @@ class AdminMainScreenController: MainScreenViewController {
         output.courseAggregationButtonTapped()
     }
     
+    @objc private func openNotifications() {
+        output.openNotifications()
+    }
+    
     @objc func telegramEditButtonTapped() {
         var telegramTextField = UITextField()
         let alertController = createAlertController(title: "Чат кафедры")
@@ -172,6 +182,10 @@ extension AdminMainScreenController: AdminMainScreenViewInput {
         ])
         
         courseAggregationButton.addTarget(self, action: #selector(courseAggregationButtonTapped), for: .touchUpInside)
+    }
+    
+    func setupBell(newEvents: Bool) {
+        (navigationController as? CustomNavigationController)?.bellBageButton.isHidden = !newEvents
     }
 }
 

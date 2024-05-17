@@ -12,4 +12,5 @@ protocol StudentSettingsModuleOutput: AnyObject {
     func moduleWantsToOpenAdminList()
     func moduleWantsToOpenRoleSelection()
     func moduleWantsToOpenDepartmentCourses()
+    func moduleWantsToOpeAuthorization()
 }

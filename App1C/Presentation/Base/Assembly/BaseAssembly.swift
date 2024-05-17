@@ -72,7 +72,9 @@ class BaseAssembly {
         let presenter = NotificationPresenter(
             id: id,
             moduleOutput: moduleOutput,
-            eventsService: serviceAssembly.makeEventsService())
+            eventsService: serviceAssembly.makeEventsService(), 
+            coursesService: serviceAssembly.makeCoursesService()
+        )
         let vc = EventViewController(output: presenter)
         presenter.viewInput = vc
         return vc

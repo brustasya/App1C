@@ -44,15 +44,12 @@ class StudentCoursesListViewController: UIViewController {
         setupScrollView()
         setupClosedCourses()
         setupCurrentCourses()
-//        closedCoursesButtonTapped()
-//        currentCoursesButtonTapped()
-      //  output.viewIsReady()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         (navigationController as? CustomNavigationController)?.hideBackButton()
-        tabBarController?.tabBar.isTranslucent = false
+        tabBarController?.tabBar.isTranslucent = true
         tabBarController?.tabBar.isHidden = false
         output.viewIsReady()
         let height = CGFloat(closedCourses.count * 100 + currentCourses.count * 100 + 200)
@@ -110,7 +107,6 @@ class StudentCoursesListViewController: UIViewController {
         closedCourseConstraint = closedCoursesTableView.heightAnchor.constraint(equalToConstant: CGFloat(closedCourses.count * 100))
         closedCourseConstraint?.isActive = true
         closedCoursesButton.addTarget(self, action: #selector(closedCoursesButtonTapped), for: .touchUpInside)
-      //  closedCoursesButtonTapped()
     }
     
     private func setupCurrentCourses() {
@@ -140,7 +136,6 @@ class StudentCoursesListViewController: UIViewController {
         currentCourseConstraint = currentCoursesTableView.heightAnchor.constraint(equalToConstant: CGFloat(currentCourses.count * 100))
         currentCourseConstraint?.isActive = true
         currentCoursesButton.addTarget(self, action: #selector(currentCoursesButtonTapped), for: .touchUpInside)
-      //  currentCoursesButtonTapped()
     }
     
     @objc private func closedCoursesButtonTapped() {
@@ -187,9 +182,9 @@ extension StudentCoursesListViewController: UITableViewDataSource, UITableViewDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == closedCoursesTableView {
-            output.selectClosedCourse(at: indexPath.row)
+            output.selectClosedCourse(at: indexPath.row, navigationController: navigationController)
         } else {
-            output.selectCurrentCourse(at: indexPath.row)
+            output.selectCurrentCourse(at: indexPath.row, navigationController: navigationController)
         }
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -250,8 +245,5 @@ extension StudentCoursesListViewController: StudentCoursesListViewInput {
         
         currentCoursesButton.setImage(Images.up.uiImage, for: .normal)
         closedCoursesButton.setImage(Images.up.uiImage, for: .normal)
-
-//        closedCoursesButtonTapped()
-//        currentCoursesButtonTapped()
     }
 }

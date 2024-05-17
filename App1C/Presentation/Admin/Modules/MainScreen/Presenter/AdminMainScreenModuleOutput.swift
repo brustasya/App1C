@@ -10,4 +10,5 @@ import Foundation
 protocol AdminMainScreenModuleOutput: AnyObject {
     func moduleWantsToOpenCourseAggregation()
     func moduleWantsToOpenCourses()
+    func moduleWantsToOpenNotifications()
 }

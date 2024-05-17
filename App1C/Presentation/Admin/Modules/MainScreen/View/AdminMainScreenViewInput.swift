@@ -9,4 +9,5 @@ import Foundation
 
 protocol AdminMainScreenViewInput: AnyObject {
     func setupCourseAggregationButton() 
+    func setupBell(newEvents: Bool)
 }

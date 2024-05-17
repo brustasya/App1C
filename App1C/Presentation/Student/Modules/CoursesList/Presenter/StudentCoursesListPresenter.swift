@@ -5,7 +5,7 @@
 //  Created by Станислава on 21.04.2024.
 //
 
-import Foundation
+import UIKit
 
 class StudentCoursesListPresenter {
     weak var moduleOutput: StudentCoursesListModuleOutput?
@@ -49,11 +49,11 @@ extension StudentCoursesListPresenter: StudentCoursesListViewOutput {
         getCourses()
     }
     
-    func selectClosedCourse(at index: Int) {
-        moduleOutput?.moduleWantsToOpenCourse(id: lastCourses[index].id)
+    func selectClosedCourse(at index: Int, navigationController: UINavigationController?) {
+        moduleOutput?.moduleWantsToOpenCourse(for: lastCourses[index].id, navigationController: navigationController)
     }
     
-    func selectCurrentCourse(at index: Int) {
-        moduleOutput?.moduleWantsToOpenCourse(id: currentCourses[index].id)
+    func selectCurrentCourse(at index: Int, navigationController: UINavigationController?) {
+        moduleOutput?.moduleWantsToOpenCourse(for: currentCourses[index].id, navigationController: navigationController)
     }
 }

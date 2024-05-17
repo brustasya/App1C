@@ -31,11 +31,12 @@ extension TeacherPersonalDataPresenter: ProfileViewOutput {
             viewInput?.setupTitle(title: "Данные преподавателя")
         }
         
-        if TokenService.shared.role == .admin || TokenService.shared.id == id {
+        if TokenService.shared.role == .admin ||
+            (TokenService.shared.id == id && TokenService.shared.role == .teacher) {
             viewInput?.setupEditButton()
             viewInput?.setupSaveButton()
-            viewInput?.changeEnable(isEdit: false)
         }
+        viewInput?.changeEnable(isEdit: false)
         
         getTeacher()
     }

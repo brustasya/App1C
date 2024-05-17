@@ -8,5 +8,7 @@
 import Foundation
 
 protocol NotificationModuleOutput: AnyObject {
-    
+    func moduleWantsToOpenCourseSelection()
+    func moduleWantsToOpenFinalCourseSelection()
+    func moduleWantsToOpenEstimation(courseID: Int, courseTitle: String)
 }

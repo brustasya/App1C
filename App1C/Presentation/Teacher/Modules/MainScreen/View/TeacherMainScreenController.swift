@@ -28,6 +28,11 @@ class TeacherMainScreenController: MainScreenViewController {
         (navigationController as? CustomNavigationController)?.bellBageButton.addTarget(self, action: #selector(openNotifications), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        output.viewIsReady()
+    }
+    
     override func setupLinksViews() {
         super.setupLinksViews()
     

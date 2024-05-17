@@ -55,6 +55,10 @@
 		85043B0B2BD4899B00FEF431 /* StudentCoursesListModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043B0A2BD4899B00FEF431 /* StudentCoursesListModuleOutput.swift */; };
 		85043B0E2BD5351100FEF431 /* RootControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043B0D2BD5351100FEF431 /* RootControllerType.swift */; };
 		85043B112BD538C800FEF431 /* EditCoursePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85043B102BD538C800FEF431 /* EditCoursePresenter.swift */; };
+		852A04BD2BF6E5C100D25D82 /* SelectCourseItemDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A04BC2BF6E5C100D25D82 /* SelectCourseItemDelegate.swift */; };
+		852A04BF2BF6E76400D25D82 /* CoursesAgregationModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A04BE2BF6E76400D25D82 /* CoursesAgregationModuleOutput.swift */; };
+		852A04C12BF6EA1900D25D82 /* FinalCourseSelectionModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A04C02BF6EA1900D25D82 /* FinalCourseSelectionModuleOutput.swift */; };
+		852A04C32BF6EDF900D25D82 /* CourseSelectionModuleOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852A04C22BF6EDF900D25D82 /* CourseSelectionModuleOutput.swift */; };
 		858695E92BE50E120004F2DD /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858695E82BE50E120004F2DD /* NotificationsViewController.swift */; };
 		858695EB2BE50E3B0004F2DD /* NotificationsViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858695EA2BE50E3B0004F2DD /* NotificationsViewInput.swift */; };
 		858695ED2BE50E500004F2DD /* NotificationsViewOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858695EC2BE50E500004F2DD /* NotificationsViewOutput.swift */; };
@@ -427,6 +431,10 @@
 		85043B0A2BD4899B00FEF431 /* StudentCoursesListModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentCoursesListModuleOutput.swift; sourceTree = "<group>"; };
 		85043B0D2BD5351100FEF431 /* RootControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootControllerType.swift; sourceTree = "<group>"; };
 		85043B102BD538C800FEF431 /* EditCoursePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCoursePresenter.swift; sourceTree = "<group>"; };
+		852A04BC2BF6E5C100D25D82 /* SelectCourseItemDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCourseItemDelegate.swift; sourceTree = "<group>"; };
+		852A04BE2BF6E76400D25D82 /* CoursesAgregationModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesAgregationModuleOutput.swift; sourceTree = "<group>"; };
+		852A04C02BF6EA1900D25D82 /* FinalCourseSelectionModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalCourseSelectionModuleOutput.swift; sourceTree = "<group>"; };
+		852A04C22BF6EDF900D25D82 /* CourseSelectionModuleOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSelectionModuleOutput.swift; sourceTree = "<group>"; };
 		858695E82BE50E120004F2DD /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		858695EA2BE50E3B0004F2DD /* NotificationsViewInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewInput.swift; sourceTree = "<group>"; };
 		858695EC2BE50E500004F2DD /* NotificationsViewOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewOutput.swift; sourceTree = "<group>"; };
@@ -811,6 +819,7 @@
 			isa = PBXGroup;
 			children = (
 				85043AB22BD32C6E00FEF431 /* CourseSelectionPresenter.swift */,
+				852A04C22BF6EDF900D25D82 /* CourseSelectionModuleOutput.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -837,6 +846,7 @@
 			isa = PBXGroup;
 			children = (
 				85043AC32BD348F800FEF431 /* CoursesAgregationPresenter.swift */,
+				852A04BE2BF6E76400D25D82 /* CoursesAgregationModuleOutput.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -873,6 +883,7 @@
 			isa = PBXGroup;
 			children = (
 				85043ADD2BD42A1300FEF431 /* FinalCourseSelectionPresenter.swift */,
+				852A04C02BF6EA1900D25D82 /* FinalCourseSelectionModuleOutput.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -964,6 +975,14 @@
 				85043B102BD538C800FEF431 /* EditCoursePresenter.swift */,
 			);
 			path = EditCourse;
+			sourceTree = "<group>";
+		};
+		852A04BB2BF6E59D00D25D82 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				852A04BC2BF6E5C100D25D82 /* SelectCourseItemDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 		858695E52BE50CE20004F2DD /* Notifications */ = {
@@ -2335,6 +2354,7 @@
 		85ED3B4A2BCEB37600101A5F /* CoursesAgregation */ = {
 			isa = PBXGroup;
 			children = (
+				852A04BB2BF6E59D00D25D82 /* Delegates */,
 				85043ABC2BD347FD00FEF431 /* View */,
 				85043ABB2BD347F600FEF431 /* Presenter */,
 			);
@@ -3241,6 +3261,7 @@
 				85ED3AF72BCB044000101A5F /* VerificationURLRequestFactory.swift in Sources */,
 				858696D62BED3A190004F2DD /* CourseEstimatingDelegate.swift in Sources */,
 				85FDB5D52BD2DC2300C71E28 /* EventViewOutput.swift in Sources */,
+				852A04BF2BF6E76400D25D82 /* CoursesAgregationModuleOutput.swift in Sources */,
 				858696C02BEC07CD0004F2DD /* CourseDependensiesModuleOutput.swift in Sources */,
 				85F0E2EF2BC4B3E200D2DBAB /* AdminSettingsViewOutput.swift in Sources */,
 				85F0E2B32BC0661300D2DBAB /* TeacherSettingsViewController.swift in Sources */,
@@ -3272,6 +3293,7 @@
 				85043AE32BD42A4600FEF431 /* FinalCourseSelectionViewOutput.swift in Sources */,
 				85F0E2B92BC0745100D2DBAB /* GradeModel.swift in Sources */,
 				85981F352BBEE9EA00A0DBE7 /* TeacherMainScreenController.swift in Sources */,
+				852A04C12BF6EA1900D25D82 /* FinalCourseSelectionModuleOutput.swift in Sources */,
 				85FDB5552BD1523A00C71E28 /* AddAdminPresenter.swift in Sources */,
 				858696C42BECFAE40004F2DD /* CourseEstimationCell.swift in Sources */,
 				85043AB12BD32C5B00FEF431 /* CourseSelectionViewOutput.swift in Sources */,
@@ -3366,6 +3388,7 @@
 				85981F382BBEEB1600A0DBE7 /* AdminMainScreenController.swift in Sources */,
 				85F0E2C42BC4158800D2DBAB /* CourseModel.swift in Sources */,
 				85FDB58A2BD1D0E500C71E28 /* TeacherDetailsPresenter.swift in Sources */,
+				852A04BD2BF6E5C100D25D82 /* SelectCourseItemDelegate.swift in Sources */,
 				85043AB82BD337D300FEF431 /* CourseSelecitonDelegate.swift in Sources */,
 				858696572BE91D190004F2DD /* AdminDiplomaPresenter.swift in Sources */,
 				85043AF42BD4523300FEF431 /* TeacherEventModuleOutput.swift in Sources */,
@@ -3454,6 +3477,7 @@
 				858696492BE836870004F2DD /* DiplomaSpeechEventPresenter.swift in Sources */,
 				85FDB54D2BD14AFC00C71E28 /* AddPersonViewInput.swift in Sources */,
 				85ED3AF52BCB042200101A5F /* VerificationService.swift in Sources */,
+				852A04C32BF6EDF900D25D82 /* CourseSelectionModuleOutput.swift in Sources */,
 				85F0E2E52BC4A92A00D2DBAB /* TeacherSettingsViewOutput.swift in Sources */,
 				85981EF52BBC82AE00A0DBE7 /* TeacherCoursesListViewController.swift in Sources */,
 				85ED3B032BCB05DA00101A5F /* CoursesSelectionURLRequestFactory.swift in Sources */,

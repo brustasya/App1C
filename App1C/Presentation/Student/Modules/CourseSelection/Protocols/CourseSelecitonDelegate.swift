@@ -12,4 +12,5 @@ protocol CourseSelecitonDelegate: AnyObject {
     func closeDependencies(view: CourseView)
     func unselectCourse(id: Int)
     func selectCourse(id: Int)
+    func getInfo(id: Int)
 }

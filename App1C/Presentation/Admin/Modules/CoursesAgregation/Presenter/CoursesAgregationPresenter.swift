@@ -5,17 +5,20 @@
 //  Created by Станислава on 20.04.2024.
 //
 
-import Foundation
+import UIKit
 
 class CoursesAgregationPresenter {
+    
+    weak var moduleOutput: CoursesAgregationModuleOutput?
     weak var viewInput: CoursesAgregationViewInput?
     
     private let coursesAggregationService: CoursesAggregationServiceProtocol
-    var coursesDict: [Int: CourseSelectionModel] = [:]
     
     init(
+        moduleOutput: CoursesAgregationModuleOutput,
         coursesAggregationService: CoursesAggregationServiceProtocol
     ) {
+        self.moduleOutput = moduleOutput
         self.coursesAggregationService = coursesAggregationService
     }
     
@@ -63,6 +66,10 @@ class CoursesAgregationPresenter {
 }
 
 extension CoursesAgregationPresenter: CoursesAgregationViewOutput {
+    func openCourse(id: Int, navigationController: UINavigationController?) {
+        moduleOutput?.moduleWantsToOpenCourse(for: id, navigationController: navigationController)
+    }
+    
     func selectCourse(id: Int, isSelect: Bool) {
         let model = VerdictModel(verdict: isSelect)
         verdict(id: id, model: model)
@@ -75,6 +82,4 @@ extension CoursesAgregationPresenter: CoursesAgregationViewOutput {
     func viewIsReady() {
         getCourses()
     }
-    
-    
 }

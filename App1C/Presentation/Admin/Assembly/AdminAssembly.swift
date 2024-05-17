@@ -222,8 +222,9 @@ final class AdminAssembly: BaseAssembly {
         return vc
     }
     
-    func makeCoursesAgregationModule()  -> UIViewController {
+    func makeCoursesAgregationModule(moduleOutput: CoursesAgregationModuleOutput)  -> UIViewController {
         let presenter = CoursesAgregationPresenter(
+            moduleOutput: moduleOutput, 
             coursesAggregationService: serviceAssembly.makeCoursesAggregationService()
         )
         let vc = CoursesAgregationViewController(output: presenter)

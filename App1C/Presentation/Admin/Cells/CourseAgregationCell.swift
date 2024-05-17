@@ -11,7 +11,7 @@ class CourseAgregationCell: UITableViewCell, ConfigurableViewProtocol {
     
     typealias ConfigurationModel = CourseAgregationModel
     
-    weak var delegate: SelectItemDelegate?
+    weak var delegate: SelectCourseItemDelegate?
     
     private lazy var titleLabel = UILabel()
     private lazy var infoButton = UIButton()
@@ -81,6 +81,7 @@ class CourseAgregationCell: UITableViewCell, ConfigurableViewProtocol {
         
         infoButton.setImage(Images.info.uiImage?.withConfiguration(UIImage.SymbolConfiguration(pointSize: 23, weight: .medium)), for: .normal)
         infoButton.tintColor = .gray
+        infoButton.addTarget(self, action: #selector(infoButtonTapped), for: .touchUpInside)
         
         setupRegims()
         setupTitle()
@@ -112,6 +113,10 @@ class CourseAgregationCell: UITableViewCell, ConfigurableViewProtocol {
             delegate?.selectItem(id: id)
         }
         isStarted = !isStarted
+    }
+    
+    @objc private func infoButtonTapped() {
+        delegate?.getInfo(id: id)
     }
     
     private func setupRegims() {

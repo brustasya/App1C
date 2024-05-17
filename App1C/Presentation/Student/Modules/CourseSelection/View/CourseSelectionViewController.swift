@@ -259,6 +259,10 @@ class CourseSelectionViewController: UIViewController {
 }
 
 extension CourseSelectionViewController: CourseSelecitonDelegate {
+    func getInfo(id: Int) {
+        //output.openCourse(id: id, navigationController: navigationController)
+    }
+    
     func openDependencies(view: CourseView) {
         if let deps = courseViews[view]?.deps {
             for courseView in courseViews.keys {

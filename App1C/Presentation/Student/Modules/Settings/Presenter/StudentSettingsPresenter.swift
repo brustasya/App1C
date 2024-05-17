@@ -10,15 +10,11 @@ import Foundation
 final class StudentSettingsPresenter {
     weak var viewInput: StudentSettingsViewInput?
     weak var moduleOutput: StudentSettingsModuleOutput?
-        
-//    private let telemetryService: TelemetryServiceProtocol
-    
+            
     init(
         moduleOutput: StudentSettingsModuleOutput
-//        telemetryService: TelemetryServiceProtocol
     ) {
         self.moduleOutput = moduleOutput
-//        self.telemetryService = telemetryService
     }
 }
 
@@ -35,6 +31,8 @@ extension StudentSettingsPresenter: StudentSettingsViewOutput {
             return
         case 4:
             moduleOutput?.moduleWantsToOpenRoleSelection()
+        case 5:
+            moduleOutput?.moduleWantsToOpeAuthorization()
         default:
             return
         }

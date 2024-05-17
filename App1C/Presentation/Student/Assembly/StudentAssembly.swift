@@ -71,7 +71,7 @@ final class StudentAssembly: BaseAssembly {
         return vc
     }
     
-    func makeCourseSelectionModule() -> UIViewController {
+    func makeCourseSelectionModule(moduleOutput: CourseSelectionModuleOutput) -> UIViewController {
         let presenter = CourseSelectionPresenter(
             courseSelectionService: serviceAssembly.makeCourseSelectionService()
         )
@@ -80,8 +80,9 @@ final class StudentAssembly: BaseAssembly {
         return vc
     }
     
-    func makeFinalCourseSelectionModule() -> UIViewController {
+    func makeFinalCourseSelectionModule(moduleOutput: FinalCourseSelectionModuleOutput) -> UIViewController {
         let presenter = FinalCourseSelectionPresenter(
+            moduleOutput: moduleOutput,
             courseSelectionService: serviceAssembly.makeCourseSelectionService()
         )
         let vc = FinalCourseSelectionViewController(output: presenter)

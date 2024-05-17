@@ -5,17 +5,20 @@
 //  Created by Станислава on 20.04.2024.
 //
 
-import Foundation
+import UIKit
 
 class FinalCourseSelectionPresenter {
     weak var viewInput: FinalCourseSelectionViewInput?
+    weak var moduleOutput: FinalCourseSelectionModuleOutput?
     
     private let courseSelectionService: CourseSelectionServiceProtocol
     var coursesDict: [Int: CourseSelectionModel] = [:]
         
     init(
+        moduleOutput: FinalCourseSelectionModuleOutput,
         courseSelectionService: CourseSelectionServiceProtocol
     ) {
+        self.moduleOutput = moduleOutput
         self.courseSelectionService = courseSelectionService
     }
     
@@ -93,6 +96,10 @@ class FinalCourseSelectionPresenter {
 }
 
 extension FinalCourseSelectionPresenter: FinalCourseSelectionViewOutput {
+    func openCourse(id: Int, navigationController: UINavigationController?) {
+        moduleOutput?.moduleWantsToOpenCourse(for: id, navigationController: navigationController)
+    }
+    
     func viewIsReady() {
         getCourses()
     }

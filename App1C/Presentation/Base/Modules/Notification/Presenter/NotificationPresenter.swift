@@ -12,17 +12,22 @@ class NotificationPresenter {
     weak var viewInput: EventViewInput?
     
     private let eventsService: EventsServiceProtocol
+    private let coursesService: CoursesServiceProtocol
     private let id: Int
+    
     private var eventType: EventType = .message
+    private var courses: [CourseModel] = []
     
     init(
         id: Int,
         moduleOutput: NotificationModuleOutput,
-        eventsService: EventsServiceProtocol
+        eventsService: EventsServiceProtocol,
+        coursesService: CoursesServiceProtocol
     ) {
         self.id = id
         self.eventsService = eventsService
         self.moduleOutput = moduleOutput
+        self.coursesService = coursesService
     }
     
     private func watchedEvent() {
@@ -32,6 +37,21 @@ class NotificationPresenter {
                 Logger.shared.printLog(log: "Success watch event")
             case .failure(let failure):
                 Logger.shared.printLog(log: "Failed watch event: \(failure)")
+            }
+        }
+    }
+    
+    private func getCourses() {
+        coursesService.getTeacherCourses(teacherID: TokenService.shared.id) { [weak self] result in
+            switch result {
+            case .success(let model):
+                let courses = model.courses.map({ CourseModel(id: $0.id, title: $0.title, isTeacherCourse: $0.isTeacherCourse ?? true, isCourseDependency: $0.isCourseDependency ?? false) })
+                self?.courses = courses
+                DispatchQueue.main.async {
+                    self?.viewInput?.updateCourses(courses: courses)
+                }
+            case .failure(let error):
+                Logger.shared.printLog(log: "Failed load courses: \(error)")
             }
         }
     }
@@ -56,8 +76,9 @@ class NotificationPresenter {
                         let deadline = Date.toDate(dateString: model.deadline)
                         self?.viewInput?.setupReadMode()
                         self?.viewInput?.updateData(deadline: deadline, descr: model.description)
+                       
                         if deadline >= Date.now {
-                            //self?.viewInput?.addGoOverButton()
+                            self?.getCourses()
                         }
                     case .diplomaThemeChoice, .diplomaSpeech:
                         break
@@ -94,7 +115,12 @@ class NotificationPresenter {
 }
 
 extension NotificationPresenter: EventViewOutput {
-    func selectCourse(at index: Int) { }
+    func selectCourse(at index: Int) { 
+        moduleOutput?.moduleWantsToOpenEstimation(
+            courseID: courses[index].id,
+            courseTitle: courses[index].title
+        )
+    }
     
     func viewIsReady() {
         watchedEvent()
@@ -104,7 +130,11 @@ extension NotificationPresenter: EventViewOutput {
     func createButtonTapped(deadline: Date, descr: String) { }
     
     func goOverButtonTapped() {
-        
+        if eventType == .preliminaryCourseChoice {
+            moduleOutput?.moduleWantsToOpenCourseSelection()
+        } else {
+            moduleOutput?.moduleWantsToOpenFinalCourseSelection()
+        }
     }
     
     func saveButtonTapped(deadline: Date, descr: String) { }

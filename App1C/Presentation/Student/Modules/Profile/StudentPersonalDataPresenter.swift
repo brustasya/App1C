@@ -32,7 +32,7 @@ extension StudentPersonalDataPresenter: ProfileViewOutput {
             viewInput?.setupTitle(title: "Данные студента")
         }
         
-        if TokenService.shared.role == .admin || TokenService.shared.id == id {
+        if TokenService.shared.role == .admin || (TokenService.shared.id == id && TokenService.shared.role == .student) {
             viewInput?.setupEditButton()
             viewInput?.setupSaveButton()
             viewInput?.changeEnable(isEdit: false)

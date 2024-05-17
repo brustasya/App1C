@@ -141,7 +141,11 @@ extension CoursesAgregationViewController: CoursesAgregationViewInput {
     }
 }
 
-extension CoursesAgregationViewController: SelectItemDelegate {
+extension CoursesAgregationViewController: SelectCourseItemDelegate {
+    func getInfo(id: Int) {
+        output.openCourse(id: id, navigationController: navigationController)
+    }
+    
     func selectItem(id: Int) {
         output.selectCourse(id: id, isSelect: true)
     }

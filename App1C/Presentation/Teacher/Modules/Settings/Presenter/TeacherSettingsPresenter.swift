@@ -35,6 +35,8 @@ extension TeacherSettingsPresenter: TeacherSettingsViewOutput {
             return
         case 4:
             moduleOutput?.moduleWantsToOpenRoleSelection()
+        case 5:
+            moduleOutput?.moduleWantsToOpenAuthorization()
         default:
             return
         }

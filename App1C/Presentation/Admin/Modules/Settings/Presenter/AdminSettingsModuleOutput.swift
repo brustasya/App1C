@@ -17,4 +17,5 @@ protocol AdminSettingsModuleOutput: AnyObject {
     func moduleWantsToOpenDiplomaThemes()
     func moduleWantsToOpenSRWResults()
     func moduleWantsToOpenSRWGrades()
+    func moduleWantsToOpenAuthorization()
 }
